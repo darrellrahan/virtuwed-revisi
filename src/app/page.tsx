@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
+import Link from 'next/link';
 
 export default function Home() {
 	return (
@@ -112,98 +113,13 @@ export default function Home() {
 		//   </div>
 		// </main>
 
-		<main className='container min-h-screen'>
-
-			{/* MAIN HERO */}
-			<section className='container min-w-full px-2.5 py-5'>
-				<div className='h-auto'>
-					<div>
-						<p>Wedding Invitation</p>
-						<h1>Natkun & Mega</h1>
-						<p>7.9.2034</p>
-					</div>
-				</div>
-			</section>
-
-			{/* QUOTE */}
-			<div className='grid py-16'>
-				<div className='py-5 mx-4 bg-contain bg-no-repeat bg-center bg-[url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/frame-quote-min.png)]'>
-					<div className='px-6'>
-						<p className='text-center leading-relaxed'>I’ll be loving you, always with a love that’s true <br />- Pasty Cline</p>
-					</div>
-				</div>
+		<main>
+			<div className='h-screen min-w-full text-center grid justify-center content-center'>
+				<h1>Landing page Virtuwed</h1>
+				<p>baru tampilan mobile saja yaa</p>
+				<Link href={'/undangandigital'} className='py-2 px-4 bg-tertiary rounded-full inline-block my-4'>undangan digital</Link>
 			</div>
-
-			{/* PROFILE */}
-			<section className='container pt-5 pb-12 grid'>
-				<div className='p-6 text-center'>
-					<h1>
-						Our Special Reception
-					</h1>
-					<p className='my-2'>The pleasure of your company is requested</p>
-				</div>
-
-				{/* COUPLE BODY */}
-				<div className='mt-5'>
-					<div>
-						<div>
-
-						</div>
-						<div className='text-center grid gap-y-2.5 px-2.5 py-5'>
-							<h2>Natkun Kageyama</h2>
-							<p>Putra dari Bapak Sudarto Brotolaras dan Ibu Barbara Jeanne Huard</p>
-							<div className='flex gap-2 items-center justify-center'>
-								<Icon icon="bi:instagram" className='text-sm' />
-								<a className='inline-block' href="https://www.instagram.com/hasnat5_/" target='_blank'>@hasnat5_</a>
-							</div>
-						</div>
-					</div>
-					<div className='py-8'><h2 className='text-center'>&</h2></div>
-					<div></div>
-				</div>
-			</section>
-
-
-			{/* COUNTDOWN */}
-			<section>
-
-			</section>
-
-
-			{/* GALERY */}
-			<section>
-
-			</section>
-
-
-			{/* TIME */}
-			<section className='container mx-auto py-6'>
-				<div>
-					<h2>Intimate Reception</h2>
-					<p>"The best use of life is love. The best expression of love is time. The best time to love is now"</p>
-				</div>
-
-
-				<div>
-					<h3>Friday,</h3>
-					<h2>September
-						<span>
-							7
-							<sup>th</sup>
-						</span>
-						, 2034</h2>
-				</div>
-			</section>
-
-
-			{/* MESSAGE */}
-			<section>
-
-			</section>
-
-
-			{/* FOOTER */}
-			<section></section>
 		</main>
+
 	)
 }

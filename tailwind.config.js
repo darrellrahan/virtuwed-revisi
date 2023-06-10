@@ -14,9 +14,8 @@ module.exports = {
         backgroundColor: '#e7d2b7'
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'flower-dark': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/flower-dark-min.png)",
+        'story-texture': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/orn-story-texture-min.png)",
       },
     },
   },
