@@ -3,6 +3,14 @@ import React from 'react'
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
 
+// TODO:
+// 1. Jumbotron
+// 2. Footer
+// 3. Timeline
+// 4. Moment
+// 5.
+
+
 const page = () => {
     return (
         <main className='container min-h-screen'>
@@ -31,7 +39,7 @@ const page = () => {
             {/* PROFILE */}
             <section className='container overflow-hidden pt-5 pb-12 grid'>
                 <div className='p-6 text-center'>
-                    <h1 className='text-2xl'>
+                    <h1 className='text-2xl text-primary'>
                         Our Special Reception
                     </h1>
                     <p className='my-2'>The pleasure of your company is requested</p>
@@ -94,38 +102,73 @@ const page = () => {
 
 
             {/* COUNTDOWN */}
-            <section className='bg-green-500'>
-                <h1>HITUNG MUNDUR</h1>
+            <section className='relative overflow-hidden px-5'>
+                {/* BACKGROUND */}
+                <div style={{ backgroundSize: '100% auto' }} className='absolute bottom-0 left-0 bg-silent-garden bg-no-repeat bg-center h-full w-[125%]'></div>
+
+                <div className='grid gap-1 py-5'>
+                    <h1 className='text-tertiary italic text-5xl leading-normal'>Save<br />The Date</h1>
+                    <p className='text-primary'>March 24 <sup>th </sup>, 2023</p>
+                </div>
+
+                {/* COUNTDOWN */}
+                <div className='py-2.5'>
+                    <p>
+                        ini COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN
+                    </p>
+                </div>
             </section>
 
+            {/* RESEPSI */}
+            <section className='container mx-auto py-6'>
+                <div className='relative'>
+                    {/* DECORATION */}
+                    <div style={{ backgroundSize: 'auto 100%' }} className='absolute bg-line-orn-event h-2.5 w-full bg-center bg-no-repeat -bottom-7'></div>
 
-            {/* GALERY */}
+                    <div className='grid gap-1.5 p-5 text-center'>
+                        <h2 className='text-2xl text-primary italic'>Intimate Reception</h2>
+                        <p className='text-[#00000080]'>Tanpa mengurangi rasa hormat kami dan dengan adanya kerterbatasan tempat dan undangan; Kami mengundang anda ke dalam Resepsi Pernikahan Virtual (Virtual Wedding) berikut ini.</p>
+                    </div>
+                </div>
+
+                <div className='mt-20'>
+                    <div className='event-head text-center p-5 grid gap-5 relative'>
+                        {/* DECORATION */}
+                        <div style={{ backgroundSize: 'auto 100%' }} className='absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
+
+                        <h3 className='uppercase text-primary text-xl tracking-[8px]'>Friday,</h3>
+                        <h2 className='text-primary text-3xl font-semibold'>March <span className='text-5xl'>24<sup>th</sup></span>, 2034</h2>
+                    </div>
+                    <div className='p-5 text-center'>
+                        <Image
+                            src="https://katsudoto.id/media/template/icons/gold/01.png"
+                            alt="Resepsi"
+                            className="object-contain object-center mb-7 mx-auto"
+                            width={50}
+                            height={50}
+                            priority
+                        />
+                        <h3 className='mb-1 italic text-secondary text-3xl'>Reception</h3>
+                        <p className='text-primary'>15:30 - End</p>
+                    </div>
+
+                    <div className='grid gap-2 p-5 text-center text-primary'>
+                        <p className='font-bold'>Villa Kailasha</p>
+                        <p>Banjar Dukuh, Desa Kelating, Kelating, Kerambitan, Tabanan Regency, Bali 82121, Indonesia</p>
+                        <p>Tabanan Regency</p>
+                        <div className='mt-3 text-center'><a href="#" className='inline-block text-secondary border border-solid border-secondary rounded-lg pt-2 pb-2.5 px-6'>View Maps</a></div>
+                        <div className='mt-3 text-center'><a href="#" className='inline-block text-white bg-secondary rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</a></div>
+                    </div>
+                </div>
+
+            </section>
+
+            {/* MOMENT */}
             <section>
 
             </section>
 
-
-            {/* TIME */}
-            <section className='container mx-auto py-6'>
-                <div>
-                    <h2>Intimate Reception</h2>
-                    <p>&quot;The best use of life is love. The best expression of love is time. The best time to love is now!&quot;</p>
-                </div>
-
-
-                <div>
-                    <h3>Friday,</h3>
-                    <h2>September
-                        <span>
-                            7
-                            <sup>th</sup>
-                        </span>
-                        , 2034</h2>
-                </div>
-            </section>
-
-
-            {/* MESSAGE */}
+            {/* TIMELINE */}
             <section>
 
             </section>
