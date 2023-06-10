@@ -4,10 +4,10 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react';
 
 // TODO:
-// 1. Jumbotron
-// 2. Footer
-// 3. Timeline
-// 4. Moment
+// 1. Moment
+// 2. Jumbotron
+// 3. Footer
+// 4. Timeline
 // 5.
 
 
@@ -74,7 +74,7 @@ const page = () => {
                     <div className='py-8'><h2 className='text-center text-6xl text-tertiary'>&</h2></div>
                     {/* WOMAN */}
                     <div className='relative'>
-                        <div style={{ backgroundSize: '100% 100%' }} className='absolute -z-30 bg-center bg-story-texture -bottom-64 left-0 right-0 mx-auto h-full w-[500px] bg-no-repeat'></div>
+                        <div style={{ backgroundSize: '100% 100%' }} className='absolute -z-10 bg-center bg-story-texture -bottom-64 left-0 right-0 mx-auto h-full w-[500px] bg-no-repeat'></div>
                         <div className='grid justify-center py-8'>
                             <div className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiary'>
                                 <div className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
@@ -104,7 +104,7 @@ const page = () => {
             {/* COUNTDOWN */}
             <section className='relative overflow-hidden px-5'>
                 {/* BACKGROUND */}
-                <div style={{ backgroundSize: '100% auto' }} className='absolute bottom-0 left-0 bg-silent-garden bg-no-repeat bg-center h-full w-[125%]'></div>
+                <div style={{ backgroundSize: '100% auto' }} className='-z-10 absolute bottom-0 left-0 bg-silent-garden bg-no-repeat bg-center h-full w-[125%]'></div>
 
                 <div className='grid gap-1 py-5'>
                     <h1 className='text-tertiary italic text-5xl leading-normal'>Save<br />The Date</h1>
@@ -123,7 +123,7 @@ const page = () => {
             <section className='container mx-auto py-6'>
                 <div className='relative'>
                     {/* DECORATION */}
-                    <div style={{ backgroundSize: 'auto 100%' }} className='absolute bg-line-orn-event h-2.5 w-full bg-center bg-no-repeat -bottom-7'></div>
+                    <div style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-line-orn-event h-2.5 w-full bg-center bg-no-repeat -bottom-7'></div>
 
                     <div className='grid gap-1.5 p-5 text-center'>
                         <h2 className='text-2xl text-primary italic'>Intimate Reception</h2>
@@ -134,7 +134,7 @@ const page = () => {
                 <div className='mt-20'>
                     <div className='event-head text-center p-5 grid gap-5 relative'>
                         {/* DECORATION */}
-                        <div style={{ backgroundSize: 'auto 100%' }} className='absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
+                        <div style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
 
                         <h3 className='uppercase text-primary text-xl tracking-[8px]'>Friday,</h3>
                         <h2 className='text-primary text-3xl font-semibold'>March <span className='text-5xl'>24<sup>th</sup></span>, 2034</h2>
