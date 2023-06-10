@@ -109,7 +109,7 @@ const page = () => {
             <section className='container mx-auto py-6'>
                 <div>
                     <h2>Intimate Reception</h2>
-                    <p>"The best use of life is love. The best expression of love is time. The best time to love is now"</p>
+                    <p>&quot;The best use of life is love. The best expression of love is time. The best time to love is now!&quot;</p>
                 </div>
 
 
