@@ -2,10 +2,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
+import { Chrono } from "react-chrono";
 
 // TODO:
-// 2. Jumbotron
-// 4. Timeline
+// 5. responsive
 
 
 const page = () => {
@@ -14,12 +14,18 @@ const page = () => {
             <main className='container min-h-screen'>
 
                 {/* MAIN HERO */}
-                <section className='container min-w-full px-2.5 py-5 bg-red-600'>
-                    <div className='h-auto'>
-                        <div>
-                            <p>Wedding Invitation</p>
-                            <h1>Natkun & Mega</h1>
-                            <p>7.9.2034</p>
+                <section className='container grid min-w-full justify-center h-screen px-2.5 py-5 bg-rsvp-texture bg-cover bg-no-repeat bg-center'>
+                    <div className='grid h-full justify-end max-w-md rounded-full bg-white bg-opacity-90 border-2 border-solid border-tertiary'>
+                        <div className='grid text-center items-center w-full px-5'>
+                            <div className='mb-5 grid justify-center'>
+                                <div className='w-3 h-3 bg-tertiary rotate-45' />
+                            </div>
+                            <p className='mb-4'>Wedding Invitation</p>
+                            <h1 className='text-tertiary text-5xl'>Natkun & Mega</h1>
+                            <p className='mt-4 text-base'>7.9.2034</p>
+                            <div className='mt-5 grid justify-center'>
+                                <div className='w-3 h-3 bg-tertiary rotate-45' />
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -177,7 +183,7 @@ const page = () => {
                 {/* MOMENT */}
                 <section className='min-w-full pt-5 pb-10 bg-forest-potrait bg-cover bg-center'>
                     <div className='px-5 py-6'>
-                        <h1 className='text-primary italic text-left text-5xl'>Our Moment</h1>
+                        <h1 className='text-primary italic text-left text-4xl'>Our Moment</h1>
                     </div>
                     <div className='px-5 grid grid-cols-2 gap-3 overflow-hidden'>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
@@ -267,8 +273,38 @@ const page = () => {
                 </section>
 
                 {/* TIMELINE */}
-                <section>
+                <section className='min-w-full pt-5 pb-10 bg-gradient-to-b from-white from-70% to-[#E6D1B6] to-90%'>
+                    <h1 className='text-primary italic text-left text-4xl p-5'>Our Story</h1>
 
+                    <div>
+                        <Chrono
+                            items={[
+                                {
+                                    title: "Jan 2032",
+                                    cardTitle: "Perkenalan",
+                                    url: "http://google.com",
+                                    cardSubtitle:
+                                        "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
+
+                                },
+                                {
+                                    title: "Feb 2032",
+                                    cardTitle: "Berteman",
+                                    cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
+
+                                },
+                                {
+                                    title: "Dec 3032",
+                                    cardTitle: "Berpacaran",
+                                    cardSubtitle: `A column of Red Army prisoners taken during the first days of the German invasion`,
+
+                                },
+                            ]}
+                            mode="VERTICAL"
+                            slideItemDuration={2000}
+                            slideShow={true}
+                        />
+                    </div>
                 </section>
 
 

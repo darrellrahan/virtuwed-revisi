@@ -20,7 +20,8 @@ module.exports = {
         'line-orn-event': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/line-orn-event-min.png)",
         'forest': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-landscape-op5-min.png)",
         'forest-potrait': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-potrait-min.png)",
-        'forest-landscape': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-landscape-min.png)"
+        'forest-landscape': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-landscape-min.png)",
+        'rsvp-texture': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-rsvp-texture-min.png)"
       },
     },
   },
