@@ -282,27 +282,34 @@ const page = () => {
                                 {
                                     title: "Jan 2032",
                                     cardTitle: "Perkenalan",
-                                    url: "http://google.com",
                                     cardSubtitle:
-                                        "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
+                                        "Bertemu di sebuah event cosplay di Bandung dan dikenalkan oleh teman sekelas saya yang bernama anugerah. Mega adalah teman Anugerah semasa SMP.",
 
                                 },
                                 {
                                     title: "Feb 2032",
                                     cardTitle: "Berteman",
-                                    cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
+                                    cardSubtitle: `Kami membahas berbagai macam topik yang akhirnya kami memiliki kecocokan terhadap dunia bisnis`,
 
                                 },
                                 {
                                     title: "Dec 3032",
                                     cardTitle: "Berpacaran",
-                                    cardSubtitle: `A column of Red Army prisoners taken during the first days of the German invasion`,
+                                    cardSubtitle: `Perasaan campur aduk dibuat olehnya, akhirnya kami pun melakukan sebuah komitmen untuk saling mengenal lebih dalam`,
 
                                 },
                             ]}
                             mode="VERTICAL"
                             slideItemDuration={2000}
                             slideShow={true}
+                            theme={{
+                                primary: "#765b46",
+                                secondary: "#D5AF6F",
+                                cardBgColor: "white",
+                                titleColor: "black",
+                                titleColorActive: "white",
+                                cardTitleColor: "#906020"
+                            }}
                         />
                     </div>
                 </section>
