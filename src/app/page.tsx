@@ -2,8 +2,10 @@
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+
 	return (
 		// <main className="flex min-h-screen flex-col items-center justify-between p-24">
 		//   <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -119,7 +121,7 @@ export default function Home() {
 				<p>baru tampilan mobile saja yaa</p>
 				<Link href={'/undangandigital'} className='py-2 px-4 bg-tertiary rounded-full inline-block my-4'>undangan digital</Link>
 			</div>
-		</main>
+		</main >
 
 	)
 }

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import { Chrono } from "react-chrono";
 import Countdown from 'react-countdown';
+import { useRouter } from 'next/router';
 
 // TODO:
 // 2. responsive
@@ -22,7 +23,7 @@ const page = () => {
                                 <div className='w-3 h-3 bg-tertiary rotate-45' />
                             </div>
                             <p className='mb-4'>Wedding Invitation</p>
-                            <h1 className='text-tertiary text-5xl'>Natkun & Mega</h1>
+                            <h1 className='text-tertiary text-5xl'>Natkun & Futaba</h1>
                             <p className='mt-4 text-base'>7.9.2034</p>
                             <div className='mt-5 grid justify-center'>
                                 <div className='w-3 h-3 bg-tertiary rotate-45' />
@@ -84,7 +85,8 @@ const page = () => {
                                 <div className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiary'>
                                     <div className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
                                     <Image
-                                        src="https://instagram.fbdo1-1.fna.fbcdn.net/v/t51.2885-19/344581579_1366309627265655_5034329855608864686_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbdo1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=4Pvdqnz2OIQAX89JVl7&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfDVu6hhYqc_3LpR4gSRyfafUYkeAMyLddN885A_r0Kqeg&oe=6489ABB6&_nc_sid=f70a57"
+                                        // src="https://instagram.fbdo1-1.fna.fbcdn.net/v/t51.2885-19/344581579_1366309627265655_5034329855608864686_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbdo1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=4Pvdqnz2OIQAX89JVl7&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfDVu6hhYqc_3LpR4gSRyfafUYkeAMyLddN885A_r0Kqeg&oe=6489ABB6&_nc_sid=f70a57"
+                                        src="https://i.pinimg.com/736x/ef/37/19/ef3719262f9da6a6a0495f2b69e97a98.jpg"
                                         alt="Vercel Logo"
                                         className="w-full h-full rounded-full z-50"
                                         width={220}
@@ -94,7 +96,7 @@ const page = () => {
                                 </div>
                             </div>
                             <div className='text-center grid gap-y-2.5 px-2.5 py-5'>
-                                <h2 className='text-4xl text-primary'>Mega Sarashina</h2>
+                                <h2 className='text-4xl text-primary'>Futaba Rio</h2>
                                 <p>Putra dari Bapak Sudarto Brotolaras dan Ibu Barbara Jeanne Huard</p>
                                 <div className='flex gap-2 items-center justify-center hover:underline underline-offset-4'>
                                     <Icon icon="bi:instagram" className='text-sm' />
@@ -289,9 +291,7 @@ const page = () => {
                                 {
                                     title: "Jan 2032",
                                     cardTitle: "Perkenalan",
-                                    cardSubtitle:
-                                        "Bertemu di sebuah event cosplay di Bandung dan dikenalkan oleh teman sekelas saya yang bernama anugerah. Mega adalah teman Anugerah semasa SMP.",
-
+                                    cardSubtitle: "Lorem ipsum dolor sit amet consectetur adipisicing eli Pariatur delectus eaque necessitatibus dicta error molestiae",
                                 },
                                 {
                                     title: "Feb 2032",
@@ -337,7 +337,7 @@ const page = () => {
                         {/* DECORATION */}
                         <div className='z-10 absolute left-0 right-0 mx-auto h-full w-[130px] rounded-full bg-[#E6D1B6]' />
                         <p className='z-20'>24.3.2034</p>
-                        <h1 className='z-20 text-4xl'>Natkun & Mega</h1>
+                        <h1 className='z-20 text-4xl'>Natkun & Futaba</h1>
                         <p className='z-20 text-base'>March 24<sup>th</sup> 2023</p>
                     </div>
                 </section>
