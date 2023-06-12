@@ -195,7 +195,7 @@ const page = () => {
                     <div className='px-5 grid grid-cols-2 gap-3 overflow-hidden'>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141019_1678073805_1600_1600.jpg"
+                                src="https://i.pinimg.com/564x/ba/a4/46/baa446cf952e540a9aa16afe7d30eed6.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -205,7 +205,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141021_1678073850_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/a9/8c/fc/a98cfc1ec60ff8d2532d4324382fe4f2.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -215,7 +215,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141011_1678073710_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/f1/bb/0c/f1bb0c92390a83f2004a904ebcb7e7cf.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -225,7 +225,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141002_1678073410_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/f6/52/ce/f652cef8d51f0526790730523e1728d3.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -235,7 +235,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141002_1678073410_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/6d/02/4b/6d024b2150a2ed70f55402dd9294fbba.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -245,7 +245,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141002_1678073410_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/df/a5/2a/dfa52ad9706158edbf2aaf2ac6f46d31.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -255,7 +255,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141002_1678073410_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/18/c3/4d/18c34d1e20ed33b481175820afcee4f7.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
@@ -265,7 +265,7 @@ const page = () => {
                         </a>
                         <a href="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_140994_1678073222_1600_1600.jpg" className='border-2 border-solid border-tertiary  w-full h-full'>
                             <Image
-                                src="https://katsudoto.id/media/public/22154/17243/gallery/thumb_lg_141002_1678073410_1600_1600.jpg"
+                                src="https://i.pinimg.com/474x/96/7f/97/967f97d05428f52442e1beee18d9a61d.jpg"
                                 alt="Moment pengantin"
                                 className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                 width={500}
