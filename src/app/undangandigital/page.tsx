@@ -3,9 +3,10 @@ import React from 'react'
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import { Chrono } from "react-chrono";
+import Countdown from 'react-countdown';
 
 // TODO:
-// 5. responsive
+// 2. responsive
 
 
 const page = () => {
@@ -108,7 +109,11 @@ const page = () => {
                 {/* COUNTDOWN */}
                 <section className='relative overflow-hidden px-5'>
                     {/* BACKGROUND */}
-                    <div style={{ backgroundSize: '100% auto' }} className='-z-10 absolute bottom-0 left-0 bg-silent-garden bg-no-repeat bg-center h-full w-[125%]'></div>
+                    <div style={{
+                        backgroundSize: '100% auto',
+                        left: '50%',
+                        transform: 'translate(-50%, 15%)',
+                    }} className='-z-10 absolute bottom-0 bg-silent-garden bg-no-repeat bg-center h-full w-[125%]'></div>
 
                     <div className='grid gap-1 py-5'>
                         <h1 className='text-tertiary italic text-5xl leading-normal'>Save<br />The Date</h1>
@@ -116,10 +121,12 @@ const page = () => {
                     </div>
 
                     {/* COUNTDOWN */}
-                    <div className='py-2.5'>
-                        <p>
-                            ini COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN COUNTDOWN
-                        </p>
+                    <div className='grid justify-center py-10'>
+                        <Countdown className='text-5xl text-primary' date={Date.now() + 100000000} />
+                    </div>
+
+                    <div className='grid justify-end py-5 mt-1'>
+                        <a href="#" className='bg-primary inline-block text-white px-4 pt-2 pb-2.5 rounded-md w-44 text-center'>Add to Calendar</a>
                     </div>
                 </section>
 
@@ -314,7 +321,6 @@ const page = () => {
                     </div>
                 </section>
 
-
                 {/* FOOTNOTE */}
                 <section className='bg-[#E6D1B6] container min-w-full grid justify-center relative py-7 overflow-hidden mx-auto'>
                     {/* DECORATION */}
@@ -335,8 +341,6 @@ const page = () => {
                         <p className='z-20 text-base'>March 24<sup>th</sup> 2023</p>
                     </div>
                 </section>
-
-
 
             </main>
             <footer className='bg-primary py-2.5 grid justify-center min-w-full'>
