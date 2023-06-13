@@ -4,8 +4,6 @@ import * as THREE from 'three';
 
 const page = () => {
     const [isClient, setIsClient] = useState(false);
-    // const [pengantin] = useState(new THREE.Mesh(new THREE.BoxGeometry(100, 100, 100), new THREE.MeshBasicMaterial()));
-    // const pengantinPosition = new THREE.Vector3(-300, 100, 100);
 
     useEffect(() => {
         setIsClient(true);
