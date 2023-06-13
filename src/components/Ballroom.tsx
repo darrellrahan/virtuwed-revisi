@@ -3,6 +3,14 @@ import React, { useEffect, useState } from 'react'
 import * as THREE from 'three';
 
 
+//TODO:
+// 1. image setup
+// 2. image feature
+// 3. livestream feature
+// 4. storytelling
+// 5. gift menu
+// 6. leaderboard
+
 const Ballroom = () => {
     const [isClient, setIsClient] = useState(false);
 
@@ -17,11 +25,11 @@ const Ballroom = () => {
             const viewer = new PANOLENS.Viewer({ container: document.getElementById('ballroom'), enableReticle: false, output: 'console', viewIndicator: true });
 
 
-            const tengah = new PANOLENS.ImagePanorama('https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/sunset.jpg');
+            const tengah = new PANOLENS.ImagePanorama('/assets/ballroom/tengah.jpg');
 
-            const depan = new PANOLENS.ImagePanorama('https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/tunnel.jpg');
+            const depan = new PANOLENS.ImagePanorama('/assets/ballroom/depan.jpg');
 
-            const belakang = new PANOLENS.ImagePanorama('https://t3.ftcdn.net/jpg/03/66/15/30/360_F_366153001_8Sz67wI8s4CWm768IZlch9DXwlvExD4w.jpg');
+            const lorong = new PANOLENS.ImagePanorama('/assets/ballroom/lorong.jpg');
 
 
             const infospotMid = new PANOLENS.Infospot(500, PANOLENS.DataImage.Info);
@@ -48,19 +56,19 @@ const Ballroom = () => {
                 viewer.setPanorama(depan);
             });
 
-            const infospotBehind = new PANOLENS.Infospot(500, PANOLENS.DataImage.Info);
-            infospotBehind.position.set(-100, -500, 5000);
-            infospotBehind.addHoverText("belakang");
+            const infospotHallway = new PANOLENS.Infospot(500, PANOLENS.DataImage.Info);
+            infospotHallway.position.set(-100, -500, 5000);
+            infospotHallway.addHoverText("belakang");
 
-            infospotBehind.addEventListener('click', function () {
-                viewer.setPanorama(belakang);
+            infospotHallway.addEventListener('click', function () {
+                viewer.setPanorama(lorong);
             });
 
-            tengah.add(infospotBehind, infospotFront);
+            tengah.add(infospotHallway, infospotFront);
             depan.add(infospotMid2);
-            belakang.add(infospotMid);
+            lorong.add(infospotMid);
 
-            viewer.add(tengah, depan, belakang);
+            viewer.add(tengah, depan, lorong);
         }
     }, [isClient]);
 
