@@ -4,10 +4,11 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import { Chrono } from "react-chrono";
 import Countdown from 'react-countdown';
+import Link from 'next/link';
 
 // TODO:
-// 2. responsive
-
+// scrollbar
+// animation
 
 const page = () => {
     return (
@@ -177,7 +178,7 @@ const page = () => {
                                 <p>Banjar Dukuh, Desa Kelating, Kelating, Kerambitan, Tabanan Regency, Bali 82121, Indonesia</p>
                                 <p>Tabanan Regency</p>
                                 <div className='mt-3 text-center'><a href="#" className='inline-block text-secondary border border-solid border-secondary rounded-lg pt-2 pb-2.5 px-6'>View Maps</a></div>
-                                <div className='mt-3 text-center'><a href="#" className='inline-block text-white bg-secondary rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</a></div>
+                                <div className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondary rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div>
                             </div>
 
                             <div className='p-5'>
