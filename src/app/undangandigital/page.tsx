@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import { Chrono } from "react-chrono";
 import Countdown from 'react-countdown';
-import { useRouter } from 'next/router';
 
 // TODO:
 // 2. responsive

@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import { useState } from 'react';
 
 const HomePage = () => {
@@ -28,6 +29,9 @@ const HomePage = () => {
             <div className='grid grid-flow-row'>
                 <button onClick={pantai}>Go to pantai</button>
                 <button onClick={gunung}>Go to gunung</button>
+
+                <Link href={'/undangandigital'}>UNDANGAN DIGITAL</Link>
+                <Link href={'/resepsivirtual'}>RESEPSI VIRTUAL</Link>
             </div>
         </div>
     );
