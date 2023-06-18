@@ -13,7 +13,7 @@ type FeatureProps = {
 
 const Feature: React.FC<FeatureProps> = (props) => {
     return (
-        <div className='grid gap-6 px-4 justify-center items-center py-16'>
+        <div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2'>
             <div>
                 <Image
                     src={props.source}

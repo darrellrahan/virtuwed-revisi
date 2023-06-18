@@ -9,21 +9,47 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
 
-export const ElementTestimoni = () => {
+const TestimoniData = [
+    {
+        name: 'Naufal Nabilansyah',
+        profession: 'Scout Boy',
+        message: 'Terima kasih virtuwed, pelayanan yang gesit dan tidak perlu khawatir tentang pengalaman digital. Pernikahan tenang, Mahiru senang.',
+    },
+    {
+        name: 'Hasnat Ferdiananda',
+        profession: 'Co Founder virtuwed.id ',
+        message: 'Berkat layanan virtuwed, tamu undangan kami menjangkau banyak orang. Futaba dan Saya terbantu.',
+    },
+    {
+        name: 'M Rafly Pratama',
+        profession: 'CTO of Upgradia',
+        message: 'Virtuwed pelayanannya memuaskan, ramah. Aku dan Nino sukaaa, pemakaiannya mudah banget.',
+    },
+    {
+        name: 'Raka Putra Ramadhan',
+        profession: 'UI/UX Designer',
+        message: 'Gampang banget tinggal ke websitenya karena dia user friendly, thankyou virtuwed!.',
+    },
+]
+
+type TestimoniProps = {
+    name: string
+    profession: string
+    message: string
+}
+export const ElementTestimoni: React.FC<TestimoniProps> = (props) => {
     return (
-        <div className='grid rounded-2xl bg-primary text-white p-4 mx-12'>
-            <h4 className='text-xl'>Naufal Nabilansyah</h4>
-            <span>Scout Boy</span>
+        <div className='grid rounded-2xl bg-primary text-white p-4'>
+            <h4 className='text-xl'>{props.name}</h4>
+            <p>{props.profession}</p>
             <p className='my-2.5'>⭐⭐⭐⭐⭐</p>
-            <p>Terima kasih virtuwed, pelayanan yang gesit dan tidak perlu khawatir tentang pengalaman digital. Pernikahan tenang, Mahiru senang.</p>
+            <p>{props.message}</p>
         </div>
     )
 }
 
 
 const Testimoni = () => {
-
-
     return (
         <Swiper
             className='mySwiper w-full'
@@ -44,11 +70,11 @@ const Testimoni = () => {
                 },
             }}
         >
-            <SwiperSlide><ElementTestimoni /></SwiperSlide>
-            <SwiperSlide><ElementTestimoni /></SwiperSlide>
-            <SwiperSlide><ElementTestimoni /></SwiperSlide>
-            <SwiperSlide><ElementTestimoni /></SwiperSlide>
-            <SwiperSlide><ElementTestimoni /></SwiperSlide>
+            {TestimoniData.map((data, key) => {
+                return (
+                    <SwiperSlide className='px-12 lg:px-0' key={key}><ElementTestimoni name={data.name} profession={data.profession} message={data.message} /></SwiperSlide>
+                )
+            })}
         </Swiper>
     )
 }
