@@ -153,8 +153,8 @@ export default function Home() {
 									/>
 								</Disclosure.Button>
 								<Disclosure.Panel className="bg-yellow-300 px-4 pt-4 pb-2 text-sm text-gray-500">
-									If you're unhappy with your purchase for any reason, email us
-									within 90 days and we'll refund you in full, no questions asked.
+									If you are unhappy with your purchase for any reason, email us
+									within 90 days and we will refund you in full, no questions asked.
 								</Disclosure.Panel>
 							</>
 						)}
