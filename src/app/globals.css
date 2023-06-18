@@ -32,10 +32,10 @@ body {
   }
 
   p{
-    @apply text-sm italic
+    @apply text-sm 
   }
   
   a{
-    @apply text-sm italic
+    @apply text-sm
   }
 }
