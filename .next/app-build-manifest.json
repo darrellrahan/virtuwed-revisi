@@ -1,0 +1,63 @@
+{
+  "pages": {
+    "/layout": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/chunks/629-0c0795ceb5104578.js",
+      "static/chunks/394-6cfde8479a9569b4.js",
+      "static/chunks/551-d782dd6f6b7a3b91.js",
+      "static/css/b12ddf3a7c7c918d.css",
+      "static/chunks/app/layout-979f94bf4a71a976.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/chunks/629-0c0795ceb5104578.js",
+      "static/chunks/394-6cfde8479a9569b4.js",
+      "static/chunks/39-610a51c91d547e1d.js",
+      "static/css/7c44893f81bbe1a3.css",
+      "static/chunks/app/page-615b7fbc3ad3a7ca.js"
+    ],
+    "/homepage/layout": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/css/13b07f9054af88c2.css",
+      "static/chunks/app/homepage/layout-bc1f1c39982776b4.js"
+    ],
+    "/homepage/page": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/chunks/629-0c0795ceb5104578.js",
+      "static/chunks/app/homepage/page-209f7ef4b1fd9a7e.js"
+    ],
+    "/homepage/resepsivirtual/page": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/chunks/8e5a698c-a7b8cbb434b2012e.js",
+      "static/chunks/e17f9eb7-ea0ac3870124fe06.js",
+      "static/chunks/0f839063-ce5869a4ec6ac739.js",
+      "static/chunks/app/homepage/resepsivirtual/page-677ee8a2a524edba.js"
+    ],
+    "/homepage/undangandigital/page": [
+      "static/chunks/webpack-b7f41e32d1d5d506.js",
+      "static/chunks/bce60fc1-682f75575b3f1c4f.js",
+      "static/chunks/769-54fe25c2ff061e02.js",
+      "static/chunks/main-app-0a0460861f9027ad.js",
+      "static/chunks/629-0c0795ceb5104578.js",
+      "static/chunks/394-6cfde8479a9569b4.js",
+      "static/chunks/551-d782dd6f6b7a3b91.js",
+      "static/chunks/987-ddba5944767dce74.js",
+      "static/chunks/app/homepage/undangandigital/page-2dff7cbecf488089.js"
+    ]
+  }
+}
