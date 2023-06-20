@@ -4,9 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // import required modules
 import { Navigation } from "swiper";
+// import required modules
+import { Pagination } from "swiper";
 
 
 const TestimoniData = [
@@ -40,7 +43,7 @@ type TestimoniProps = {
 export const ElementTestimoni: React.FC<TestimoniProps> = (props) => {
     return (
         <div className='grid rounded-2xl bg-primary text-white p-4'>
-            <h4 className='text-xl'>{props.name}</h4>
+            <h4 className='text-xl lg:text-2xl'>{props.name}</h4>
             <p>{props.profession}</p>
             <p className='my-2.5'>⭐⭐⭐⭐⭐</p>
             <p>{props.message}</p>
@@ -53,8 +56,9 @@ const Testimoni = () => {
     return (
         <Swiper
             className='mySwiper w-full'
-            navigation={true}
-            modules={[Navigation]}
+            // navigation={true}
+            pagination={true}
+            modules={[Navigation, Pagination]}
             spaceBetween={24}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
@@ -72,7 +76,7 @@ const Testimoni = () => {
         >
             {TestimoniData.map((data, key) => {
                 return (
-                    <SwiperSlide className='px-12 lg:px-0' key={key}><ElementTestimoni name={data.name} profession={data.profession} message={data.message} /></SwiperSlide>
+                    <SwiperSlide className='px-12 lg:px-0 py-12' key={key}><ElementTestimoni name={data.name} profession={data.profession} message={data.message} /></SwiperSlide>
                 )
             })}
         </Swiper>

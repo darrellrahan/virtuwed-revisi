@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${amiamie.variable} ${deAetna.variable}`}>
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   )

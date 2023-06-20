@@ -9,12 +9,12 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = (props) => {
     return (
-        <Link href={props.link} className='py-4 px-8 bg-primary text-white text-center inline-block rounded-lg'>{props.title}</Link>
+        <Link href={props.link} className='py-3 px-6 bg-primary text-white text-center inline-block rounded-lg'>{props.title}</Link>
     )
 }
 
 export const ButtonOutline: React.FC<ButtonProps> = (props) => {
     return (
-        <Link href={props.link} className='py-4 px-8 bg-white text-primary text-center inline-block rounded-lg outline outline-primary'>{props.title}</Link>
+        <Link href={props.link} className='py-3 px-6 bg-primary/20 text-primary text-center inline-block rounded-lg'>{props.title}</Link>
     )
 }
