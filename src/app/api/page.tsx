@@ -10,7 +10,7 @@ type ThemeData = {
     password: string;
 };
 
-const page: NextPage = () => {
+const TestingApi: NextPage = () => {
     const [themes, setThemes] = useState<ThemeData[]>([]);
 
     useEffect(() => {
@@ -55,4 +55,4 @@ const page: NextPage = () => {
     )
 }
 
-export default page
+export default TestingApi
