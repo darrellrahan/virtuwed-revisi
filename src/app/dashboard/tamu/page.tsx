@@ -14,7 +14,7 @@ type GuestWeddingSession = {
     visit_virtual_wedding_at: string;
 };
 
-const page = () => {
+const Tamu = () => {
     const [guest, setGuest] = useState<GuestWeddingSession[]>([]);
 
     useEffect(() => {
@@ -71,4 +71,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Tamu

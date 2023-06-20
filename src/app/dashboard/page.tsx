@@ -11,7 +11,7 @@ type DigitalGift = {
     price: number;
 };
 
-const page = () => {
+const Dashboard = () => {
     const [gift, setgift] = useState<DigitalGift[]>([]);
 
     useEffect(() => {
@@ -61,4 +61,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Dashboard
