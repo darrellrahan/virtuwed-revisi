@@ -7,7 +7,7 @@ import { Button, ButtonOutline } from '@/components/ButtonComponent';
 
 // LIBRARY
 import { Disclosure } from '@headlessui/react'
-import { ChevronUpIcon, ArrowUpRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ArrowUpRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { NewspaperIcon, GiftIcon, PresentationChartLineIcon, UsersIcon, VideoCameraIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/20/solid';
 import Footer from '@/components/Footer';
 
@@ -391,7 +391,7 @@ export default function Home() {
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary text-white' : 'text-black border-b-2'}`}>
 										<span>Apa itu Virtuwed?</span>
-										<ChevronUpIcon
+										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
@@ -409,7 +409,7 @@ export default function Home() {
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary text-white' : 'text-black border-b-2'}`}>
 										<span>Apa itu Virtuwed?</span>
-										<ChevronUpIcon
+										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
@@ -427,7 +427,7 @@ export default function Home() {
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary text-white' : 'text-black border-b-2'}`}>
 										<span>Apa itu Virtuwed?</span>
-										<ChevronUpIcon
+										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
@@ -445,7 +445,7 @@ export default function Home() {
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary text-white' : 'text-black border-b-2'}`}>
 										<span>Apa itu Virtuwed?</span>
-										<ChevronUpIcon
+										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>

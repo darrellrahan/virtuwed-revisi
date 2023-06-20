@@ -1,7 +1,9 @@
+'use client'
 import { ChatBubbleBottomCenterTextIcon, CodeBracketSquareIcon, Cog6ToothIcon, GiftIcon, QuestionMarkCircleIcon, UserGroupIcon } from "@heroicons/react/24/solid"
 import { Poppins } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 const poppins = Poppins({
     subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700']
@@ -12,6 +14,13 @@ export default function DashboardLayout({
 }: {
     children: React.ReactNode
 }) {
+
+    const [activeTab, setActiveTab] = useState('hadiah');
+    const handleClick = (tab: string) => {
+        setActiveTab(tab);
+    };
+
+
     return (
         <html lang="en">
             <body className={`${poppins.className}`}>
@@ -40,27 +49,27 @@ export default function DashboardLayout({
                                 {/* SUBMENU */}
                                 <span className="text-xs">Main menu</span>
                                 <div className='grid gap-2'>
-                                    <Link href='/dashboard' className='focus:bg-primary/30 text-gray-400 focus:text-primary rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11'>
+                                    <Link onClick={() => handleClick('hadiah')} href='/dashboard' className={`${activeTab === 'hadiah' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
                                         <GiftIcon className='w-6 h-6' />
                                         <p className="text-black">
                                             Hadiah
                                         </p>
                                     </Link>
-                                    <Link href='/dashboard/tamu' className='focus:bg-primary/30 text-gray-400 focus:text-primary rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11'>
+                                    <Link onClick={() => handleClick('tamu')} href='/dashboard/tamu' className={`${activeTab === 'tamu' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
                                         <UserGroupIcon className='w-6 h-6' />
                                         <p className="text-black">
                                             Tamu
                                         </p>
                                     </Link>
-                                    <Link href='/dashboard' className='rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11'>
-                                        <ChatBubbleBottomCenterTextIcon className='w-6 h-6 text-gray-400' />
-                                        <p>
+                                    <Link onClick={() => handleClick('ucapan')} href='/dashboard' className={`${activeTab === 'ucapan' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
+                                        <ChatBubbleBottomCenterTextIcon className='w-6 h-6' />
+                                        <p className="text-black">
                                             Ucapan
                                         </p>
                                     </Link>
-                                    <Link href='/dashboard' className='rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11'>
-                                        <CodeBracketSquareIcon className='w-6 h-6 text-gray-400' />
-                                        <p className='text-base'>
+                                    <Link onClick={() => handleClick('virtuwed')} href='/dashboard' className={`${activeTab === 'virtuwed' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
+                                        <CodeBracketSquareIcon className='w-6 h-6' />
+                                        <p className='text-black'>
                                             Virtuwed
                                         </p>
                                     </Link>
@@ -76,15 +85,15 @@ export default function DashboardLayout({
                                 {/* SUBMENU */}
                                 <span className="text-xs">General Menu</span>
                                 <div className='grid gap-2'>
-                                    <Link href='/dashboard' className='inline-flex justify-start items-center px-3.5 gap-3 h-11'>
-                                        <Cog6ToothIcon className='w-6 h-6 text-gray-400' />
-                                        <p>
+                                    <Link onClick={() => handleClick('settings')} href='/dashboard' className={`${activeTab === 'settings' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
+                                        <Cog6ToothIcon className='w-6 h-6' />
+                                        <p className="text-black">
                                             Settings
                                         </p>
                                     </Link>
-                                    <Link href='/dashboard' className='rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11'>
-                                        <QuestionMarkCircleIcon className='w-6 h-6 text-gray-400' />
-                                        <p>
+                                    <Link onClick={() => handleClick('help')} href='/dashboard' className={`${activeTab === 'help' ? 'bg-primary/30 text-primary' : 'text-gray-400'} rounded-lg inline-flex justify-start items-center px-3.5 gap-3 h-11`}>
+                                        <QuestionMarkCircleIcon className='w-6 h-6' />
+                                        <p className="text-black">
                                             Help
                                         </p>
                                     </Link>
