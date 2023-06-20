@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[812],{8712:function(_,a,n){Promise.resolve().then(n.t.bind(n,2552,23))},2552:function(_){_.exports={style:{fontFamily:"'__Playfair_Display_03547c', '__Playfair_Display_Fallback_03547c'",fontStyle:"normal"},className:"__className_03547c"}}},function(_){_.O(0,[253,769,744],function(){return _(_.s=8712)}),_N_E=_.O()}]);

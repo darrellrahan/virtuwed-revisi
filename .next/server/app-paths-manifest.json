@@ -1,7 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/homepage/page": "app/homepage/page.js",
-  "/homepage/resepsivirtual/page": "app/homepage/resepsivirtual/page.js",
-  "/homepage/undangandigital/page": "app/homepage/undangandigital/page.js"
-}
