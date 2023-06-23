@@ -26,12 +26,12 @@ const Footer = () => {
                         height={220}
                         priority
                     />
-                    <h3 className='text-2xl font-bold'>Virtuwed</h3>
+                    <h3 className='text-2xl font-bold text-white'>Virtuwed</h3>
                 </div>
 
                 <div className='grid grid-cols-2 lg:pt-8 lg:justify-items-end'>
                     <div className='grid gap-4'>
-                        <h5 className='text-base lg:text-lg font-bold'>Navigasi</h5>
+                        <h5 className='text-base lg:text-lg font-bold text-white'>Navigasi</h5>
 
                         <ul className='grid gap-2'>
                             <li>
@@ -50,31 +50,31 @@ const Footer = () => {
                     </div>
 
                     <div className='grid gap-4'>
-                        <h5 className='text-base lg:text-lg font-bold'>Sosial Media</h5>
+                        <h5 className='text-base lg:text-lg font-bold text-white'>Sosial Media</h5>
 
                         <ul className='grid gap-2'>
                             <li>
-                                <a className='flex items-center content-center gap-2' target='_blank' href="#">
+                                <a className='flex items-center gap-2' target='_blank' href="#">
                                     <Icon width={16} height={16} icon="ic:round-email" />
-                                    <p>Email</p>
+                                    <span>Email</span>
                                 </a>
                             </li>
                             <li>
                                 <a className='flex items-center gap-2' target='_blank' href="#">
                                     <Icon width={16} height={16} icon="ri:instagram-fill" />
-                                    <p>Instagram</p>
+                                    <span>Instagram</span>
                                 </a>
                             </li>
                             <li>
                                 <a className='flex items-center gap-2' target='_blank' href="#">
                                     <Icon width={16} height={16} icon="ic:baseline-tiktok" />
-                                    <p>Tiktok</p>
+                                    <span>Tiktok</span>
                                 </a>
                             </li>
                             <li>
                                 <a className='flex items-center gap-2' target='_blank' href="#">
                                     <Icon width={16} height={16} icon="entypo-social:facebook" />
-                                    <p>Facebook</p>
+                                    <span>Facebook</span>
                                 </a>
                             </li>
                         </ul>

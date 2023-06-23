@@ -41,7 +41,7 @@ const TestingApi: NextPage = () => {
 
     return (
         <div>
-            <h1>Users natkn</h1>
+            <h1>Users natkun</h1>
             <ul>
                 {themes && themes.map((theme) => (
                     <li className='p-3 bg-green-500 m-3' key={theme.id}>

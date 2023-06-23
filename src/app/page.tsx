@@ -10,6 +10,8 @@ import { Disclosure } from '@headlessui/react'
 import { ArrowUpRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 import { NewspaperIcon, GiftIcon, PresentationChartLineIcon, UsersIcon, VideoCameraIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/20/solid';
 import Footer from '@/components/Footer';
+import { motion } from "framer-motion"
+import Navbar from '@/components/Navbar';
 
 
 
@@ -21,26 +23,43 @@ import Footer from '@/components/Footer';
 // H5 = sm 16px lg 
 
 // TODO:
-// color pallete
-// responsive
 // navbar
+// color pallete
 
-const disclosures = [
-	{ id: 1, title: 'Disclosure 1', content: 'Content for disclosure 1' },
-	{ id: 2, title: 'Disclosure 2', content: 'Content for disclosure 2' },
-	{ id: 3, title: 'Disclosure 3', content: 'Content for disclosure 3' },
-];
 
 
 export default function Home() {
 
+	const item = {
+		hidden: {
+			y: "100%",
+			transition: { ease: [0.455, 0.03, 0.515, 0.955] }
+		},
+		visible: {
+			y: 0,
+			transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 }
+		}
+	};
+
+	const item2 = {
+		offscreen: {
+			y: "200%",
+			// transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 }
+			transition: { ease: [0.455, 0.03, 0.515, 0.955] }
+		},
+		onscreen: {
+			y: 0,
+			transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 }
+		}
+	};
 
 	return (
 		<>
-			<main className={`container min-w-full`}>
+			<Navbar />
+			<main className='container min-w-full'>
 
 				{/* JUMBOTRON */}
-				<section className='container min-w-full grid gap-6 justify-center items-center px-4 py-20 lg:py-28 lg:grid-cols-2 lg:px-40'>
+				<section id='Beranda' className='container min-w-full grid gap-6 justify-center items-center px-4 py-20 lg:py-28 lg:grid-cols-2 mt-8 md:mt-0 lg:px-40 lg:h-screen'>
 					<div className='lg:order-2'>
 						<Image
 							src="https://satumomen.com/images/aplikasi-undangan-digital-website.webp"
@@ -53,8 +72,10 @@ export default function Home() {
 					</div>
 
 					<div className='grid gap-4 justify-start'>
-						<h1 className='text-4xl lg:text-6xl font-bold'>Platform Pernikahan <span className='text-primary'>Virtual</span></h1>
-						<p>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
+						<span className="overflow-hidden inline-block">
+							<motion.h1 variants={item} initial="hidden" animate="visible" className='text-4xl lg:text-6xl font-bold'>Platform Pernikahan <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtual</span></motion.h1>
+						</span>
+						<p className='font-light'>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
 						<div className='lg:flex gap-4'>
 							<div>
 								<Button title='Mulai Sekarang' link='/dashboard' />
@@ -70,16 +91,16 @@ export default function Home() {
 
 				{/* TAGLINE */}
 				<section className='bg-tagline bg-cover bg-center'>
-					<div className='grid gap-4 py-9 px-5 backdrop-brightness-50 lg:px-40'>
+					<div className='grid gap-4 py-9 px-5 backdrop-brightness-[.2] lg:px-40'>
 						<h3 className='text-2xl lg:text-3xl font-bold text-white'>Raih pernikahan luar biasa <span className='text-primary'>Virtuwed</span></h3>
 						<p className='text-white font-light'>Memperkaya Pernikahan Melalui Pengalaman Digital yang Inovatif.</p>
 					</div>
 				</section>
 
 				{/* FEATURE */}
-				<section className='container grid min-w-full justify-center items-center'>
+				<section id='Fitur' className='container grid min-w-full justify-center items-center'>
 					{/* FEATURE 1 */}
-					<div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2'>
+					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2'>
 						<div className='lg:order-2'>
 							<Image
 								src='/assets/landingpage/feature/virtualWedding.png'
@@ -92,8 +113,10 @@ export default function Home() {
 						</div>
 
 						<div className='grid gap-y-4'>
-							<h2 className='text-3xl lg:text-4xl font-bold'>Virtual 360° Wedding</h2>
-							<p>Dengan Virtuwed, hadirkan suasana pernikahan impianmu ke dalam bentuk virtual room yang kami miliki, sehingga tamu dapat merasakan kesakralan atau feel pernikahan konvensional anda secara digital.</p>
+							<span className="overflow-hidden inline-block pb-1.5">
+								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Virtual 360° Wedding</motion.h2>
+							</span>
+							<p className='font-light'>Dengan Virtuwed, hadirkan suasana pernikahan impianmu ke dalam bentuk virtual room yang kami miliki, sehingga tamu dapat merasakan kesakralan atau feel pernikahan konvensional anda secara digital.</p>
 							<div>
 								<Link className='inline-block' href={'./homepage'}>
 									<div className='items-center flex gap-2'>
@@ -103,10 +126,10 @@ export default function Home() {
 								</Link>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* FEATURE 2 */}
-					<div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 bg-primary/20'>
+					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 bg-primary/20'>
 						<div>
 							<Image
 								src='https://satumomen.com/images/undangan-digital-unlimited-tamu-undangan.png'
@@ -119,8 +142,10 @@ export default function Home() {
 						</div>
 
 						<div className='grid gap-y-4'>
-							<h2 className='text-3xl lg:text-4xl font-bold'>Undangan Digital</h2>
-							<p>Sambutlah era baru undangan digital yang terintegrasi langsung dengan Ruang Virtual 360 kami, dan ucapkan selamat tinggal pada undangan digital era lama.</p>
+							<span className="overflow-hidden inline-block pb-1.5">
+								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Undangan Digital</motion.h2>
+							</span>
+							<p className='font-light'>Sambutlah era baru undangan digital yang terintegrasi langsung dengan Ruang Virtual 360 kami, dan ucapkan selamat tinggal pada undangan digital era lama.</p>
 							<div>
 								<Link className='inline-block' href={'./homepage'}>
 									<div className='items-center flex gap-2'>
@@ -130,10 +155,10 @@ export default function Home() {
 								</Link>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* FEATURE 3 */}
-					<div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2'>
+					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2'>
 						<div className='lg:order-2'>
 							<Image
 								src='https://satumomen.com/images/reseller-undangan-digital-website-5.png'
@@ -146,8 +171,10 @@ export default function Home() {
 						</div>
 
 						<div className='grid gap-y-4'>
-							<h2 className='text-3xl lg:text-4xl font-bold'>Desain Mewah & Eksklusif</h2>
-							<p>Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.</p>
+							<span className="overflow-hidden inline-block pb-1.5">
+								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Desain Mewah & Eksklusif</motion.h2>
+							</span>
+							<p className='font-light'>Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.</p>
 							<div>
 								<Link className='inline-block' href={'./homepage'}>
 									<div className='items-center flex gap-2'>
@@ -157,11 +184,13 @@ export default function Home() {
 								</Link>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* FEATURE 4 */}
-					<div className='grid gap-6 px-4 items-center py-16 lg:px-40'>
-						<h2 className='text-3xl lg:text-4xl font-bold'>Integrasikan Dengan Fitur Terbaik</h2>
+					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 items-center py-16 lg:px-40'>
+						<span className="overflow-hidden inline-block pb-1.5">
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Integrasikan Dengan Fitur Terbaik</motion.h2>
+						</span>
 
 						<div className='grid lg:grid-cols-2 gap-6'>
 							<div>
@@ -204,13 +233,15 @@ export default function Home() {
 								</ul>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 				</section>
 
 				{/* PRODUCT */}
-				<section className='grid gap-6 bg-white py-20 px-4 content-center lg:px-40'>
-					<h2 className='font-bold text-3xl lg:text-4xl text-center'>Paket Virtuwed</h2>
+				<motion.section id='Paket' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 bg-white py-20 px-4 content-center lg:px-40'>
+					<span className="overflow-hidden inline-block pb-1.5">
+						<motion.h2 variants={item2} className='font-bold text-3xl lg:text-4xl text-center'>Paket Virtuwed</motion.h2>
+					</span>
 					<div className='grid gap-6 lg:grid-cols-3'>
 
 						{/* PRODUCT */}
@@ -346,20 +377,22 @@ export default function Home() {
 
 
 					</div>
-				</section>
+				</motion.section>
 
 				{/* TESTIMONI */}
-				<section className='grid justify-center items-center py-20'>
-					<div className='grid gap-4 px-4 lg:px-40'>
-						<h2 className='text-3xl lg:text-4xl font-bold'>Yang Mereka Katakan</h2>
-						<p>Menawarkan solusi terbaik untuk momen istimewa Anda menjadi tak terlupakan. Dapatkan pengalaman pernikahan yang memikat.</p>
+				<motion.section id='Testimoni' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid justify-center items-center py-20'>
+					<div className='grid gap-4 px-4 lg:px-40 text-center'>
+						<span className="overflow-hidden inline-block pb-1.5">
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Yang Mereka Katakan</motion.h2>
+						</span>
+						<p className='font-light lg:max-w-xl lg:mx-auto'>Menawarkan solusi terbaik untuk momen istimewa Anda menjadi tak terlupakan. Dapatkan pengalaman pernikahan yang memikat.</p>
 					</div>
 
 					<div className='grid lg:px-40'>
 						<Testimoni />
 					</div>
 
-				</section>
+				</motion.section>
 
 				{/* CTA */}
 				<section
@@ -379,11 +412,13 @@ export default function Home() {
 				</section>
 
 				{/* FAQ */}
-				<section className='grid gap-4 min-w-full items-center py-20 px-4 text-center lg:text-start lg:px-40'>
+				<motion.section initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-4 min-w-full items-center py-20 px-4 text-center lg:text-start lg:px-40'>
 					<div className='grid gap-4'>
-						<h2 className='text-3xl lg:text-4xl font-bold'>General FAQs</h2>
+						<span className="overflow-hidden inline-block pb-1.5">
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold text-center'>General FAQs</motion.h2>
+						</span>
 						<hr className='bg-[#f7f2f2]' />
-						<p>Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami</p>
+						<p className='font-light lg:max-w-xl mx-auto text-center'>Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami</p>
 					</div>
 					<div className="w-full">
 						<Disclosure>
@@ -459,7 +494,7 @@ export default function Home() {
 						</Disclosure>
 					</div>
 
-				</section>
+				</motion.section>
 			</main >
 
 			<Footer />

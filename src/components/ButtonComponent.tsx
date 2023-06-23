@@ -9,7 +9,7 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = (props) => {
     return (
-        <Link href={props.link} className='py-3 px-6 bg-primary text-white text-center inline-block rounded-lg'>{props.title}</Link>
+        <Link style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} href={props.link} className='py-3 px-6 text-white text-center inline-block rounded-lg'>{props.title}</Link>
     )
 }
 
