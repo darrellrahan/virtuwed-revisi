@@ -8,12 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // primary: '#765b46',
-        // secondary: '#906020',
-        // tertiary: '#D5AF6F',
-        // backgroundColor: '#e7d2b7'
+        // UNDANGAN DIGITAL
+        primaryInv: '#765b46',
+        secondaryInv: '#906020',
+        tertiaryInv: '#D5AF6F',
 
-        primary: '#D1B0B0'
+        backgroundColorInv: '#e7d2b7',
+
+        // LANDING PAGE
+        primary: '#D1B0B0',
+        fontColor: '#3E4C59',
+        fontColorHeading: '#313F4A'
       },
       fontFamily: {
         heading: ['var(--font-deAetna)'],
@@ -33,7 +38,7 @@ module.exports = {
         'forest-potrait': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-potrait-min.png)",
         'forest-landscape': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-landscape-min.png)",
         'rsvp-texture': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-rsvp-texture-min.png)",
-        'cover-wedding': "url(https://i.pinimg.com/564x/dc/be/fb/dcbefb01fe6b39ddeea5d8ce52fbb20e.jpg)"
+        'cover-wedding': "url(/assets/undanganDigital/Prewed24.jpeg)"
 
       },
     },

@@ -28,15 +28,15 @@ body {
 
 @layer base{
   h1, h2, h3, h4, h5{
-   @apply font-heading 
+   @apply font-heading text-fontColorHeading
   }
 
   p{
-    @apply text-sm md:text-base font-body
+    @apply text-base font-body text-fontColor
   }
   
   a{
-    @apply text-sm md:text-base
+    @apply text-base
   }
 
 }
