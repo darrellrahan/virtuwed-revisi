@@ -38,5 +38,17 @@ body {
   a{
     @apply text-base
   }
+}
 
+
+@layer utilities{
+  .btn-shadow-primary{
+    box-shadow: 0px 5px 10px 2px rgba(214, 180, 178, 0.60);
+    @apply transition-all ease-in-out duration-75
+  }
+  
+  .btn-shadow-secondary{
+    box-shadow: 0px 5px 10px 2px rgb(209 176 176 / 0.2);
+    @apply transition-all ease-in-out duration-75
+  }
 }

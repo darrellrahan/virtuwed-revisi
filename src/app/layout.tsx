@@ -38,6 +38,16 @@ const deAetna = localFont({
   variable: '--font-deAetna'
 })
 
+const ade = localFont({
+  src: [
+    {
+      path: '../../public/assets/fonts/ade/Ade-Display.otf',
+      weight: '400'
+    }
+  ],
+  variable: '--font-ade'
+})
+
 
 
 export default function RootLayout({
@@ -47,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${amiamie.variable} ${deAetna.variable}`}>
+      <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
         {children}
       </body>
     </html>

@@ -35,6 +35,11 @@ const TestimoniData = [
     },
 ]
 
+interface SwiperStyles {
+    [key: string]: string;
+}
+
+
 type TestimoniProps = {
     name: string
     profession: string
@@ -44,7 +49,7 @@ export const ElementTestimoni: React.FC<TestimoniProps> = (props) => {
     return (
         <div className='grid rounded-2xl bg-white border border-solid border-[#d5dfff] p-4'>
             <h4 className='text-xl lg:text-2xl'>{props.name}</h4>
-            <p className='text-fontColor/50'>{props.profession}</p>
+            <p className='font-light'>{props.profession}</p>
             <p className='my-2.5'>⭐⭐⭐⭐⭐</p>
             <p>{props.message}</p>
         </div>
@@ -53,9 +58,19 @@ export const ElementTestimoni: React.FC<TestimoniProps> = (props) => {
 
 
 const Testimoni = () => {
+    const swiperStyles: SwiperStyles = {
+        '--swiper-pagination-color': '#D1B0B0',
+        '--swiper-pagination-bullet-inactive-color': '#EBEBEB',
+        '--swiper-pagination-bullet-inactive-opacity': '1',
+        '--swiper-pagination-bullet-size': '10px',
+        '--swiper-pagination-bullet-width': '10px',
+        '--swiper-pagination-bullet-height': '10px',
+    };
+
     return (
         <Swiper
             className='mySwiper w-full'
+            style={swiperStyles}
             // navigation={true}
             pagination={true}
             modules={[Navigation, Pagination]}

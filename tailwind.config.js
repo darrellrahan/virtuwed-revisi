@@ -12,7 +12,6 @@ module.exports = {
         primaryInv: '#765b46',
         secondaryInv: '#906020',
         tertiaryInv: '#D5AF6F',
-
         backgroundColorInv: '#e7d2b7',
 
         // LANDING PAGE
@@ -23,10 +22,12 @@ module.exports = {
       fontFamily: {
         heading: ['var(--font-deAetna)'],
         body: ['var(--font-amiamie)'],
+        display: ['var(--font-ade)'],
       },
       backgroundImage: {
         // LANDING PAGE PURPOSE
         'tagline': "url(https://images.unsplash.com/photo-1533091090875-1ff4acc497dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80)",
+        'cta': "url(https://images.pexels.com/photos/56926/pexels-photo-56926.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
 
 
         // UNDANGAN DIGITAL PURPOSE
