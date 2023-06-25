@@ -540,6 +540,7 @@ const UndanganDigital = () => {
                         <form className="p-5" onSubmit={handleFormSubmit}>
                             <div className="mb-4">
                                 <input
+                                    data-aos-once="true"
                                     data-aos="fade-up" data-aos-duration="1200"
                                     className="shadow appearance-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     type="text"
@@ -551,15 +552,16 @@ const UndanganDigital = () => {
                             </div>
                             <div className="mb-4">
                                 <textarea
+                                    data-aos-once="true"
                                     data-aos="fade-up" data-aos-duration="1200"
                                     className="shadow appearance-none rounded w-full min-h-[100px] p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Give your wish...."
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)} />
                             </div>
                             <div className='mb-4'>
-                                <Listbox data-aos="fade-up" data-aos-duration="1200" value={selected} onChange={setSelected}>
+                                <Listbox data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" value={selected} onChange={setSelected}>
                                     <div className="relative mt-1">
-                                        <Listbox.Button className="relative w-full cursor-default rounded bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                        <Listbox.Button className="z-50 relative w-full cursor-default rounded bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                                             <span className="block truncate">{selected.status}</span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <ChevronUpDownIcon
@@ -574,12 +576,12 @@ const UndanganDigital = () => {
                                             leaveFrom="opacity-100"
                                             leaveTo="opacity-0"
                                         >
-                                            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                            <Listbox.Options className="mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                 {rspv.map((rspv, rspvIdx) => (
                                                     <Listbox.Option
                                                         key={rspvIdx}
                                                         className={({ active }) =>
-                                                            `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                                                            `relative z-30 cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900 z-50' : 'text-gray-900'
                                                             }`
                                                         }
                                                         value={rspv}
@@ -606,8 +608,8 @@ const UndanganDigital = () => {
                                     </div>
                                 </Listbox>
                             </div>
-                            <div className="flex items-center justify-between">
-                                <button data-aos="fade-up" data-aos-duration="1200" className="bg-primaryInv text-white italic py-2 px-8 rounded" type="submit">
+                            <div className="flex items-center justify-between z-10">
+                                <button data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className="bg-primaryInv text-white italic py-2 px-8 rounded " type="submit">
                                     Kirim
                                 </button>
                             </div>
@@ -617,7 +619,7 @@ const UndanganDigital = () => {
                         {/* COMMENTAR */}
                         <div className='p-5'>
                             {displayedItems.map((data) => (
-                                <div data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={data.id}>
+                                <div data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={data.id}>
                                     <div>
                                         <h3 className='text-lg text-primaryInv font-bold'>{data.name}</h3>
                                         <small className='text-xs text-primaryInv italic'>{data.createdAt}</small>
