@@ -50,7 +50,7 @@ const rspv = [
 ]
 
 
-const page = () => {
+const UndanganDigital = () => {
     const [guestComments, setGuestComments] = useState<GuestComments[]>([]);
     const [countRSPV, setCountRSPV] = useState<CountRSPV[]>([]);
     const [countGuestComments, setCountGuestComments] = useState<CountGuestComments | null>(null);
@@ -672,4 +672,4 @@ const page = () => {
     )
 }
 
-export default page
+export default UndanganDigital
