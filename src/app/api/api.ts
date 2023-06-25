@@ -47,5 +47,48 @@ export const guestWeddingSession = async (query: string) => {
     }
 };
 
+export const getAllGuestCommentsByWeddingSessionId = async (query: string) => {
+    try {
+        const response = await axios.post(API_URL, {
+            query,
+        });
+
+        return response.data.data.getAllGuestCommentsByWeddingSessionId;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch data');
+    }
+};
+
+export const countGuestComment = async (query: string) => {
+    try {
+        const response = await axios.post(API_URL, {
+            query,
+        });
+
+        console.log(response.data.data.countGuestComment)
+        return response.data.data.countGuestComment;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch data');
+    }
+};
+
+export const countRSPVStatus = async (query: string) => {
+    try {
+        const response = await axios.post(API_URL, {
+            query,
+        });
+
+        console.log(response.data.data.countRSVPStatusByWeddingSessionId)
+        return response.data.data.countRSVPStatusByWeddingSessionId;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch data');
+    }
+};
+
+
+
 
 

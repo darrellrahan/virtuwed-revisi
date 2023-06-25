@@ -28,11 +28,13 @@ body {
 
 @layer base{
   h1, h2, h3, h4, h5{
-   @apply font-heading text-fontColorHeading
+   /* @apply font-heading text-fontColorHeading */
+   @apply text-fontColorHeading
   }
 
   p{
-    @apply text-base font-body text-fontColor
+    /* @apply text-base font-body text-fontColor */
+    @apply text-base text-fontColor
   }
   
   a{
