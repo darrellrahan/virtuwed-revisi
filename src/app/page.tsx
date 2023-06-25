@@ -25,6 +25,7 @@ import Navbar from '@/components/Navbar';
 // TODO:
 // navbar mobile
 // link btn jumbotron
+// decoration wallpaper
 
 
 
@@ -73,12 +74,12 @@ export default function Home() {
 
 					<div className='grid gap-4 justify-start'>
 						<span className="overflow-hidden inline-block">
-							<motion.h1 variants={item} initial="hidden" animate="visible" className='text-4xl lg:text-6xl font-bold'>Platform Pernikahan <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtual</span></motion.h1>
+							<motion.h1 variants={item} initial="hidden" animate="visible" className='text-4xl lg:text-6xl font-deAetna'>Platform Pernikahan <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtual</span></motion.h1>
 						</span>
-						<p className='font-light'>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
+						<p className='font-light font-amiamie'>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
 						<div className='lg:flex gap-4'>
 							<div>
-								<Button title='Mulai Sekarang' link='/dashboard' />
+								<Button title='Mulai Sekarang' link='https://forms.gle/4pD6peBYRoFKVJEN7' />
 							</div>
 							<div className='hidden lg:block'>
 								<ButtonOutline title='Cara Memulai' link='/homepage' />
@@ -93,8 +94,8 @@ export default function Home() {
 				<section className='bg-tagline bg-cover bg-center'>
 					<div className='backdrop-brightness-[.2] '>
 						<div className='max-w-screen-xl mx-auto grid gap-4 justify-start py-9 px-5 lg:px-40'>
-							<h3 className='text-2xl lg:text-3xl font-bold text-white'>Raih pernikahan luar biasa <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtuwed</span></h3>
-							<p className='text-white font-light'>Memperkaya Pernikahan Melalui Pengalaman Digital yang Inovatif.</p>
+							<h3 className='text-2xl lg:text-3xl font-deAetna text-white'>Raih pernikahan luar biasa <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtuwed</span></h3>
+							<p className='text-white font-light font-amiamie'>Memperkaya Pernikahan Melalui Pengalaman Digital yang Inovatif.</p>
 						</div>
 					</div>
 				</section>
@@ -116,13 +117,13 @@ export default function Home() {
 
 						<div className='grid gap-y-4'>
 							<span className="overflow-hidden inline-block pb-1.5">
-								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Virtual 360° Wedding</motion.h2>
+								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna'>Virtual 360° Wedding</motion.h2>
 							</span>
-							<p className='font-light'>Dengan Virtuwed, hadirkan suasana pernikahan impianmu ke dalam bentuk virtual room yang kami miliki, sehingga tamu dapat merasakan kesakralan atau feel pernikahan konvensional anda secara digital.</p>
+							<p className='font-light font-amiamie'>Dengan Virtuwed, hadirkan suasana pernikahan impianmu ke dalam bentuk virtual room yang kami miliki, sehingga tamu dapat merasakan kesakralan atau feel pernikahan konvensional anda secara digital.</p>
 							<div>
 								<Link className='inline-block' href={'./homepage/resepsivirtual'}>
 									<div className='items-center flex gap-2'>
-										<p className='text-primary'>Lihat 360° Virtual Wedding</p>
+										<p className='text-primary font-amiamie'>Lihat 360° Virtual Wedding</p>
 										<ArrowUpRightIcon className="h-4 w-4 text-primary" />
 									</div>
 								</Link>
@@ -146,13 +147,13 @@ export default function Home() {
 
 							<div className='grid gap-y-4'>
 								<span className="overflow-hidden inline-block pb-1.5">
-									<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Undangan Digital</motion.h2>
+									<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna'>Undangan Digital</motion.h2>
 								</span>
-								<p className='font-light'>Sambutlah era baru undangan digital yang terintegrasi langsung dengan Ruang Virtual 360 kami, dan ucapkan selamat tinggal pada undangan digital era lama.</p>
+								<p className='font-light font-amiamie'>Sambutlah era baru undangan digital yang terintegrasi langsung dengan Ruang Virtual 360 kami, dan ucapkan selamat tinggal pada undangan digital era lama.</p>
 								<div>
 									<Link className='inline-block' href={'./homepage'}>
 										<div className='items-center flex gap-2'>
-											<p className='text-primary'>Lihat Contoh Undangan</p>
+											<p className='text-primary font-amiamie'>Lihat Contoh Undangan</p>
 											<ArrowUpRightIcon className="h-4 w-4 text-primary" />
 										</div>
 									</Link>
@@ -176,13 +177,13 @@ export default function Home() {
 
 						<div className='grid gap-y-4'>
 							<span className="overflow-hidden inline-block pb-1.5">
-								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Desain Mewah & Eksklusif</motion.h2>
+								<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna'>Desain Mewah & Eksklusif</motion.h2>
 							</span>
-							<p className='font-light'>Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.</p>
+							<p className='font-light font-amiamie'>Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.</p>
 							<div>
 								<Link className='inline-block' href={'./homepage'}>
 									<div className='items-center flex gap-2'>
-										<p className='text-primary'>Cari Desain Impian Anda</p>
+										<p className='text-primary font-amiamie'>Cari Desain Impian Anda</p>
 										<ArrowUpRightIcon className="h-4 w-4 text-primary" />
 									</div>
 								</Link>
@@ -193,7 +194,7 @@ export default function Home() {
 					{/* FEATURE 4 */}
 					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 items-center py-16 lg:px-40 max-w-screen-xl mx-auto'>
 						<span className="overflow-hidden inline-block pb-1.5">
-							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Integrasikan Dengan Fitur Terbaik</motion.h2>
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna'>Integrasikan Dengan Fitur Terbaik</motion.h2>
 						</span>
 
 						<div className='grid justify-items-start lg:grid-cols-2 gap-6'>
@@ -216,7 +217,7 @@ export default function Home() {
 												className='h-4 w-4 text-primary'
 											/>
 										</div>
-										<p className='text-base'>Live Streaming 2 arah</p>
+										<p className='text-base font-amiamie'>Live Streaming 2 arah</p>
 									</li>
 									<li className='flex gap-2 items-center'>
 										<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -224,7 +225,7 @@ export default function Home() {
 												className='h-4 w-4 text-primary'
 											/>
 										</div>
-										<p className='text-base'>Hadiah digital</p>
+										<p className='text-base font-amiamie'>Hadiah digital</p>
 									</li>
 									<li className='flex gap-2 items-center'>
 										<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -232,7 +233,7 @@ export default function Home() {
 												className='h-4 w-4 text-primary'
 											/>
 										</div>
-										<p className='text-base'>Ucapan Pernikahan</p>
+										<p className='text-base font-amiamie'>Ucapan Pernikahan</p>
 									</li>
 								</ul>
 							</div>
@@ -244,14 +245,14 @@ export default function Home() {
 				{/* PRODUCT */}
 				<motion.section id='Paket' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 bg-white py-20 px-4 content-center lg:px-40 max-w-screen-xl mx-auto'>
 					<span className="overflow-hidden inline-block pb-1.5">
-						<motion.h2 variants={item2} className='font-bold text-3xl lg:text-4xl text-center'>Paket Virtuwed</motion.h2>
+						<motion.h2 variants={item2} className='font-deAetna text-3xl lg:text-4xl text-center'>Paket Virtuwed</motion.h2>
 					</span>
 					<div className='grid gap-6 lg:grid-cols-3'>
 
 						{/* PRODUCT */}
 						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff]'>
-							<h4 className='font-bold text-xl lg:text-2xl'>Virtuwed Restu</h4>
-							<ul className='grid gap-3 font-light'>
+							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Restu</h4>
+							<ul className='grid gap-3 font-light font-amiamie'>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
 										<NewspaperIcon
@@ -288,14 +289,14 @@ export default function Home() {
 							</ul>
 
 							<div className='grid gap-4'>
-								<h2 className='text-3xl lg:text-4xl font-bold'><span className='font-normal text-base'>Rp </span>250.000</h2>
+								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>250.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
 						</div>
 
 						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff]'>
-							<h4 className='font-bold text-xl lg:text-2xl'>Virtuwed Lamar</h4>
-							<ul className='grid gap-3 font-light'>
+							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Lamar</h4>
+							<ul className='grid gap-3 font-light font-amiamie'>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
 										<NewspaperIcon
@@ -332,14 +333,14 @@ export default function Home() {
 							</ul>
 
 							<div className='grid gap-4'>
-								<h2 className='text-3xl lg:text-4xl font-bold'><span className='font-normal text-base'>Rp </span>850.000</h2>
+								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>850.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
 						</div>
 
 						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff] '>
-							<h4 className='font-bold text-xl lg:text-2xl'>Virtuwed Mantu</h4>
-							<ul className='grid gap-3 font-light'>
+							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Mantu</h4>
+							<ul className='grid gap-3 font-light font-amiamie'>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
 										<NewspaperIcon
@@ -376,7 +377,7 @@ export default function Home() {
 							</ul>
 
 							<div className='grid gap-4'>
-								<h2 className='text-3xl lg:text-4xl font-bold'><span className='font-normal text-base'>Rp </span>900.000</h2>
+								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>900.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
 						</div>
@@ -389,9 +390,9 @@ export default function Home() {
 				<motion.section id='Testimoni' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid justify-center items-center py-20 max-w-screen-xl mx-auto'>
 					<div className='grid gap-4 px-4 lg:px-40 text-center'>
 						<span className="overflow-hidden inline-block pb-1.5">
-							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold'>Yang Mereka Katakan</motion.h2>
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna'>Yang Mereka Katakan</motion.h2>
 						</span>
-						<p className='font-light lg:max-w-xl lg:mx-auto'>Menawarkan solusi terbaik untuk momen istimewa Anda menjadi tak terlupakan. Dapatkan pengalaman pernikahan yang memikat.</p>
+						<p className='font-light font-amiamie lg:max-w-xl lg:mx-auto'>Menawarkan solusi terbaik untuk momen istimewa Anda menjadi tak terlupakan. Dapatkan pengalaman pernikahan yang memikat.</p>
 					</div>
 
 					<div className='grid lg:px-40'>
@@ -405,9 +406,9 @@ export default function Home() {
 					className='bg-cta bg-cover bg-center' >
 					<div className='grid gap-4 min-w-full justify-center items-center py-32 px-5 text-center backdrop-brightness-[.2]'>
 						<div className='grid gap-4'>
-							<h2 className='text-3xl lg:text-4xl font-bold text-white'>Buat Virtuwed-mu Sekarang</h2>
+							<h2 className='text-3xl lg:text-4xl font-deAetna text-white'>Buat Virtuwed-mu Sekarang</h2>
 							<hr></hr>
-							<p className='text-white font-light'>Nikmati pengalaman pernikahan yang tak terlupakan dengan Virtuwed.</p>
+							<p className='text-white font-light font-amiamie'>Nikmati pengalaman pernikahan yang tak terlupakan dengan Virtuwed.</p>
 						</div>
 						<div>
 							<Button title='Mulai Sekarang' link='/homepage' />
@@ -419,24 +420,24 @@ export default function Home() {
 				<motion.section initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-4 items-center py-20 px-4 text-center lg:text-start lg:px-40 max-w-screen-xl mx-auto '>
 					<div className='grid gap-4'>
 						<span className="overflow-hidden inline-block pb-1.5">
-							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-bold text-center'>General FAQs</motion.h2>
+							<motion.h2 variants={item2} className='text-3xl lg:text-4xl font-deAetna text-center'>General FAQs</motion.h2>
 						</span>
 						<hr className='bg-[#f7f2f2]' />
-						<p className='font-light lg:max-w-xl mx-auto text-center'>Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami</p>
+						<p className='font-light font-amiamie lg:max-w-xl mx-auto text-center'>Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami</p>
 					</div>
 					<div className="w-full">
 						<Disclosure>
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''}`}>Apa itu layanan undangan digital?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa itu layanan undangan digital?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
-										<p className='font-light text-white text-start'>
+										<p className='font-light font-amiamie text-white text-start'>
 											Layanan undangan digital adalah sebuah platform atau layanan yang memungkinkan Anda untuk membuat dan mengirimkan undangan pernikahan secara digital melalui email, pesan teks, atau media sosial.
 										</p>
 									</Disclosure.Panel>
@@ -448,14 +449,14 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''}`}>Apakah undangan digital cocok untuk semua jenis acara?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apakah undangan digital cocok untuk semua jenis acara?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
-										<p className='font-light text-white text-start'>
+										<p className='font-light font-amiamie text-white text-start'>
 											Ya, undangan digital dapat digunakan untuk berbagai jenis acara, seperti pernikahan, ulang tahun, pesta perayaan, pertemuan bisnis, dan lainnya. Prinsipnya adalah menggantikan undangan fisik dengan versi digital yang lebih praktis.
 										</p>
 									</Disclosure.Panel>
@@ -467,14 +468,14 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''}`}>Apa keuntungan menggunakan layanan undangan digital?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa keuntungan menggunakan layanan undangan digital?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
-										<p className='font-light text-white text-start'>
+										<p className='font-light font-amiamie text-white text-start'>
 											Beberapa keuntungan menggunakan layanan undangan digital adalah:
 											Hemat biaya cetak dan pengiriman fisik.
 											Ramah lingkungan karena mengurangi penggunaan kertas.
@@ -490,14 +491,14 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''}`}>Apakah undangan digital dapat dipersonalisasi?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apakah undangan digital dapat dipersonalisasi?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
-										<p className='font-light text-white text-start'>
+										<p className='font-light font-amiamie text-white text-start'>
 											Ya, undangan digital umumnya dapat dipersonalisasi sesuai dengan preferensi Anda. Anda dapat mengubah warna, gaya, dan layout undangan. Anda juga dapat menambahkan foto atau video pribadi serta informasi tambahan seperti peta lokasi, tanggal acara, dan lainnya.
 										</p>
 									</Disclosure.Panel>
@@ -509,14 +510,14 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''}`}>Bagaimana undangan digital dapat diakses oleh tamu?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Bagaimana undangan digital dapat diakses oleh tamu?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
 										/>
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
-										<p className='font-light text-white text-start'>
+										<p className='font-light font-amiamie text-white text-start'>
 											Undangan digital dapat diakses oleh tamu melalui email, pesan teks, atau melalui tautan yang dibagikan melalui media sosial atau platform pesan. Tamu dapat membuka undangan tersebut di perangkat mereka, seperti smartphone, tablet, atau komputer, dan melihat semua informasi yang terkandung di dalamnya.
 										</p>
 									</Disclosure.Panel>

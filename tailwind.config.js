@@ -20,9 +20,9 @@ module.exports = {
         fontColorHeading: '#313F4A'
       },
       fontFamily: {
-        heading: ['var(--font-deAetna)'],
-        body: ['var(--font-amiamie)'],
-        display: ['var(--font-ade)'],
+        deAetna: ['var(--font-deAetna)'],
+        amiamie: ['var(--font-amiamie)'],
+        ade: ['var(--font-ade)'],
       },
       backgroundImage: {
         // LANDING PAGE PURPOSE

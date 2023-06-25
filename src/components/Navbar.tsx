@@ -1,14 +1,14 @@
 'use client'
 import Hamburger from 'hamburger-react'
 import Image from 'next/image'
-import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link as ScrollLink } from 'react-scroll';
+import MobileNavigation from './MobileNavigation';
 
 const Navbar = () => {
 
     const [isOpen, setOpen] = useState(false)
-    // const closeMobileMenu = () => setOpen(false)
+    const closeMobileMenu = () => setOpen(false)
 
 
     return (
@@ -27,10 +27,7 @@ const Navbar = () => {
                     </ScrollLink>
 
                     <div className="hidden lg:block">
-                        <ul className="flex gap-6 font-dinBold text-third text-base">
-                            {/* <li><Link href="#Beranda"><motion.p whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => scrollToSection('Beranda')}>Beranda</motion.p></Link></li> */}
+                        <ul className="flex gap-6 font-amiamie text-third text-base">
                             <li className='cursor-pointer'><ScrollLink to="Beranda" smooth={true} duration={500}><p>Beranda</p></ScrollLink></li>
                             <li className='cursor-pointer'><ScrollLink to="Fitur" smooth={true} duration={500}><p>Fitur</p></ScrollLink></li>
                             <li className='cursor-pointer'><ScrollLink to="Paket" smooth={true} duration={500}><p>Paket</p></ScrollLink></li>
@@ -39,8 +36,8 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* {isOpen && <MobileNav isMobile={true} closeMobileMenu={closeMobileMenu} />} */}
-                <div className="lg:hidden">
+                {isOpen && <MobileNavigation isMobile={true} closeMobileMenus={closeMobileMenu} />}
+                <div className="lg:hidden" >
                     <Hamburger color="#3E4C59" toggled={isOpen} toggle={setOpen} size={24} />
                 </div>
             </nav >

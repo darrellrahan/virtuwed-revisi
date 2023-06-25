@@ -48,10 +48,10 @@ type TestimoniProps = {
 export const ElementTestimoni: React.FC<TestimoniProps> = (props) => {
     return (
         <div className='grid rounded-2xl bg-white border border-solid border-[#d5dfff] p-4'>
-            <h4 className='text-xl lg:text-2xl'>{props.name}</h4>
-            <p className='font-light'>{props.profession}</p>
+            <h4 className='text-xl lg:text-2xl font-deAetna'>{props.name}</h4>
+            <p className='font-light font-amiamie'>{props.profession}</p>
             <p className='my-2.5'>⭐⭐⭐⭐⭐</p>
-            <p>{props.message}</p>
+            <p className='font-amiamie'>{props.message}</p>
         </div>
     )
 }

@@ -9,12 +9,12 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = (props) => {
     return (
-        <Link style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} href={props.link} className='py-3 px-6 text-white text-center inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>{props.title}</Link>
+        <Link style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} href={props.link} className='pt-3 pb-2.5 px-6 text-white text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>{props.title}</Link>
     )
 }
 
 export const ButtonOutline: React.FC<ButtonProps> = (props) => {
     return (
-        <Link href={props.link} className='py-3 px-6 bg-primary/20 text-primary text-center inline-block rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>{props.title}</Link>
+        <Link href={props.link} className='pt-3 pb-2.5 px-6 bg-primary/20 text-primary font-amiamie text-center inline-block rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>{props.title}</Link>
     )
 }

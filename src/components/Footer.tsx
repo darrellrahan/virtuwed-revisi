@@ -19,33 +19,25 @@ const Footer = () => {
                         height={220}
                         priority
                     />
-                    <h2 className='text-3xl lg:text-4xl text-white font-display'>VIRTUWED</h2>
+                    <h2 className='text-3xl lg:text-4xl text-white font-ade'>VIRTUWED</h2>
                 </ScrollLink>
 
                 <div className='grid grid-cols-2 lg:pt-8 lg:justify-items-end'>
                     <div className='grid gap-4'>
-                        <h5 className='text-base lg:text-lg font-bold text-white'>Navigasi</h5>
+                        <h5 className='text-base lg:text-lg font-body text-white font-deAetna'>Navigasi</h5>
 
-                        <ul className='grid gap-2 font-light text-sm font-body'>
-                            <li>
-                                <Link className='hover:underline font-body' href={'/'}>Harga</Link>
-                            </li>
-                            <li>
-                                <Link className='hover:underline font-body' href={'/'}>Tema</Link>
-                            </li>
-                            <li>
-                                <Link className='hover:underline font-body' href={'/'}>Blog</Link>
-                            </li>
-                            <li>
-                                <Link className='hover:underline font-body' href={'/'}>Bantuan</Link>
-                            </li>
+                        <ul className='grid gap-2 font-light font-amiamie'>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Beranda" smooth={true} duration={500}><p className='text-white'>Beranda</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Fitur" smooth={true} duration={500}><p className='text-white'>Fitur</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Paket" smooth={true} duration={500}><p className='text-white'>Paket</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Testimoni" smooth={true} duration={500}><p className='text-white'>Testimoni</p></ScrollLink></li>
                         </ul>
                     </div>
 
                     <div className='grid gap-4'>
-                        <h5 className='text-base lg:text-lg font-bold text-white'>Sosial Media</h5>
+                        <h5 className='text-base lg:text-lg font-deAetna text-white'>Sosial Media</h5>
 
-                        <ul className='grid gap-2 font-light text-sm font-body'>
+                        <ul className='grid gap-2 font-light text-sm font-amiamie'>
                             <li>
                                 <a className='flex items-center gap-2 hover:underline' target='_blank' href="#">
                                     <Icon width={16} height={16} icon="ic:round-email" />
@@ -76,7 +68,7 @@ const Footer = () => {
             </div>
 
             <div className='text-center py-4'>
-                <p className='text-sm text-white'>© 2023 <a className='text-sm hover:underline' target='_blank' href="https://virtuwed.id">virtuwed.id</a> All Rights Reserved</p>
+                <p className='text-sm text-white font-amiamie'>© 2023 <a className='text-sm hover:underline' target='_blank' href="https://virtuwed.id">virtuwed.id</a> All Rights Reserved</p>
             </div>
         </footer>
     )
