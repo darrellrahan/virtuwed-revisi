@@ -1,11 +1,11 @@
 'use client'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Icon } from '@iconify/react';
 import { Chrono } from "react-chrono";
 import Countdown from 'react-countdown';
 import Link from 'next/link';
-import { Listbox, Transition } from '@headlessui/react'
+import { Dialog, Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { countGuestComment, countRSPVStatus, getAllGuestCommentsByWeddingSessionId } from '@/app/api/api';
@@ -61,6 +61,28 @@ const UndanganDigital = () => {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
 
+    // modal moment
+    let [isOpen, setIsOpen] = useState(false)
+    let [momentTitle, setMomentTitle] = useState('')
+    let [momentLink, setMomentLink] = useState('')
+
+    // SONG 
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [isButtonVisible, setIsButtonVisible] = useState(true);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const prevScrollY = useRef(0);
+
+    const handleButtonClick = () => {
+        if (isPlaying) {
+            audioRef.current?.pause();
+        } else {
+            audioRef.current?.play();
+        }
+        setIsPlaying(!isPlaying);
+    };
+
+
+    // FETCH FUNCTION
     const fetchCountGuestComment = async () => {
         const query = `
         query {
@@ -190,13 +212,50 @@ const UndanganDigital = () => {
 
     const displayedItems = guestComments.slice(0, displayCount);
 
+
+    // MODAL
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    function openModal() {
+        setIsOpen(true)
+    }
+
+
+
+
     useEffect(() => {
         AOS.init(); // Initialize AOS
         fetchGuestComments()
         fetchCountGuestComment()
         fetchCountRSPVStatus()
+
         return () => {
             AOS.refresh(); // Clean up AOS on component unmount
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > prevScrollY.current) {
+                setIsButtonVisible(false);
+            } else {
+                setIsButtonVisible(true);
+            }
+
+            prevScrollY.current = currentScrollY;
+        };
+
+        audioRef.current = new Audio('/assets/undanganDigital/Self-Love.mp3');
+        audioRef.current.loop = true;
+        audioRef.current.play();
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
@@ -209,7 +268,66 @@ const UndanganDigital = () => {
                     </div>
                 </section>
 
-                <section className='block lg:grid lg:col-span-4 lg:col-start-9'>
+                <section className='block lg:grid lg:col-span-4 lg:col-start-9 relative'>
+                    {/* MODAL MOMENT */}
+                    <Transition appear show={isOpen} as={Fragment}>
+                        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0"
+                                enterTo="opacity-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100"
+                                leaveTo="opacity-0"
+                            >
+                                <div className="fixed inset-0 bg-black bg-opacity-25" />
+                            </Transition.Child>
+
+                            <div className="fixed inset-0 overflow-y-auto">
+                                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                    <Transition.Child
+                                        as={Fragment}
+                                        enter="ease-out duration-300"
+                                        enterFrom="opacity-0 scale-95"
+                                        enterTo="opacity-100 scale-100"
+                                        leave="ease-in duration-200"
+                                        leaveFrom="opacity-100 scale-100"
+                                        leaveTo="opacity-0 scale-95"
+                                    >
+                                        <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                            <Dialog.Title
+                                                as="h3"
+                                                className="text-lg font-medium leading-6 text-gray-900"
+                                            >
+                                                Moment {momentTitle}
+                                            </Dialog.Title>
+                                            <div className="mt-2">
+                                                <Image
+                                                    src={momentLink}
+                                                    alt="Moment pengantin"
+                                                    className="object-cover object-center min-w-full w-full h-auto rounded-lg"
+                                                    width={500}
+                                                    height={500}
+                                                    priority
+                                                />
+                                            </div>
+
+                                            <div className="mt-4">
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-primaryInv px-4 py-2 text-sm font-medium text-white hover:bg-tertiaryInv focus:outline-none"
+                                                    onClick={closeModal}
+                                                >
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </Dialog.Panel>
+                                    </Transition.Child>
+                                </div>
+                            </div>
+                        </Dialog>
+                    </Transition>
 
                     {/* MAIN HERO */}
                     <section className='container grid min-w-full justify-center h-screen px-2.5 py-5 bg-rsvp-texture bg-cover bg-no-repeat bg-center'>
@@ -392,7 +510,13 @@ const UndanganDigital = () => {
                                 <h1 data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv italic text-left text-4xl'>Our Moment</h1>
                             </div>
                             <div className='px-5 grid grid-cols-2 gap-3 overflow-hidden'>
-                                <a href="/assets/undanganDigital/Prewed14.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                <div
+                                    onClick={() => {
+                                        openModal()
+                                        setMomentLink("/assets/undanganDigital/Prewed14.jpeg")
+                                        setMomentTitle("1")
+                                    }}
+                                    className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed14.jpeg"
                                         alt="Moment pengantin"
@@ -401,8 +525,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed1.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed1.jpeg")
+                                    setMomentTitle("2")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed1.jpeg"
                                         alt="Moment pengantin"
@@ -411,8 +539,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed3.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed3.jpeg")
+                                    setMomentTitle("3")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed3.jpeg"
                                         alt="Moment pengantin"
@@ -421,8 +553,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed9.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed9.jpeg")
+                                    setMomentTitle("4")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed9.jpeg"
                                         alt="Moment pengantin"
@@ -431,8 +567,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed13.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed13.jpeg")
+                                    setMomentTitle("5")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed13.jpeg"
                                         alt="Moment pengantin"
@@ -441,8 +581,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed20.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed20.jpeg")
+                                    setMomentTitle("6")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed20.jpeg"
                                         alt="Moment pengantin"
@@ -451,8 +595,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed22.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed22.jpeg")
+                                    setMomentTitle("7")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed22.jpeg"
                                         alt="Moment pengantin"
@@ -461,8 +609,12 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-                                <a href="/assets/undanganDigital/Prewed12.jpeg" className='border-2 border-solid border-tertiaryInv w-full h-full'>
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed12.jpeg")
+                                    setMomentTitle("8")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
                                         src="/assets/undanganDigital/Prewed12.jpeg"
                                         alt="Moment pengantin"
@@ -471,10 +623,7 @@ const UndanganDigital = () => {
                                         height={500}
                                         priority
                                     />
-                                </a>
-
-
-
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -660,6 +809,12 @@ const UndanganDigital = () => {
                             <h1 data-aos-once="true" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" className='z-20 text-4xl text-primaryInv'>Rifqi & Alysha</h1>
                             <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500" className='z-20 text-base text-primaryInv'>July 8<sup>th</sup> 2023</p>
                         </div>
+                    </section>
+
+                    {/* MUSIC */}
+                    <section className='fixed z-50 bottom-4 ml-4'>
+                        <button className={`bg-music-disc bg-cover w-12 h-12 ${isPlaying ? 'animate-spin-slow' : 'animate-none'} ${isButtonVisible ? 'block' : 'hidden'}`} onClick={handleButtonClick}>
+                        </button>
                     </section>
 
                     <footer className='bg-primaryInv py-2.5 grid justify-center min-w-full'>

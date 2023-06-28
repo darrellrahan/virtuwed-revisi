@@ -40,10 +40,14 @@ module.exports = {
         'forest-landscape': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-forest-landscape-min.png)",
         'rsvp-texture': "url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/bg-rsvp-texture-min.png)",
         'cover-wedding': "url(/assets/undanganDigital/Prewed24.jpeg)",
-        'cover-session': "url(/assets/undanganDigital/Prewed13.jpeg)"
+        'cover-session': "url(/assets/undanganDigital/Prewed13.jpeg)",
+        'music-disc': "url(https://katsudoto.id/media/template/details/music.png)"
 
 
       },
+      animation: {
+        'spin-slow': 'spin 10s linear infinite',
+      }
     },
   },
   plugins: [],
