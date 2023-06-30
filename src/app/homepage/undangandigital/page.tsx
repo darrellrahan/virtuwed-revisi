@@ -249,7 +249,7 @@ const UndanganDigital = () => {
             prevScrollY.current = currentScrollY;
         };
 
-        audioRef.current = new Audio('/assets/undanganDigital/Self-Love.mp3');
+        audioRef.current = new Audio('/assets/undanganDigital/GonnaLiveForever.mp3');
         audioRef.current.loop = true;
         audioRef.current.play();
         window.addEventListener('scroll', handleScroll);
@@ -263,7 +263,7 @@ const UndanganDigital = () => {
         <>
             <main className={`${playFair.className} overflow-hidden min-h-screen lg:grid lg:grid-cols-12 lg:relative`}>
                 <section className='hidden lg:grid col-span-8 h-screen w-4/6 bg-primaryInv fixed p-5'>
-                    <div className='w-full h-full grid items-end bg-no-repeat bg-cover-wedding bg-cover bg-center p-20'>
+                    <div className='w-full h-full grid items-end bg-no-repeat bg-cover-wedding bg-cover bg-center p-16'>
                         <h1 className='text-white text-7xl'>RIFQI & ALYSHA</h1>
                     </div>
                 </section>
@@ -373,9 +373,9 @@ const UndanganDigital = () => {
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
                                         <div data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300" data-aos-once="true" className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -bottom-7 -left-10'></div>
                                         <Image
-                                            src="/assets/undanganDigital/Prewed1.jpeg"
+                                            src="/assets/undanganDigital/pengantinPria.jpg"
                                             alt="Vercel Logo"
-                                            className="w-full h-full rounded-full z-50 object-cover"
+                                            className="w-full h-full rounded-full z-50 object-cover bg-white"
                                             width={220}
                                             height={220}
                                             priority
@@ -399,7 +399,7 @@ const UndanganDigital = () => {
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
                                         <div className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
                                         <Image
-                                            src="/assets/undanganDigital/Prewed1.jpeg"
+                                            src="/assets/undanganDigital/pengantinWanita.jpg"
                                             alt="Vercel Logo"
                                             className="w-full h-full rounded-full z-50 object-cover"
                                             width={220}
@@ -413,7 +413,7 @@ const UndanganDigital = () => {
                                     <p data-aos="fade-up" data-aos-duration="1000">Putri dari Bapak Karmana dan Ibu Dedah Jubaedah</p>
                                     <div data-aos="fade-up" data-aos-duration="1000" className='flex gap-2 items-center justify-center hover:underline underline-offset-4'>
                                         <Icon icon="bi:instagram" className='text-sm' />
-                                        <a className='inline-block' href="https://www.instagram.com/hasnat5_/" target='_blank'>@alyshakarmina2009</a>
+                                        <a className='inline-block' href="https://www.instagram.com/alyshakarmina2009/" target='_blank'>@alyshakarmina2009</a>
                                     </div>
                                 </div>
                             </div>
@@ -440,9 +440,9 @@ const UndanganDigital = () => {
                                 <Countdown className='text-5xl text-primaryInv' date={Date.now() + 100000000} />
                             </div>
 
-                            <div className='grid justify-end py-5 mt-1'>
+                            {/* <div className='grid justify-end py-5 mt-1'>
                                 <a href="#" className='bg-primaryInv inline-block text-white px-4 pt-2 pb-2.5 rounded-md w-44 text-center'>Add to Calendar</a>
-                            </div>
+                            </div> */}
                         </div>
                     </section>
 
@@ -477,18 +477,18 @@ const UndanganDigital = () => {
                                     priority
                                 />
                                 <h3 data-aos="fade-up" data-aos-duration="1000" className='mb-1 italic text-secondaryInvInv text-3xl text-secondaryInv'>Reception</h3>
-                                <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>15:30 - End</p>
+                                <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>09:00 - 13:30</p>
                             </div>
 
                             <div className='grid gap-2 p-5 text-center'>
-                                <p data-aos="fade-up" data-aos-duration="1000" className='font-bold text-primaryInv'>Villa Kailasha</p>
-                                <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Banjar Dukuh, Desa Kelating, Kelating, Kerambitan, Tabanan Regency, Bali 82121, Indonesia</p>
-                                <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Tabanan Regency</p>
-                                <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><a href="#" className='inline-block text-secondaryInv border border-solid border-secondaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-white hover:bg-secondaryInv transition-all ease-in-out'>View Maps</a></div>
+                                <p data-aos="fade-up" data-aos-duration="1000" className='font-bold text-primaryInv'>Neka Kopi</p>
+                                <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Jl. Ciawitali No.42, Citeureup, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40525</p>
+                                {/* <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Tabanan Regency</p> */}
+                                <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><a href="https://maps.app.goo.gl/enaLsFpM2Yf6bBWRA" target='_blank' className='inline-block text-secondaryInv border bg-white border-solid border-secondaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-white hover:bg-secondaryInv transition-all ease-in-out'>View Maps</a></div>
                                 <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondaryInv rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div>
                             </div>
 
-                            <div className='p-5'>
+                            {/* <div className='p-5'>
 
                                 <iframe
                                     className="rounded-xl h-48 md:h-64"
@@ -499,7 +499,7 @@ const UndanganDigital = () => {
                                     allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowFullScreen={true}
                                 ></iframe>
-                            </div>
+                            </div> */}
                         </div>
                     </section>
 
@@ -513,12 +513,12 @@ const UndanganDigital = () => {
                                 <div
                                     onClick={() => {
                                         openModal()
-                                        setMomentLink("/assets/undanganDigital/Prewed14.jpeg")
+                                        setMomentLink("/assets/undanganDigital/Prewed6.jpeg")
                                         setMomentTitle("1")
                                     }}
                                     className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed14.jpeg"
+                                        src="/assets/undanganDigital/Prewed6.jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -528,11 +528,11 @@ const UndanganDigital = () => {
                                 </div>
                                 <div onClick={() => {
                                     openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed1.jpeg")
+                                    setMomentLink("/assets/undanganDigital/Prewed7.jpeg")
                                     setMomentTitle("2")
                                 }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed1.jpeg"
+                                        src="/assets/undanganDigital/Prewed7.jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -542,11 +542,11 @@ const UndanganDigital = () => {
                                 </div>
                                 <div onClick={() => {
                                     openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed3.jpeg")
+                                    setMomentLink("/assets/undanganDigital/Prewed(24).jpeg")
                                     setMomentTitle("3")
                                 }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed3.jpeg"
+                                        src="/assets/undanganDigital/Prewed(24).jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -556,11 +556,11 @@ const UndanganDigital = () => {
                                 </div>
                                 <div onClick={() => {
                                     openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed9.jpeg")
+                                    setMomentLink("/assets/undanganDigital/Prewed16.jpeg")
                                     setMomentTitle("4")
                                 }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed9.jpeg"
+                                        src="/assets/undanganDigital/Prewed16.jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -570,11 +570,39 @@ const UndanganDigital = () => {
                                 </div>
                                 <div onClick={() => {
                                     openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed13.jpeg")
+                                    setMomentLink("/assets/undanganDigital/Prewed8.jpeg")
                                     setMomentTitle("5")
                                 }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed13.jpeg"
+                                        src="/assets/undanganDigital/Prewed8.jpeg"
+                                        alt="Moment pengantin"
+                                        className="object-cover object-center min-w-full max-h-40 w-full h-auto"
+                                        width={500}
+                                        height={500}
+                                        priority
+                                    />
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed10.jpeg")
+                                    setMomentTitle("6")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
+                                    <Image
+                                        src="/assets/undanganDigital/Prewed10.jpeg"
+                                        alt="Moment pengantin"
+                                        className="object-cover object-center min-w-full max-h-40 w-full h-auto"
+                                        width={500}
+                                        height={500}
+                                        priority
+                                    />
+                                </div>
+                                <div onClick={() => {
+                                    openModal()
+                                    setMomentLink("/assets/undanganDigital/Prewed19.jpeg")
+                                    setMomentTitle("7")
+                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
+                                    <Image
+                                        src="/assets/undanganDigital/Prewed19.jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -585,38 +613,10 @@ const UndanganDigital = () => {
                                 <div onClick={() => {
                                     openModal()
                                     setMomentLink("/assets/undanganDigital/Prewed20.jpeg")
-                                    setMomentTitle("6")
-                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
-                                    <Image
-                                        src="/assets/undanganDigital/Prewed20.jpeg"
-                                        alt="Moment pengantin"
-                                        className="object-cover object-center min-w-full max-h-40 w-full h-auto"
-                                        width={500}
-                                        height={500}
-                                        priority
-                                    />
-                                </div>
-                                <div onClick={() => {
-                                    openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed22.jpeg")
-                                    setMomentTitle("7")
-                                }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
-                                    <Image
-                                        src="/assets/undanganDigital/Prewed22.jpeg"
-                                        alt="Moment pengantin"
-                                        className="object-cover object-center min-w-full max-h-40 w-full h-auto"
-                                        width={500}
-                                        height={500}
-                                        priority
-                                    />
-                                </div>
-                                <div onClick={() => {
-                                    openModal()
-                                    setMomentLink("/assets/undanganDigital/Prewed12.jpeg")
                                     setMomentTitle("8")
                                 }} className='cursor-pointer border-2 border-solid border-tertiaryInv w-full h-full'>
                                     <Image
-                                        src="/assets/undanganDigital/Prewed12.jpeg"
+                                        src="/assets/undanganDigital/Prewed20.jpeg"
                                         alt="Moment pengantin"
                                         className="object-cover object-center min-w-full max-h-40 w-full h-auto"
                                         width={500}
@@ -630,26 +630,26 @@ const UndanganDigital = () => {
 
                     {/* TIMELINE */}
                     <section className='min-w-full pt-5 pb-10 bg-gradient-to-b from-white from-70% to-backgroundColorInv to-90%'>
-                        <h1 data-aos="fade-right" data-aos-duration="1000" className='text-primaryInv italic text-left text-4xl p-5'>Our Story</h1>
+                        <h1 data-aos="fade-right" data-aos-duration="1000" className='text-primaryInv italic text-left text-4xl p-5'>Alysha Story</h1>
 
                         <div>
                             <Chrono
                                 items={[
                                     {
-                                        title: "Jan 2032",
-                                        cardTitle: "Perkenalan",
-                                        cardSubtitle: "Lorem ipsum dolor sit amet consectetur adipisicing eli Pariatur delectus eaque necessitatibus dicta error molestiae",
+                                        title: "2014",
+                                        cardTitle: "Pertemuan",
+                                        cardSubtitle: "Saya memasuki dunia anak SMP dimana Saya beranjak ke masa remaja. Awalnya Saya sama sekali tidak mengenal Rifqi Sholeh karena Dia cowo satu satunya yang bersikap jutek, cuek sama cewek. Bahkan sama sekali Saya tidak mengenal Rifqi Sholeh saking cueknya itu orang",
                                     },
                                     {
-                                        title: "Feb 2032",
-                                        cardTitle: "Berteman",
-                                        cardSubtitle: `Kami membahas berbagai macam topik yang akhirnya kami memiliki kecocokan terhadap dunia bisnis`,
+                                        title: "20 Sept 2015",
+                                        cardTitle: "Berpacaran",
+                                        cardSubtitle: 'Hari dimana aku sangat berbahagia bisa mengenal lebih dekat dengan Cowo super jutek dan cuek itu. Setelah mengenal Dia lebih dalam ternyata Dia sangat humoris dan penyayang serta peduli banget sama pasangan ga nyangka bisa pacaran sama Cowo sejutek dan cuek seperti Dia',
 
                                     },
                                     {
-                                        title: "Dec 3032",
-                                        cardTitle: "Berpacaran",
-                                        cardSubtitle: `Perasaan campur aduk dibuat olehnya, akhirnya kami pun melakukan sebuah komitmen untuk saling mengenal lebih dalam`,
+                                        title: "6 Jan 2023",
+                                        cardTitle: "Melamar",
+                                        cardSubtitle: "Hari dimana Aku merasa bahagia dan dibuat degdegan parah. Karena hari itu Dia mulai menunjukan keseriusannya terhadap Aku. Dia pria cuek dan jutek bisa bisanya memberanikan diri untuk datang kerumahku bersama keluarganya membawa kabar gembira yang gabisa Aku ungkapin dengan kata kata dan sangat bikin aku terharu. Setelah sekian lamanya perjalanan banyak lika liku huru hara hubungan Kita",
 
                                     },
                                 ]}
