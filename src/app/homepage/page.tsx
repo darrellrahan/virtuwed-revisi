@@ -1,6 +1,8 @@
 'use client'
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import { useSearchParams } from 'next/navigation'
 
 
 import AOS from 'aos';
@@ -11,7 +13,10 @@ import { Playfair_Display } from 'next/font/google'
 const playFair = Playfair_Display({ subsets: ['latin'] })
 
 
-const HomePage = () => {
+const page = () => {
+    const searchParams = useSearchParams()
+
+    const u = searchParams.get('u')
 
     useEffect(() => {
         AOS.init(); // Initialize AOS
@@ -24,7 +29,7 @@ const HomePage = () => {
         <main className={`${playFair.className} container min-w-full mx-auto h-screen text-center max-w-screen-xl bg-cover-session bg-no-repeat bg-center bg-cover`}>
             <div className='grid items-center h-full px-4 bg-white/75'>
                 <div className='grid justify-center gap-2'>
-                    <h3 data-aos="zoom-in" data-aos-delay="500" data-aos-duration="500" className='text-3xl'>Kepada Yth bapak/ibu/saudara/i</h3>
+                    <h3 data-aos="zoom-in" data-aos-delay="500" data-aos-duration="500" className='text-3xl'>Kepada Yth bapak/ibu/saudara/i {u}</h3>
                     <p data-aos="fade" data-aos-delay="750" data-aos-duration="500" className='text-base'>mohon maaf apabila ada kesalahan pengejaan nama</p>
                 </div>
 
@@ -46,4 +51,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default page;
