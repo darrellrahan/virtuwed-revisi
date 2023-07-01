@@ -485,7 +485,7 @@ const UndanganDigital = () => {
                                 <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Jl. Ciawitali No.42, Citeureup, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40525</p>
                                 {/* <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Tabanan Regency</p> */}
                                 <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><a href="https://maps.app.goo.gl/enaLsFpM2Yf6bBWRA" target='_blank' className='inline-block text-secondaryInv border bg-white border-solid border-secondaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-white hover:bg-secondaryInv transition-all ease-in-out'>View Maps</a></div>
-                                <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondaryInv rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div>
+                                {/* <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondaryInv rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div> */}
                             </div>
 
                             {/* <div className='p-5'>
