@@ -13,7 +13,7 @@ import { Playfair_Display } from 'next/font/google'
 const playFair = Playfair_Display({ subsets: ['latin'] })
 
 
-const page = () => {
+const Homepage = () => {
     const searchParams = useSearchParams()
 
     const u = searchParams.get('u')
@@ -51,4 +51,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Homepage;
