@@ -181,7 +181,7 @@ export default function Home() {
 							</span>
 							<p className='font-light font-amiamie'>Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.</p>
 							<div>
-								<Link className='inline-block' href={'./homepage'}>
+								<Link className='inline-block' href={{ pathname: '/homepage' }}>
 									<div className='items-center flex gap-2'>
 										<p className='text-primary font-amiamie'>Cari Desain Impian Anda</p>
 										<ArrowUpRightIcon className="h-4 w-4 text-primary" />
