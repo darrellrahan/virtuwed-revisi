@@ -255,6 +255,7 @@ const UndanganDigital = () => {
         window.addEventListener('scroll', handleScroll);
 
         return () => {
+            audioRef.current?.pause();
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
