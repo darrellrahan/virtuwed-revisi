@@ -677,7 +677,7 @@ const UndanganDigital = () => {
 
                             <div className='flex justify-between'>
 
-                                {countRSPV.map((status, id) => (
+                                {countRSPV?.map((status, id) => (
                                     <div key={id} className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
                                         <h2 className='text-3xl text-primaryInv'>{status.count}</h2>
                                         <p className='text-base text-primaryInv'>{status._id}</p>
@@ -768,7 +768,7 @@ const UndanganDigital = () => {
 
                         {/* COMMENTAR */}
                         <div className='p-5'>
-                            {displayedItems.map((data) => (
+                            {displayedItems?.map((data) => (
                                 <div data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={data.id}>
                                     <div>
                                         <h3 className='text-lg text-primaryInv font-bold'>{data.name}</h3>
