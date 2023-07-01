@@ -51,15 +51,18 @@ const rspv = [
 
 
 const UndanganDigital = () => {
+    const [isClient, setIsClient] = useState(false);
+
     const [guestComments, setGuestComments] = useState<GuestComments[]>([]);
     const [countRSPV, setCountRSPV] = useState<CountRSPV[]>([]);
     const [countGuestComments, setCountGuestComments] = useState<CountGuestComments | null>(null);
     const [selected, setSelected] = useState(rspv[0])
 
-    const [displayCount, setDisplayCount] = useState(6);
 
+    // COMMENT
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
+    const [displayCount, setDisplayCount] = useState(6);
 
     // modal moment
     let [isOpen, setIsOpen] = useState(false)
@@ -147,61 +150,66 @@ const UndanganDigital = () => {
     // SEND COMMENT
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const commentSend = await axios.post('https://calm-plum-hosiery.cyclic.app/graphql', {
-                query: `
-                mutation CreateGuestComment($name: String!, $message: String!) {
-                  createGuestComment(wedding_session_id: "649007bdca091be7add3c440", name: $name, message: $message) {
-                    id
-                    wedding_session {
-                      id
-                    }
-                    name
-                    message
-                    createdAt
-                    updatedAt
-                  }
-                }
-              `,
-                variables: {
-                    name,
-                    message,
-                },
-            });
-
-            const rspvSend = await axios.post('https://calm-plum-hosiery.cyclic.app/graphql', {
-                query: `
-                mutation RSVPAbsent($name: String!, $status: String!) {
-                    RSVPAbsent(wedding_session_id: "649007bdca091be7add3c440", name: $name, status: $status) {
-                      id
-                      wedding_session {
+        if (name.trim() === '' || message.trim() === '') {
+            // If either name or message is empty, do not proceed with the fetch request
+            alert('Jangan lupa isi nama dan pesan yaa')
+        } else {
+            try {
+                const commentSend = await axios.post('https://calm-plum-hosiery.cyclic.app/graphql', {
+                    query: `
+                    mutation CreateGuestComment($name: String!, $message: String!) {
+                      createGuestComment(wedding_session_id: "649007bdca091be7add3c440", name: $name, message: $message) {
                         id
+                        wedding_session {
+                          id
+                        }
+                        name
+                        message
+                        createdAt
+                        updatedAt
                       }
-                      guest_id {
-                        id
-                      }
-                      name
-                      status
                     }
-                  }
-              `,
-                variables: {
-                    name,
-                    status: selected.status
-                },
-            });
+                  `,
+                    variables: {
+                        name,
+                        message,
+                    },
+                });
 
-            console.log('Data added:');
-            // Handle success or show a confirmation message
-            setName("");
-            setMessage("");
-            fetchGuestComments();
-            fetchCountRSPVStatus();
-            fetchCountGuestComment();
+                const rspvSend = await axios.post('https://calm-plum-hosiery.cyclic.app/graphql', {
+                    query: `
+                    mutation RSVPAbsent($name: String!, $status: String!) {
+                        RSVPAbsent(wedding_session_id: "649007bdca091be7add3c440", name: $name, status: $status) {
+                          id
+                          wedding_session {
+                            id
+                          }
+                          guest_id {
+                            id
+                          }
+                          name
+                          status
+                        }
+                      }
+                  `,
+                    variables: {
+                        name,
+                        status: selected.status
+                    },
+                });
 
-        } catch (error) {
-            console.error('Error adding data:', error);
-            // Handle error or show an error message
+                console.log('Data added:');
+                // Handle success or show a confirmation message
+                setName("");
+                setMessage("");
+                fetchGuestComments();
+                fetchCountRSPVStatus();
+                fetchCountGuestComment();
+
+            } catch (error) {
+                console.error('Error adding data:', error);
+                // Handle error or show an error message
+            }
         }
     };
 
@@ -209,8 +217,8 @@ const UndanganDigital = () => {
     const handleLoadMore = () => {
         setDisplayCount(displayCount + 6);
     };
-
     const displayedItems = guestComments.slice(0, displayCount);
+
 
 
     // MODAL
@@ -223,10 +231,10 @@ const UndanganDigital = () => {
     }
 
 
-
-
     useEffect(() => {
         AOS.init(); // Initialize AOS
+        setIsClient(true);
+
         fetchGuestComments()
         fetchCountGuestComment()
         fetchCountRSPVStatus()
@@ -438,7 +446,7 @@ const UndanganDigital = () => {
 
                             {/* COUNTDOWN */}
                             <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100" className='grid justify-center py-10'>
-                                <Countdown className='text-5xl text-primaryInv' date={Date.now() + 100000000} />
+                                {isClient && <Countdown className='text-5xl text-primaryInv' date={'2023-07-08T09:00:00'} />}
                             </div>
 
                             {/* <div className='grid justify-end py-5 mt-1'>
