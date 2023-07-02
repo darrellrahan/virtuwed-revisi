@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://calm-plum-hosiery.cyclic.app/graphql'
+const API_URL = 'https://api.virtuwed.id/graphql'
 
 export const fetchGraphQL = async (query: string) => {
     try {
