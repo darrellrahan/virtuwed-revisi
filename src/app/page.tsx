@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link';
-import Feature from '@/components/Feature';
 import Testimoni from '@/components/Testimoni';
 import { Button, ButtonOutline } from '@/components/ButtonComponent';
 
@@ -243,7 +242,7 @@ export default function Home() {
 				</section>
 
 				{/* PRODUCT */}
-				<motion.section id='Paket' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 bg-white py-20 px-4 content-center lg:px-40 max-w-screen-xl mx-auto'>
+				<motion.section id='Paket' initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 bg-gray-300/25 py-20 px-4 content-center lg:px-40 max-w-screen-xl mx-auto'>
 					<span className="overflow-hidden inline-block pb-1.5">
 						<motion.h2 variants={item2} className='font-deAetna text-3xl lg:text-4xl text-center'>Paket Virtuwed</motion.h2>
 					</span>
