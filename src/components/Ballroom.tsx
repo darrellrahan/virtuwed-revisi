@@ -148,7 +148,7 @@ const Ballroom = () => {
 
 
             //ASSET SETUP 
-            const back = new PANOLENS.ImagePanorama('/assets/ballroom/Back.png');
+            const back = new PANOLENS.ImagePanorama('/assets/ballroom/Back.jpg');
             // back.addEventListener('enter-fade-start', function () {
             //     pov == 'daridepan' ?
             //         viewer.tweenControlCenter(lookAtPositions[1], 0)
@@ -157,12 +157,12 @@ const Ballroom = () => {
 
             // });
 
-            const front = new PANOLENS.ImagePanorama('/assets/ballroom/Front.png');
+            const front = new PANOLENS.ImagePanorama('/assets/ballroom/Front.jpg');
             // front.addEventListener('enter-fade-start', function () {
             //     viewer.tweenControlCenter(lookAtPositions[0], 0);
             // });
 
-            const koridor = new PANOLENS.ImagePanorama('/assets/ballroom/Koridor.png');
+            const koridor = new PANOLENS.ImagePanorama('/assets/ballroom/Koridor.jpg');
             koridor.addEventListener('enter-fade-start', function () {
                 viewer.tweenControlCenter(lookAtPositions[1], 0);
             });
