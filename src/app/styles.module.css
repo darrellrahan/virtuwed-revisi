@@ -1,0 +1,10 @@
+.container {
+    height: 100vh;
+  }
+  
+  @supports (-webkit-touch-callout: none) {
+    .container {
+      height: -webkit-fill-available;
+    }
+  }
+  
