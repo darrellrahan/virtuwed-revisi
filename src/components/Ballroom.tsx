@@ -189,7 +189,12 @@ const Ballroom = () => {
             // const viewer = new PANOLENS.Viewer({ container: document.getElementById('ballroom'), enableReticle: false, output: 'console', viewIndicator: true });
             const viewer = new PANOLENS.Viewer({ container: document.getElementById('ballroom'), enableReticle: false, output: 'console', controlBar: false, autoRotate: false, autoHideInfospot: false });
             viewer.OrbitControls.enabled = false;
-
+            viewer.camera.fov = 70; // Adjust the FOV value as needed
+            viewer.camera.updateProjectionMatrix();
+            if (window.innerWidth < 768) {
+                viewer.camera.fov = 100; // Adjust the FOV value as needed
+                viewer.camera.updateProjectionMatrix();
+            }
 
             //ASSET SETUP 
             const back = new PANOLENS.ImagePanorama('/assets/ballroom/Back.jpg');
@@ -270,14 +275,19 @@ const Ballroom = () => {
                 viewer.OrbitControls.enabled = false;
                 viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
                 // type( frontText.pelaminan, onPelaminanComplete, 2000 );
-                type(frontText.pelaminan, function () { buttonPelaminan?.classList.toggle('hidden'); }, 2000);
+                type(frontText.pelaminan, function () { buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true; }, 2000);
 
             }
 
             const onLoadBack = () => {
-                // digitalGiftContainer?.classList.toggle('hidden');
-                viewer.tweenControlCenter(new THREE.Vector3(-116.83, 138.59, -4988.43), 0);
-                souvenirContainer?.classList.toggle('hidden');
+                viewer.tweenControlCenter(new THREE.Vector3(-5000, 0, 0), 0);
+                setTimeout(function () {
+                    delayExecute(mejaSouvenirInfospot.focus.bind(mejaSouvenirInfospot), tweeningDelay);
+                    // viewer.tweenControlCenter(new THREE.Vector3(-116.83, 138.59, -4988.43), 0);
+                }, 1000);
+                setTimeout(function () {
+                    souvenirContainer?.classList.toggle('hidden');
+                }, 2000);
             }
 
 
@@ -335,15 +345,14 @@ const Ballroom = () => {
 
             // FRONT INFOSPOTS
             const mejaHadiahInfospot = new PANOLENS.Infospot();
-            const videocallInfospot = new PANOLENS.Infospot(500, '/assets/ballroom/button/buttonVideocall.png');
-            const livestreamInfospot = new PANOLENS.Infospot(500, '/assets/ballroom/button/buttonLivestream.png');
+            const videocallInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonVideocall.png');
+            const livestreamInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonLivestream.png');
             const mejaSouvenirPOVInfospot = new PANOLENS.Infospot(10e-7);
 
             //   BACK INFOSPOTS
+            const keluarRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonKeluarRuangan.png');
+            const lihatRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonLihatRuangan.png');
             const mejaSouvenirInfospot = new PANOLENS.Infospot();
-
-            const keluarRuanganInfospot = new PANOLENS.Infospot(500, '/assets/ballroom/button/buttonKeluarRuangan.png');
-            const lihatRuanganInfospot = new PANOLENS.Infospot(500, '/assets/ballroom/button/buttonLihatRuangan.png');
             const ucapanEndingInfospot = new PANOLENS.Infospot(10e-7);  // Make it not visible
 
 
