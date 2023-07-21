@@ -1,7 +1,6 @@
 'use client'
 import Ballroom from '@/components/Ballroom';
 import { useEffect, useRef, useState } from 'react';
-// import styles from '../../styles.module.css';
 
 const Page = () => {
     // SONG 
@@ -28,7 +27,6 @@ const Page = () => {
     }, []);
 
     return (
-        // <main className={`${styles.container} container w-full min-w-full h-screen mx-auto overflow-hidden`}>
         <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden`}>
             <Ballroom />
 
