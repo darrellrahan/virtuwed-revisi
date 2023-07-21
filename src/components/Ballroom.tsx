@@ -101,6 +101,7 @@ const Ballroom = () => {
                 buttonPelaminan?.classList.toggle('hidden');
                 delayExecute(mejaHadiahInfospot.focus.bind(mejaHadiahInfospot), tweeningDelay);
                 digitalGiftContainer?.classList.toggle('hidden');
+                viewer.OrbitControls.enabled = false;
             });
 
             digitalGiftButton?.addEventListener('click', function () {

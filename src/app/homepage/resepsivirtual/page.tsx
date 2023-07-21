@@ -1,41 +1,42 @@
 'use client'
 import Ballroom from '@/components/Ballroom';
+import { useEffect, useRef, useState } from 'react';
 // import styles from '../../styles.module.css';
 
 const Page = () => {
     // SONG 
-    // const [isPlaying, setIsPlaying] = useState(true);
-    // const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(true);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    // const handleButtonClick = () => {
-    //     if (isPlaying) {
-    //         audioRef.current?.pause();
-    //     } else {
-    //         audioRef.current?.play();
-    //     }
-    //     setIsPlaying(!isPlaying);
-    // };
+    const handleButtonClick = () => {
+        if (isPlaying) {
+            audioRef.current?.pause();
+        } else {
+            audioRef.current?.play();
+        }
+        setIsPlaying(!isPlaying);
+    };
 
-    // useEffect(() => {
-    //     audioRef.current = new Audio('/assets/undanganDigital/GonnaLiveForever.mp3');
-    //     audioRef.current.loop = true;
-    //     audioRef.current.play();
+    useEffect(() => {
+        audioRef.current = new Audio('/assets/undanganDigital/GonnaLiveForever.mp3');
+        audioRef.current.loop = true;
+        audioRef.current.play();
 
-    //     return () => {
-    //         audioRef.current?.pause();
-    //     };
-    // }, []);
+        return () => {
+            audioRef.current?.pause();
+        };
+    }, []);
 
     return (
         // <main className={`${styles.container} container w-full min-w-full h-screen mx-auto overflow-hidden`}>
         <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden`}>
             <Ballroom />
 
-            {/* MUSIC
+            MUSIC
             <section className='fixed z-50 bottom-4 ml-4'>
                 <button className={`block bg-music-disc bg-cover w-12 h-12 ${isPlaying ? 'animate-spin-slow' : 'animate-none'}`} onClick={handleButtonClick}>
                 </button>
-            </section> */}
+            </section>
         </main>
     )
 }
