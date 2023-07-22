@@ -105,7 +105,7 @@ export default function Home() {
 					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 max-w-screen-xl mx-auto'>
 						<div className='lg:order-2'>
 							<Image
-								src='/assets/landingpage/feature/virtualWedding.png'
+								src='/assets/landingpage/feature/1.png'
 								alt="Jumbotron Ilustration"
 								className="w-full h-auto mx-auto"
 								width={220}
@@ -135,7 +135,7 @@ export default function Home() {
 						<div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 max-w-screen-xl mx-auto'>
 							<div>
 								<Image
-									src='https://satumomen.com/images/undangan-digital-unlimited-tamu-undangan.png'
+									src='/assets/landingpage/feature/2.png'
 									alt="Jumbotron Ilustration"
 									className="w-full h-auto mx-auto"
 									width={220}
@@ -165,7 +165,7 @@ export default function Home() {
 					<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.1 }} className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 max-w-screen-xl mx-auto'>
 						<div className='lg:order-2'>
 							<Image
-								src='https://satumomen.com/images/reseller-undangan-digital-website-5.png'
+								src='/assets/landingpage/feature/3.png'
 								alt="Jumbotron Ilustration"
 								className="w-full h-auto mx-auto"
 								width={220}

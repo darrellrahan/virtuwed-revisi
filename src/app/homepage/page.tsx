@@ -42,7 +42,7 @@ const Homepage = () => {
 
                 <div className='grid gap-6 max-w-screen-md w-full mx-auto'>
                     <Link href={'homepage/undangandigital'} className='px-1.5 py-3 bg-primaryInv text-white'>Buka Undangan</Link>
-                    {/* <Link href={'homepage/resepsivirtual'} className='px-1.5 py-3 bg-white text-primaryInv border-2 border-solid border-primaryInv'>Buka Resepsi Virtual</Link> */}
+                    <Link href={'homepage/resepsivirtual'} className='px-1.5 py-3 bg-white text-primaryInv border-2 border-solid border-primaryInv'>Buka Resepsi Virtual</Link>
                 </div>
             </div>
 
