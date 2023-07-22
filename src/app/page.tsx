@@ -62,11 +62,11 @@ export default function Home() {
 				<section id='Beranda' className='container w-full grid gap-6 justify-center items-center px-4 py-20 lg:py-28 lg:grid-cols-2 mt-8 md:mt-0 lg:px-40 lg:h-screen max-w-screen-xl mx-auto'>
 					<div className='lg:order-2'>
 						<Image
-							src="https://satumomen.com/images/aplikasi-undangan-digital-website.webp"
+							src="/assets/landingpage/jumbotron.png"
 							alt="Jumbotron Ilustration"
 							className="w-full h-auto mx-auto"
-							width={220}
-							height={220}
+							width={500}
+							height={500}
 							priority
 						/>
 					</div>
@@ -108,8 +108,8 @@ export default function Home() {
 								src='/assets/landingpage/feature/1.png'
 								alt="Jumbotron Ilustration"
 								className="w-full h-auto mx-auto"
-								width={220}
-								height={220}
+								width={500}
+								height={500}
 								priority
 							/>
 						</div>
@@ -138,8 +138,8 @@ export default function Home() {
 									src='/assets/landingpage/feature/2.png'
 									alt="Jumbotron Ilustration"
 									className="w-full h-auto mx-auto"
-									width={220}
-									height={220}
+									width={500}
+									height={500}
 									priority
 								/>
 							</div>
@@ -168,8 +168,8 @@ export default function Home() {
 								src='/assets/landingpage/feature/3.png'
 								alt="Jumbotron Ilustration"
 								className="w-full h-auto mx-auto"
-								width={220}
-								height={220}
+								width={500}
+								height={500}
 								priority
 							/>
 						</div>
