@@ -805,7 +805,7 @@ const Ballroom = () => {
             </div>
 
             {/* PLACEHOLDER VIDEOCALL */}
-            <div id="videocallPlaceholder" className='hidden absolute w-full h-full overflow-y-auto z-50'
+            <div id="videocallPlaceholder" className='hidden absolute w-full h-screen overflow-y-auto z-50'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -817,7 +817,7 @@ const Ballroom = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
 
-                <div className="relative w-full h-full overflow-hidden">
+                <div className="relative flex flex-col w-full h-full">
 
                     {/* NAVBAR */}
                     <div className='bg-black grid grid-flow-col justify-between py-10 px-4 h-fit'>
@@ -830,13 +830,12 @@ const Ballroom = () => {
                         <Icon icon="icon-park-solid:people-plus-one" color="white" fontSize={24} className='z-10' />
                     </div>
 
-
                     {/* PARTNER VIDEOCALL */}
-                    <div className='w-full h-full'>
+                    <div className='grid w-full h-full'>
                         <Image
-                            src="/assets/undanganDigital/Prewed6.jpeg"
-                            alt="Moment pengantin"
-                            className="object-cover object-center h-full w-full"
+                            src="/assets/undanganDigital/Prewed16.jpeg"
+                            alt="mempelai"
+                            className="object-cover object-center w-full h-full"
                             width={500}
                             height={500}
                             priority
@@ -844,7 +843,7 @@ const Ballroom = () => {
                     </div>
 
                     {/* SELF REFLECTION */}
-                    <div className='absolute rounded right-4 top-16'>
+                    <div className='hidden absolute rounded right-4 top-16'>
 
                         <video
                             autoPlay
