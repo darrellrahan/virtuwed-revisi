@@ -2,6 +2,7 @@ import localFont from 'next/font/local'
 import Footer from '@/components/Footer'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import Head from 'next/head'
 
 export const metadata = {
   title: 'Virtuwed',
@@ -59,7 +60,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
         {children}
-      </body>
-    </html>
+      </body >
+    </html >
   )
 }

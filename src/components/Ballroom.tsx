@@ -7,6 +7,7 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
+import { Icon } from '@iconify/react';
 
 
 //TODO:
@@ -51,8 +52,6 @@ const Ballroom = () => {
     const [isClient, setIsClient] = useState(false);
 
     const [selected, setSelected] = useState(plans[0])
-
-    const [infospotVisible, setInfospotVisible] = useState(10e-7);
 
     useEffect(() => {
         setIsClient(true);
@@ -806,7 +805,7 @@ const Ballroom = () => {
             </div>
 
             {/* PLACEHOLDER VIDEOCALL */}
-            <div id="videocallPlaceholder" className='hidden absolute w-full h-full rounded-lg overflow-y-auto z-10'
+            <div id="videocallPlaceholder" className='hidden absolute w-full h-full overflow-y-auto z-50'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -818,24 +817,69 @@ const Ballroom = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
 
-                <div className="relative bg-gray-100 rounded-lg overflow-auto w-full h-full grid text-center items-center gap-6 p-6 ">
+                <div className="relative w-full h-full overflow-hidden">
 
-                    <div className='grid gap-6 w-full'>
-                        <h3 className='font-deAetna text-3xl lg:text-4xl'>Video Call</h3>
+                    {/* NAVBAR */}
+                    <div className='bg-black grid grid-flow-col justify-between py-10 px-4 h-fit'>
 
-                        <iframe
-                            className="h-48 md:h-64"
-                            width="100%"
-                            height="auto"
-                            src="https://www.youtube.com/embed/D7icsuamx5E"
-                            title="Live Stream"
-                            allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen={true}
-                        ></iframe>
+                        <Icon icon="ion:chevron-back" color="white" fontSize={24} />
+                        <div className='flex gap-2 items-center z-10'>
+                            <Icon icon="uis:lock" color="white" />
+                            <h4 className='font-amiamie text-base text-gray-300'>End-to-end Encrypted</h4>
+                        </div>
+                        <Icon icon="icon-park-solid:people-plus-one" color="white" fontSize={24} className='z-10' />
                     </div>
 
-                    <div className='absolute bottom-0 mb-6 px-4 md:px-0 min-w-full grid justify-items-center'>
-                        <button id='videocallCloseButton' className='w-full md:max-w-screen-sm pt-3 pb-2.5 px-6 bg-white text-primary font-amiamie border-4 border-primary text-center rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>Keluar Video Call</button>
+
+                    {/* PARTNER VIDEOCALL */}
+                    <div className='w-full h-full'>
+                        <Image
+                            src="/assets/undanganDigital/Prewed6.jpeg"
+                            alt="Moment pengantin"
+                            className="object-cover object-center h-full w-full"
+                            width={500}
+                            height={500}
+                            priority
+                        />
+                    </div>
+
+                    {/* SELF REFLECTION */}
+                    <div className='absolute rounded right-4 top-16'>
+
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="object-cover object-center h-40 w-28 rounded     "
+                        >
+                            <source src="assets/ballroom/videocall/guestVideo.mp4" type="video/mp4" />
+                            {/* You can add more source elements for different video formats */}
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    {/* FEATURE VIDEOCALL */}
+                    <div className='bg-stone-800 absolute bottom-0 rounded-t-3xl px-4 pb-8 min-w-full grid justify-items-center gap-4'>
+                        <div>
+                            <Icon icon="fluent:chevron-up-16-filled" fontSize={36} className='text-stone-700' />
+                        </div>
+
+                        <div className='grid grid-flow-col justify-between w-full'>
+                            <div className='rounded-full bg-stone-700 p-3'>
+                                <Icon icon="mdi:camera-flip" color="white" fontSize={36} />
+                            </div>
+                            <div className='rounded-full bg-stone-700 p-3'>
+                                <Icon icon="eva:video-off-fill" color="white" fontSize={36} />
+                            </div>
+                            <div className='rounded-full bg-stone-700 p-3'>
+                                <Icon icon="bi:mic-mute-fill" color="white" fontSize={36} />
+                            </div>
+                            <button id='videocallCloseButton' className='rounded-full bg-red-600 p-3'>
+                                <Icon icon="fluent:call-end-16-filled" color="white" fontSize={36} />
+                            </button>
+                        </div>
+
                     </div>
 
                 </div>

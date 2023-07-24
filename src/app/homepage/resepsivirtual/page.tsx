@@ -31,7 +31,7 @@ const Page = () => {
             <Ballroom />
 
             MUSIC
-            <section className='fixed z-50 bottom-4 ml-4'>
+            <section className='fixed z-10 bottom-4 ml-4'>
                 <button className={`block bg-music-disc bg-cover w-12 h-12 ${isPlaying ? 'animate-spin-slow' : 'animate-none'}`} onClick={handleButtonClick}>
                 </button>
             </section>
