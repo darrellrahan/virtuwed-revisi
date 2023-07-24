@@ -30,7 +30,7 @@ const Page = () => {
         <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden`}>
             <Ballroom />
 
-            MUSIC
+            {/* MUSIC */}
             <section className='fixed z-10 bottom-4 ml-4'>
                 <button className={`block bg-music-disc bg-cover w-12 h-12 ${isPlaying ? 'animate-spin-slow' : 'animate-none'}`} onClick={handleButtonClick}>
                 </button>

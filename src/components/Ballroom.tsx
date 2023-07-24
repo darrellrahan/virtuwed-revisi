@@ -843,7 +843,7 @@ const Ballroom = () => {
                     </div>
 
                     {/* SELF REFLECTION */}
-                    <div className='hidden absolute rounded right-4 top-16'>
+                    <div className='absolute rounded right-4 top-16'>
 
                         <video
                             autoPlay
