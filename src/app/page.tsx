@@ -76,11 +76,12 @@ export default function Home() {
 							<motion.h1 variants={item} initial="hidden" animate="visible" className='text-4xl lg:text-6xl font-deAetna'>Platform Pernikahan <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#EFD2D2] from-10% to-[#D18080] to-30%'>Virtual</span></motion.h1>
 						</span>
 						<p className='font-light font-amiamie'>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
-						<div className='lg:flex gap-4'>
+						<div className='flex gap-4'>
 							<div>
 								<Button title='Mulai Sekarang' link='https://forms.gle/4pD6peBYRoFKVJEN7' />
 							</div>
-							<div className='hidden lg:block'>
+							{/* <div className='hidden lg:block'> */}
+							<div>
 								<ButtonOutline title='Cara Memulai' link='/homepage' />
 							</div>
 						</div>
