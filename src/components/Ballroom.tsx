@@ -844,25 +844,25 @@ const Ballroom = () => {
                     {/* SELF REFLECTION */}
                     <div className='absolute rounded right-4 top-16'>
 
-                        {/* <video
+                        <video
                             autoPlay
                             loop
                             muted
                             playsInline
-                            className="h-40 w-28 rounded"
+                            style={{ height: '160px', width: '112px', objectFit: 'cover', objectPosition: 'center', borderRadius: '4px' }}
                         >
                             <source src="assets/ballroom/videocall/guestVideo.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
- */}
-                        <Image
+                            Your browser does not support the video tag.
+                        </video>
+
+                        {/* <Image
                             src="/assets/ballroom/videocall/kangAgy.jpg"
                             alt="mempelai"
                             className="object-cover object-center h-40 w-28 rounded"
                             width={500}
                             height={500}
                             priority
-                        />
+                        /> */}
                     </div>
 
                     {/* FEATURE VIDEOCALL */}
