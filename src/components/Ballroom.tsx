@@ -655,7 +655,7 @@ const Ballroom = () => {
                             className="shadow appearance-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text"
                             placeholder="Name"
-                            // value={'nama'}
+                            value={'Elang Fajar Buana'}
                             onChange={
                                 // (e) => setName(e.target.value)
                                 (e) => console.log(e)
@@ -664,7 +664,7 @@ const Ballroom = () => {
                         <textarea
                             data-aos-once="true"
                             data-aos="fade-up" data-aos-duration="1200"
-                            className="shadow appearance-none rounded w-full min-h-[100px] p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Alamat lengkap pengiriman"
+                            className="shadow appearance-none rounded w-full min-h-[100px] p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Ucapan Kepada Pengantin"
                             // value={'alamat'}
                             onChange={
                                 (e) => console.log(e)
