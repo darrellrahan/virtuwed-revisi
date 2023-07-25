@@ -789,7 +789,7 @@ const Ballroom = () => {
                             className="h-48 md:h-64"
                             width="100%"
                             height="auto"
-                            src="https://www.youtube.com/embed/D7icsuamx5E"
+                            src="https://www.youtube.com/embed/zq40UhEGuAI"
                             title="Live Stream"
                             allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen={true}
@@ -804,7 +804,7 @@ const Ballroom = () => {
             </div>
 
             {/* PLACEHOLDER VIDEOCALL */}
-            <div id="videocallPlaceholder" className='absolute w-full h-screen overflow-y-auto z-50'
+            <div id="videocallPlaceholder" className='hidden absolute w-full h-screen overflow-y-auto z-50'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -816,7 +816,7 @@ const Ballroom = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
 
-                <div className="relative flex flex-col w-full h-full">
+                <div className="relative flex flex-col w-full h-full overflow-hidden">
 
                     {/* NAVBAR */}
                     <div className='bg-black grid grid-flow-col justify-between py-10 px-4 h-fit'>
@@ -844,17 +844,25 @@ const Ballroom = () => {
                     {/* SELF REFLECTION */}
                     <div className='absolute rounded right-4 top-16'>
 
-                        <video
+                        {/* <video
                             autoPlay
                             loop
                             muted
-                            // playsInline
-                            className="object-cover object-center h-40 w-28 rounded"
+                            playsInline
+                            className="h-40 w-28 rounded"
                         >
                             <source src="assets/ballroom/videocall/guestVideo.mp4" type="video/mp4" />
-                            {/* You can add more source elements for different video formats */}
-                            Your browser does not support the video tag.
-                        </video>
+                        Your browser does not support the video tag.
+                    </video>
+ */}
+                        <Image
+                            src="/assets/ballroom/videocall/kangAgy.jpg"
+                            alt="mempelai"
+                            className="object-cover object-center h-40 w-28 rounded"
+                            width={500}
+                            height={500}
+                            priority
+                        />
                     </div>
 
                     {/* FEATURE VIDEOCALL */}
@@ -881,7 +889,7 @@ const Ballroom = () => {
                     </div>
 
                 </div>
-            </div>
+            </div >
         </>
     )
 }
