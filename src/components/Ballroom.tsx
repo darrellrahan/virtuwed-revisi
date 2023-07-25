@@ -274,9 +274,8 @@ const Ballroom = () => {
                 buttonKoridor?.classList.toggle('hidden');
                 viewer.OrbitControls.enabled = false;
                 viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
-                // type( frontText.pelaminan, onPelaminanComplete, 2000 );
-                type(frontText.pelaminan, function () { buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true; }, 2000);
-
+                // type(frontText.pelaminan, function () { buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true; }, 2000);
+                buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true;
             }
 
             const onLoadBack = () => {
@@ -805,7 +804,7 @@ const Ballroom = () => {
             </div>
 
             {/* PLACEHOLDER VIDEOCALL */}
-            <div id="videocallPlaceholder" className='hidden absolute w-full h-screen overflow-y-auto z-50'
+            <div id="videocallPlaceholder" className='absolute w-full h-screen overflow-y-auto z-50'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -849,8 +848,8 @@ const Ballroom = () => {
                             autoPlay
                             loop
                             muted
-                            playsInline
-                            className="object-cover object-center h-40 w-28 rounded     "
+                            // playsInline
+                            className="object-cover object-center h-40 w-28 rounded"
                         >
                             <source src="assets/ballroom/videocall/guestVideo.mp4" type="video/mp4" />
                             {/* You can add more source elements for different video formats */}

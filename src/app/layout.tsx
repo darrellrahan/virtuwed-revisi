@@ -58,6 +58,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="preload" href="/video.mp4" as="video" />
+      </Head>
       <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
         {children}
       </body >
