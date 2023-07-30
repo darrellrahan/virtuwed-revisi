@@ -56,3 +56,20 @@ body {
     @apply transition-all ease-in-out duration-75
   }
 }
+
+/* Add this CSS to your component's CSS file or style block */
+@keyframes wiperAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px); /* Adjust the value based on your desired range of motion */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-wiper {
+  animation: wiperAnimation 2s infinite; /* Adjust the animation duration as needed */
+}

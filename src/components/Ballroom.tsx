@@ -293,6 +293,7 @@ const Ballroom = () => {
 
             const onLoad = () => {
                 viewer.tweenControlCenter(new THREE.Vector3(5000, 0, 0), 0);
+                viewer.OrbitControls.enabled = true;
                 setTimeout(function () {
                     opening?.classList.toggle('opacity-100');
                     opening?.classList.toggle('opacity-0');
@@ -300,13 +301,14 @@ const Ballroom = () => {
                 }, 3000);
                 setTimeout(function () {
                     opening?.classList.toggle('hidden');
+                }, 3500);
+                setTimeout(function () {
                     openingTouch?.classList.toggle('hidden');
-                    onWelcomeComplete()
+                    // onWelcomeComplete()
                 }, 6000);
-                // setTimeout(function () {
-                //     opening?.classList.toggle('hidden');
-                // }, 3000);
-                // type(koridorText.welcome, onWelcomeComplete, 2000);
+                setTimeout(function () {
+                    buttonKoridor?.classList.toggle('hidden'); directLocation = front
+                }, 9000);
 
             }
 
@@ -405,9 +407,24 @@ const Ballroom = () => {
             koridorKiriInfospot7.position.set(4628.98, -597.37, 1763.53);
 
             koridorKiriInfospot1.addHoverElement(document.getElementById('profilPengantinPria'), 140);
-            // koridorKiriInfospot1.addEventListener('click', function () {
-            //     document.getElementById('profilPengantinPria'), 140
-            // });
+            koridorKiriInfospot2.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKiriInfospot3.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKiriInfospot4.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKiriInfospot5.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKiriInfospot6.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKiriInfospot7.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
 
             koridorKananInfospot1.position.set(2118.57, 746.00, -4460.28);
             koridorKananInfospot2.position.set(3227.22, 1656.68, -3430.40);
@@ -422,6 +439,22 @@ const Ballroom = () => {
             koridorKananInfospot2.addEventListener('click', function () {
                 koridorInfoModal?.classList.toggle('hidden');
             });
+            koridorKananInfospot3.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKananInfospot4.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKananInfospot5.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKananInfospot6.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+            koridorKananInfospot7.addEventListener('click', function () {
+                koridorInfoModal?.classList.toggle('hidden');
+            });
+
             koridorInfoCloseButton?.addEventListener('click', function () {
                 koridorInfoModal?.classList.toggle('hidden')
             });
@@ -534,10 +567,10 @@ const Ballroom = () => {
             </div>
 
             {/* OPENING-TOUCH */}
-            <div id="openingTouch" className='absolute w-full h-full z-40'
+            <div id="openingTouch" className='pointer-events-none absolute w-full h-full z-40'
                 style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
+                    maxWidth: '400px',
+                    maxHeight: '300px',
                     minWidth: '200px',
                     minHeight: '250px',
                     WebkitOverflowScrolling: 'touch',
@@ -548,7 +581,7 @@ const Ballroom = () => {
 
                 <div className="relative overflow-auto w-full h-full grid text-center justify-items-center content-center p-6 ">
 
-                    <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse' />
+                    <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse animate-wiper' />
                     <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />virtual room</h4>
                 </div>
             </div>
