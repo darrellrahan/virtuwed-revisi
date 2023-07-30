@@ -589,7 +589,7 @@ const Ballroom = () => {
                 </div>
             </div>
 
-            BANNER OPEN BETA
+            {/* BANNER OPEN BETA */}
             <div id="bannerOpenBeta" className='pointer-events-none absolute w-full h-fit z-50'
                 style={{
                     maxWidth: '100%',
@@ -602,15 +602,10 @@ const Ballroom = () => {
                     transform: 'translate(-50%, 0)'
                 }}>
 
-                <div className="relative bg-white border-2 border-solid border-black pointer-events-auto overflow-auto w-full h-fit grid gap-3 text-center justify-items-center content-center p-2">
-                    <motion.h3
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
-                        className='font-deAetna text-xl text-black lg:text-2xl'>Anda berada pada Virtuwed Open Beta.</motion.h3>
+                <div className="relative bg-white pointer-events-auto overflow-auto w-full h-fit grid gap-2 text-center justify-items-center content-center p-1 shadow-md">
+                    <h5 className='font-deAetna text-base text-black'>Anda berada pada Virtuwed Open Beta</h5>
 
-                    <a href='https://forms.gle/VPpq2k7k8vhGntF16' target='_blank' style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} className='pt-3 pb-2.5 px-6 text-white text-xs text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300 w-fit'>Kirim Feedback</a>
+                    <a href='https://forms.gle/VPpq2k7k8vhGntF16' target='_blank' className='py-1.5 px-3 bg-white text-black border-black border-solid border text-xs text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary w-fit'>Kirim Feedback</a>
                 </div>
             </div>
 
