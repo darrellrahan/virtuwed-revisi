@@ -126,8 +126,11 @@ const Ballroom = () => {
             buttonPelaminan?.addEventListener('click', function () {
                 buttonPelaminan?.classList.toggle('hidden');
                 delayExecute(mejaHadiahInfospot.focus.bind(mejaHadiahInfospot), tweeningDelay);
-                digitalGiftContainer?.classList.toggle('hidden');
-                viewer.OrbitControls.enabled = false;
+                setTimeout(function () {
+                    digitalGiftContainer?.classList.toggle('hidden');
+                    viewer.OrbitControls.enabled = false;
+                }, 1000);
+
             });
 
             digitalGiftButton?.addEventListener('click', function () {
@@ -582,10 +585,34 @@ const Ballroom = () => {
                 <div className="relative overflow-auto w-full h-full grid text-center justify-items-center content-center p-6 ">
 
                     <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse animate-wiper' />
-                    <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />virtual room</h4>
+                    <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />resepsi virtual</h4>
                 </div>
             </div>
 
+            BANNER OPEN BETA
+            <div id="bannerOpenBeta" className='pointer-events-none absolute w-full h-fit z-50'
+                style={{
+                    maxWidth: '100%',
+                    // maxHeight: 'fit',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '0',
+                    left: '50%',
+                    transform: 'translate(-50%, 0)'
+                }}>
+
+                <div className="relative bg-white border-2 border-solid border-black pointer-events-auto overflow-auto w-full h-fit grid gap-3 text-center justify-items-center content-center p-2">
+                    <motion.h3
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        className='font-deAetna text-xl text-black lg:text-2xl'>Anda berada pada Virtuwed Open Beta.</motion.h3>
+
+                    <a href='https://forms.gle/VPpq2k7k8vhGntF16' target='_blank' style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} className='pt-3 pb-2.5 px-6 text-white text-xs text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300 w-fit'>Kirim Feedback</a>
+                </div>
+            </div>
 
             {/* PROFIL PRIA */}
             <div id="profilPengantinPria" className='w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
@@ -903,13 +930,13 @@ const Ballroom = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
 
-                <div className="relative bg-gray-100 rounded-lg overflow-auto w-full h-full grid text-center items-center gap-6 p-6 ">
+                <div className="relative bg-gray-100 overflow-auto w-full h-full grid text-center items-center gap-6 p-6 ">
 
                     <div className='grid gap-6 w-full'>
                         <h3 className='font-deAetna text-3xl lg:text-4xl'>Live Streaming</h3>
 
                         <iframe
-                            className="h-48 md:h-64"
+                            className="h-48 md:h-96"
                             width="100%"
                             height="auto"
                             src="https://www.youtube.com/embed/zq40UhEGuAI"

@@ -78,7 +78,8 @@ export default function Home() {
 						<p className='font-light font-amiamie'>Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.</p>
 						<div className='flex gap-4'>
 							<div>
-								<Button title='Mulai Sekarang' link='https://forms.gle/4pD6peBYRoFKVJEN7' />
+								{/* <Button title='Mulai Sekarang' link='https://forms.gle/4pD6peBYRoFKVJEN7' /> */}
+								<Button title='Mulai Sekarang' link='/homepage' />
 							</div>
 							{/* <div className='hidden lg:block'> */}
 							<div>
@@ -247,19 +248,20 @@ export default function Home() {
 					<span className="overflow-hidden inline-block pb-1.5">
 						<motion.h2 variants={item2} className='font-deAetna text-3xl lg:text-4xl text-center'>Paket Virtuwed</motion.h2>
 					</span>
-					<div className='grid gap-6 lg:grid-cols-3'>
+					<div className='grid gap-6 items-start lg:grid-cols-2'>
 
 						{/* PRODUCT */}
 						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff]'>
-							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Restu</h4>
+							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Premium</h4>
 							<ul className='grid gap-3 font-light font-amiamie'>
+
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
 										<NewspaperIcon
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Kisah Cinta</p>
+									<p>Undangan Digital (1000 Tamu)</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -267,7 +269,7 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Amplop digital</p>
+									<p>Resepsi Virtual</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -275,7 +277,7 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Guest Management</p>
+									<p>Galeri Foto Pernikahan</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -283,19 +285,55 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>E-invitation</p>
+									<p>Video call</p>
 								</li>
-
+								<li className='flex gap-2 items-center'>
+									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
+										<UsersIcon
+											className='h-4 w-4 text-primary'
+										/>
+									</div>
+									<p>Live Streaming Pernikahan</p>
+								</li>
+								<li className='flex gap-2 items-center'>
+									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
+										<UsersIcon
+											className='h-4 w-4 text-primary'
+										/>
+									</div>
+									<p>Hadiah Digital</p>
+								</li>
+								<li className='flex gap-2 items-center'>
+									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
+										<UsersIcon
+											className='h-4 w-4 text-primary'
+										/>
+									</div>
+									<p>Pengiriman Souvenir</p>
+								</li>
+								<li className='flex gap-2 items-center'>
+									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
+										<UsersIcon
+											className='h-4 w-4 text-primary'
+										/>
+									</div>
+									<p>Dapat Diakses Selama 1 Tahun</p>
+								</li>
 							</ul>
 
 							<div className='grid gap-4'>
-								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>250.000</h2>
+								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>2.000.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
 						</div>
 
 						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff]'>
-							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Lamar</h4>
+
+							<div>
+								<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Priority</h4>
+								<p>Semua yang dimiliki Virtuwed Premium, Plus:</p>
+							</div>
+
 							<ul className='grid gap-3 font-light font-amiamie'>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -303,7 +341,7 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Kisah Cinta</p>
+									<p>Livestreaming dengan Kamera Profesional</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -311,7 +349,7 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Amplop digital</p>
+									<p>Video Call dengan TV 40 inch</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -319,7 +357,7 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p>Guest Management</p>
+									<p>Dedicated Internet</p>
 								</li>
 								<li className='flex gap-2 items-center'>
 									<div className='grid justify-center items-center h-8 w-8 rounded-full bg-primary/30'>
@@ -327,18 +365,18 @@ export default function Home() {
 											className='h-4 w-4 text-primary'
 										/>
 									</div>
-									<p className='text-base'>E-invitation</p>
+									<p className='text-base'>Dokumentasi 360 Derajat</p>
 								</li>
 
 							</ul>
 
 							<div className='grid gap-4'>
-								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>850.000</h2>
+								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>10.000.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
 						</div>
 
-						<div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff] '>
+						{/* <div className='bg-white grid w-full gap-6 rounded-2xl py-10 px-6 border border-solid border-[#d5dfff] '>
 							<h4 className='font-deAetna text-xl lg:text-2xl'>Virtuwed Mantu</h4>
 							<ul className='grid gap-3 font-light font-amiamie'>
 								<li className='flex gap-2 items-center'>
@@ -380,9 +418,7 @@ export default function Home() {
 								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>900.000</h2>
 								<Button title='Tambah ke Cart' link='/homepage' />
 							</div>
-						</div>
-
-
+						</div> */}
 					</div>
 				</motion.section>
 
@@ -430,7 +466,7 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa itu layanan undangan digital?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa itu Virtuwed?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
@@ -438,7 +474,7 @@ export default function Home() {
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
 										<p className='font-light font-amiamie text-white text-start'>
-											Layanan undangan digital adalah sebuah platform atau layanan yang memungkinkan Anda untuk membuat dan mengirimkan undangan pernikahan secara digital melalui email, pesan teks, atau media sosial.
+											Virtuwed adalah platform virtual pernikahan dengan fitur undangan digital, platform 360, galeri foto, video call, live streaming, dan lainnya.
 										</p>
 									</Disclosure.Panel>
 								</>
@@ -449,7 +485,7 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apakah undangan digital cocok untuk semua jenis acara?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa saja fitur utama yang ditawarkan Virtuwed?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
@@ -457,7 +493,7 @@ export default function Home() {
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
 										<p className='font-light font-amiamie text-white text-start'>
-											Ya, undangan digital dapat digunakan untuk berbagai jenis acara, seperti pernikahan, ulang tahun, pesta perayaan, pertemuan bisnis, dan lainnya. Prinsipnya adalah menggantikan undangan fisik dengan versi digital yang lebih praktis.
+											Fitur utama meliputi undangan digital, pengiriman souvenir, sambutan virtual, galeri foto pernikahan, video call, dan live streaming pernikahan.
 										</p>
 									</Disclosure.Panel>
 								</>
@@ -468,7 +504,7 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa keuntungan menggunakan layanan undangan digital?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apa saja paket yang disediakan oleh Virtuwed?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
@@ -476,11 +512,7 @@ export default function Home() {
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
 										<p className='font-light font-amiamie text-white text-start'>
-											Beberapa keuntungan menggunakan layanan undangan digital adalah:
-											Hemat biaya cetak dan pengiriman fisik.
-											Ramah lingkungan karena mengurangi penggunaan kertas.
-											Mudah dan cepat untuk mengirimkan undangan kepada tamu.
-											Menawarkan fitur-fitur interaktif seperti konfirmasi kehadiran, navigasi, dan lainnya.
+											Ada 2 paket: VIRTUWED Premium (2 Juta Rupiah) untuk pernikahan intim, dan VIRTUWED Priority (10 Juta Rupiah) dengan layanan lebih profesional.
 										</p>
 									</Disclosure.Panel>
 								</>
@@ -491,7 +523,7 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apakah undangan digital dapat dipersonalisasi?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Apakah ada biaya tambahan untuk penambahan tamu pada VIRTUWED Premium?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
@@ -499,7 +531,7 @@ export default function Home() {
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
 										<p className='font-light font-amiamie text-white text-start'>
-											Ya, undangan digital umumnya dapat dipersonalisasi sesuai dengan preferensi Anda. Anda dapat mengubah warna, gaya, dan layout undangan. Anda juga dapat menambahkan foto atau video pribadi serta informasi tambahan seperti peta lokasi, tanggal acara, dan lainnya.
+											Ya, penambahan 100 tamu dikenakan biaya Rp.50.000,-
 										</p>
 									</Disclosure.Panel>
 								</>
@@ -510,7 +542,7 @@ export default function Home() {
 							{({ open }) => (
 								<>
 									<Disclosure.Button className={`flex w-full justify-between rounded-t-lg px-4 py-4 text-left text-sm font-medium ${open ? 'bg-primary' : 'border-b-2'}`}>
-										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Bagaimana undangan digital dapat diakses oleh tamu?</p>
+										<p className={`${open ? 'text-white' : ''} font-amiamie`}>Mengapa Virtuwed menjadi pilihan untuk pernikahan?</p>
 										<ChevronDownIcon
 											className={`${open ? 'rotate-180 transform text-white' : 'text-black'
 												} h-5 w-5`}
@@ -518,7 +550,7 @@ export default function Home() {
 									</Disclosure.Button>
 									<Disclosure.Panel className="bg-primary px-4 py-4 rounded-b-lg">
 										<p className='font-light font-amiamie text-white text-start'>
-											Undangan digital dapat diakses oleh tamu melalui email, pesan teks, atau melalui tautan yang dibagikan melalui media sosial atau platform pesan. Tamu dapat membuka undangan tersebut di perangkat mereka, seperti smartphone, tablet, atau komputer, dan melihat semua informasi yang terkandung di dalamnya.
+											Virtuwed menawarkan solusi ekonomis dan inovatif untuk menciptakan pernikahan yang tak terlupakan dengan biaya terjangkau dan dapat diakses dari mana saja.
 										</p>
 									</Disclosure.Panel>
 								</>
