@@ -6,8 +6,8 @@ import Typed from 'typed.js';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import { Icon } from '@iconify/react';
+import { motion } from "framer-motion"
 
 
 //TODO:
@@ -24,6 +24,10 @@ import { Icon } from '@iconify/react';
 // loading progress
 // 3d model
 // storytelling
+
+// ANIMATION
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const plans = [
@@ -53,8 +57,27 @@ const Ballroom = () => {
 
     const [selected, setSelected] = useState(plans[0])
 
+    const item = {
+        hidden: {
+            y: "100%",
+            transition: { ease: [0.455, 0.03, 0.515, 0.955] }
+        },
+        visible: {
+            y: 0,
+            transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 }
+        }
+    };
+
     useEffect(() => {
         setIsClient(true);
+    }, []);
+
+    useEffect(() => {
+        AOS.init(); // Initialize AOS
+
+        return () => {
+            AOS.refresh(); // Clean up AOS on component unmount
+        };
     }, []);
 
     useEffect(() => {
@@ -62,6 +85,10 @@ const Ballroom = () => {
             const tweeningDelay = 300, typeStartDelay = 1000, typeSpeed = 50;
             const buttonKoridor = document.getElementById('buttonKoridor');
             const buttonPelaminan = document.getElementById('buttonPelaminan');
+
+            const opening = document.getElementById('opening');
+            const openingTouch = document.getElementById('openingTouch');
+            const ballroom = document.getElementById('ballroom');
 
             //infospot information mempelai
             const koridorInfoModal = document.getElementById('koridorInfoModal')
@@ -266,7 +293,20 @@ const Ballroom = () => {
 
             const onLoad = () => {
                 viewer.tweenControlCenter(new THREE.Vector3(5000, 0, 0), 0);
-                type(koridorText.welcome, onWelcomeComplete, 2000);
+                setTimeout(function () {
+                    opening?.classList.toggle('opacity-100');
+                    opening?.classList.toggle('opacity-0');
+                    ballroom?.classList.toggle('saturate-0');
+                }, 3000);
+                setTimeout(function () {
+                    opening?.classList.toggle('hidden');
+                    openingTouch?.classList.toggle('hidden');
+                    onWelcomeComplete()
+                }, 6000);
+                // setTimeout(function () {
+                //     opening?.classList.toggle('hidden');
+                // }, 3000);
+                // type(koridorText.welcome, onWelcomeComplete, 2000);
 
             }
 
@@ -455,7 +495,7 @@ const Ballroom = () => {
 
     return (
         <>
-            <section id='ballroom' className='w-full h-full relative'>
+            <section id='ballroom' className='saturate-0 transition-all duration-1000 delay-2000 w-full h-full relative'>
 
                 <div className='absolute top-1/2 w-full flex justify-center items-center p-5'>
                     <div id="typed" className='text-white text-2xl'></div>
@@ -463,6 +503,56 @@ const Ballroom = () => {
 
 
             </section>
+
+            {/* OPENING */}
+            <div id="opening" className='transition-opacity duration-500 opacity-100 absolute w-full h-full z-50'
+                style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }}>
+
+                <div className="relative bg-gray-100 overflow-auto w-full h-full grid text-center content-center p-6 ">
+                    <motion.h3
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        className='font-deAetna text-3xl text-black lg:text-4xl'>Selamat Datang</motion.h3>
+                    <motion.h4
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1, delay: 0.75 }}
+                        className='font-deAetna text-xl text-gray-500 lg:text-2xl'>Elang Fajar Buana</motion.h4>
+                </div>
+            </div>
+
+            {/* OPENING-TOUCH */}
+            <div id="openingTouch" className='absolute w-full h-full z-40'
+                style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }}>
+
+                <div className="relative overflow-auto w-full h-full grid text-center justify-items-center content-center p-6 ">
+
+                    <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse' />
+                    <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />virtual room</h4>
+                </div>
+            </div>
+
 
             {/* PROFIL PRIA */}
             <div id="profilPengantinPria" className='w-full rounded-lg overflow-y-auto px-4 z-10 hidden'

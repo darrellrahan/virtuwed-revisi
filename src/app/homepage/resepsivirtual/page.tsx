@@ -16,6 +16,7 @@ const Page = () => {
         setIsPlaying(!isPlaying);
     };
 
+
     useEffect(() => {
         audioRef.current = new Audio('/assets/undanganDigital/GonnaLiveForever.mp3');
         audioRef.current.loop = true;

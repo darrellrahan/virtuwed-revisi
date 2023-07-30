@@ -47,6 +47,9 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
+      },
+      transitionDelay: {
+        '2000': '2000ms',
       }
     },
   },
