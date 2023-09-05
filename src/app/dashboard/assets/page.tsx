@@ -14,7 +14,7 @@ type getAllAssetByWeddingSession = {
     asset_url: string
 };
 
-const page = () => {
+const Assets = () => {
 
     const weddingSessionId = '649007bdca091be7add3c440'; // Replace with an actual user ID
     const [assets, setAssets] = useState<getAllAssetByWeddingSession[]>([]);
@@ -39,4 +39,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Assets

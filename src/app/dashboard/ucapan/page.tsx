@@ -13,7 +13,7 @@ type getAllGuestCommentsByWeddingSessionId = {
     createdAt: string;
 };
 
-const page = () => {
+const Ucapan = () => {
     // const [message, setMessage] = useState<getAllGuestCommentsByWeddingSessionId[]>([]);
 
     // useEffect(() => {
@@ -90,4 +90,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Ucapan

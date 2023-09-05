@@ -24,7 +24,7 @@ type getAllGuestDigitalGiftByWeddingSessionId = {
 };
 
 
-const page = () => {
+const Hadiah = () => {
 
     const weddingSessionId = '649007bdca091be7add3c440'; // Replace with an actual user ID
     const [gift, setGift] = useState<getAllGuestDigitalGiftByWeddingSessionId[]>([]);
@@ -112,4 +112,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Hadiah
