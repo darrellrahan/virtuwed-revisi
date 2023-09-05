@@ -9,7 +9,7 @@ import { Link as ScrollLink } from 'react-scroll';
 const Footer = () => {
     return (
         <footer className='grid gap-6 bg-primary text-white'>
-            <div className='grid lg:grid-cols-2 max-w-screen-xl mx-auto w-full px-4 lg:px-40'>
+            <div className='grid lg:grid-cols-2 max-w-screen-xl mx-auto w-full px-4 lg:px-40 gap-12'>
                 <div>
                     <ScrollLink to="Beranda" smooth={true} duration={500} className='items-center justify-center py-6 gap-2 lg:justify-start cursor-pointer inline-flex'>
                         <Image
@@ -26,7 +26,7 @@ const Footer = () => {
                 </div>
 
 
-                <div className='grid grid-cols-2 lg:pt-8 lg:justify-items-end'>
+                <div className='grid grid-cols-2 items-start lg:pt-8 lg:justify-items-end'>
                     <div className='grid gap-4'>
                         <h5 className='text-base lg:text-lg font-body text-white font-deAetna'>Navigasi</h5>
 
@@ -38,32 +38,20 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className='grid gap-4'>
+                    <div className='grid gap-4 items-start'>
                         <h5 className='text-base lg:text-lg font-deAetna text-white'>Sosial Media</h5>
 
                         <ul className='grid gap-2 font-light text-sm font-amiamie'>
                             <li>
-                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="#">
-                                    <Icon width={16} height={16} icon="ic:round-email" />
-                                    <span>Email</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="#">
+                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="https://instagram.com/virtuwed">
                                     <Icon width={16} height={16} icon="ri:instagram-fill" />
                                     <span>Instagram</span>
                                 </a>
                             </li>
                             <li>
-                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="#">
-                                    <Icon width={16} height={16} icon="ic:baseline-tiktok" />
-                                    <span>Tiktok</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="#">
-                                    <Icon width={16} height={16} icon="entypo-social:facebook" />
-                                    <span>Facebook</span>
+                                <a className='flex items-center gap-2 hover:underline' target='_blank' href="https://www.linkedin.com/company/virtuwed/">
+                                    <Icon width={16} height={16} icon="bi:linkedin" color="white" />
+                                    <span>LinkedIn</span>
                                 </a>
                             </li>
                         </ul>
