@@ -1,5 +1,6 @@
 'use client'
-import { guestWeddingSession } from '@/app/api/api';
+import { GET_GUEST } from '@/utility/queries';
+import { getAllGuestWeddingSessionId } from '@/utility/tamu';
 import React, { useEffect, useState } from 'react'
 
 type GuestWeddingSession = {
@@ -15,59 +16,93 @@ type GuestWeddingSession = {
 };
 
 const Tamu = () => {
+
+    const weddingSessionId = '649007bdca091be7add3c440'; // Replace with an actual user ID
     const [guest, setGuest] = useState<GuestWeddingSession[]>([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const query = `
-            query {
-                getAllGuestWeddingSessionId(wedding_session_id: "649007bdca091be7add3c440"){
-                  wedding_session {
-                    id
-                  }
-                  name
-                  whatsapp
-                  instagram
-                  address
-                  visit_invitation_at
-                  visit_virtual_wedding_at
-                }
-              }
-          `;
-
+        async function fetchUserData() {
             try {
-
-                const masuk = await guestWeddingSession(query);
-                console.log(masuk);
-                setGuest(masuk);
+                const variables = { weddingSessionId };
+                const response = await getAllGuestWeddingSessionId(GET_GUEST, variables);
+                setGuest(response.data.getAllGuestWeddingSessionId);
             } catch (error) {
-                console.error(error);
+                console.error('Error fetching user data:', error);
             }
-        };
+        }
 
-        fetchData();
+        fetchUserData();
     }, []);
 
 
     return (
-        <div className='px-8 w-full'>
-            <h3>Tamu Undangan</h3>
+        <div className="px-6 py-9 w-screen md:w-full">
+            <h3 className='text-2xl mb-6 md:text-3xl'>TAMU</h3>
+            <div className='overflow-hidden'>
+                <table className="table w-full">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>
+                                <label>
+                                    <input type="checkbox" className="checkbox" />
+                                </label>
+                            </th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody className='overflow-auto'>
+                        {guest && guest.map((guest) => (
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" className="checkbox" />
+                                    </label>
+                                </th>
+                                <td>
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src="/assets/dashboard/peni.jpg" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">{guest.name}</div>
+                                            <div className="text-sm opacity-50">{guest.instagram}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {guest.whatsapp}
+                                </td>
+                                <td>{guest.address}</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                            </tr>
 
-            <div>
-                <ul>
-                    {guest && guest.map((guest) => (
-                        <li className='p-3 my-3 rounded-lg bg-primary/30' key={guest.name}>
-                            <p>Name: {guest.name}</p>
-                            <p>adress: {guest.address}</p>
-                            <p>instagram: {guest.instagram}</p>
-                            <p>whatsapp: {guest.whatsapp}</p>
-                            <p>visit_invitation_at: {guest.visit_invitation_at}</p>
-                            <p>visit_virtual_wedding: {guest.visit_virtual_wedding_at}</p>
-                        </li>
-                    ))}
-                </ul>
+                        ))}
+
+                    </tbody>
+                    {/* foot */}
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+
+                </table>
             </div>
-        </div>
+        </div >
+
+
     )
 }
 

@@ -323,7 +323,7 @@ export default function Home() {
 
 							<div className='grid gap-4'>
 								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>2.000.000</h2>
-								<Button title='Tambah ke Cart' link='/homepage' />
+								<Button title='Berlangganan Sekarang' link='https://wa.me/62881081169699' />
 							</div>
 						</div>
 
@@ -372,7 +372,7 @@ export default function Home() {
 
 							<div className='grid gap-4'>
 								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>10.000.000</h2>
-								<Button title='Tambah ke Cart' link='/homepage' />
+								<Button title='Berlangganan Sekarang' link='https://wa.me/62881081169699' />
 							</div>
 						</div>
 
@@ -461,6 +461,7 @@ export default function Home() {
 						<hr className='bg-[#f7f2f2]' />
 						<p className='font-light font-amiamie lg:max-w-xl mx-auto text-center'>Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami</p>
 					</div>
+
 					<div className="w-full">
 						<Disclosure>
 							{({ open }) => (

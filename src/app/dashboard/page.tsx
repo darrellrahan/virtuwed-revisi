@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { digitalGift } from '../api/api';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type DigitalGift = {
     id: string;
@@ -42,6 +44,7 @@ const Dashboard = () => {
     }, []);
 
     return (
+
         <div className='px-8 w-full'>
             <h3>Hadiah Digital</h3>
 

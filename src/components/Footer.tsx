@@ -10,17 +10,21 @@ const Footer = () => {
     return (
         <footer className='grid gap-6 bg-primary text-white'>
             <div className='grid lg:grid-cols-2 max-w-screen-xl mx-auto w-full px-4 lg:px-40'>
-                <ScrollLink to="Beranda" smooth={true} duration={500} className='items-center justify-center py-6 gap-2 lg:justify-start cursor-pointer inline-flex'>
-                    <Image
-                        src="/assets/logopack/Virtuwed_Main_Logo_White.png"
-                        alt="Jumbotron Ilustration"
-                        className="w-12 h-auto lg:w-24"
-                        width={220}
-                        height={220}
-                        priority
-                    />
-                    <h2 className='text-3xl lg:text-4xl text-white font-ade'>VIRTUWED</h2>
-                </ScrollLink>
+                <div>
+                    <ScrollLink to="Beranda" smooth={true} duration={500} className='items-center justify-center py-6 gap-2 lg:justify-start cursor-pointer inline-flex'>
+                        <Image
+                            src="/assets/logopack/Virtuwed_Main_Logo_White.png"
+                            alt="Jumbotron Ilustration"
+                            className="w-12 h-auto lg:w-24"
+                            width={220}
+                            height={220}
+                            priority
+                        />
+                        <h2 className='text-3xl lg:text-4xl text-white font-ade'>VIRTUWED</h2>
+                    </ScrollLink>
+                    <p className='font-light font-amiamie text-white'>PT Virtuwed Digital Indonesia</p>
+                </div>
+
 
                 <div className='grid grid-cols-2 lg:pt-8 lg:justify-items-end'>
                     <div className='grid gap-4'>

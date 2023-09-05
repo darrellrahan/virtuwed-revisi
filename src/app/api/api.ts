@@ -47,6 +47,14 @@ export const guestWeddingSession = async (query: string) => {
     }
 };
 
+
+
+
+
+
+
+
+
 export const getAllGuestCommentsByWeddingSessionId = async (query: string) => {
     try {
         const response = await axios.post(API_URL, {
