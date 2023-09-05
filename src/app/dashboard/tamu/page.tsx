@@ -55,8 +55,8 @@ const Tamu = () => {
                         </tr>
                     </thead>
                     <tbody className='overflow-auto'>
-                        {guest && guest.map((guest) => (
-                            <tr>
+                        {guest && guest.map((guest, key) => (
+                            <tr key={key}>
                                 <th>
                                     <label>
                                         <input type="checkbox" className="checkbox" />
