@@ -17,6 +17,7 @@ module.exports = {
         // LANDING PAGE
         primary: '#D1B0B0',
         fontColor: '#3E4C59',
+        tertiary: '#FFD9D9',
         fontColorHeading: '#313F4A'
       },
       fontFamily: {
