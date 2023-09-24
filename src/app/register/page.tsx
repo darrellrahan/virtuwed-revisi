@@ -120,7 +120,7 @@ mutation CreateGuest($name: String!, $phoneNumber: String!){
 
                                 <button
                                     style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }}
-                                    className='inline-flex gap-2 items-center justify-center rounded-lg py-2 px-4 text-white font-mono text-base text-center uppercase lg:w-fit lg:px-6'>
+                                    className='inline-flex gap-2 items-center justify-center rounded-lg py-2 px-4 text-white font-mono text-base text-center uppercase lg:px-6'>
 
                                     {loading
                                         ? <span className="loading loading-spinner"></span>
