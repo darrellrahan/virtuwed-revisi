@@ -80,12 +80,12 @@ mutation CreateGuest($name: String!, $phoneNumber: String!){
             <Navbar />
             <main className='container min-w-full bg-cover-session bg-cover bg-center min-h-screen'>
 
-                <div className='px-4 py-24 md:px-12 lg:px-32 backdrop-brightness-50 min-h-screen grid justify-center'>
+                <div className='px-4 py-24 md:px-12 lg:px-32 backdrop-brightness-50 min-h-screen grid justify-center items-center'>
                     {/* MENU */}
-                    <section className='grid p-6 bg-white rounded-2xl md:w-80'>
+                    <section className='grid p-6 bg-white rounded-2xl md:w-80 h-fit'>
                         <h2 className='mb-6 text-center font-deAetna text-xl'>Daftar untuk mendapat undangan resepsi virtual</h2>
 
-                        <div className='grid gap-16 md:gap-12'>
+                        <div className='grid gap-16'>
                             {/* INPUT */}
                             <form className='grid gap-6' onSubmit={handleSubmit}>
                                 <div className="form-control w-full">
