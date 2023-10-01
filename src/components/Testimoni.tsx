@@ -15,18 +15,18 @@ import { Pagination } from "swiper";
 const TestimoniData = [
     {
         name: 'Naufal Nabilansyah',
-        profession: 'Scout Boy',
-        message: 'Terima kasih virtuwed, pelayanan yang gesit dan tidak perlu khawatir tentang pengalaman digital. Pernikahan tenang, Mahiru senang.',
+        profession: 'Project Manager',
+        message: 'Mudah. Dapat diandalkan. Dengan virtuwed, kami dapat mengadakan resepsi dengan skalabilitas luas.',
     },
     {
         name: 'Hasnat Ferdiananda',
-        profession: 'Co Founder virtuwed.id ',
-        message: 'Berkat layanan virtuwed, tamu undangan kami menjangkau banyak orang. Futaba dan Saya terbantu.',
+        profession: 'CTO Cobadulu Academy',
+        message: 'Berkat layanan virtuwed, acara kami bisa menjangkau banyak orang.',
     },
     {
         name: 'M Rafly Pratama',
         profession: 'CTO of Upgradia',
-        message: 'Virtuwed pelayanannya memuaskan, ramah. Aku dan Nino sukaaa, pemakaiannya mudah banget.',
+        message: 'Virtuwed pelayanannya memuaskan, ramah. Aku sama aura sukaaa, pemakaiannya mudah banget.',
     },
     {
         name: 'Raka Putra Ramadhan',

@@ -323,7 +323,7 @@ export default function Home() {
 
 							<div className='grid gap-4'>
 								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>2.000.000</h2>
-								<Button title='Berlangganan Sekarang' link='https://wa.me/62881081169699' />
+								<Button title='Berlangganan Sekarang' link='https://wa.me/6285156914687' />
 							</div>
 						</div>
 
@@ -372,7 +372,7 @@ export default function Home() {
 
 							<div className='grid gap-4'>
 								<h2 className='text-3xl lg:text-4xl font-deAetna'><span className='font-normal text-base'>Rp </span>10.000.000</h2>
-								<Button title='Berlangganan Sekarang' link='https://wa.me/62881081169699' />
+								<Button title='Berlangganan Sekarang' link='https://wa.me/6285156914687' />
 							</div>
 						</div>
 
