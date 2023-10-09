@@ -5,11 +5,11 @@ deploy_production:
   stage: build
   script:
     - echo "Building the application... to production"
-    - cd /home/virtuweddev/application/virtuwed-landing-page
+    - cd /var/www/virtuwed-landing-page
     - git pull origin master
     - yarn install 
     - yarn build 
-    - pm2 restart landing
+    - pm2 restart landing-page
     - echo "application is running..."
   only:
     - master
