@@ -10,6 +10,7 @@ deploy_production:
     - yarn install 
     - yarn build 
     - pm2 restart landing
+    - echo "application is running..."
   only:
     - master
   tags:
