@@ -1,0 +1,18 @@
+variables:
+  GIT_STRATEGY: none
+
+deploy_production:
+  stage: build
+  script:
+    - echo "Building the application... to production"
+    - cd /home/virtuweddev/application/virtuwed-landing-page
+    - git pull origin main
+    - yarn install 
+    - yarn build 
+    - pm2 delete "virtuwed-landing-page"
+    - pm2 start yarn --name "virtuwed-landing-page" -- start
+    - pm2 save
+  only:
+    - main
+  tags:
+    - virtuwed
