@@ -6,7 +6,7 @@ deploy_production:
   script:
     - echo "Building the application... to production"
     - cd /home/virtuweddev/application/virtuwed-landing-page
-    - git pull origin main
+    - git pull origin master
     - yarn install 
     - yarn build 
     - pm2 delete "virtuwed-landing-page"
