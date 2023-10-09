@@ -13,6 +13,6 @@ deploy_production:
     - pm2 start yarn --name "virtuwed-landing-page" -- start
     - pm2 save
   only:
-    - main
+    - master
   tags:
     - virtuwed
