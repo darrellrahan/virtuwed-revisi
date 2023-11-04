@@ -31,19 +31,84 @@ body {
 @layer base{
   h1, h2, h3, h4, h5{
    /* @apply font-heading text-fontColorHeading */
-   @apply text-fontColorHeading
+   @apply font-deAetna
+  }
+  h1{
+    @apply  text-4xl md:text-7xl
+  }
+  h2{
+    @apply text-3xl md:text-5xl
+  }
+  h3{
+    @apply  text-2xl md:text-2xl
+  }
+  h4{
+    @apply  text-lg md:text-xl
+  }
+  h5{
+    @apply text-sm md:text-base
   }
 
   p{
     /* @apply text-base font-body text-fontColor */
-    @apply text-base text-fontColor
+    @apply font-amiamie
   }
   
   a{
     @apply text-base
   }
+
+  .l1-r{
+    @apply font-normal text-xl
+  }
+  .l1-b{
+    @apply font-semibold text-xl
+  }
+  .l2-r{
+    @apply font-normal text-base
+  }
+  .l2-b{
+    @apply font-semibold text-base
+  }
+  .l3-r{
+    @apply font-normal text-sm 
+  }
+  .l3-b{
+    @apply font-semibold text-sm
+  }
+  .l4-r{
+    @apply font-normal text-xs
+  }
+  .l4-b{
+    @apply font-semibold text-xs
+  }
+
+  .p1-r{
+    @apply text-base font-normal
+  }
+  .p1-b{
+    @apply text-base font-medium
+  }
+  .p2-r{
+    @apply text-sm font-normal
+  }
+  .p2-b{
+    @apply text-sm font-medium
+  }
+  .p3-r{
+    @apply text-xs font-normal
+  }
+  .p3-b{
+    @apply text-xs font-medium
+  }
 }
 
+
+@layer components{
+  .btn {
+    @apply rounded-sm font-deAetna normal-case text-base;
+  }
+}
 
 @layer utilities{
   .btn-shadow-primary{
@@ -55,6 +120,21 @@ body {
     box-shadow: 0px 5px 10px 2px rgb(209 176 176 / 0.2);
     @apply transition-all ease-in-out duration-75
   }
+
+  .birthdayCard {
+    /* transform: perspective(2500px) rotate(5deg); */
+    transform: perspective(2500px);
+    /* box-shadow: inset 100px 20px 100px rgba(0, 0, 0, .2), 0 10px 100px rgba(0, 0, 0, 0.5); */
+   }
+   
+   .birthdayCard .cardFront {
+    transform: rotateY(-160deg);
+    @apply bg-guestBookInsideLeft bg-contain bg-no-repeat bg-transparent
+   }
+   
+   .birthdayCard .titleGuestBook {
+    visibility: hidden;
+   }
 }
 
 /* Add this CSS to your component's CSS file or style block */

@@ -15,10 +15,32 @@ module.exports = {
         backgroundColorInv: '#e7d2b7',
 
         // LANDING PAGE
-        primary: '#D1B0B0',
+        // primary: '#D1B0B0',
         fontColor: '#3E4C59',
-        tertiary: '#FFD9D9',
-        fontColorHeading: '#313F4A'
+        fontColorHeading: '#313F4A',
+
+        // PRIMARY
+        // primary: "linear-gradient(107deg, #FFD9D9 -7.85%, #FF9797 88.84%)",
+        secondary: "#FA9F9F",
+        tertiary: "#FFD9D9",
+        White: "#FFF6F9",
+
+        primaryGradient: {
+          start: '#FFD9D9',   // Warna pada langkah pertama
+          end: '#FF9797',     // Warna pada langkah kedua
+        },
+
+        // NEUTRAL
+        N900: "#1F2223",
+        N800: "#363939",
+        N700: "#57595A",
+        N600: "#797A7B",
+        N500: "#8E9090",
+        N400: "#B1B2B2",
+        N300: "#D2D3D3",
+        N200: "#EAEAEA",
+        N100: "#F6F6F6",
+
       },
       fontFamily: {
         deAetna: ['var(--font-deAetna)'],
@@ -47,7 +69,21 @@ module.exports = {
         // LOGIN & REGISTER
         'register': "url(/assets/landingpage/register.avif)",
 
+        // RESEPSI VIRTUAL
+        'guestBookInsideRight': "url(/assets/ballroom/guestBookInsideRight.webp)",
+        'guestBookInsideLeft': "url(/assets/ballroom/guestBookInsideLeft.webp)",
+        'guestBookCover': "url(/assets/ballroom/guestBookCover.jpg)",
 
+        // KENANGAN VIRTUAL
+        'pengantin1': "url('/assets/kenanganVirtual/gallery/Prewed1.jpeg')",
+        'pengantin2': "url('/assets/kenanganVirtual/gallery/Prewed2.jpeg')",
+        'pengantin3': "url('/assets/kenanganVirtual/gallery/Prewed3.jpeg')",
+        'pengantin4': "url('/assets/kenanganVirtual/gallery/Prewed4.jpeg')",
+        'pengantin5': "url('/assets/kenanganVirtual/gallery/Prewed5.jpeg')",
+        'pengantin6': "url('/assets/kenanganVirtual/gallery/Prewed6.jpeg')",
+      },
+      linearGradientColors: {
+        '107': '107deg, #primaryGradient-start -7.85%, #primaryGradient-end 88.84%',
       },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
@@ -57,8 +93,22 @@ module.exports = {
       }
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require("tailwindcss-gradients")
+  ],
   daisyui: {
-    themes: ["light"],
+    themes: [
+      {
+        mytheme: {
+          "primary": "linear-gradient(107deg, #FFD9D9 -7.85%, #FF9797 88.84%)",
+          "secondary": "#FA9F9F",
+          "accent": "#FFD9D9",
+          "neutral": "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+      "light"
+    ],
   },
 }
