@@ -186,7 +186,7 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                     src={wedding.media.prewedding_videos[0]}
                     allowFullScreen
                     title="YouTube video player"
-                    allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                // allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>
             </div >
 
