@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import 'remixicon/fonts/remixicon.css'
 import axios from 'axios';
 
-const page = () => {
+const Page = () => {
     const API_BASE_URL = 'https://panel.virtuwed.id/api/register-guest';
 
     const wedding_slug = useSelector((state: RootState) => state.value.wedding_slug);
@@ -140,4 +140,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

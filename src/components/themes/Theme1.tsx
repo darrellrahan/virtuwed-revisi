@@ -453,7 +453,7 @@ const Theme1 = () => {
                         <div className='relative text-center mx-4 py-5'>
                             <div data-aos="zoom-in" data-aos-duration="1500" style={{ backgroundSize: '100% 100%' }} className='absolute bottom-0 top-0 mx-auto right-0 left-0 w-full max-w-sm bg-no-repeat bg-center bg-[url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/frame-quote-min.png)]'></div>
                             <div className='grid items-center h-full px-6 overflow-y-auto'>
-                                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className={`${playFair.className} leading-relaxed italic`}>"The best thing to hold onto in life is each other."<br />– Audrey Hepburn</p>
+                                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className={`${playFair.className} leading-relaxed italic`}>&quot;The best thing to hold onto in life is each other.&quot;<br />– Audrey Hepburn</p>
                             </div>
                         </div>
                     </div>
