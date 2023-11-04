@@ -8,7 +8,7 @@ import { Link as ScrollLink } from 'react-scroll';
 
 const Footer = () => {
     return (
-        <footer className='grid gap-6 bg-primary text-white'>
+        <footer className='grid gap-6 bg-secondary text-white'>
             <div className='grid lg:grid-cols-2 max-w-screen-xl mx-auto w-full px-4 lg:px-40 gap-12'>
                 <div>
                     <ScrollLink to="Beranda" smooth={true} duration={500} className='items-center justify-center py-6 gap-2 lg:justify-start cursor-pointer inline-flex'>

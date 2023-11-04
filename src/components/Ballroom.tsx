@@ -1,13 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import * as THREE from 'three';
-import { RadioGroup } from '@headlessui/react'
+import { RadioGroup, Tab } from '@headlessui/react'
 import Typed from 'typed.js';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { Disclosure } from '@headlessui/react'
 import Image from 'next/image';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
 import { Icon } from '@iconify/react';
-import { motion } from "framer-motion"
+import 'remixicon/fonts/remixicon.css'
+import { useSelector } from 'react-redux';
 
 
 //TODO:
@@ -28,34 +29,154 @@ import { motion } from "framer-motion"
 // ANIMATION
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { RootState } from '@/app/redux/reducers';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
-
-const plans = [
+const gifts = [
     {
-        img: '/assets/ballroom/gift/ucapan.png',
-        name: 'Ucapan saja',
-        price: '0',
-        btn: 'Kirim Ucapan saja'
+        emoticon: '/assets/ballroom/emoticons/4.webp',
+        icon: 'ri-plant-line',
+        img: '/assets/ballroom/gift/buket_bunga.webp',
+        name: 'buket bunga',
+        price: '50000'
     },
     {
-        img: '/assets/ballroom/gift/bunga.png',
-        name: 'Bunga Mawar',
-        price: '50000',
-        btn: 'Kirim ucapan dan mawar'
-    },
-    {
-        img: '/assets/ballroom/gift/tv.png',
-        name: 'Televisi',
+        emoticon: '/assets/ballroom/emoticons/3.webp',
+        icon: 'ri-coupon-3-line',
+        img: '/assets/ballroom/gift/tiket_nonton.webp',
+        name: 'tiket nonton',
         price: '100000',
-        btn: 'Kirim ucapan dan televisi'
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/2.webp',
+        icon: 'ri-timer-line',
+        img: '/assets/ballroom/gift/jam_tangan.webp',
+        name: 'jam tangan',
+        price: '500000',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/1.webp',
+        icon: 'ri-tv-2-line',
+        img: '/assets/ballroom/gift/televisi.webp',
+        name: 'televisi',
+        price: '1000000',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/4.webp',
+        icon: 'ri-cash-line',
+        // img: '/assets/ballroom/gift/televisi.png',
+        name: 'Jumlah Lainnya',
+        price: '0',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/5.webp',
+        icon: 'ri-message-3-line',
+        // img: '/assets/ballroom/gift/televisi.png',
+        name: 'Ucapan Saja',
+        price: '0',
     },
 ]
 
 
+// FOR TAB "UCAPAN SELAMAT" SELECTED
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+}
+
 const Ballroom = () => {
     const [isClient, setIsClient] = useState(false);
 
-    const [selected, setSelected] = useState(plans[0])
+    const [loading, setLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(true);
+
+    const wedding = useSelector((state: RootState) => state.value.wedding);
+    const guest = useSelector((state: RootState) => state.value.guest);
+    const theme = useSelector((state: RootState) => state.value.theme);
+
+    const router = useRouter();
+
+
+    // HADIAH DIGITAL
+    const [digitalGift, setDigitalGift] = useState(gifts[0])
+    const mainGifts = gifts.slice(0, 4)
+    // const [digitalGiftCustom, setDigitalGiftCustom] = useState('')
+    // const handleGiftsChange = (gift: any) => {
+    //     setDigitalGift(gift);
+    //     if (digitalGiftCustom !== '') {
+    //         // Update the selected plan's name when a radio option is checked
+    //         gift.price = digitalGiftCustom;
+    //     }
+    // };
+
+    const [continueBtn, setContinueBtn] = useState('buttonKoridor')
+    const [backBtn, setBackBtn] = useState('')
+    const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true);
+    const [isContinueButtonDisabled, setIsContinueButtonDisabled] = useState(true);
+
+
+    // UCAPAN SELAMAT
+    const [ucapanSelamat, setUcapanSelamat] = useState('')
+    // const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
+
+    // PREVIEW HANDLER
+    const [selectedImage, setSelectedImage] = useState();
+    // This function will be triggered when the file field change
+    const imageChange = (e: any) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedImage(e.target.files[0]);
+        }
+    };
+
+    const [selectedVideo, setSelectedVideo] = useState();
+    // This function will be triggered when the file field change
+    const videoChange = (e: any) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedVideo(e.target.files[0]);
+        }
+    };
+    // END UCAPAN SELAMAT
+
+
+    const handleKonfirmasi = async (e: any) => {
+        e.preventDefault();
+
+        // Prevent multiple submissions
+        if (loading) {
+            return;
+        }
+
+        setLoading(true); // Set loading to true when the submission starts
+
+        // KIRIM HADIAH
+        try {
+            const response = await axios.post('https://panel.virtuwed.id/api/gift', {
+                wedding_slug: wedding.wedding_slug,
+                guest_slug: guest.guest_slug,
+                nama_hadiah: digitalGift.name,
+                nominal: digitalGift.price,
+            });
+            // setNama('')
+            // setNoWhatsapp('')
+            // setInstagram('')
+
+            console.log(response.data);
+
+            setIsSuccess(true)
+            // if (document) {
+            //     (document.getElementById('modalMessage') as HTMLFormElement).showModal();
+            // }
+        } catch (error) {
+            setIsSuccess(false)
+            // if (document) {
+            //     (document.getElementById('modalMessage') as HTMLFormElement).showModal();
+            // }
+            alert(error)
+        } finally {
+            setLoading(false); // Set loading to false when the submission is done, whether it succeeded or failed
+        }
+    };
+
 
     const item = {
         hidden: {
@@ -83,68 +204,308 @@ const Ballroom = () => {
     useEffect(() => {
         if (isClient) {
             const tweeningDelay = 300, typeStartDelay = 1000, typeSpeed = 50;
+
+            // NAVIGATION BUTTON
+            // backBtn
+            const buttonSpawnPoint = document.getElementById('buttonSpawnPoint');
+            const buttonBackToUcapanSelamat = document.getElementById('buttonBackToUcapanSelamat');
+            const buttonBackToDigitalGift = document.getElementById('buttonBackToDigitalGift');
+
+            // continueBtn
             const buttonKoridor = document.getElementById('buttonKoridor');
-            const buttonPelaminan = document.getElementById('buttonPelaminan');
+            const buttonPelaminanModalOpen = document.getElementById('buttonPelaminanModalOpen')
+            const buttonKonfirmasiModalOpen = document.getElementById('buttonKonfirmasiModalOpen')
+
+            // exploreBtn
+            const exploreBtn = document.getElementById('exploreBtn')
+            // END OF NAVIGATION BUTTON
 
             const opening = document.getElementById('opening');
+            const birthdayCard = document.getElementById('birthdayCard');
+            const cardFront = document.getElementById('cardFront');
+
+
             const openingTouch = document.getElementById('openingTouch');
             const ballroom = document.getElementById('ballroom');
+
 
             //infospot information mempelai
             const koridorInfoModal = document.getElementById('koridorInfoModal')
             const koridorInfoCloseButton = document.getElementById('koridorInfoCloseButton')
 
-            const livestreamPlaceholder = document.getElementById('livestreamPlaceholder')
+            const ucapanSelamatContainer = document.getElementById('ucapanSelamatContainer')
             const videocallPlaceholder = document.getElementById('videocallPlaceholder')
 
-            const souvenirContainer = document.getElementById('souvenirContainer');
+            const konfirmasiContainer = document.getElementById('konfirmasiContainer');
             const digitalGiftContainer = document.getElementById('digitalGiftContainer');
             const ucapanEnding = document.getElementById('ucapanEnding');
 
             const digitalGiftButton = document.getElementById('digitalGiftButton');
-            const souvenirButton = document.getElementById('souvenirButton');
+            const konfirmasiButton = document.getElementById('konfirmasiButton');
             const ucapanEndingButton = document.getElementById('ucapanEndingButton');
+            const buttonPelaminan = document.getElementById('buttonPelaminan');
+            const buttonChangeDigitalGift = document.getElementById('buttonChangeDigitalGift');
+            const buttonChangeUcapanSelamat = document.getElementById('buttonChangeUcapanSelamat');
 
-            const livestreamCloseButton = document.getElementById('livestreamCloseButton');
+
+
+            const digitalGiftCloseButton = document.getElementById('digitalGiftCloseButton');
+            const konfirmasiCloseButton = document.getElementById('konfirmasiCloseButton');
+
+
+            const ucapanSelamatCloseButton = document.getElementById('ucapanSelamatCloseButton');
             const videocallCloseButton = document.getElementById('videocallCloseButton');
 
             let directLocation: any;
 
 
+
+            // BACK BTN FUNCTION
+            buttonSpawnPoint?.addEventListener('click', function () {
+                setIsBackButtonDisabled(true)
+                setIsContinueButtonDisabled(false)
+
+
+                // MODAL PRESENCE HANDLING
+                if (ucapanSelamatContainer && !ucapanSelamatContainer.classList.contains('hidden')) {
+                    // Add the 'hidden' class
+                    ucapanSelamatContainer?.classList.add('hidden');
+                }
+
+                // UNACTIVE BTN
+                buttonPelaminanModalOpen?.classList.toggle('hidden')
+                buttonPelaminanModalOpen?.classList.toggle('flex')
+
+                // ACTIVE BTN
+                buttonKoridor?.classList.toggle('hidden')
+                buttonKoridor?.classList.toggle('flex')
+
+                viewer.setPanorama(koridor);
+                // viewer.tweenControlCenter(new THREE.Vector3(5000, 0, 0), 0);
+                // viewer.OrbitControls.enabled = true;
+            })
+
+            buttonBackToUcapanSelamat?.addEventListener('click', function () {
+                delayExecute(ucapkanSelamatInfospot.focus.bind(ucapkanSelamatInfospot), tweeningDelay);
+                // viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
+                viewer.OrbitControls.enabled = true;
+                setIsBackButtonDisabled(true)
+
+                // UNACTIVE CONTINUE BTN
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+
+                // ACTIVATION CONTINUE BTN
+                buttonPelaminanModalOpen?.classList.toggle('hidden')
+                buttonPelaminanModalOpen?.classList.toggle('flex')
+
+                // UNACTIVE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+
+                // ACTIVATION BACK BTN
+                buttonSpawnPoint?.classList.toggle('hidden')
+                buttonSpawnPoint?.classList.toggle('flex')
+
+                setTimeout(function () {
+                    setIsContinueButtonDisabled(false)
+                    setIsBackButtonDisabled(false)
+                    ucapanSelamatContainer?.classList.toggle('hidden');
+                }, 2000);
+            })
+
+            buttonBackToDigitalGift?.addEventListener('click', function () {
+                console.log('buttonBackToDigitalGift clicked');
+
+                setIsBackButtonDisabled(true)
+                viewer.setPanorama(directLocation)
+                delayExecute(berikanHadiahInfospot.focus.bind(berikanHadiahInfospot), tweeningDelay);
+                viewer.OrbitControls.enabled = false;
+                setTimeout(function () {
+                    setIsBackButtonDisabled(false)
+                    digitalGiftContainer?.classList.toggle('hidden');
+                }, 2000);
+
+                // MODAL PRESENCE HANDLING
+                if (konfirmasiContainer && !konfirmasiContainer.classList.contains('hidden')) {
+                    // Add the 'hidden' class
+                    konfirmasiContainer?.classList.add('hidden');
+                }
+
+                // UNACTIVE BACK BTN
+                buttonBackToDigitalGift?.classList.toggle('hidden')
+                buttonBackToDigitalGift?.classList.toggle('flex')
+
+                // ACTIVE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+
+                // UNACTIVE CONTINUE BTN
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+
+                // ACTIVE CONTINUE BTN
+                setIsContinueButtonDisabled(true)
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+            })
+
+            // CONTINUE BTN FUNCTION
             buttonKoridor?.addEventListener('click', function () {
                 viewer.setPanorama(directLocation)
+                viewer.tweenControlCenter(new THREE.Vector3(5000, 0, 0), 0);
+                viewer.OrbitControls.enabled = false;
+
+                setIsContinueButtonDisabled(true)
+                buttonKoridor?.classList.toggle('hidden')
+                buttonKoridor?.classList.toggle('flex')
+                // setContinueBtn('buttonPelaminanModalOpen')
+
+                // ACTIVATE CONTINUE BTN
+                buttonPelaminanModalOpen?.classList.toggle('hidden')
+                buttonPelaminanModalOpen?.classList.toggle('flex')
+
+                // ACTIVATE BACK BTN
+                // buttonSpawnPoint?.classList.toggle('')
+
+
+                setTimeout(function () {
+                    setIsBackButtonDisabled(false)
+                    setIsContinueButtonDisabled(false)
+                    ucapanSelamatContainer?.classList.toggle('hidden');
+                }, 3000);
             });
 
-            livestreamCloseButton?.addEventListener('click', function () {
-                livestreamPlaceholder?.classList.toggle('hidden');
+            buttonPelaminanModalOpen?.addEventListener('click', function () {
+                const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
+                if (ucapanSelamatModal) {
+                    ucapanSelamatModal.showModal();
+                }
             });
+
+            buttonKonfirmasiModalOpen?.addEventListener('click', function () {
+                // NAVIGATION BUTTON PURPOSE
+                setIsContinueButtonDisabled(true)
+                setIsBackButtonDisabled(true)
+                exploreBtn?.classList.toggle('hidden');
+                exploreBtn?.classList.toggle('grid');
+                // END OF NAVIGATION BUTTON PURPOSE
+
+                // keluarRuanganInfospot.hide()
+                // lihatRuanganInfospot.hide()
+                konfirmasiContainer?.classList.toggle('hidden');
+                delayExecute(keluarRuanganInfospot.focus.bind(ucapanEndingInfospot), tweeningDelay);
+                setTimeout(function () {
+                    ucapanEnding?.classList.toggle('hidden');
+                }, 1500);
+            });
+
+            // EXPLORE BTN FUNCTION
+            exploreBtn?.addEventListener('click', function () {
+                viewer.setPanorama(koridor);
+                koridor.add(infospotBack);
+                front.add(infospotMid2);
+                back.add(infospotKoridor, infospotFront);
+            })
+
+
+
+            // CONTAINER CLOSE BTN
+            ucapanSelamatCloseButton?.addEventListener('click', function () {
+                ucapanSelamatContainer?.classList.toggle('hidden');
+                setIsContinueButtonDisabled(true)
+                berikanHadiahInfospot.hide(0)
+                viewer.OrbitControls.enabled = true;
+            });
+
+            digitalGiftCloseButton?.addEventListener('click', function () {
+                digitalGiftContainer?.classList.toggle('hidden');
+            });
+
+            konfirmasiCloseButton?.addEventListener('click', function () {
+                konfirmasiContainer?.classList.toggle('hidden')
+                setIsContinueButtonDisabled(true)
+            })
 
             videocallCloseButton?.addEventListener('click', function () {
-                videocallPlaceholder?.classList.toggle('hidden');
-            });
+                videocallPlaceholder?.classList.toggle('hidden')
+            })
+            // END OF CONTAINER CLOSE BTN
 
             buttonPelaminan?.addEventListener('click', function () {
-                buttonPelaminan?.classList.toggle('hidden');
-                delayExecute(mejaHadiahInfospot.focus.bind(mejaHadiahInfospot), tweeningDelay);
+                ucapanSelamatContainer?.classList.toggle('hidden')
+                berikanHadiahInfospot.show(0)
+                // setContinueBtn('buttonKonfirmasiModalOpen')
+
+                setIsContinueButtonDisabled(true)
+                setIsBackButtonDisabled(true)
+
+                // UNACTIVE CONTINUE BTN
+                buttonPelaminanModalOpen?.classList.toggle('hidden')
+                buttonPelaminanModalOpen?.classList.toggle('flex')
+
+                // ACTIVATE CONTINUE BTN
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+
+                // UNACTIVE BACK BTN
+                buttonSpawnPoint?.classList.toggle('hidden')
+                buttonSpawnPoint?.classList.toggle('flex')
+
+                // ACTIVATE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+
+
+                delayExecute(berikanHadiahInfospot.focus.bind(berikanHadiahInfospot), tweeningDelay);
+                viewer.OrbitControls.enabled = false;
                 setTimeout(function () {
+                    setIsBackButtonDisabled(false)
                     digitalGiftContainer?.classList.toggle('hidden');
-                    viewer.OrbitControls.enabled = false;
-                }, 1000);
+                }, 2000);
 
             });
 
             digitalGiftButton?.addEventListener('click', function () {
                 digitalGiftContainer?.classList.toggle('hidden');
-                delayExecute(mejaSouvenirPOVInfospot.focus.bind(mejaSouvenirPOVInfospot), tweeningDelay);
+                delayExecute(mejaKonfirmasiPOVInfospot.focus.bind(mejaKonfirmasiPOVInfospot), tweeningDelay);
+
+                //UNACTIVE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+
+                //ACTIVATE BACK BTN 
+                buttonBackToDigitalGift?.classList.toggle('hidden')
+                buttonBackToDigitalGift?.classList.toggle('flex')
+                setIsBackButtonDisabled(true)
+
                 setTimeout(function () {
                     viewer.setPanorama(back);
+                    viewer.tweenControlCenter(new THREE.Vector3(-5000, 0, 0), 0);
+                    setTimeout(function () {
+                        delayExecute(checkOutInfospot.focus.bind(checkOutInfospot), tweeningDelay);
+                        // viewer.tweenControlCenter(new THREE.Vector3(-116.83, 138.59, -4988.43), 0);
+                    }, 1000);
+                    setTimeout(function () {
+                        konfirmasiContainer?.classList.toggle('hidden');
+                        setIsBackButtonDisabled(false)
+                        setIsContinueButtonDisabled(false)
+                    }, 3000);
                 }, 1500);
+
             });
 
-            souvenirButton?.addEventListener('click', function () {
+            konfirmasiButton?.addEventListener('click', function () {
+                // NAVIGATION BUTTON PURPOSE
+                setIsContinueButtonDisabled(true)
+                setIsBackButtonDisabled(true)
+                exploreBtn?.classList.toggle('hidden');
+                exploreBtn?.classList.toggle('grid');
+                // END OF NAVIGATION BUTTON PURPOSE
+
                 keluarRuanganInfospot.hide()
                 lihatRuanganInfospot.hide()
-                souvenirContainer?.classList.toggle('hidden');
+                konfirmasiContainer?.classList.toggle('hidden');
                 delayExecute(keluarRuanganInfospot.focus.bind(ucapanEndingInfospot), tweeningDelay);
                 setTimeout(function () {
                     ucapanEnding?.classList.toggle('hidden');
@@ -157,6 +518,84 @@ const Ballroom = () => {
                 viewer.OrbitControls.enabled = true;
                 keluarRuanganInfospot.show()
                 lihatRuanganInfospot.show()
+            });
+
+            buttonChangeDigitalGift?.addEventListener('click', function () {
+                setIsBackButtonDisabled(true)
+                viewer.setPanorama(directLocation)
+                delayExecute(berikanHadiahInfospot.focus.bind(berikanHadiahInfospot), tweeningDelay);
+                viewer.OrbitControls.enabled = false;
+                setTimeout(function () {
+                    setIsBackButtonDisabled(false)
+                    digitalGiftContainer?.classList.toggle('hidden');
+                }, 2000);
+
+                // MODAL PRESENCE HANDLING
+                if (konfirmasiContainer && !konfirmasiContainer.classList.contains('hidden')) {
+                    // Add the 'hidden' class
+                    konfirmasiContainer?.classList.add('hidden');
+                }
+
+                // UNACTIVE BACK BTN
+                buttonBackToDigitalGift?.classList.toggle('hidden')
+                buttonBackToDigitalGift?.classList.toggle('flex')
+
+                // ACTIVE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+
+                // UNACTIVE CONTINUE BTN
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+
+                // ACTIVE CONTINUE BTN
+                setIsContinueButtonDisabled(true)
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+            });
+
+            buttonChangeUcapanSelamat?.addEventListener('click', function () {
+                viewer.setPanorama(directLocation)
+                viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
+                // viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
+                viewer.OrbitControls.enabled = false;
+                setIsBackButtonDisabled(true)
+                setIsContinueButtonDisabled(true)
+
+
+                // MODAL PRESENCE HANDLING
+                if (konfirmasiContainer && !konfirmasiContainer.classList.contains('hidden')) {
+                    // Add the 'hidden' class
+                    konfirmasiContainer?.classList.add('hidden');
+                }
+
+                // UNACTIVE CONTINUE BTN
+                buttonKonfirmasiModalOpen?.classList.toggle('hidden')
+                buttonKonfirmasiModalOpen?.classList.toggle('flex')
+
+                // ACTIVATION CONTINUE BTN
+                buttonPelaminanModalOpen?.classList.toggle('hidden')
+                buttonPelaminanModalOpen?.classList.toggle('flex')
+
+                // UNACTIVE BACK BTN
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+                buttonBackToUcapanSelamat?.classList.toggle('hidden')
+                buttonBackToUcapanSelamat?.classList.toggle('flex')
+                buttonBackToDigitalGift?.classList.toggle('hidden')
+                buttonBackToDigitalGift?.classList.toggle('flex')
+
+
+
+                // // ACTIVATION BACK BTN
+                buttonSpawnPoint?.classList.toggle('hidden')
+                buttonSpawnPoint?.classList.toggle('flex')
+
+                setTimeout(function () {
+                    setIsContinueButtonDisabled(false)
+                    setIsBackButtonDisabled(false)
+                    ucapanSelamatContainer?.classList.toggle('hidden');
+                }, 2000);
             });
 
             let pov = 'daridepan'
@@ -227,7 +666,7 @@ const Ballroom = () => {
             }
 
             //ASSET SETUP 
-            const back = new PANOLENS.ImagePanorama('/assets/ballroom/Back.jpg');
+            const back = new PANOLENS.ImagePanorama('/assets/ballroom/Back.webp');
             // back.addEventListener('enter-fade-start', function () {
             //     pov == 'daridepan' ?
             //         viewer.tweenControlCenter(lookAtPositions[1], 0)
@@ -236,12 +675,12 @@ const Ballroom = () => {
 
             // });
 
-            const front = new PANOLENS.ImagePanorama('/assets/ballroom/Front.jpg');
+            const front = new PANOLENS.ImagePanorama('/assets/ballroom/Front.webp');
             // front.addEventListener('enter-fade-start', function () {
             //     viewer.tweenControlCenter(lookAtPositions[0], 0);
             // });
 
-            const koridor = new PANOLENS.ImagePanorama('/assets/ballroom/Koridor.jpg');
+            const koridor = new PANOLENS.ImagePanorama('/assets/ballroom/Koridor.webp');
             koridor.addEventListener('enter-fade-start', function () {
                 viewer.tweenControlCenter(lookAtPositions[1], 0);
             });
@@ -266,7 +705,6 @@ const Ballroom = () => {
             infospotFront.addEventListener('click', function () {
                 viewer.setPanorama(front);
             });
-
 
 
             const infospotBack = new PANOLENS.Infospot(300, PANOLENS.DataImage.Info);
@@ -297,41 +735,49 @@ const Ballroom = () => {
             const onLoad = () => {
                 viewer.tweenControlCenter(new THREE.Vector3(5000, 0, 0), 0);
                 viewer.OrbitControls.enabled = true;
+                directLocation = front
+
+                setTimeout(function () {
+                    birthdayCard?.classList.toggle('birthdayCard');
+                    birthdayCard?.classList.toggle('titleGuestBook');
+                    cardFront?.classList.toggle('cardFront');
+                }, 1000);
+
                 setTimeout(function () {
                     opening?.classList.toggle('opacity-100');
                     opening?.classList.toggle('opacity-0');
+                    openingTouch?.classList.toggle('hidden');
                     ballroom?.classList.toggle('saturate-0');
-                }, 3000);
+                }, 4000);
                 setTimeout(function () {
                     opening?.classList.toggle('hidden');
-                }, 3500);
+                }, 4500);
                 setTimeout(function () {
                     openingTouch?.classList.toggle('hidden');
+                    setIsContinueButtonDisabled(false)
                     // onWelcomeComplete()
                 }, 6000);
-                setTimeout(function () {
-                    buttonKoridor?.classList.toggle('hidden'); directLocation = front
-                }, 9000);
 
             }
 
             const onLoadFront = () => {
-                buttonKoridor?.classList.toggle('hidden');
-                viewer.OrbitControls.enabled = false;
+                // buttonKoridor?.classList.toggle('hidden');
+                setContinueBtn('buttonPelaminan');
                 viewer.tweenControlCenter(new THREE.Vector3(4787.98, 1426.00, 16.95), 0);
                 // type(frontText.pelaminan, function () { buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true; }, 2000);
-                buttonPelaminan?.classList.toggle('hidden'); viewer.OrbitControls.enabled = true;
+                // buttonPelaminan?.classList.toggle('hidden');
+                // viewer.OrbitControls.enabled = false;
             }
 
             const onLoadBack = () => {
                 viewer.tweenControlCenter(new THREE.Vector3(-5000, 0, 0), 0);
                 setTimeout(function () {
-                    delayExecute(mejaSouvenirInfospot.focus.bind(mejaSouvenirInfospot), tweeningDelay);
+                    delayExecute(checkOutInfospot.focus.bind(checkOutInfospot), tweeningDelay);
                     // viewer.tweenControlCenter(new THREE.Vector3(-116.83, 138.59, -4988.43), 0);
                 }, 1000);
-                setTimeout(function () {
-                    souvenirContainer?.classList.toggle('hidden');
-                }, 2000);
+                // setTimeout(function () {
+                //     konfirmasiContainer?.classList.toggle('hidden');
+                // }, 2000);
             }
 
 
@@ -388,15 +834,15 @@ const Ballroom = () => {
             const koridorKananInfospot7 = new PANOLENS.Infospot(300, '/assets/ballroom/button/infoPengantin/buttonClickHere14.png');
 
             // FRONT INFOSPOTS
-            const mejaHadiahInfospot = new PANOLENS.Infospot();
+            const berikanHadiahInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/berikanHadiah.webp');
             const videocallInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonVideocall.png');
-            const livestreamInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonLivestream.png');
-            const mejaSouvenirPOVInfospot = new PANOLENS.Infospot(10e-7);
+            const ucapkanSelamatInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/ucapkanSelamat.webp');
+            const mejaKonfirmasiPOVInfospot = new PANOLENS.Infospot(10e-7);
 
             //   BACK INFOSPOTS
-            const keluarRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonKeluarRuangan.png');
-            const lihatRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonLihatRuangan.png');
-            const mejaSouvenirInfospot = new PANOLENS.Infospot();
+            const keluarRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonKeluarResepsi.webp');
+            const lihatRuanganInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/buttonLihatKenanganVirtual.webp');
+            const checkOutInfospot = new PANOLENS.Infospot(900, '/assets/ballroom/button/checkOut.webp');
             const ucapanEndingInfospot = new PANOLENS.Infospot(10e-7);  // Make it not visible
 
 
@@ -463,8 +909,11 @@ const Ballroom = () => {
             });
 
             // FRONT
-            mejaHadiahInfospot.position.set(208.08, -1561.25, -4738.41);
-            mejaHadiahInfospot.addHoverText('Kasih Hadiah Digital disini', 50);
+            berikanHadiahInfospot.position.set(133.47, -678.04, -4943.77);
+            // berikanHadiahInfospot.addHoverText('Kasih Hadiah Digital disini', 50);
+            berikanHadiahInfospot.addEventListener('click', function () {
+                digitalGiftContainer?.classList.toggle('hidden');
+            });
 
             videocallInfospot.position.set(4501.65, 2168.44, -3.57);
             videocallInfospot.addEventListener('click', function () {
@@ -472,30 +921,44 @@ const Ballroom = () => {
             });
 
 
-            livestreamInfospot.position.set(4957.06, 623.64, -2.76);
-            livestreamInfospot.addEventListener('click', function () {
-                livestreamPlaceholder?.classList.toggle('hidden');
+            ucapkanSelamatInfospot.position.set(4957.06, 623.64, -2.76);
+            ucapkanSelamatInfospot.addEventListener('click', function () {
+                ucapanSelamatContainer?.classList.toggle('hidden');
+                setIsContinueButtonDisabled(false)
             });
 
-            mejaSouvenirPOVInfospot.position.set(-4995.67, 107.19, -2.18);
+            mejaKonfirmasiPOVInfospot.position.set(-4995.67, 107.19, -2.18);
 
             // BACK
-            mejaSouvenirInfospot.position.set(63.26, -1587.21, -4736.43);
-            mejaSouvenirInfospot.addHoverText('Mengambil souvenir disini', 50);
+            checkOutInfospot.position.set(17.44, -603.27, -4958.70);
+            checkOutInfospot.addEventListener('click', function () {
+                konfirmasiContainer?.classList.toggle('hidden');
+                setIsContinueButtonDisabled(false)
+            });
 
             ucapanEndingInfospot.position.set(-4829.37, 1281.33, 5.80);
 
-            keluarRuanganInfospot.position.set(-5000.00, 1811.57, 10.79);
+            keluarRuanganInfospot.position.set(-4946.40, 713.02, -4.30);
             keluarRuanganInfospot.addEventListener('click', function () {
-                window.location.href = '/homepage';
+
+                // Use the router to navigate without a page reload
+                router.push(`/${wedding.wedding_slug}/${guest.guest_slug}/`);
             });
 
-            lihatRuanganInfospot.position.set(-4946.40, 713.02, -4.30);
+
+            lihatRuanganInfospot.position.set(-5000.00, 1811.57, 10.79);
             lihatRuanganInfospot.addEventListener('click', function () {
-                viewer.setPanorama(koridor);
-                koridor.add(infospotBack);
-                front.add(infospotMid2);
-                back.add(infospotKoridor, infospotFront);
+                // viewer.setPanorama(koridor);
+                // koridor.add(infospotBack);
+                // front.add(infospotMid2);
+                // back.add(infospotKoridor, infospotFront);
+                // window.location.href = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
+                // redirect('/' + wedding.wedding_slug + '/' + guest.guest_slug + '/kenanganvirtual')
+                // return redirect('/register-guest')
+                const newUrl = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
+
+                // Use the router to navigate without a page reload
+                router.push(newUrl);
             });
 
 
@@ -519,10 +982,11 @@ const Ballroom = () => {
             );
 
             front.addEventListener('load', onLoadFront);
-            front.add(mejaHadiahInfospot, livestreamInfospot, videocallInfospot, mejaSouvenirPOVInfospot);
+            // front.add(berikanHadiahInfospot, ucapkanSelamatInfospot, videocallInfospot, mejaKonfirmasiPOVInfospot);
+            front.add(berikanHadiahInfospot, ucapkanSelamatInfospot, mejaKonfirmasiPOVInfospot, videocallInfospot);
 
-            back.add(mejaSouvenirInfospot, ucapanEndingInfospot, keluarRuanganInfospot, lihatRuanganInfospot);
-            back.addEventListener('load', onLoadBack);
+            back.add(checkOutInfospot, ucapanEndingInfospot, keluarRuanganInfospot, lihatRuanganInfospot);
+            // back.addEventListener('load', onLoadBack);
 
 
             viewer.add(koridor, front, back);
@@ -531,12 +995,11 @@ const Ballroom = () => {
 
     return (
         <>
-            <section id='ballroom' className='saturate-0 transition-all duration-1000 delay-2000 w-full h-full relative'>
+            <section id='ballroom' className='saturate-0 transition-all duration-1000 delay-2000 w-full h-full relative z-0'>
 
                 <div className='absolute top-1/2 w-full flex justify-center items-center p-5'>
                     <div id="typed" className='text-white text-2xl'></div>
                 </div>
-
 
             </section>
 
@@ -553,24 +1016,47 @@ const Ballroom = () => {
                     transform: 'translate(-50%, -50%)'
                 }}>
 
-                <div className="relative bg-gray-100 overflow-auto w-full h-full grid text-center content-center p-6 ">
-                    <motion.h3
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
-                        className='font-deAetna text-3xl text-black lg:text-4xl'>Selamat Datang</motion.h3>
-                    <motion.h4
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1, delay: 0.75 }}
-                        className='font-deAetna text-xl text-gray-500 lg:text-2xl'>Elang Fajar Buana</motion.h4>
+                <div className="relative overflow-auto w-full h-full grid justify-items-center content-center p-6 ">
+
+                    {/* GUEST BOOK */}
+                    <div
+                        id='birthdayCard'
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            transform: 'perspective(2500px)',
+                            transition: '1s',
+                        }}
+                        className='relative w-64 h-96 cursor-pointer '>
+                        <div
+                            id='cardFront'
+                            style={{
+                                transformOrigin: 'left',
+                                transition: '.6s',
+                            }}
+                            className='grid justify-center content-center relative bg-guestBookCover bg-contain bg-no-repeat bg-center w-full h-full overflow-hidden '>
+                            <h2 className='text-White  titleGuestBook mb-28'>Guest Book</h2>
+                        </div>
+
+                        <div className='absolute bg-guestBookInsideRight bg-contain bg-center bg-no-repeat w-full h-full grid gap-6 justify-items-center content-start pb-6 pt-8 pl-6 pr-12 -z-10 left-0 top-0'>
+                            <h3 className='text-N700'>Buku Tamu</h3>
+                            {/* MAKS 11 ORANG */}
+                            <ul className='grid gap-1 text-start w-full list-decimal list-inside text-N700'>
+                                <li className='p1-r font-deAetna'>Mugia Choir</li>
+                                <li className='p1-r font-deAetna'>Elang Fajar Buana</li>
+                                <li className='p1-r font-deAetna'>Zuhdan Nur Ihsan I</li>
+                                <li className='p1-r font-deAetna'>Hasnat</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
                 </div>
             </div>
 
+
             {/* OPENING-TOUCH */}
-            <div id="openingTouch" className='pointer-events-none absolute w-full h-full z-40'
+            <div id="openingTouch" className='hidden pointer-events-none absolute w-full h-full z-40'
                 style={{
                     maxWidth: '400px',
                     maxHeight: '300px',
@@ -586,26 +1072,6 @@ const Ballroom = () => {
 
                     <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse animate-wiper' />
                     <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />resepsi virtual</h4>
-                </div>
-            </div>
-
-            {/* BANNER OPEN BETA */}
-            <div id="bannerOpenBeta" className='pointer-events-none absolute w-full h-fit z-50'
-                style={{
-                    maxWidth: '100%',
-                    // maxHeight: 'fit',
-                    minWidth: '200px',
-                    minHeight: '250px',
-                    WebkitOverflowScrolling: 'touch',
-                    top: '0',
-                    left: '50%',
-                    transform: 'translate(-50%, 0)'
-                }}>
-
-                <div className="relative bg-white pointer-events-auto overflow-auto w-full h-fit grid gap-2 text-center justify-items-center content-center p-1 shadow-md">
-                    <h5 className='font-deAetna text-base text-black'>Anda berada pada Virtuwed Open Beta</h5>
-
-                    <a href='https://forms.gle/VPpq2k7k8vhGntF16' target='_blank' className='py-1.5 px-3 bg-white text-black border-black border-solid border text-xs text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary w-fit'>Kirim Feedback</a>
                 </div>
             </div>
 
@@ -725,26 +1191,57 @@ const Ballroom = () => {
             </div >
 
             {/* BUTTON LINKING */}
-            <div className='absolute bottom-0 mb-6 px-4 md:px-0 min-w-full grid justify-items-center'>
-                <button id='buttonKoridor' className='hidden w-full md:max-w-screen-sm pt-3 pb-2.5 px-6 bg-white text-primary font-amiamie border-4 border-primary text-center rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>Menuju Pelaminan</button>
+            <div className='absolute bottom-3 px-2 min-w-full grid items-end justify-items-center z-10'>
+                <div className='w-full max-w-[500px] h-fit bg-White flex items-center rounded-lg shadow-md px-1 py-3 font-amiamie'>
+                    {/* BACK BUTTON */}
+                    <button id='buttonSpawnPoint' disabled={isBackButtonDisabled} className='w-full text-center text-N800 py-2 flex justify-center items-center gap-1 disabled:text-N400'>
+                        <i className="ri-arrow-left-s-line ri-xl"></i>
+                        <p className='l4-r'>Kembali</p>
+                    </button>
+                    <button id='buttonBackToUcapanSelamat' disabled={isBackButtonDisabled} className='hidden w-full text-center text-N800 py-2 justify-center items-center gap-1 disabled:text-N400'>
+                        <i className="ri-arrow-left-s-line ri-xl"></i>
+                        <p className='l4-r'>Kembali</p>
+                    </button>
+                    <button id='buttonBackToDigitalGift' disabled={isBackButtonDisabled} className='hidden w-full text-center text-N800 py-2 justify-center items-center gap-1 disabled:text-N400'>
+                        <i className="ri-arrow-left-s-line ri-xl"></i>
+                        <p className='l4-r'>Kembali</p>
+                    </button>
+
+                    {/* EXPLORE BUTTON */}
+                    <button id='exploreBtn' className='hidden bg-secondary text-white h-full w-full text-center py-2 gap-2 justify-center items-center rounded'>
+                        <i className="ri-compass-3-line ri-xl"></i>
+                        <p className='l4-r'>Jelajahi Venue</p>
+                    </button>
+
+                    {/* CONTINUE BUTTON */}
+                    <button id='buttonKoridor' disabled={isContinueButtonDisabled} className='w-full text-center text-N800 py-2 flex justify-center items-center gap-1 disabled:text-N400'>
+                        <p className='l4-r'>Selanjutnya</p>
+                        <i className="ri-arrow-right-s-line ri-xl"></i>
+                    </button>
+                    <button id='buttonPelaminanModalOpen' disabled={isContinueButtonDisabled} className='hidden w-full text-center text-N800 py-2 justify-center items-center gap-1 disabled:text-N400'>
+                        <p className='l4-r'>Selanjutnya</p>
+                        <i className="ri-arrow-right-s-line ri-xl"></i>
+                    </button>
+                    <button id='buttonKonfirmasiModalOpen' disabled={isContinueButtonDisabled} className='hidden w-full text-center text-N800 py-2 justify-center items-center gap-1 disabled:text-N400'>
+                        <p className='l4-r'>Selanjutnya</p>
+                        <i className="ri-arrow-right-s-line ri-xl"></i>
+                    </button>
+                    {/* <button id='buttonKoridor' className='hidden w-full text-primary font-amiamie text-center'>Menuju Pelaminan</button> */}
+                </div>
             </div>
 
-            {/* BUTTON LINKING */}
-            <div className='absolute bottom-0 mb-6 px-4 md:px-0 min-w-full grid justify-items-center'>
-                <button id='buttonPelaminan' className='hidden w-full md:max-w-screen-sm pt-3 pb-2.5 px-6 bg-white text-primary font-amiamie border-4 border-primary text-center rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>Menuju Hadiah Digital</button>
-            </div>
-
-            {/* MODAL SOUVENIR */}
-            <div id="souvenirContainer" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
+            {/* KONFIRMASI */}
+            <div id="konfirmasiContainer" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
                 style={{
                     maxWidth: '500px',
-                    maxHeight: '75%',
+                    maxHeight: '100%',
                     minWidth: '200px',
                     minHeight: '250px',
                     WebkitOverflowScrolling: 'touch',
-                    top: '50%',
+                    top: '72px',
+                    bottom: '88px',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)'
+                    transform: 'translateX(-50%)'
                 }}
                 data-aos-once="true"
                 data-aos="zoom-in"
@@ -752,30 +1249,109 @@ const Ballroom = () => {
                 data-aos-duration="1200"
             >
 
-                <div className="text-center text-black bg-gray-100 rounded-lg overflow-auto w-full grid gap-6 p-6 ">
-                    <h3 className='text-xl lg:text-2xl font-deAetna'>Sebagai bentuk rasa hormat, kami akan mengirimkan souvenir pernikahan kepada Alamat Bapak/Ibu.</h3>
-                    <p className='font-light font-amiamie'>Silahkan Untuk Mengisi Alamat Lengkap Pengiriman Souvenir.</p>
-                    <form className='grid gap-6'>
-                        <textarea
-                            data-aos-once="true"
-                            data-aos="fade-up" data-aos-duration="1200"
-                            className="shadow appearance-none rounded w-full min-h-[100px] p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Alamat lengkap pengiriman"
-                        // value={'alamat'}
-                        // onChange={
-                        //     (e) => console.log(e)
-                        //     // (e) => setMessage(e.target.value)
-                        // }
-                        />
-                    </form>
-                    <button id='souvenirButton' style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} className='pt-3 pb-2.5 px-6 text-white text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>Simpan Alamat Pengiriman</button>
+                <div className="text-black bg-White rounded-md overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
+                    <div className='grid justify-end'>
+                        <button id='konfirmasiCloseButton'>
+                            <i className="ri-close-line ri-xl"></i>
+                        </button>
+                    </div>
+                    <div className='text-center grid justify-items-center w-full'>
+                        <h3 className='text-N800 capitalize'>konfirmasi</h3>
+                        <p className='p3-r w-full max-w-[285px]'>Tolong konfirmasi ucapan selamat dan hadiah yang akan anda berikan</p>
+                    </div>
+
+                    <div className='grid border border-secondary rounded-sm p-3 gap-6'>
+                        <div className='w-full'>
+                            <Disclosure>
+                                {({ open }) => (
+                                    <>
+                                        <Disclosure.Button className="flex w-full justify-between items-center text-left">
+                                            <p className='l3-r text-N700'>Foto/Video</p>
+                                            <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
+                                        </Disclosure.Button>
+                                        <Disclosure.Panel className="mt-1">
+                                            {selectedImage && (
+                                                <Image
+                                                    src={URL.createObjectURL(selectedImage)}
+                                                    alt="preview foto"
+                                                    className="w-full h-auto rounded-md"
+                                                    width={220}
+                                                    height={220}
+                                                    priority
+                                                />
+                                            ) || selectedVideo && (
+                                                <div>
+                                                    <video width='320' height='240' controls>
+                                                        <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
+                                                    </video>
+                                                </div>
+                                            )}
+                                        </Disclosure.Panel>
+                                    </>
+                                )}
+                            </Disclosure>
+                        </div>
+
+                        <div className='grid gap-1'>
+                            <p className='p2-r text-N700'>Caption</p>
+                            <form>
+                                <textarea
+                                    className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder={`Selamat menikah, semoga sabar menjalani hidup dengan ${wedding.undangan_digital.pengantin_pria.nama_lengkap}.`}
+                                    rows={2}
+                                // value={'alamat'}
+                                // onChange={
+                                //     (e) => console.log(e)
+                                //     // (e) => setMessage(e.target.value)
+                                // }
+                                />
+                            </form>
+                        </div>
+
+                        <div className='grid gap-1'>
+                            <p className='p2-r text-N700'>{guest.nama} memberi {wedding.wedding_name} sebuah...</p>
+                            <div className='relative flex rounded-full border border-N500 text-N500 p-3 focus:outline-none'>
+                                <div className="flex gap-2 w-full items-center">
+                                    <div className='w-fit'>
+                                        <i className={`${digitalGift.icon} ri-xl`}></i>
+                                    </div>
+                                    <div className='grid justify-items-center w-full '>
+                                        <p className='p2-r capitalize'>{digitalGift.name}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='flex w-full items-center gap-1 text-red-500'>
+                            <i className="ri-error-warning-line self-start"></i>
+                            <p className='p3-r'>Data anda akan dilihat oleh pengantin</p>
+                        </div>
+
+                        <div className='grid gap-2'>
+                            <div className='z-20 flex w-full'>
+                                <button id='buttonChangeUcapanSelamat' className='w-full border border-secondary flex gap-2 text-secondary rounded-l-sm h-12 justify-center items-center capitalize'>
+                                    <i className="ri-message-3-line ri-xl"></i>
+                                    <p className='l2-r font-deAetna'>ganti ucapan</p>
+                                </button>
+                                <button id='buttonChangeDigitalGift' className='w-full border border-secondary flex gap-2 text-secondary rounded-r-sm h-12 justify-center items-center capitalize'>
+                                    <i className="ri-gift-line ri-xl"></i>
+                                    <p className='l2-r font-deAetna'>ganti hadiah</p>
+                                </button>
+                            </div>
+
+                            <button onClick={handleKonfirmasi} id='konfirmasiButton' className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
+                                <i className="ri-check-line ri-xl"></i>
+                                <p className='l2-r font-deAetna'>konfirmasi</p>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div >
 
-            {/* MODAL HADIAH DIGITAL */}
-            < div id="digitalGiftContainer" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
+            {/* HADIAH DIGITAL */}
+            <div id="digitalGiftContainer" className='absolute w-full h-full overflow-y-auto z-20 hidden'
                 style={{
-                    maxWidth: '500px',
-                    maxHeight: '75%',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
                     minWidth: '200px',
                     minHeight: '250px',
                     WebkitOverflowScrolling: 'touch',
@@ -783,107 +1359,457 @@ const Ballroom = () => {
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
                 }}
-                data-aos-once="true"
-                data-aos="zoom-in"
-                data-aos-delay="300"
-                data-aos-duration="1200"
             >
+                <div className="text-center text-black bg-White w-full grid gap-3 px-3 py-4">
+                    <div className='grid justify-end'>
+                        <button id='digitalGiftCloseButton'>
+                            <i className="ri-close-line ri-xl"></i>
+                        </button>
+                    </div>
 
-                <div className="text-center text-black bg-gray-100 rounded-lg w-full grid gap-6 p-6 ">
-                    <h3 className='text-xl lg:text-2xl font-deAetna'>Terimakasih Bapak Elang Fajar Buana atas kehadirannya.</h3>
-                    <p className='font-light font-amiamie'>Berikan Ucapan Terbaik Kepada Mempelai.</p>
-                    <form className='grid gap-6'>
-                        <input
-                            data-aos-once="true"
-                            data-aos="fade-up" data-aos-duration="1200"
-                            className="shadow appearance-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            type="text"
-                            placeholder="Name"
-                            value={'Elang Fajar Buana'}
-                            onChange={
-                                // (e) => setName(e.target.value)
-                                (e) => console.log(e)
-                            }
-                        />
-                        <textarea
-                            data-aos-once="true"
-                            data-aos="fade-up" data-aos-duration="1200"
-                            className="shadow appearance-none rounded w-full min-h-[100px] p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Ucapan Kepada Pengantin"
-                            // value={'alamat'}
-                            onChange={
-                                (e) => console.log(e)
-                                // (e) => setMessage(e.target.value)
-                            }
-                        />
+                    <div className='grid justify-items-center text-center w-full max-w-[500px] mx-auto'>
+                        <h3 className='capitalize text-N800'>berikan hadiah digital</h3>
+                        <p className='p3-r text-N700 max-w-[285px]'>Hadiah digital hanya merupakan simbolis, pengantin akan menerima nominal dari hadiah yang anda berikan</p>
+                    </div>
 
-                        <RadioGroup value={selected} onChange={setSelected}>
-                            <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
-                            <div className="space-y-2">
-                                {plans.map((plan) => (
+                    <Image
+                        src={digitalGift.emoticon}
+                        alt="emot"
+                        className="justify-self-center"
+                        width={110}
+                        height={110}
+                    />
+
+                    <div className='p-3 grid w-full max-w-[500px] mx-auto'>
+                        <RadioGroup className='w-full grid gap-3' value={digitalGift} onChange={setDigitalGift}>
+                            <div className="grid grid-cols-2 gap-y-3 gap-x-1">
+                                {mainGifts.map((gift) => (
                                     <RadioGroup.Option
-                                        key={plan.name}
-                                        value={plan}
+                                        key={gift.name}
+                                        value={gift}
+                                        style={{
+                                            background: `
+                                        linear-gradient(357deg, #000 -23.05%, rgba(0, 0, 0, 0.00) 97.17%),
+                                        url('${gift.img}') center/cover no-repeat`,
+                                        }}
                                         className={({ active, checked }) =>
-                                            `${active
-                                                ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
-                                                : ''
-                                            }
-                  ${checked ? 'bg-sky-900 bg-opacity-75 text-white' : 'bg-white'
-                                            }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
-                                        }
-                                    >
-                                        {({ active, checked }) => (
-                                            <>
-                                                <div className="flex w-full items-center justify-between">
-                                                    <div className="flex gap-2 items-center">
-                                                        <div>
-                                                            <Image
-                                                                src={plan.img}
-                                                                alt="Gift"
-                                                                className="w-12 h-auto"
-                                                                width={220}
-                                                                height={220}
-                                                                priority
-                                                            />
-                                                        </div>
-                                                        <div className="text-sm text-start">
-                                                            <RadioGroup.Label
-                                                                as="p"
-                                                                className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
-                                                                    }`}
-                                                            >
-                                                                {plan.name}
-                                                            </RadioGroup.Label>
-                                                            <RadioGroup.Description
-                                                                as="span"
-                                                                className={`inline ${checked ? 'text-sky-100' : 'text-gray-500'
-                                                                    }`}
-                                                            >
-                                                                <span>
-                                                                    Rp {plan.price}
-                                                                </span>
-                                                            </RadioGroup.Description>
-                                                        </div>
-                                                    </div>
-                                                    {checked && (
-                                                        <div className="shrink-0 text-white">
-                                                            <CheckIcon className="h-6 w-6" />
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </>
-                                        )}
+                                            `${checked ? 'border-secondary border-4' : 'border-none'} grid w-full h-36 rounded-md items-end p-1.5 cursor-pointer`
+                                        }>
+                                        <div className='grid justify-start text-white text-start'>
+                                            <p className='l4-r font-deAetna capitalize'>{gift.name}</p>
+                                            <p className='text-[8px] capitalize'>{gift.price}</p>
+                                        </div>
                                     </RadioGroup.Option>
                                 ))}
-                            </div>
-                        </RadioGroup>
+                            </div >
 
-                        <span className='text-xs text-black/70'>*Hadiah ini merupakan simbolis, mempelai akan menerima uang tunai.</span>
+                            <RadioGroup.Option
+                                key={gifts[4].name}
+                                value={gifts[4]}
+                                className={({ active, checked }) => `${checked ? 'border-secondary text-secondary' : 'text-N500'} flex w-full border border-N500 pl-3 rounded-full items-center relative`}
+                            >
+                                {({ active, checked }) => (
+                                    <>
+                                        <i className="ri-cash-line ri-xl absolute"></i>
+                                        <input
+                                            type="number"
+                                            // value={digitalGiftCustom}
+                                            // onChange={
+                                            //     (e) => {
+                                            //         setDigitalGiftCustom(e.target.value)
+                                            //         console.log(gifts[4].price)
+                                            //         console.log(digitalGiftCustom)
+                                            //     }
+                                            // }
+                                            placeholder={gifts[4].name}
+                                            className={`${checked ? 'text-secondary' : 'text-N500'} w-full outline-none py-3 text-center bg-transparent`}
+                                        />
+                                    </>
+                                )}
+                            </RadioGroup.Option>
+
+                            <div className='grid justify-self-center h-1 w-11 rounded-full bg-secondary'></div>
+
+                            <RadioGroup.Option
+                                key={gifts[5].name}
+                                value={gifts[5]}
+                                className={({ active, checked }) => `${checked ? 'border-secondary text-secondary' : 'text-N500'} flex w-full border border-N500 px-3 rounded-full items-center py-3 relative`}
+                            >
+                                <i className="ri-message-3-line ri-xl absolute"></i>
+                                <p className='p1-r capitalize w-full text-center'>{gifts[5].name}</p>
+                            </RadioGroup.Option>
+
+                            <div className='flex w-full items-center gap-1 text-red-500'>
+                                <i className="ri-error-warning-line self-start"></i>
+                                <p className='p3-r'>Invoice akan dikirimkan ke whatsapp anda</p>
+                            </div>
+                        </RadioGroup >
+                        <button
+                            className='mt-3 z-10 bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'
+                            onClick={() => {
+                                const digitalGiftModal = document.getElementById('digitalGiftModal') as HTMLDialogElement | null;
+                                if (digitalGiftModal) {
+                                    digitalGiftModal.showModal();
+                                }
+                            }}>
+                            <i className="ri-gift-line ri-xl"></i>
+                            <p className='l2-r font-deAetna'>kirim hadiah</p>
+                        </button>
+                    </div >
+
+                </div >
+            </ div >
+            {/* MODAL VALIDATATION */}
+            <dialog id="digitalGiftModal" className="modal" >
+                <div className="modal-box bg-White px-5 py-8 grid gap-6 rounded-lg w-11/12 max-w-5xl">
+                    <div className='grid gap-2 justify-items-center text-center'>
+                        <Image
+                            src={digitalGift.emoticon}
+                            alt="emoticon"
+                            width={110}
+                            height={110}
+                        />
+                        <h4 className="text-N800">
+                            {
+                                digitalGift === gifts[5]
+                                    ? 'Apakah anda yakin hanya memberi ucapan saja kepada Rifqi dan Alysha?'
+                                    : 'Rifqi dan Alysha sangat senang dengan pemberian anda'
+                            }
+                        </h4>
+                        <p className="p3-r text-N600">
+                            {
+                                digitalGift === gifts[5]
+                                    ? 'Hadiah dengan berapapun nominalnya akan sangat berharga bagi pengantin'
+                                    : 'Terimakasih telah memberikan hadiah terbaik anda'
+                            }
+                        </p>
+                    </div>
+
+                    <form className='flex gap-1' method="dialog">
+                        {/* if there is a button, it will close the modal */}
+                        <button className="w-full bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize">
+                            <i className="ri-gift-line ri-xl"></i>
+                            {
+                                digitalGift === gifts[5]
+                                    ? 'Beri Hadiah'
+                                    : 'Ganti Hadiah'
+                            }
+                        </button>
+                        <button id='digitalGiftButton' className="w-full border border-secondary flex gap-2 text-secondary rounded-sm h-12 justify-center items-center capitalize">
+                            {
+                                digitalGift === gifts[5]
+                                    ? <><i className='ri-check-line ri-xl' />Yakin</>
+                                    : <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
+                            }
+                        </button>
                     </form>
-                    <button id='digitalGiftButton' style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} className='pt-3 pb-2.5 px-6 text-white text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>{selected.btn}</button>
                 </div>
-            </ div>
+            </dialog>
+
+            {/* UCAPAN SELAMAT */}
+            < div id="ucapanSelamatContainer" className='absolute w-full overflow-y-auto px-4 z-10 hidden'
+                style={{
+                    maxWidth: '500px',
+                    maxHeight: '100%',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '72px',
+                    bottom: '88px',
+                    left: '50%',
+                    transform: 'translateX(-50%)'
+                }}>
+
+                <div className="text-black bg-White rounded-md overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
+                    <div className='grid justify-end'>
+                        <button id='ucapanSelamatCloseButton'>
+                            <i className="ri-close-line ri-xl"></i>
+                        </button>
+                    </div>
+                    <div className='text-center grid w-full justify-items-center'>
+                        <h3 className='text-N800 capitalize'>berikan ucapan selamat</h3>
+                        <p className='p3-r w-full max-w-[285px]'>Anda boleh memberikan ucapan melalui video ataupun foto</p>
+                    </div>
+
+                    <div className='grid w-full'>
+                        <Tab.Group>
+                            <Tab.List className='h-12 rounded-t-md border border-secondary flex'>
+
+                                <Tab className={({ selected }) =>
+                                    classNames('flex justify-center items-center gap-2 w-full px-4 rounded-tr-md',
+                                        selected
+                                            ? 'bg-secondary text-white'
+                                            : 'text-secondary bg-transparent'
+                                    )
+                                }>
+                                    <i className="ri-image-line ri-xl"></i>
+                                    <p className='l2-r font-deAetna'>Foto</p>
+                                </Tab>
+
+                                <Tab className={({ selected }) =>
+                                    classNames('flex justify-center items-center gap-2 w-full px-4 rounded-tl-md',
+                                        selected
+                                            ? 'bg-secondary text-white'
+                                            : 'text-secondary bg-transparent'
+                                    )
+                                }>
+                                    <i className="ri-vidicon-line ri-xl"></i>
+                                    <p className='l2-r font-deAetna'>Video</p>
+                                </Tab>
+
+
+
+                            </Tab.List>
+
+                            <Tab.Panels className='px-3 pb-3 pt-6 border border-secondary rounded-b-md'>
+
+                                {/* PHOTO UPLOAD */}
+                                <Tab.Panel className='grid gap-3 w-full'>
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700'>Upload Foto</p>
+                                        <div className='flex'>
+                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tl-md border border-secondary text-secondary'>
+                                                <input
+                                                    accept="image/*"
+                                                    type="file"
+                                                    onChange={imageChange}
+                                                    className='hidden'
+                                                />
+                                                <i className="ri-image-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Galeri</p>
+                                            </label>
+                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tr-md border border-secondary text-secondary'>
+                                                <input
+                                                    accept="image/*"
+                                                    type="file"
+                                                    onChange={imageChange}
+                                                    className='hidden'
+                                                />
+                                                <i className="ri-camera-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Camera</p>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className='w-full'>
+                                        <Disclosure>
+                                            {({ open }) => (
+                                                <>
+                                                    <Disclosure.Button className="flex w-full justify-between items-center text-left">
+                                                        <p className='l3-r text-N700'>Preview</p>
+                                                        {/* {selectedImage && <p>{URL.createObjectURL(selectedImage)}</p>} */}
+                                                        <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
+                                                    </Disclosure.Button>
+                                                    <Disclosure.Panel className="mt-1">
+                                                        {selectedImage && (
+                                                            <div>
+                                                                <Image
+                                                                    src={URL.createObjectURL(selectedImage)}
+                                                                    alt="preview foto"
+                                                                    className="w-full h-auto rounded-md"
+                                                                    width={220}
+                                                                    height={220}
+                                                                    priority
+                                                                />
+                                                            </div>
+                                                        )}
+
+                                                    </Disclosure.Panel>
+                                                </>
+                                            )}
+                                        </Disclosure>
+                                    </div>
+
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700'>Ucapan Selamat</p>
+                                        <form className='grid gap-6'>
+                                            <textarea
+                                                className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder="..."
+                                                rows={3}
+                                                // value={ucapanSelamat}
+                                                // onChange={
+                                                //     (e) => setUcapanSelamat(e.target.value)
+                                                // }
+                                                value={ucapanSelamat}
+                                                onChange={
+                                                    (e) => setUcapanSelamat(e.target.value)
+                                                }
+                                            />
+                                        </form>
+                                    </div>
+
+                                    <button
+                                        onClick={() => {
+                                            const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
+                                            if (ucapanSelamatModal) {
+                                                ucapanSelamatModal.showModal();
+                                            }
+                                        }}
+                                        className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
+                                        <i className="ri-send-plane-line ri-xl"></i>
+                                        <p className='l2-r font-deAetna'>kirim ucapan</p>
+                                    </button>
+                                </Tab.Panel>
+
+
+                                {/* VIDEO UPLOAD */}
+                                <Tab.Panel className='grid gap-3 w-full'>
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700'>Upload Video</p>
+                                        <div className='flex'>
+                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tl-md border border-secondary text-secondary'>
+                                                <input
+                                                    accept="video/mp4,video/x-m4v,video/*"
+                                                    type="file"
+                                                    onChange={videoChange}
+                                                    className='hidden'
+                                                />
+                                                <i className="ri-image-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Galeri</p>
+                                            </label>
+                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tr-md border border-secondary text-secondary'>
+                                                <input
+                                                    accept="image/*"
+                                                    type="file"
+                                                    onChange={videoChange}
+                                                    className='hidden'
+                                                />
+
+                                                <i className="ri-camera-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Camera</p>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className='w-full'>
+                                        <Disclosure>
+                                            {({ open }) => (
+                                                <>
+                                                    <Disclosure.Button className="flex w-full justify-between items-center text-left">
+                                                        <p className='l3-r text-N700'>Preview</p>
+                                                        <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
+                                                    </Disclosure.Button>
+                                                    <Disclosure.Panel className="mt-1">
+                                                        {selectedVideo && (
+                                                            <div>
+                                                                <video width='320' height='240' controls>
+                                                                    <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
+                                                                </video>
+                                                            </div>
+                                                        )}
+
+                                                    </Disclosure.Panel>
+                                                </>
+                                            )}
+                                        </Disclosure>
+                                    </div>
+
+                                    <button
+                                        onClick={() => {
+                                            const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
+                                            if (ucapanSelamatModal) {
+                                                ucapanSelamatModal.showModal();
+                                            }
+                                        }}
+                                        className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
+                                        <i className="ri-send-plane-line ri-xl"></i>
+                                        kirim ucapan
+                                    </button>
+                                </Tab.Panel>
+
+
+
+                            </Tab.Panels>
+                        </Tab.Group>
+                    </div>
+
+                </div>
+            </ div >
+            {/* MODAL VALIDATATION */}
+            <dialog id="ucapanSelamatModal" className="modal" >
+                <div className="modal-box bg-White px-5 py-8 grid gap-6 rounded-lg w-11/12 max-w-5xl">
+                    <div className='grid gap-2 justify-items-center text-center'>
+                        <Image
+                            src={
+                                // ucapanSelamat.trim() === '' &&
+                                selectedImage === undefined &&
+                                    selectedVideo === undefined
+                                    ? '/assets/ballroom/emoticons/5.webp'
+                                    : '/assets/ballroom/emoticons/1.webp'
+                            }
+                            alt="emoticon"
+                            width={110}
+                            height={110}
+                        />
+                        <h4 className="text-N800">
+                            {
+                                // ucapanSelamat.trim() === '' &&
+                                selectedImage === undefined &&
+                                    selectedVideo === undefined
+                                    ? 'Apakah anda yakin tidak ingin memberikan ucapan selamat?'
+                                    : 'Terimakasih telah memberikan ucapan selamat kepada kami'
+                            }
+                        </h4>
+                        <p className="p3-r text-N600">
+                            {
+                                ucapanSelamat.trim() === '' &&
+                                    selectedImage === undefined &&
+                                    selectedVideo === undefined
+                                    ? 'Ucapan anda akan sangat berharga bagi momen spesial kami'
+                                    : 'Semoga segala ucapan dan doa yang anda berikan akan kembali menjadi kebaikan untuk anda'
+                            }
+                        </p>
+                    </div>
+
+                    <form className='flex gap-1' method="dialog">
+                        {/* if there is a button, it will close the modal */}
+                        <button className="w-full bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize">
+                            <i className='ri-message-3-line ri-xl' />
+                            {
+                                ucapanSelamat.trim() === '' &&
+                                    selectedImage === undefined &&
+                                    selectedVideo === undefined
+                                    ? 'Beri Ucapan'
+                                    : 'Ganti Ucapan'
+                            }
+                        </button>
+                        <button id='buttonPelaminan' className="w-full border border-secondary flex gap-2 text-secondary rounded-sm h-12 justify-center items-center capitalize">
+                            {
+                                ucapanSelamat.trim() === '' &&
+                                    selectedImage === undefined &&
+                                    selectedVideo === undefined
+                                    ? <><i className='ri-check-line ri-xl' />Yakin</>
+                                    : <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
+                            }
+                        </button>
+                    </form>
+                </div>
+            </dialog>
+
+
+
+
+            {/* UNUSED COMPONENT */}
+
+            {/* BANNER OPEN BETA */}
+            {/* <div id="bannerOpenBeta" className='pointer-events-none absolute w-full h-fit z-50'
+                style={{
+                    maxWidth: '100%',
+                    // maxHeight: 'fit',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '0',
+                    left: '50%',
+                    transform: 'translate(-50%, 0)'
+                }}>
+
+                <div className="relative bg-white pointer-events-auto overflow-auto w-full h-fit grid gap-2 text-center justify-items-center content-center p-1 shadow-md">
+                    <h5 className='font-deAetna text-base text-black'>Anda berada pada Virtuwed Open Beta</h5>
+
+                    <a href='https://forms.gle/VPpq2k7k8vhGntF16' target='_blank' className='py-1.5 px-3 bg-white text-black border-black border-solid border text-xs text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary w-fit'>Kirim Feedback</a>
+                </div>
+            </div> */}
 
             {/* MODAL UCAPAN ENDING */}
             <div id="ucapanEnding" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
@@ -896,7 +1822,8 @@ const Ballroom = () => {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
-                }}>
+                }
+                }>
 
                 <div className="bg-gray-100 rounded-lg overflow-auto w-full grid text-center items-start gap-6 p-6 ">
 
@@ -907,49 +1834,16 @@ const Ballroom = () => {
                         </div>
                         <p className='font-light font-amiamie'>Kami sangat senang dan berterima kasih atas kehadiran Anda di acara istimewa ini. Keikutsertaan Anda membuat momen ini semakin berarti dan berkesan bagi pasangan pengantin. Semoga Anda menikmati perayaan ini dengan penuh sukacita dan kebahagiaan.</p>
 
-                        <button id='ucapanEndingButton' style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }} className='pt-3 pb-2.5 px-6 text-white text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>Tutup</button>
+                        <button
+                            id='ucapanEndingButton'
+                            // style={{ background: 'linear-gradient(313deg, #FFF -70%, #D1B0B0 100%)' }}
+                            className='bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end pt-3 pb-2.5 px-6 text-white text-center font-amiamie inline-block rounded-lg hover:btn-shadow-primary transition-all ease-in-out duration-300'>Tutup</button>
                     </div>
-                </div>
-            </div>
-
-            {/* PLACEHOLDER LIVESTREAM */}
-            <div id="livestreamPlaceholder" className='hidden absolute w-full h-full rounded-lg overflow-y-auto z-10'
-                style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    minWidth: '200px',
-                    minHeight: '250px',
-                    WebkitOverflowScrolling: 'touch',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)'
-                }}>
-
-                <div className="relative bg-gray-100 overflow-auto w-full h-full grid text-center items-center gap-6 p-6 ">
-
-                    <div className='grid gap-6 w-full'>
-                        <h3 className='font-deAetna text-3xl lg:text-4xl'>Live Streaming</h3>
-
-                        <iframe
-                            className="h-48 md:h-96"
-                            width="100%"
-                            height="auto"
-                            src="https://www.youtube.com/embed/zq40UhEGuAI"
-                            title="Live Stream"
-                            allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen={true}
-                        ></iframe>
-                    </div>
-
-                    <div className='absolute bottom-0 mb-6 px-4 md:px-0 min-w-full grid justify-items-center'>
-                        <button id='livestreamCloseButton' className='w-full md:max-w-screen-sm pt-3 pb-2.5 px-6 bg-white text-primary font-amiamie border-4 border-primary text-center rounded-lg hover:btn-shadow-secondary transition-all ease-in-out duration-300'>Keluar Live Streaming</button>
-                    </div>
-
                 </div>
             </div>
 
             {/* PLACEHOLDER VIDEOCALL */}
-            <div id="videocallPlaceholder" className='hidden absolute w-full h-screen overflow-y-auto z-50'
+            < div id="videocallPlaceholder" className='hidden absolute w-full h-screen overflow-y-auto z-50'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -959,7 +1853,8 @@ const Ballroom = () => {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
-                }}>
+                }
+                }>
 
                 <div className="relative flex flex-col w-full h-full overflow-hidden">
 
@@ -1040,7 +1935,3 @@ const Ballroom = () => {
 }
 
 export default Ballroom
-
-
-// TODO:
-// animasi masuk 360

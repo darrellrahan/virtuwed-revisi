@@ -1,8 +1,7 @@
 import localFont from 'next/font/local'
-import Footer from '@/components/Footer'
 import './globals.css'
-import Navbar from '@/components/Navbar'
 import Head from 'next/head'
+import { ReduxProvider } from './redux/provider'
 
 export const metadata = {
   title: 'Virtuwed',
@@ -62,7 +61,9 @@ export default function RootLayout({
         <link rel="preload" href="/video.mp4" as="video" />
       </Head>
       <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
-        {children}
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
       </body >
     </html >
   )
