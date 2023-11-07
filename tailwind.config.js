@@ -21,9 +21,9 @@ module.exports = {
 
         // PRIMARY
         // primary: "linear-gradient(107deg, #FFD9D9 -7.85%, #FF9797 88.84%)",
-        secondary: "#FA9F9F",
-        tertiary: "#FFD9D9",
-        White: "#FFF6F9",
+        secondary: "#FF9797",
+        tertiary: "#D4AF37",
+        White: "#FFFFF0",
 
         primaryGradient: {
           start: '#FFD9D9',   // Warna pada langkah pertama
@@ -102,8 +102,8 @@ module.exports = {
       {
         mytheme: {
           "primary": "linear-gradient(107deg, #FFD9D9 -7.85%, #FF9797 88.84%)",
-          "secondary": "#FA9F9F",
-          "accent": "#FFD9D9",
+          "secondary": "#FF9797",
+          "accent": "#D4AF37",
           "neutral": "#3d4451",
           "base-100": "#ffffff",
         },

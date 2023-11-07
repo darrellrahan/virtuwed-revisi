@@ -106,7 +106,17 @@ body {
 
 @layer components{
   .btn {
-    @apply rounded-sm font-deAetna normal-case text-base;
+    @apply rounded-none font-deAetna normal-case text-base text-White flex-1;
+  }
+  /* .btn-secondary {
+    @apply bg-secondary text-White;
+  } */
+  .btn-accent {
+    @apply bg-transparent text-tertiary border-tertiary border;
+  }
+  
+  .btn-accent:hover {
+    @apply text-White;
   }
 }
 

@@ -32,6 +32,7 @@ import 'aos/dist/aos.css';
 import { RootState } from '@/app/redux/reducers';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import YouTubePlayer from './YoutubePlayer';
 
 const gifts = [
     {
@@ -65,15 +66,15 @@ const gifts = [
     {
         emoticon: '/assets/ballroom/emoticons/4.webp',
         icon: 'ri-cash-line',
-        // img: '/assets/ballroom/gift/televisi.png',
+        img: '/assets/ballroom/gift/televisi.png',
         name: 'Jumlah Lainnya',
         price: '0',
     },
     {
         emoticon: '/assets/ballroom/emoticons/5.webp',
         icon: 'ri-message-3-line',
-        // img: '/assets/ballroom/gift/televisi.png',
-        name: 'Ucapan Saja',
+        img: '/assets/ballroom/gift/televisi.png',
+        name: 'Tidak Memberi Apapun',
         price: '0',
     },
 ]
@@ -236,11 +237,13 @@ const Ballroom = () => {
             const ucapanSelamatContainer = document.getElementById('ucapanSelamatContainer')
             const videocallPlaceholder = document.getElementById('videocallPlaceholder')
 
+            const livestreamContainer = document.getElementById('livestreamContainer');
             const konfirmasiContainer = document.getElementById('konfirmasiContainer');
             const digitalGiftContainer = document.getElementById('digitalGiftContainer');
             const ucapanEnding = document.getElementById('ucapanEnding');
 
             const digitalGiftButton = document.getElementById('digitalGiftButton');
+            const livestreamButton = document.getElementById('livestreamButton');
             const konfirmasiButton = document.getElementById('konfirmasiButton');
             const ucapanEndingButton = document.getElementById('ucapanEndingButton');
             const buttonPelaminan = document.getElementById('buttonPelaminan');
@@ -511,6 +514,11 @@ const Ballroom = () => {
                     ucapanEnding?.classList.toggle('hidden');
                 }, 1500);
                 // type(endingText.ending, functi   on () { viewer.OrbitControls.enabled = true; });
+            });
+
+            livestreamButton?.addEventListener('click', function () {
+
+                livestreamContainer?.classList.toggle('hidden');
             });
 
             ucapanEndingButton?.addEventListener('click', function () {
@@ -1191,7 +1199,7 @@ const Ballroom = () => {
             </div >
 
             {/* BUTTON LINKING */}
-            <div className='absolute bottom-3 px-2 min-w-full grid items-end justify-items-center z-10'>
+            <div className='absolute bottom-3 px-2 min-w-full grid items-end justify-items-center z-20'>
                 <div className='w-full max-w-[500px] h-fit bg-White flex items-center rounded-lg shadow-md px-1 py-3 font-amiamie'>
                     {/* BACK BUTTON */}
                     <button id='buttonSpawnPoint' disabled={isBackButtonDisabled} className='w-full text-center text-N800 py-2 flex justify-center items-center gap-1 disabled:text-N400'>
@@ -1208,9 +1216,14 @@ const Ballroom = () => {
                     </button>
 
                     {/* EXPLORE BUTTON */}
-                    <button id='exploreBtn' className='hidden bg-secondary text-white h-full w-full text-center py-2 gap-2 justify-center items-center rounded'>
+                    {/* <button id='exploreBtn' className='hidden bg-secondary text-white h-full w-full text-center py-2 gap-2 justify-center items-center rounded'>
                         <i className="ri-compass-3-line ri-xl"></i>
                         <p className='l4-r'>Jelajahi Venue</p>
+                    </button> */}
+
+                    <button id='livestreamButton' className=' bg-secondary text-white h-full w-full text-center py-2 gap-2 justify-center items-center rounded'>
+                        <i className="ri-live-line ri-xl"></i>
+                        <p className='l4-r'>Livestream</p>
                     </button>
 
                     {/* CONTINUE BUTTON */}
@@ -1228,6 +1241,22 @@ const Ballroom = () => {
                     </button>
                     {/* <button id='buttonKoridor' className='hidden w-full text-primary font-amiamie text-center'>Menuju Pelaminan</button> */}
                 </div>
+            </div>
+
+            <div id='livestreamContainer'
+                style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    minWidth: '100%',
+                    minHeight: '100%',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '0',
+                    bottom: '0',
+                    left: '50%',
+                    transform: 'translateX(-50%)'
+                }}
+                className='absolute w-full h-full z-10 hidden'>
+                <YouTubePlayer videoId="HqYhkpGgZXc" />
             </div>
 
             {/* KONFIRMASI */}
@@ -1260,66 +1289,67 @@ const Ballroom = () => {
                         <p className='p3-r w-full max-w-[285px]'>Tolong konfirmasi ucapan selamat dan hadiah yang akan anda berikan</p>
                     </div>
 
-                    <div className='grid border border-secondary rounded-sm p-3 gap-6'>
-                        <div className='w-full'>
-                            <Disclosure>
-                                {({ open }) => (
-                                    <>
-                                        <Disclosure.Button className="flex w-full justify-between items-center text-left">
-                                            <p className='l3-r text-N700'>Foto/Video</p>
-                                            <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
-                                        </Disclosure.Button>
-                                        <Disclosure.Panel className="mt-1">
-                                            {selectedImage && (
-                                                <Image
-                                                    src={URL.createObjectURL(selectedImage)}
-                                                    alt="preview foto"
-                                                    className="w-full h-auto rounded-md"
-                                                    width={220}
-                                                    height={220}
-                                                    priority
-                                                />
-                                            ) || selectedVideo && (
-                                                <div>
-                                                    <video width='320' height='240' controls>
-                                                        <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
-                                                    </video>
-                                                </div>
-                                            )}
-                                        </Disclosure.Panel>
-                                    </>
-                                )}
-                            </Disclosure>
+                    <div className='grid border border-tertiary rounded-lg p-3 gap-5'>
+
+                        {/* GIFT */}
+                        <div className='grid gap-1'>
+                            <p className='l3-r text-N700 font-deAetna'><span className='font-bold font-amiamie'>{guest.nama} </span> memberi {wedding.wedding_name} sebuah...</p>
+                            {
+                                digitalGift != gifts[5]
+                                    ?
+                                    <div className='flex gap-1'>
+                                        <Image
+                                            src={digitalGift.img}
+                                            alt="decoration"
+                                            width={72}
+                                            height={72}
+                                            className='h-20 w-20 rounded'
+                                        />
+                                        <div className="grid gap-0.5 p-1.5 w-full content-center">
+                                            <p className='l2-r font-deAetna text-N700 capitalize'>{digitalGift.name}</p>
+                                            <p className='p3-r text-N600 capitalize'>Rp. {digitalGift.price}</p>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className='p-3 gap-1 text-tertiary flex content-center items-center min-h-12 justify-center'>
+                                        <i className="ri-alert-line ri-lg"></i>
+                                        <p className='l3-r font-deAetna'>{gifts[5].name}</p>
+                                    </div>
+                            }
+
                         </div>
 
+                        {/* UCAPAN */}
                         <div className='grid gap-1'>
-                            <p className='p2-r text-N700'>Caption</p>
-                            <form>
-                                <textarea
-                                    className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder={`Selamat menikah, semoga sabar menjalani hidup dengan ${wedding.undangan_digital.pengantin_pria.nama_lengkap}.`}
-                                    rows={2}
-                                // value={'alamat'}
-                                // onChange={
-                                //     (e) => console.log(e)
-                                //     // (e) => setMessage(e.target.value)
-                                // }
+                            <p className='L3-r font-deAetna text-N700'>dan Ucapan Selamat...</p>
+                            <p className='py-3 p3-r text-N400'>Selamat menikah, semoga sabar menjalani hidup dengan Agy.</p>
+                        </div>
+
+                        {/* FILE UPLOAD */}
+                        {selectedImage && (
+                            <div className='grid gap-1 w-full'>
+                                <p className='l3-r text-N700'>Beserta Foto/Video Ucapan...</p>
+                                <Image
+                                    src={URL.createObjectURL(selectedImage)}
+                                    alt="preview foto"
+                                    className="w-full h-auto rounded-md"
+                                    width={220}
+                                    height={220}
+                                    priority
                                 />
-                            </form>
-                        </div>
-
-                        <div className='grid gap-1'>
-                            <p className='p2-r text-N700'>{guest.nama} memberi {wedding.wedding_name} sebuah...</p>
-                            <div className='relative flex rounded-full border border-N500 text-N500 p-3 focus:outline-none'>
-                                <div className="flex gap-2 w-full items-center">
-                                    <div className='w-fit'>
-                                        <i className={`${digitalGift.icon} ri-xl`}></i>
-                                    </div>
-                                    <div className='grid justify-items-center w-full '>
-                                        <p className='p2-r capitalize'>{digitalGift.name}</p>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        ) || selectedVideo && (
+                            <div className='grid gap-1 w-full'>
+                                <p className='l3-r text-N700'>Beserta Foto/Video Ucapan...</p>
+                                <video width='320' height='240' controls>
+                                    <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
+                                </video>
+                            </div>
+                        )}
+
+
+
+
 
                         <div className='flex w-full items-center gap-1 text-red-500'>
                             <i className="ri-error-warning-line self-start"></i>
@@ -1327,23 +1357,34 @@ const Ballroom = () => {
                         </div>
 
                         <div className='grid gap-2'>
-                            <div className='z-20 flex w-full'>
-                                <button id='buttonChangeUcapanSelamat' className='w-full border border-secondary flex gap-2 text-secondary rounded-l-sm h-12 justify-center items-center capitalize'>
+                            <div className='z-20 flex gap-1 w-full content-stretch'>
+                                <button id='buttonChangeUcapanSelamat' className='rounded btn btn-accent h-fit py-2'>
                                     <i className="ri-message-3-line ri-xl"></i>
-                                    <p className='l2-r font-deAetna'>ganti ucapan</p>
+                                    <p className='l2-r font-deAetna'>Ganti Ucapan</p>
                                 </button>
-                                <button id='buttonChangeDigitalGift' className='w-full border border-secondary flex gap-2 text-secondary rounded-r-sm h-12 justify-center items-center capitalize'>
+                                <button id='buttonChangeDigitalGift' className='rounded btn btn-accent h-fit py-2'>
                                     <i className="ri-gift-line ri-xl"></i>
-                                    <p className='l2-r font-deAetna'>ganti hadiah</p>
+                                    <p className='l2-r font-deAetna'>Ganti Hadiah</p>
                                 </button>
                             </div>
 
-                            <button onClick={handleKonfirmasi} id='konfirmasiButton' className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
+                            <button onClick={handleKonfirmasi} id='konfirmasiButton' className='btn btn-secondary rounded'>
                                 <i className="ri-check-line ri-xl"></i>
                                 <p className='l2-r font-deAetna'>konfirmasi</p>
                             </button>
                         </div>
                     </div>
+
+                    {/* DECORATION */}
+                    <Image
+                        src={
+                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                        }
+                        alt="decoration"
+                        width={110}
+                        height={110}
+                        className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                    />
                 </div>
             </div >
 
@@ -1403,11 +1444,17 @@ const Ballroom = () => {
                                 ))}
                             </div >
 
-                            <RadioGroup.Option
+                            {/* <RadioGroup.Option
                                 key={gifts[4].name}
                                 value={gifts[4]}
                                 className={({ active, checked }) => `${checked ? 'border-secondary text-secondary' : 'text-N500'} flex w-full border border-N500 pl-3 rounded-full items-center relative`}
                             >
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Remember me</span>
+                                        <input type="checkbox" className="checkbox checkbox-primary" />
+                                    </label>
+                                </div>
                                 {({ active, checked }) => (
                                     <>
                                         <i className="ri-cash-line ri-xl absolute"></i>
@@ -1426,17 +1473,22 @@ const Ballroom = () => {
                                         />
                                     </>
                                 )}
-                            </RadioGroup.Option>
+                            </RadioGroup.Option> */}
 
-                            <div className='grid justify-self-center h-1 w-11 rounded-full bg-secondary'></div>
+
+                            <div className='flex gap-2.5 justify-center items-center'>
+                                <div className='h-1 w-11 rounded-full bg-secondary'></div>
+                                <p className='l3-r font-deAetna'>Atau</p>
+                                <div className='h-1 w-11 rounded-full bg-secondary'></div>
+                            </div>
 
                             <RadioGroup.Option
                                 key={gifts[5].name}
                                 value={gifts[5]}
-                                className={({ active, checked }) => `${checked ? 'border-secondary text-secondary' : 'text-N500'} flex w-full border border-N500 px-3 rounded-full items-center py-3 relative`}
+                                className={({ active, checked }) => `${checked ? 'bg-tertiary text-White' : 'text-tertiary'} flex w-full border border-tertiary px-3 rounded items-center py-3 relative cursor-pointer`}
                             >
                                 <i className="ri-message-3-line ri-xl absolute"></i>
-                                <p className='p1-r capitalize w-full text-center'>{gifts[5].name}</p>
+                                <p className='capitalize w-full text-center font-deAetna l3-r'>{gifts[5].name}</p>
                             </RadioGroup.Option>
 
                             <div className='flex w-full items-center gap-1 text-red-500'>
@@ -1445,7 +1497,7 @@ const Ballroom = () => {
                             </div>
                         </RadioGroup >
                         <button
-                            className='mt-3 z-10 bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'
+                            className='mt-3 z-10 btn btn-secondary rounded'
                             onClick={() => {
                                 const digitalGiftModal = document.getElementById('digitalGiftModal') as HTMLDialogElement | null;
                                 if (digitalGiftModal) {
@@ -1457,11 +1509,33 @@ const Ballroom = () => {
                         </button>
                     </div >
 
+                    {/* DECORATION */}
+                    <Image
+                        src={
+                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                        }
+                        alt="decoration"
+                        width={110}
+                        height={110}
+                        className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                    />
+
                 </div >
             </ div >
             {/* MODAL VALIDATATION */}
             <dialog id="digitalGiftModal" className="modal" >
-                <div className="modal-box bg-White px-5 py-8 grid gap-6 rounded-lg w-11/12 max-w-5xl">
+                <div className="modal-box bg-White px-5 py-8 grid justify-items-center gap-6 rounded-lg w-11/12 max-w-5xl">
+
+                    <Image
+                        src={
+                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                        }
+                        alt="emoticon"
+                        width={110}
+                        height={110}
+                        className='opacity-50 h-auto w-52'
+                    />
+
                     <div className='grid gap-2 justify-items-center text-center'>
                         <Image
                             src={digitalGift.emoticon}
@@ -1485,9 +1559,9 @@ const Ballroom = () => {
                         </p>
                     </div>
 
-                    <form className='flex gap-1' method="dialog">
+                    <form className='flex gap-1 w-full' method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="w-full bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize">
+                        <button className="btn btn-secondary rounded-l">
                             <i className="ri-gift-line ri-xl"></i>
                             {
                                 digitalGift === gifts[5]
@@ -1495,7 +1569,7 @@ const Ballroom = () => {
                                     : 'Ganti Hadiah'
                             }
                         </button>
-                        <button id='digitalGiftButton' className="w-full border border-secondary flex gap-2 text-secondary rounded-sm h-12 justify-center items-center capitalize">
+                        <button id='digitalGiftButton' className="btn btn-accent rounded-r">
                             {
                                 digitalGift === gifts[5]
                                     ? <><i className='ri-check-line ri-xl' />Yakin</>
@@ -1505,6 +1579,7 @@ const Ballroom = () => {
                     </form>
                 </div>
             </dialog>
+
 
             {/* UCAPAN SELAMAT */}
             < div id="ucapanSelamatContainer" className='absolute w-full overflow-y-auto px-4 z-10 hidden'
@@ -1528,7 +1603,7 @@ const Ballroom = () => {
                     </div>
                     <div className='text-center grid w-full justify-items-center'>
                         <h3 className='text-N800 capitalize'>berikan ucapan selamat</h3>
-                        <p className='p3-r w-full max-w-[285px]'>Anda boleh memberikan ucapan melalui video ataupun foto</p>
+                        <p className='text-N700 p3-r w-full max-w-[285px]'>Anda boleh memberikan ucapan melalui video ataupun foto</p>
                     </div>
 
                     <div className='grid w-full'>
@@ -1727,7 +1802,18 @@ const Ballroom = () => {
             </ div >
             {/* MODAL VALIDATATION */}
             <dialog id="ucapanSelamatModal" className="modal" >
-                <div className="modal-box bg-White px-5 py-8 grid gap-6 rounded-lg w-11/12 max-w-5xl">
+                <div className="modal-box bg-White px-5 py-8 grid justify-items-center gap-6 rounded-lg w-11/12 max-w-5xl">
+
+                    <Image
+                        src={
+                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                        }
+                        alt="emoticon"
+                        width={110}
+                        height={110}
+                        className='opacity-50 h-auto w-52'
+                    />
+
                     <div className='grid gap-2 justify-items-center text-center'>
                         <Image
                             src={
@@ -1761,9 +1847,9 @@ const Ballroom = () => {
                         </p>
                     </div>
 
-                    <form className='flex gap-1' method="dialog">
+                    <form className='flex gap-1 w-full' method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="w-full bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize">
+                        <button className="btn btn-secondary rounded-l">
                             <i className='ri-message-3-line ri-xl' />
                             {
                                 ucapanSelamat.trim() === '' &&
@@ -1773,7 +1859,7 @@ const Ballroom = () => {
                                     : 'Ganti Ucapan'
                             }
                         </button>
-                        <button id='buttonPelaminan' className="w-full border border-secondary flex gap-2 text-secondary rounded-sm h-12 justify-center items-center capitalize">
+                        <button id='buttonPelaminan' className="btn btn-accent rounded-r">
                             {
                                 ucapanSelamat.trim() === '' &&
                                     selectedImage === undefined &&

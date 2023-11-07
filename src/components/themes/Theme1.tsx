@@ -64,6 +64,8 @@ const Theme1 = () => {
     const guest = useSelector((state: RootState) => state.value.guest);
     const theme = useSelector((state: RootState) => state.value.theme);
 
+    const [dayPart, monthPart, yearPart] = wedding.reception_begin_at.date.split('-');
+
 
     // COMMENT
     // const [name, setName] = useState("");
@@ -365,7 +367,7 @@ const Theme1 = () => {
                 <section className='block lg:grid lg:col-span-4 lg:col-start-9 relative'>
 
                     {/* NAVIGATION */}
-                    <section className='fixed bottom-0 left-0 h-fit bg-white text-tertiaryInv w-full py-3 grid justify-center z-30 border-t border-tertiaryInv'>
+                    <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-tertiaryInv w-full py-3 grid justify-center z-30 border-t border-tertiaryInv'>
                         <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-building-4-line ri-xl"></i>
                             <p className='p3-r capitalize'>resepsi virtual</p>
@@ -540,7 +542,7 @@ const Theme1 = () => {
 
                             {/* COUNTDOWN */}
                             <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100" className='grid justify-center py-10'>
-                                {isClient && <Countdown className={`${playFair.className} text-5xl text-primaryInv`} date={'2023-10-31T21:00:00'} />}
+                                {isClient && <Countdown className={`${playFair.className} text-5xl text-primaryInv`} date={`${yearPart}-${monthPart}-${dayPart}T${wedding.reception_begin_at.time}:00`} />}
                             </div>
 
                             {/* <div className='grid justify-end py-5 mt-1'>
@@ -594,7 +596,8 @@ const Theme1 = () => {
                                             <div data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="250" style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
 
                                             <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-primaryInv text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
-                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}>{wedding.reception_begin_at.month} <span className='text-5xl'>8<sup>th</sup></span>, 2023</h2>
+                                            {/* <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}<sup>th</sup></span> {wedding.reception_begin_at.month}, {yearPart}</h2> */}
+                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
                                         </div>
 
                                         <div className='p-5 text-center'>
@@ -635,8 +638,8 @@ const Theme1 = () => {
                                             {/* DECORATION */}
                                             <div data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="250" style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
 
-                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-primaryInv text-xl tracking-[8px]`}>Saturday,</h3>
-                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}>July <span className='text-5xl'>8<sup>th</sup></span>, 2023</h2>
+                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-primaryInv text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
+                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
                                         </div>
 
                                         <div className='p-5 text-center'>

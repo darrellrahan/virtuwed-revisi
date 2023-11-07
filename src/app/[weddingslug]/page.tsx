@@ -94,10 +94,20 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
                                 priority
                             />
                             <div className='grid gap-2 text-center max-w-sm mb-4'>
-                                <h3 className='text-N700 font-bold'>Resepsi Privat</h3>
-                                <p className='p3-r text-N700'>Mohon maaf, hanya tamu yang diundang yang dapat menghadiri resepsi pernikahan ini. Jika anda merasa diundang, tolong cek kembali pesan pada whatsapp anda yang dikirim oleh akun bernama Virtuwed</p>
+                                <h3 className='text-N700 font-bold capitalize'>Link Tidak Valid</h3>
+                                <p className='p3-r text-N700'>Mohon periksa kembali link undangan anda. Cek kembali pesan pada WhatsApp anda yang dikirim oleh akun bernama “Virtuwed”</p>
                             </div>
-                            <ButtonDaisy link='/' title='Virtuwed.id' />
+                            <Link href={'/'} className="btn btn-block btn-secondary rounded-sm md:btn-wide">
+                                <Image
+                                    src={'/assets/logopack/Virtuwed_Main_Logo_White.png'}
+                                    alt="Virtuwed Logo"
+                                    className="object-cover object-center w-6 h-auto"
+                                    width={500}
+                                    height={500}
+                                    priority
+                                />
+                                Virtuwed.id
+                            </Link>
                         </section>
                     </main>
                 </Suspense>
@@ -119,7 +129,17 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
                                 <h3 className='text-N700 font-bold capitalize'>pernikahan tidak ditemukan</h3>
                                 <p className='p3-r text-N700'>Mohon maaf, pernikahan yang anda cari tidak ditemukan</p>
                             </div>
-                            <ButtonDaisy link='/' title='Virtuwed.id' />
+                            <Link href={'/'} className="btn btn-block btn-secondary rounded-sm md:btn-wide">
+                                <Image
+                                    src={'/assets/logopack/Virtuwed_Main_Logo_White.png'}
+                                    alt="Virtuwed Logo"
+                                    className="object-cover object-center w-6 h-auto"
+                                    width={500}
+                                    height={500}
+                                    priority
+                                />
+                                Virtuwed.id
+                            </Link>
                         </section>
                     </main>
                 </Suspense>
