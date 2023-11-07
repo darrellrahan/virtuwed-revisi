@@ -60,7 +60,7 @@ const Page = () => {
             <section className='grid gap-6 min-h-[666px] h-[100dvh] content-center justify-items-center px-6'>
                 <div className='grid p-2 text-center'>
                     <p className='p3-r text-N700'>Sebelum menghadiri acara pernikahan</p>
-                    <h2 className='text-N700 mb-2 md:mb-3'>{wedding_slug.replace('-', ' & ')}</h2>
+                    <h2 className='text-N700 mb-2 md:mb-3 capitalize'>{wedding_slug.replace('-', ' & ')}</h2>
                     <p className='p3-r text-N700 '>Mohon untuk mengisi data dibawah ini</p>
                 </div>
 
@@ -115,7 +115,7 @@ const Page = () => {
                         <i className="ri-error-warning-line self-start"></i>
                         <p className='p3-r'>Link akan dikirim ke no WA yang didaftarkan</p>
                     </div>
-                    <button type="submit" className="btn btn-block btn-secondary text-White">
+                    <button type="submit" className="btn btn-block btn-secondary">
                         {loading
                             ? <span className="loading loading-spinner"></span>
                             : <i className="ri-whatsapp-line ri-lg text-White"></i>
