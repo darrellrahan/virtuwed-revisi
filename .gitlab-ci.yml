@@ -7,7 +7,7 @@ deploy_production:
     - echo "Building the application... to production"
     - cd /var/www/virtuwed-landing-page
     - git pull origin master
-    - cat $env_production > .env
+    # - cat .env > $env_production
     - yarn install 
     - yarn build 
     - pm2 stop landing-page
