@@ -9,6 +9,12 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid';
 import { Icon } from '@iconify/react';
 import 'remixicon/fonts/remixicon.css'
 import { useSelector } from 'react-redux';
+import { FileUploader } from "react-drag-drop-files";
+
+
+import "../../node_modules/video-react/dist/video-react.css";
+// import '~video-react/dist/video-react.css'; // import css
+import { Player } from "video-react";
 
 
 //TODO:
@@ -135,6 +141,12 @@ const Ballroom = () => {
         if (e.target.files && e.target.files.length > 0) {
             setSelectedVideo(e.target.files[0]);
         }
+    };
+
+    const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
+    const [file, setFile] = useState<File>()
+    const handleChange = (file: any) => {
+        setFile(file);
     };
     // END UCAPAN SELAMAT
 
@@ -1243,6 +1255,7 @@ const Ballroom = () => {
                 </div>
             </div>
 
+            {/* LIVESTREAM */}
             <div id='livestreamContainer'
                 style={{
                     maxWidth: '100%',
@@ -1278,7 +1291,7 @@ const Ballroom = () => {
                 data-aos-duration="1200"
             >
 
-                <div className="text-black bg-White rounded-md overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
+                <div className="text-black bg-White rounded-lg overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
                     <div className='grid justify-end'>
                         <button id='konfirmasiCloseButton'>
                             <i className="ri-close-line ri-xl"></i>
@@ -1322,35 +1335,37 @@ const Ballroom = () => {
                         {/* UCAPAN */}
                         <div className='grid gap-1'>
                             <p className='L3-r font-deAetna text-N700'>dan Ucapan Selamat...</p>
-                            <p className='py-3 p3-r text-N400'>Selamat menikah, semoga sabar menjalani hidup dengan Agy.</p>
+                            <p className='py-3 p3-r text-N400'>{ucapanSelamat}</p>
                         </div>
 
-                        {/* FILE UPLOAD */}
-                        {selectedImage && (
-                            <div className='grid gap-1 w-full'>
-                                <p className='l3-r text-N700'>Beserta Foto/Video Ucapan...</p>
-                                <Image
-                                    src={URL.createObjectURL(selectedImage)}
-                                    alt="preview foto"
-                                    className="w-full h-auto rounded-md"
-                                    width={220}
-                                    height={220}
-                                    priority
-                                />
-                            </div>
-                        ) || selectedVideo && (
-                            <div className='grid gap-1 w-full'>
-                                <p className='l3-r text-N700'>Beserta Foto/Video Ucapan...</p>
-                                <video width='320' height='240' controls>
-                                    <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
-                                </video>
-                            </div>
-                        )}
-
-
-
-
-
+                        <div className='grid gap-1'>
+                            {/* FILE UPLOAD */}
+                            {file && (
+                                file.type.startsWith('video/') ? (
+                                    <>
+                                        <p className='L3-r font-deAetna text-N700'>beserta Foto/Video ucapan...</p>
+                                        <Player
+                                            playsInline
+                                            src={URL.createObjectURL(file)}
+                                            fluid
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className='L3-r font-deAetna text-N700'>beserta Foto/Video ucapan...</p>
+                                        <Image
+                                            src={URL.createObjectURL(file)}
+                                            alt="Preview photo"
+                                            className="w-full h-auto rounded-md"
+                                            width={220}
+                                            height={220}
+                                            priority
+                                        />
+                                    </>
+                                )
+                            )
+                            }
+                        </div>
                         <div className='flex w-full items-center gap-1 text-red-500'>
                             <i className="ri-error-warning-line self-start"></i>
                             <p className='p3-r'>Data anda akan dilihat oleh pengantin</p>
@@ -1358,11 +1373,11 @@ const Ballroom = () => {
 
                         <div className='grid gap-2'>
                             <div className='z-20 flex gap-1 w-full content-stretch'>
-                                <button id='buttonChangeUcapanSelamat' className='rounded btn btn-accent h-fit py-2'>
+                                <button id='buttonChangeUcapanSelamat' className='rounded btn btn-accent h-full py-2'>
                                     <i className="ri-message-3-line ri-xl"></i>
                                     <p className='l2-r font-deAetna'>Ganti Ucapan</p>
                                 </button>
-                                <button id='buttonChangeDigitalGift' className='rounded btn btn-accent h-fit py-2'>
+                                <button id='buttonChangeDigitalGift' className='rounded btn btn-accent h-full py-2'>
                                     <i className="ri-gift-line ri-xl"></i>
                                     <p className='l2-r font-deAetna'>Ganti Hadiah</p>
                                 </button>
@@ -1559,9 +1574,9 @@ const Ballroom = () => {
                         </p>
                     </div>
 
-                    <form className='flex gap-1 w-full' method="dialog">
+                    <form className='flex items-stretch content-stretch gap-1 w-full' method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="btn btn-secondary rounded-l">
+                        <button className="btn btn-secondary rounded-l h-full py-2">
                             <i className="ri-gift-line ri-xl"></i>
                             {
                                 digitalGift === gifts[5]
@@ -1569,7 +1584,7 @@ const Ballroom = () => {
                                     : 'Ganti Hadiah'
                             }
                         </button>
-                        <button id='digitalGiftButton' className="btn btn-accent rounded-r">
+                        <button id='digitalGiftButton' className="btn btn-accent h-full rounded-r">
                             {
                                 digitalGift === gifts[5]
                                     ? <><i className='ri-check-line ri-xl' />Yakin</>
@@ -1595,7 +1610,7 @@ const Ballroom = () => {
                     transform: 'translateX(-50%)'
                 }}>
 
-                <div className="text-black bg-White rounded-md overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
+                <div className="text-black bg-White rounded-lg overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
                     <div className='grid justify-end'>
                         <button id='ucapanSelamatCloseButton'>
                             <i className="ri-close-line ri-xl"></i>
@@ -1603,202 +1618,84 @@ const Ballroom = () => {
                     </div>
                     <div className='text-center grid w-full justify-items-center'>
                         <h3 className='text-N800 capitalize'>berikan ucapan selamat</h3>
-                        <p className='text-N700 p3-r w-full max-w-[285px]'>Anda boleh memberikan ucapan melalui video ataupun foto</p>
+                        <p className='text-N700 p3-r w-full max-w-[285px]'>Anda dapat memberikan ucapan melalui video ataupun foto</p>
                     </div>
 
-                    <div className='grid w-full'>
-                        <Tab.Group>
-                            <Tab.List className='h-12 rounded-t-md border border-secondary flex'>
 
-                                <Tab className={({ selected }) =>
-                                    classNames('flex justify-center items-center gap-2 w-full px-4 rounded-tr-md',
-                                        selected
-                                            ? 'bg-secondary text-white'
-                                            : 'text-secondary bg-transparent'
-                                    )
-                                }>
-                                    <i className="ri-image-line ri-xl"></i>
-                                    <p className='l2-r font-deAetna'>Foto</p>
-                                </Tab>
+                    < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3' >
+                        <div className='grid gap-1'>
+                            <p className='l3-r text-N700 font-deAetna'>Upload Foto/Video Ucapan</p>
 
-                                <Tab className={({ selected }) =>
-                                    classNames('flex justify-center items-center gap-2 w-full px-4 rounded-tl-md',
-                                        selected
-                                            ? 'bg-secondary text-white'
-                                            : 'text-secondary bg-transparent'
-                                    )
-                                }>
-                                    <i className="ri-vidicon-line ri-xl"></i>
-                                    <p className='l2-r font-deAetna'>Video</p>
-                                </Tab>
+                            <FileUploader handleChange={handleChange} types={fileTypes} name="file">
+                                <div className='bg-white grid gap-1 justify-items-center border border-N300 rounded-md py-4 px-3 text-N400 cursor-pointer'>
+                                    <i className="ri-upload-2-line ri-lg"></i>
+                                    <p className='p2-r'>Klik untuk {file ? 'ganti' : 'upload'} foto/video</p>
+                                </div>
+                            </FileUploader>
 
+                            {file && (
+                                file.type.startsWith('video/') ? (
+                                    <Player
+                                        playsInline
+                                        src={URL.createObjectURL(file)}
+                                        fluid
+                                    />
+                                ) : (
+                                    <Image
+                                        src={URL.createObjectURL(file)}
+                                        alt="Preview photo"
+                                        className="w-full h-auto rounded-md"
+                                        width={220}
+                                        height={220}
+                                        priority
+                                    />
+                                )
+                            )
+                            }
+                        </div>
 
+                        <div className='grid gap-1'>
+                            <p className='l3-r text-N700 font-deAetna'>Ucapan Selamat</p>
+                            <form className='grid gap-6'>
+                                <textarea
+                                    className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder="..."
+                                    rows={3}
+                                    // value={ucapanSelamat}
+                                    // onChange={
+                                    //     (e) => setUcapanSelamat(e.target.value)
+                                    // }
+                                    value={ucapanSelamat}
+                                    onChange={
+                                        (e) => setUcapanSelamat(e.target.value)
+                                    }
+                                />
+                            </form>
+                        </div>
 
-                            </Tab.List>
+                        <button
+                            onClick={() => {
+                                const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
+                                if (ucapanSelamatModal) {
+                                    ucapanSelamatModal.showModal();
+                                }
+                            }}
+                            className='btn btn-secondary rounded'>
+                            <i className="ri-send-plane-line ri-xl"></i>
+                            <p className='l2-r font-deAetna'>kirim ucapan</p>
+                        </button>
+                    </ div>
 
-                            <Tab.Panels className='px-3 pb-3 pt-6 border border-secondary rounded-b-md'>
-
-                                {/* PHOTO UPLOAD */}
-                                <Tab.Panel className='grid gap-3 w-full'>
-                                    <div className='grid gap-1'>
-                                        <p className='l3-r text-N700'>Upload Foto</p>
-                                        <div className='flex'>
-                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tl-md border border-secondary text-secondary'>
-                                                <input
-                                                    accept="image/*"
-                                                    type="file"
-                                                    onChange={imageChange}
-                                                    className='hidden'
-                                                />
-                                                <i className="ri-image-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Galeri</p>
-                                            </label>
-                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tr-md border border-secondary text-secondary'>
-                                                <input
-                                                    accept="image/*"
-                                                    type="file"
-                                                    onChange={imageChange}
-                                                    className='hidden'
-                                                />
-                                                <i className="ri-camera-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Camera</p>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div className='w-full'>
-                                        <Disclosure>
-                                            {({ open }) => (
-                                                <>
-                                                    <Disclosure.Button className="flex w-full justify-between items-center text-left">
-                                                        <p className='l3-r text-N700'>Preview</p>
-                                                        {/* {selectedImage && <p>{URL.createObjectURL(selectedImage)}</p>} */}
-                                                        <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
-                                                    </Disclosure.Button>
-                                                    <Disclosure.Panel className="mt-1">
-                                                        {selectedImage && (
-                                                            <div>
-                                                                <Image
-                                                                    src={URL.createObjectURL(selectedImage)}
-                                                                    alt="preview foto"
-                                                                    className="w-full h-auto rounded-md"
-                                                                    width={220}
-                                                                    height={220}
-                                                                    priority
-                                                                />
-                                                            </div>
-                                                        )}
-
-                                                    </Disclosure.Panel>
-                                                </>
-                                            )}
-                                        </Disclosure>
-                                    </div>
-
-                                    <div className='grid gap-1'>
-                                        <p className='l3-r text-N700'>Ucapan Selamat</p>
-                                        <form className='grid gap-6'>
-                                            <textarea
-                                                className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder="..."
-                                                rows={3}
-                                                // value={ucapanSelamat}
-                                                // onChange={
-                                                //     (e) => setUcapanSelamat(e.target.value)
-                                                // }
-                                                value={ucapanSelamat}
-                                                onChange={
-                                                    (e) => setUcapanSelamat(e.target.value)
-                                                }
-                                            />
-                                        </form>
-                                    </div>
-
-                                    <button
-                                        onClick={() => {
-                                            const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
-                                            if (ucapanSelamatModal) {
-                                                ucapanSelamatModal.showModal();
-                                            }
-                                        }}
-                                        className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
-                                        <i className="ri-send-plane-line ri-xl"></i>
-                                        <p className='l2-r font-deAetna'>kirim ucapan</p>
-                                    </button>
-                                </Tab.Panel>
-
-
-                                {/* VIDEO UPLOAD */}
-                                <Tab.Panel className='grid gap-3 w-full'>
-                                    <div className='grid gap-1'>
-                                        <p className='l3-r text-N700'>Upload Video</p>
-                                        <div className='flex'>
-                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tl-md border border-secondary text-secondary'>
-                                                <input
-                                                    accept="video/mp4,video/x-m4v,video/*"
-                                                    type="file"
-                                                    onChange={videoChange}
-                                                    className='hidden'
-                                                />
-                                                <i className="ri-image-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Galeri</p>
-                                            </label>
-                                            <label className='h-12 flex justify-center items-center gap-2 w-full px-4 rounded-tr-md border border-secondary text-secondary'>
-                                                <input
-                                                    accept="image/*"
-                                                    type="file"
-                                                    onChange={videoChange}
-                                                    className='hidden'
-                                                />
-
-                                                <i className="ri-camera-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Camera</p>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div className='w-full'>
-                                        <Disclosure>
-                                            {({ open }) => (
-                                                <>
-                                                    <Disclosure.Button className="flex w-full justify-between items-center text-left">
-                                                        <p className='l3-r text-N700'>Preview</p>
-                                                        <i className={`ri-arrow-drop-up-line ri-xl text-N400 ${open ? '' : 'rotate-180 transform'}`}></i>
-                                                    </Disclosure.Button>
-                                                    <Disclosure.Panel className="mt-1">
-                                                        {selectedVideo && (
-                                                            <div>
-                                                                <video width='320' height='240' controls>
-                                                                    <source src={selectedVideo} type='video/mp4,video/x-m4v,video/*' />
-                                                                </video>
-                                                            </div>
-                                                        )}
-
-                                                    </Disclosure.Panel>
-                                                </>
-                                            )}
-                                        </Disclosure>
-                                    </div>
-
-                                    <button
-                                        onClick={() => {
-                                            const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
-                                            if (ucapanSelamatModal) {
-                                                ucapanSelamatModal.showModal();
-                                            }
-                                        }}
-                                        className='bg-secondary flex gap-2 text-white rounded-sm h-12 justify-center items-center capitalize'>
-                                        <i className="ri-send-plane-line ri-xl"></i>
-                                        kirim ucapan
-                                    </button>
-                                </Tab.Panel>
-
-
-
-                            </Tab.Panels>
-                        </Tab.Group>
-                    </div>
-
-                </div>
+                    {/* DECORATION */}
+                    < Image
+                        src={
+                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                        }
+                        alt="decoration"
+                        width={110}
+                        height={110}
+                        className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                    />
+                </div >
             </ div >
             {/* MODAL VALIDATATION */}
             <dialog id="ucapanSelamatModal" className="modal" >
@@ -1817,11 +1714,10 @@ const Ballroom = () => {
                     <div className='grid gap-2 justify-items-center text-center'>
                         <Image
                             src={
-                                // ucapanSelamat.trim() === '' &&
-                                selectedImage === undefined &&
-                                    selectedVideo === undefined
-                                    ? '/assets/ballroom/emoticons/5.webp'
-                                    : '/assets/ballroom/emoticons/1.webp'
+                                file != undefined
+                                    ? '/assets/ballroom/emoticons/1.webp'
+                                    :
+                                    ucapanSelamat != '' ? '/assets/ballroom/emoticons/1.webp' : '/assets/ballroom/emoticons/5.webp'
                             }
                             alt="emoticon"
                             width={110}
@@ -1829,20 +1725,18 @@ const Ballroom = () => {
                         />
                         <h4 className="text-N800">
                             {
-                                // ucapanSelamat.trim() === '' &&
-                                selectedImage === undefined &&
-                                    selectedVideo === undefined
-                                    ? 'Apakah anda yakin tidak ingin memberikan ucapan selamat?'
-                                    : 'Terimakasih telah memberikan ucapan selamat kepada kami'
+                                file != undefined
+                                    ? 'Terimakasih telah memberikan ucapan selamat kepada kami'
+                                    :
+                                    ucapanSelamat != '' ? 'Yakin Ga Sekalian Kirim Foto/Video?' : 'Apakah anda yakin tidak ingin memberikan ucapan selamat?'
                             }
                         </h4>
                         <p className="p3-r text-N600">
                             {
-                                ucapanSelamat.trim() === '' &&
-                                    selectedImage === undefined &&
-                                    selectedVideo === undefined
+                                file != undefined
                                     ? 'Ucapan anda akan sangat berharga bagi momen spesial kami'
-                                    : 'Semoga segala ucapan dan doa yang anda berikan akan kembali menjadi kebaikan untuk anda'
+                                    :
+                                    ucapanSelamat != '' ? 'Kirim Foto/Video ucapan anda untuk pengantin' : 'Ucapan anda akan sangat berharga bagi momen spesial kami'
                             }
                         </p>
                     </div>
@@ -1852,25 +1746,24 @@ const Ballroom = () => {
                         <button className="btn btn-secondary rounded-l">
                             <i className='ri-message-3-line ri-xl' />
                             {
-                                ucapanSelamat.trim() === '' &&
-                                    selectedImage === undefined &&
-                                    selectedVideo === undefined
-                                    ? 'Beri Ucapan'
-                                    : 'Ganti Ucapan'
+                                file != undefined
+                                    ? 'Ganti Ucapan'
+                                    :
+                                    ucapanSelamat != '' ? 'Ganti Ucapan' : 'Beri Ucapan'
                             }
                         </button>
                         <button id='buttonPelaminan' className="btn btn-accent rounded-r">
                             {
-                                ucapanSelamat.trim() === '' &&
-                                    selectedImage === undefined &&
-                                    selectedVideo === undefined
-                                    ? <><i className='ri-check-line ri-xl' />Yakin</>
-                                    : <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
+                                file != undefined
+                                    ? <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
+                                    : ucapanSelamat != ''
+                                        ? <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
+                                        : <><i className='ri-check-line ri-xl' />Yakin</>
                             }
                         </button>
                     </form>
                 </div>
-            </dialog>
+            </dialog >
 
 
 
