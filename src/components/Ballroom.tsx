@@ -127,25 +127,9 @@ const Ballroom = () => {
     // const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
 
     // PREVIEW HANDLER
-    const [selectedImage, setSelectedImage] = useState();
-    // This function will be triggered when the file field change
-    const imageChange = (e: any) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectedImage(e.target.files[0]);
-        }
-    };
-
-    const [selectedVideo, setSelectedVideo] = useState();
-    // This function will be triggered when the file field change
-    const videoChange = (e: any) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectedVideo(e.target.files[0]);
-        }
-    };
-
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
-    const [file, setFile] = useState<File>()
-    const handleChange = (file: any) => {
+    const [file, setFile] = useState<File | null>(null)
+    const handleChange = (file: File) => {
         setFile(file);
     };
     // END UCAPAN SELAMAT
@@ -153,6 +137,12 @@ const Ballroom = () => {
 
     const handleKonfirmasi = async (e: any) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('wedding_slug', wedding.wedding_slug);
+        formData.append('guest_slug', guest.guest_slug);
+        formData.append('ucapan', ucapanSelamat);
+        formData.append('ucapan_file', file!);
+
 
         // Prevent multiple submissions
         if (loading) {
@@ -161,19 +151,26 @@ const Ballroom = () => {
 
         setLoading(true); // Set loading to true when the submission starts
 
-        // KIRIM HADIAH
+        // KIRIM HADIAH & UCAPAN SELAMAT
         try {
-            const response = await axios.post('https://panel.virtuwed.id/api/gift', {
+
+            const postGift = await axios.post('https://panel.virtuwed.id/api/gift', {
                 wedding_slug: wedding.wedding_slug,
                 guest_slug: guest.guest_slug,
                 nama_hadiah: digitalGift.name,
                 nominal: digitalGift.price,
             });
+
+            const postUcapanResepsiVirtual = await axios.post(
+                'https://panel.virtuwed.id/api/guest/ucapan/resepsi',
+                formData
+            );
             // setNama('')
             // setNoWhatsapp('')
             // setInstagram('')
 
-            console.log(response.data);
+            console.log(postGift.data);
+            console.log(postUcapanResepsiVirtual.data);
 
             setIsSuccess(true)
             // if (document) {
@@ -184,6 +181,8 @@ const Ballroom = () => {
             // if (document) {
             //     (document.getElementById('modalMessage') as HTMLFormElement).showModal();
             // }
+            console.log(file);
+
             alert(error)
         } finally {
             setLoading(false); // Set loading to false when the submission is done, whether it succeeded or failed
@@ -1269,7 +1268,7 @@ const Ballroom = () => {
                     transform: 'translateX(-50%)'
                 }}
                 className='absolute w-full h-full z-10 hidden'>
-                <YouTubePlayer videoId="HqYhkpGgZXc" />
+                <YouTubePlayer videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
             </div>
 
             {/* KONFIRMASI */}
