@@ -15,7 +15,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId }) => {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
             controls: 0,
-            mute: 1,
+            mute: 0,
             origin: 'https://virtuwed.id',
             rel: 0,
             showinfo: 0,
