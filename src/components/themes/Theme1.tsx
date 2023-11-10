@@ -477,8 +477,8 @@ const Theme1 = () => {
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
                                         <div data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300" data-aos-once="true" className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -bottom-7 -left-10'></div>
                                         <Image
-                                            src="/assets/undanganDigital/pengantinPria.jpg"
-                                            alt="Vercel Logo"
+                                            src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.pengantin_pria.foto}
+                                            alt="Mempelai Pria"
                                             className="w-full h-full rounded-full z-50 object-cover bg-white"
                                             width={220}
                                             height={220}
@@ -503,8 +503,8 @@ const Theme1 = () => {
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
                                         <div className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
                                         <Image
-                                            src="/assets/undanganDigital/pengantinWanita.jpg"
-                                            alt="Vercel Logo"
+                                            src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.pengantin_wanita.foto}
+                                            alt="Mempelai Pria"
                                             className="w-full h-full rounded-full z-50 object-cover"
                                             width={220}
                                             height={220}
