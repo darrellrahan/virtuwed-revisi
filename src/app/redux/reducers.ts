@@ -27,23 +27,48 @@ interface Wedding {
             nama_ortu_bapak: string;
             nama_ortu_ibu: string;
             instagram: string;
+            foto: string;
         };
         pengantin_wanita: {
             nama_lengkap: string;
             nama_ortu_bapak: string;
             nama_ortu_ibu: string;
             instagram: string;
+            foto: string;
         };
         kisah_cinta: Array<{
             kisah_cinta_date: string;
             kisah_cinta_judul: string;
             kisah_cinta_cerita: string;
         }>;
+        daftar_acara: Array<{
+            event_icon: string,
+            event_name: string,
+            event_date: string,
+            event_time: string,
+            event_description: string
+        }>;
         reception_location_name: string;
         reception_location_address: string;
         reception_location_maps_url: string;
+        ucapan_undangan_digital: {
+            total: number,
+            tidak_hadir: number,
+            hadir: number,
+            ragu: number,
+            data: Array<{
+                nama: string;
+                status_kehadiran: string;
+                ucapan_invitation_text: string;
+            }>;
+        }
     };
     resepsi_virtual: {
+        wedding_live_streaming_link: {
+            full_url: string | null
+            query: string | null
+        },
+        wedding_video_call_link: string | null,
         wedding_greeting_video: string | null;
         wedding_ending_video: string | null;
     };
@@ -111,21 +136,37 @@ const initialState: RootState = {
                     "nama_lengkap": "",
                     "nama_ortu_bapak": "",
                     "nama_ortu_ibu": "",
-                    "instagram": ""
+                    "instagram": "",
+                    "foto": ""
                 },
                 "pengantin_wanita": {
                     "nama_lengkap": "",
                     "nama_ortu_bapak": "",
                     "nama_ortu_ibu": "",
-                    "instagram": ""
+                    "instagram": "",
+                    "foto": ""
                 },
                 "kisah_cinta": [
                 ],
+                "daftar_acara": [
+                ],
                 "reception_location_name": "",
                 "reception_location_address": "",
-                "reception_location_maps_url": ""
+                "reception_location_maps_url": "",
+                "ucapan_undangan_digital": {
+                    "total": 0,
+                    "tidak_hadir": 0,
+                    "hadir": 0,
+                    "ragu": 0,
+                    "data": []
+                }
             },
             "resepsi_virtual": {
+                "wedding_live_streaming_link": {
+                    "full_url": null,
+                    "query": null
+                },
+                "wedding_video_call_link": null,
                 "wedding_greeting_video": null,
                 "wedding_ending_video": null
             },
