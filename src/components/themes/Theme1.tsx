@@ -44,10 +44,24 @@ interface CountRSPV {
     count: number;
 };
 
+interface InvitationData {
+    nama: string;
+    status_kehadiran: "Hadir" | "Tidak Hadir" | "Ragu"; // Assuming status can only be one of these values
+    ucapan_invitation_text: string;
+}
+
+interface UcapanUndanganDigital {
+    total: number;
+    tidak_hadir: number;
+    hadir: number;
+    ragu: number;
+    data: InvitationData[];
+}
+
 const rspv = [
-    { status: "Hadir" },
-    { status: "Tidak Hadir" },
-    { status: "Masih Ragu" },
+    { status: "1", description: "Hadir" },
+    { status: "0", description: "Tidak Hadir" },
+    { status: "2", description: "Masih Ragu" },
 ]
 
 
@@ -58,6 +72,12 @@ const Theme1 = () => {
     const [guestComments, setGuestComments] = useState<GuestComments[]>([]);
     const [countRSPV, setCountRSPV] = useState<CountRSPV[]>([]);
     const [countGuestComments, setCountGuestComments] = useState<CountGuestComments | null>(null);
+
+
+    const [ucapanUndanganDigital, setUcapanUndanganDigital] = useState<UcapanUndanganDigital | null>(null);
+
+
+
     const [selected, setSelected] = useState(rspv[0])
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
@@ -84,7 +104,7 @@ const Theme1 = () => {
     const prevScrollY = useRef(0);
 
 
-
+    // MUSIC
     const handleButtonClick = () => {
         if (isPlaying) {
             audioRef.current?.pause();
@@ -157,65 +177,89 @@ const Theme1 = () => {
     };
 
 
+    const dataUcapanUndanganDigital = async () => {
+        const API_BASE_URL = 'https://panel.virtuwed.id/api';
+        const API_ENDPOINT = `/wedding?wedding_slug=${wedding.wedding_slug}&guest_slug=${guest.guest_slug}`;
+
+        try {
+            const response = await axios.get(API_BASE_URL + API_ENDPOINT);
+            // setGuestComments(response.data)
+            console.log(response.data.data.wedding.undangan_digital.ucapan_undangan_digital);
+            setUcapanUndanganDigital(response.data.data.wedding.undangan_digital.ucapan_undangan_digital);
+
+        } catch (error) {
+
+        }
+    }
+
+
+
     // SEND COMMENT
     const handleFormSubmit = async (e: React.FormEvent) => {
-        const guestName = guest.nama
         e.preventDefault();
         if (message.trim() === '') {
             // If either name or message is empty, do not proceed with the fetch request
-            alert('Jangan lupa isi nama dan pesan yaa')
+            alert('Jangan lupa isi pesan yaa')
         } else {
             try {
-                const commentSend = await axios.post('https://api.virtuwed.id/graphql', {
-                    query: `
-                    mutation CreateGuestComment($guestName: String!, $message: String!) {
-                      createGuestComment(wedding_session_id: "649007bdca091be7add3c440", name: $guestName, message: $message) {
-                        id
-                        wedding_session {
-                          id
-                        }
-                        name
-                        message
-                        createdAt
-                        updatedAt
-                      }
-                    }
-                  `,
-                    variables: {
-                        guestName,
-                        message,
-                    },
-                });
+                // const commentSend = await axios.post('https://api.virtuwed.id/graphql', {
+                //     query: `
+                //     mutation CreateGuestComment($guestName: String!, $message: String!) {
+                //       createGuestComment(wedding_session_id: "649007bdca091be7add3c440", name: $guestName, message: $message) {
+                //         id
+                //         wedding_session {
+                //           id
+                //         }
+                //         name
+                //         message
+                //         createdAt
+                //         updatedAt
+                //       }
+                //     }
+                //   `,
+                //     variables: {
+                //         guestName,
+                //         message,
+                //     },
+                // });
 
-                const rspvSend = await axios.post('https://api.virtuwed.id/graphql', {
-                    query: `
-                    mutation RSVPAbsent($guestName: String!, $status: String!) {
-                        RSVPAbsent(wedding_session_id: "649007bdca091be7add3c440", name: $guestName, status: $status) {
-                          id
-                          wedding_session {
-                            id
-                          }
-                          guest_id {
-                            id
-                          }
-                          name
-                          status
-                        }
-                      }
-                  `,
-                    variables: {
-                        guestName,
-                        status: selected.status
-                    },
-                });
+                // const rspvSend = await axios.post('https://api.virtuwed.id/graphql', {
+                //     query: `
+                //     mutation RSVPAbsent($guestName: String!, $status: String!) {
+                //         RSVPAbsent(wedding_session_id: "649007bdca091be7add3c440", name: $guestName, status: $status) {
+                //           id
+                //           wedding_session {
+                //             id
+                //           }
+                //           guest_id {
+                //             id
+                //           }
+                //           name
+                //           status
+                //         }
+                //       }
+                //   `,
+                //     variables: {
+                //         guestName,
+                //         status: selected.status
+                //     },
+                // });
 
-                console.log('Data added:');
+                const postUcapanUndanganDigital = await axios.post(`https://panel.virtuwed.id/api/guest/ucapan/undangan`, {
+                    wedding_slug: wedding.wedding_slug,
+                    guest_slug: guest.guest_slug,
+                    ucapan: message,
+                    status_kehadiran: selected.status,
+                })
+
+                console.log('Data added:' + postUcapanUndanganDigital);
                 // Handle success or show a confirmation message
                 // setName("");
                 setMessage("");
-                fetchGuestComments();
-                fetchCountRSPVStatus();
-                fetchCountGuestComment();
+                // fetchGuestComments();
+                // fetchCountRSPVStatus();
+                // fetchCountGuestComment();
+                dataUcapanUndanganDigital()
 
             } catch (error) {
                 console.error('Error adding data:', error);
@@ -256,6 +300,8 @@ const Theme1 = () => {
         fetchGuestComments()
         fetchCountGuestComment()
         fetchCountRSPVStatus()
+
+        dataUcapanUndanganDigital()
 
         return () => {
             AOS.refresh(); // Clean up AOS on component unmount
@@ -563,7 +609,7 @@ const Theme1 = () => {
                                             : 'text-N400 border-N400'
                                     )
                                 }>
-                                    <h4 className={`${playFair.className} italic`}>Resepsi Virtual</h4>
+                                    <h4 className={`${playFair.className} italic`}>Online</h4>
                                 </Tab>
                                 <Tab className={({ selected }) =>
                                     classNames('flex justify-center items-center w-full px-4 border-b-2',
@@ -572,13 +618,13 @@ const Theme1 = () => {
                                             : 'text-N400 border-N400'
                                     )
                                 }>
-                                    <h4 className={`${playFair.className} italic`}>Resepsi</h4>
+                                    <h4 className={`${playFair.className} italic`}>Offline</h4>
                                 </Tab>
                             </Tab.List>
 
                             <Tab.Panels>
 
-                                {/* RESEPSI VIRTUAL */}
+                                {/* ONLINE */}
                                 <Tab.Panel className='grid w-full'>
                                     <div className='relative'>
                                         {/* DECORATION */}
@@ -611,7 +657,7 @@ const Theme1 = () => {
                                                 priority
                                             />
                                             <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>Virtual Reception</h3>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} - {wedding.reception_end_at.time}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
                                         </div>
 
                                         <div className='grid p-5'>
@@ -621,7 +667,7 @@ const Theme1 = () => {
                                     </div>
                                 </Tab.Panel>
 
-                                {/* RESEPSI */}
+                                {/* OFFLINE */}
                                 <Tab.Panel className='grid w-full'>
                                     <div className='relative'>
                                         {/* DECORATION */}
@@ -642,18 +688,38 @@ const Theme1 = () => {
                                             <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
                                         </div>
 
-                                        <div className='p-5 text-center'>
+                                        {
+                                            wedding.undangan_digital.daftar_acara?.map((daftar_acara, key) => {
+                                                return (
+                                                    <div key={key} className='p-6 text-center'>
+                                                        <Image
+                                                            data-aos="fade-up" data-aos-duration="1000"
+                                                            src="https://katsudoto.id/media/template/icons/gold/01.png"
+                                                            alt="Icon Daftar Acara"
+                                                            className="object-contain object-center mb-8 mx-auto"
+                                                            width={50}
+                                                            height={50}
+                                                            priority
+                                                        />
+                                                        <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>{daftar_acara.event_name}</h3>
+                                                        <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{daftar_acara.event_time} — End</p>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+
+                                        <div className='p-6 text-center'>
                                             <Image
                                                 data-aos="fade-up" data-aos-duration="1000"
-                                                src="https://katsudoto.id/media/template/icons/gold/01.png"
+                                                src="https://katsudoto.id/media/template/icons/gold/02.png"
                                                 alt="Resepsi"
-                                                className="object-contain object-center mb-7 mx-auto"
+                                                className="object-contain object-center mb-8 mx-auto"
                                                 width={50}
                                                 height={50}
                                                 priority
                                             />
                                             <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>Reception</h3>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} - {wedding.reception_end_at.time}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
                                         </div>
 
                                         <div className='grid gap-2 p-5 text-center'>
@@ -777,16 +843,30 @@ const Theme1 = () => {
                     <section className='bg-backgroundColorInv pt-5 pb-2.5'>
                         <div className='p-5 grid gap-4'>
                             <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-primaryInv italic text-left text-4xl`}>Wedding Wish</h1>
-                            <p data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-primaryInv italic text-left text-base`}>{countGuestComments?.count} Comments</p>
+                            <p data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-primaryInv italic text-left text-base`}>{ucapanUndanganDigital?.total} Comments</p>
 
                             <div className='flex justify-between'>
 
-                                {countRSPV?.map((status, id) => (
+                                {/* {countRSPV?.map((status, id) => (
                                     <div key={id} className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
                                         <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{status.count}</h2>
                                         <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>{status._id}</p>
                                     </div>
-                                ))}
+                                ))} */}
+
+                                {/*  */}
+                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.hadir}</h2>
+                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Hadir</p>
+                                </div>
+                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.tidak_hadir}</h2>
+                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Tidak Hadir</p>
+                                </div>
+                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.ragu}</h2>
+                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Ragu</p>
+                                </div>
                             </div>
                         </div>
 
@@ -816,7 +896,7 @@ const Theme1 = () => {
                                 <Listbox data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" value={selected} onChange={setSelected}>
                                     <div className="relative mt-1">
                                         <Listbox.Button className="z-50 relative w-full cursor-default rounded bg-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                                            <span className={`${playFair.className} italic block truncate`}>{selected.status}</span>
+                                            <span className={`${playFair.className} italic block truncate`}>{selected.description}</span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <i className="ri-expand-up-down-line text-gray-400 ri-lg"></i>
                                             </span>
@@ -844,7 +924,7 @@ const Theme1 = () => {
                                                                     className={`${playFair.className} italic block truncate ${selected ? 'font-medium text-amber-900' : 'font-normal'
                                                                         }`}
                                                                 >
-                                                                    {rspv.status}
+                                                                    {rspv.description}
                                                                 </span>
                                                                 {selected ? (
                                                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
@@ -870,7 +950,7 @@ const Theme1 = () => {
 
                         {/* COMMENTAR */}
                         <div className='p-5'>
-                            {displayedItems?.map((data) => (
+                            {/* {displayedItems?.map((data) => (
                                 <div data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={data.id}>
                                     <div>
                                         <h3 className={`${playFair.className} text-lg text-primaryInv font-bold`}>{data.name}</h3>
@@ -880,11 +960,22 @@ const Theme1 = () => {
                                         <p className={`${playFair.className} text-base text-primaryInv italic`}>{data.message}</p>
                                     </div>
                                 </div>
+                            ))} */}
+                            {ucapanUndanganDigital?.data?.map((data, key) => (
+                                <div data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={key}>
+                                    <div>
+                                        <h3 className={`${playFair.className} text-lg text-primaryInv font-bold`}>{data.nama}</h3>
+                                        <small className={`${playFair.className} text-xs text-primaryInv italic`}>{data.status_kehadiran}</small>
+                                    </div>
+                                    <div className='mt-2.5'>
+                                        <p className={`${playFair.className} text-base text-primaryInv italic`}>{data.ucapan_invitation_text}</p>
+                                    </div>
+                                </div>
                             ))}
                         </div>
 
                         <div className='p-5'>
-                            {displayCount < guestComments.length && (
+                            {ucapanUndanganDigital?.data && displayCount < ucapanUndanganDigital?.data?.length && (
                                 <button className={`${playFair.className} bg-primaryInv text-white w-full py-2.5 px-5 rounded text-base italic`} onClick={handleLoadMore}>Load More Comments</button>
                             )}
                         </div>

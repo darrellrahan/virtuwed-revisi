@@ -141,7 +141,9 @@ const Ballroom = () => {
         formData.append('wedding_slug', wedding.wedding_slug);
         formData.append('guest_slug', guest.guest_slug);
         formData.append('ucapan', ucapanSelamat);
-        formData.append('ucapan_file', file!);
+        if (file != null) {
+            formData.append('ucapan_file', file!);
+        }
 
 
         // Prevent multiple submissions
@@ -154,33 +156,30 @@ const Ballroom = () => {
         // KIRIM HADIAH & UCAPAN SELAMAT
         try {
 
-            const postGift = await axios.post('https://panel.virtuwed.id/api/gift', {
-                wedding_slug: wedding.wedding_slug,
-                guest_slug: guest.guest_slug,
-                nama_hadiah: digitalGift.name,
-                nominal: digitalGift.price,
-            });
+            if (digitalGift != gifts[5]) {
+                const postGift = await axios.post('https://panel.virtuwed.id/api/gift', {
+                    wedding_slug: wedding.wedding_slug,
+                    guest_slug: guest.guest_slug,
+                    nama_hadiah: digitalGift.name,
+                    nominal: digitalGift.price,
+                });
 
-            const postUcapanResepsiVirtual = await axios.post(
-                'https://panel.virtuwed.id/api/guest/ucapan/resepsi',
-                formData
-            );
-            // setNama('')
-            // setNoWhatsapp('')
-            // setInstagram('')
+                console.log(postGift.data);
 
-            console.log(postGift.data);
-            console.log(postUcapanResepsiVirtual.data);
+            }
+
+            if (ucapanSelamat != '' || file != null) {
+                const postUcapanResepsiVirtual = await axios.post(
+                    'https://panel.virtuwed.id/api/guest/ucapan/resepsi',
+                    formData
+                );
+                setUcapanSelamat('')
+                console.log(postUcapanResepsiVirtual.data);
+            }
 
             setIsSuccess(true)
-            // if (document) {
-            //     (document.getElementById('modalMessage') as HTMLFormElement).showModal();
-            // }
         } catch (error) {
             setIsSuccess(false)
-            // if (document) {
-            //     (document.getElementById('modalMessage') as HTMLFormElement).showModal();
-            // }
             console.log(file);
 
             alert(error)
