@@ -1267,7 +1267,7 @@ const Ballroom = () => {
                     transform: 'translateX(-50%)'
                 }}
                 className='absolute w-full h-full z-10 hidden'>
-                <YouTubePlayer videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
+                <YouTubePlayer height={window.innerHeight} width={window.innerWidth} videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
             </div>
 
             {/* KONFIRMASI */}
