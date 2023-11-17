@@ -4,17 +4,22 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 
 interface YouTubePlayerProps {
     videoId: string;
+    height: string | number;
+    width: string | number;
 }
 
-const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId }) => {
+const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, height, width }) => {
 
     const opts: YouTubeProps['opts'] = {
-        height: `${window.innerHeight}px`,
-        width: `${window.innerWidth}px`,
+        // height: `${window.innerHeight}px`,
+        // width: `${window.innerWidth}px`,
+        height: `${height}px`,
+        width: `${width}px`,
         playerVars: {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
-            controls: 0,
+            loop: 1,
+            controls: 1,
             mute: 0,
             origin: 'https://virtuwed.id',
             rel: 0,

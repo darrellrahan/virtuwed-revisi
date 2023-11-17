@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 import LoadingSkeleton from './LoadingSkeleton';
 import Image from 'next/image';
+import YouTubePlayer from './YoutubePlayer';
 
 interface PanoProps {
     dataKenanganVirtual: {
@@ -53,9 +54,16 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
     const picturespot4 = useRef(null);
     const picturespot5 = useRef(null);
     const picturespot6 = useRef(null);
+    const textInfo = useRef(null);
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
     const IMAGE_URL = 'sgp1.vultrobjects.com/virtuwed-storage';
+
+    document.body.classList.add('no-touch');
+    window.addEventListener('touchstart', function () {
+        document.body.classList.remove('no-touch');
+        document.body.classList.add('touch');
+    });
 
     // const [isClient, setIsClient] = useState(false);
 
@@ -79,16 +87,16 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
             const viewer = new Marzipano.Viewer(panoRef.current, viewerOpts);
 
             const panoScenes = scenes.map((sceneData: any) => {
-                const { id, initialViewParameters, levels, faceSize } = sceneData;
+                const { id, name, levels, faceSize, initialViewParameters, linkHotspots, infoHotspots } = sceneData;
 
                 // const urlPrefix = "//www.marzipano.net/media";
                 const urlPrefix = "/assets/kenanganVirtual";
                 const source = Marzipano.ImageUrlSource.fromString(
                     // `${urlPrefix}/${id}/{z}/{f}/{y}/{x}.jpg`,
                     // { cubeMapPreviewUrl: `${urlPrefix}/${id}/preview.jpg` },
-                    `${urlPrefix}/${id}.webp`,
+                    `${urlPrefix}/${id}`,
                     {
-                        cubeMapPreviewUrl: `${urlPrefix}/${id}.webp`
+                        cubeMapPreviewUrl: `${urlPrefix}/${id}`
                     }
                 );
 
@@ -108,6 +116,85 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                     pinFirstLevel: true,
                 });
 
+                // const switchScene = (scene: any) => {
+                //     // stopAutorotate();
+                //     scene.view.setParameters(scene.data.initialViewParameters);
+                //     scene.scene.switchTo();
+                //     // startAutorotate();
+                //     // updateSceneName(scene);
+                //     // updateSceneList(scene);
+                // }
+
+                const createLinkHotspotElement = (hotspot: any) => {
+
+                    // Create wrapper element to hold icon and tooltip.
+                    var wrapper = document.createElement('div');
+                    wrapper.classList.add('hotspot');
+                    wrapper.classList.add('link-hotspot');
+
+                    // Create image element.
+                    var icon = document.createElement('img');
+                    icon.src = '/assets/kenanganVirtual/link.png';
+                    icon.classList.add('link-hotspot-icon');
+
+                    // Set rotation transform.
+                    // var transformProperties = ['-ms-transform', '-webkit-transform', 'transform'];
+                    // for (var i = 0; i < transformProperties.length; i++) {
+                    //     var property = transformProperties[i];
+                    //     icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
+                    // }
+
+
+
+                    // Add click event handler.
+                    wrapper.addEventListener('click', function () {
+                        switchScene(findSceneById(hotspot.target));
+                    });
+
+                    // Prevent touch and scroll events from reaching the parent element.
+                    // This prevents the view control logic from interfering with the hotspot.
+                    // stopTouchAndScrollEventPropagation(wrapper);
+
+                    // Create tooltip element.
+                    var tooltip = document.createElement('div');
+                    tooltip.classList.add('hotspot-tooltip');
+                    tooltip.classList.add('link-hotspot-tooltip');
+                    const sceneData = findSceneDataById(hotspot.target);
+                    if (sceneData) {
+                        tooltip.innerHTML = sceneData.name;
+                    }
+                    // tooltip.innerHTML = findSceneDataById(hotspot.target).name;
+
+                    wrapper.appendChild(icon);
+                    wrapper.appendChild(tooltip);
+
+                    return wrapper;
+                }
+
+                const findSceneById = (id: string) => {
+                    for (var i = 0; i < scenes.length; i++) {
+                        if (panoScenes[i].sceneData.id === id) {
+                            return panoScenes[i];
+                        }
+                    }
+                    return null;
+                }
+
+                const findSceneDataById = (id: string) => {
+                    for (var i = 0; i < scenes.length; i++) {
+                        if (scenes[i].id === id) {
+                            return scenes[i];
+                        }
+                    }
+                    return null;
+                }
+
+                // Create link hotspots.
+                linkHotspots.forEach(function (hotspot: any) {
+                    var element = createLinkHotspotElement(hotspot);
+                    scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+                });
+
                 return {
                     sceneData,
                     scene,
@@ -115,7 +202,25 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                 };
             });
 
-            panoScenes[0].scene.switchTo();
+            const switchScene = (scene: any) => {
+                // stopAutorotate();
+                // scene.view.setParameters(scene.initialViewParameters);
+                scene.scene.switchTo();
+
+                // if (scene && scene.scene) {
+                //     scene.scene.switchTo();
+                // } else {
+                //     console.error("Tidak dapat beralih ke adegan karena 'scene' tidak terdefinisi atau 'null'.");
+                // }
+                // startAutorotate();
+                // updateSceneName(scene);
+                // updateSceneList(scene);
+            }
+
+            switchScene(panoScenes[0]);
+            // ==================================================================================================
+
+            // panoScenes[0].scene.switchTo();
 
             // panoScenes[0].scene.hotspotContainer().createHotspot(document.getElementById('iframespot'), { yaw: 0.0335, pitch: -0.102 }, { perspective: { radius: 1640, extraTransforms: "rotateX(5deg)" } })
 
@@ -124,7 +229,8 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
             if (container) {
                 // YOUTUBE
                 container.createHotspot(iframespot.current, { yaw: 0, pitch: -0.04100000000000000 },
-                    { perspective: { radius: 2320, extraTransforms: "rotateX(2deg)" } });
+                    // { perspective: { radius: 2320, extraTransforms: "rotateX(2deg)" } });
+                    { perspective: { radius: 696, extraTransforms: "rotateX(2deg)" } });
 
 
                 // POTO1
@@ -155,13 +261,16 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                 container.createHotspot(picturespot6.current, { yaw: -1.117538709593365, pitch: 0.010069377139673819 },
                     { perspective: { radius: 3225, extraTransforms: "rotateY(25deg)" } });
 
+                // INFOSPOT POTO1
+                container.createHotspot(textInfo.current, { yaw: 1.2663669301631675, pitch: -0.1802312721318824 });
+
             } else {
                 console.error("Element with ID 'iframespot' not found.");
             }
 
 
-            // var pano = panoRef.current;
             // // CHECK COORDS
+            // var pano = panoRef.current;
             // pano.addEventListener('click', (e) => {
             //     var view = viewer.view();
             //     console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
@@ -178,16 +287,19 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
         <>
             < div className="h-full w-full absolute" ref={panoRef} ></div>
 
-            <div ref={iframespot} id="iframespot" className='relative w-[1920px] h-[1080px] rounded-3xl'>
-                <iframe id="youtube"
-                    className='rounded-3xl'
-                    width="1920"
-                    height="1080"
-                    src={wedding.media.prewedding_videos[0]}
+            <div ref={iframespot} id="iframespot" className='relative w-[576px] h-[324px]'>
+                {/* <iframe id="youtube"
+                    className='rounded-lg'
+                    width="576"
+                    height="324"
+                    // src={wedding.media.prewedding_videos[0]}
+                    src={`https://www.youtube.com/embed/XtXfZTnM5xU?controls=0`}
                     allowFullScreen
                     title="YouTube video player"
-                // allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                ></iframe>
+                    allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                ></iframe> */}
+
+                <YouTubePlayer width={576} height={324} videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
             </div >
 
             <>
@@ -251,6 +363,17 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                         priority
                     />
                 </div>
+
+                <div id="textInfo" ref={textInfo}>
+                    <div className="hotspot">
+                        <div className="out"></div>
+                        <div className="in"></div>
+                    </div>
+                    <div className="tooltip-content">
+                        <p>Dulu, anak SMA pemalu, Agy, naksir gadis populer, Yoriko. Saat kuliah, dia berjuang keras, berprestasi, dan berhasil memenangkan hati Yoriko. Cinta mereka mekar setelah melewati lika-liku karir kuliah.</p>
+                    </div>
+                </div>
+
             </>
 
 
