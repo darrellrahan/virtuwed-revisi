@@ -188,7 +188,7 @@ const Theme1 = () => {
             setUcapanUndanganDigital(response.data.data.wedding.undangan_digital.ucapan_undangan_digital);
 
         } catch (error) {
-
+            console.error(error);
         }
     }
 
@@ -338,7 +338,7 @@ const Theme1 = () => {
             {/* OPENING */}
             <div ref={openingContainerDigitalInvitation} className='absolute z-50 w-full h-full top-0 left-0'>
 
-                <main className={`relative container min-w-full mx-auto min-h-[666px] md:min-h-[100dvh] h-[100dvh] text-center max-w-screen-xl`}>
+                <main className={`relative container min-w-full mx-auto min-h-[100dvh] h-[100dvh] text-center max-w-screen-xl`}>
                     <Image
                         src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.cover_undangan_digital}
                         alt="Moment pengantin"
@@ -348,41 +348,41 @@ const Theme1 = () => {
                         priority
                     />
 
-                    <div className='grid gap-6 justify-items-center content-center min-h-[666px] md:min-h-[100dvh] h-[100dvh] px-4 bg-white z-40'>
+                    <div className='grid gap-6 justify-items-center items-center tall:content-center min-h-[100dvh] h-[100dvh] px-4 bg-white z-40'>
                         <div className='grid justify-center gap-2 z-10'>
-                            <p data-aos="fade" data-aos-delay="750" data-aos-duration="500" className={`${playFair.className} p3-r italic`}>Selamat datang bapak/ibu/saudara/i </p>
+                            <h2 data-aos="fade" data-aos-delay="750" data-aos-duration="500" className={`${playFair.className} italic`}>Selamat datang bapak/ibu/saudara/i </h2>
                             <h3 data-aos="zoom-in" data-aos-delay="500" data-aos-duration="500" className={`${playFair.className} text-xl md:text-3xl`}>{guest.nama}</h3>
                         </div>
 
                         <Image
                             src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.cover_undangan_digital}
                             alt="Moment pengantin"
-                            className="object-cover object-center rounded-full w-52 h-52 z-10"
+                            className="object-cover object-center rounded-full w-52 h-52 z-10 hidden tall:block"
                             width={500}
                             height={500}
                             priority
                         />
 
                         <div className='grid gap-2 z-10'>
-                            <h2 data-aos="fade" data-aos-delay="1000" data-aos-duration="500" className={`${playFair.className} text-lg italic`}>Di acara pernikahan antara</h2>
-                            <h1 data-aos="zoom-in" data-aos-duration="1000" className={`${playFair.className} text-5xl text-primaryInv`}>{wedding.wedding_name}</h1>
+                            <h2 data-aos="fade" data-aos-delay="1000" data-aos-duration="500" className={`${playFair.className} text-lg italic`}>Di acara pernikahan dari</h2>
+                            <h1 data-aos="zoom-in" data-aos-duration="1000" className={`${playFair.className} text-5xl text-secondary`}>{wedding.wedding_name}</h1>
                             <p data-aos="fade" data-aos-delay="1000" data-aos-duration="500" className={`${playFair.className}`}>{wedding.reception_begin_at.date}</p>
                         </div>
 
 
                         <div className='grid gap-4 max-w-screen-md w-full mx-auto z-10'>
 
-                            <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} italic px-1.5 py-3 bg-primaryInv text-white w-full rounded-lg flex gap-2 items-center justify-center`}>
+                            <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} px-1.5 py-3 bg-secondary text-white w-full rounded-lg flex gap-2 items-center justify-center`}>
                                 <i className="ri-cake-2-fill ri-lg"></i>
                                 Hadiri Pernikahan
                             </Link>
 
                             <div className='flex w-full gap-4'>
-                                <button onClick={openDigitalInvitation} className={`${playFair.className} italic px-1.5 py-3 bg-white text-primaryInv border border-solid border-primaryInv rounded-lg flex items-center justify-center w-full gap-2`}>
+                                <button onClick={openDigitalInvitation} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary rounded-lg flex items-center justify-center w-full gap-2`}>
                                     <i className="ri-calendar-event-line ri-lg"></i>
                                     Undangan
                                 </button>
-                                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`} className={`${playFair.className} italic px-1.5 py-3 bg-white text-primaryInv border border-solid border-primaryInv w-full rounded-lg flex gap-2 items-center justify-center`}>
+                                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
                                     <i className="ri-image-line ri-lg"></i>
                                     Galeri
                                 </Link>
@@ -394,7 +394,7 @@ const Theme1 = () => {
 
 
             <div className={`overflow-hidden min-h-screen lg:grid lg:grid-cols-12 lg:relative`}>
-                <section className='hidden lg:grid col-span-8 h-screen w-4/6 bg-primaryInv fixed p-5'>
+                <section className='hidden lg:grid col-span-8 h-screen w-4/6 bg-secondary fixed p-5'>
                     {wedding.undangan_digital.cover_undangan_digital &&
                         <div className={`relative w-full h-full grid items-end p-16`}>
                             <Image
@@ -405,7 +405,7 @@ const Theme1 = () => {
                                 height={500}
                                 priority
                             />
-                            <h1 className={`${playFair.className} uppercase z-50 text-primaryInv text-6xl`}>{wedding.wedding_name}</h1>
+                            <h1 className={`${playFair.className} uppercase z-50 text-secondary text-6xl`}>{wedding.wedding_name}</h1>
                         </div>
                     }
                 </section>
@@ -413,7 +413,7 @@ const Theme1 = () => {
                 <section className='block lg:grid lg:col-span-4 lg:col-start-9 relative'>
 
                     {/* NAVIGATION */}
-                    <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-tertiaryInv w-full py-3 grid justify-center z-30 border-t border-tertiaryInv'>
+                    <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-secondary w-full py-3 grid justify-center z-30 border-t border-secondary'>
                         <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-building-4-line ri-xl"></i>
                             <p className='p3-r capitalize'>resepsi virtual</p>
@@ -466,7 +466,7 @@ const Theme1 = () => {
                                             <div className="mt-4">
                                                 <button
                                                     type="button"
-                                                    className="inline-flex justify-center rounded-md border border-transparent bg-primaryInv px-4 py-2 text-sm font-medium text-white hover:bg-tertiaryInv focus:outline-none"
+                                                    className="inline-flex justify-center rounded-md border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-secondary/80 focus:outline-none"
                                                     onClick={closeModal}
                                                 >
                                                     Close
@@ -481,7 +481,7 @@ const Theme1 = () => {
 
                     {/* MAIN HERO */}
                     <section className='container grid min-w-full justify-center h-screen px-2.5 py-5 bg-rsvp-texture bg-cover bg-no-repeat bg-center'>
-                        <div data-aos="zoom-in" data-aos-duration="1000" className='grid h-full justify-end max-w-md rounded-full bg-white bg-opacity-90 border-2 border-solid border-tertiaryInv'>
+                        <div data-aos="zoom-in" data-aos-duration="1000" className='grid h-full justify-end max-w-md rounded-full bg-white bg-opacity-75 border-2 border-solid border-tertiaryInv'>
                             <div className='grid text-center items-center w-full px-5'>
                                 <div className='mb-5 grid justify-center'>
                                     <div className='w-3 h-3 bg-tertiaryInv rotate-45' />
@@ -509,7 +509,7 @@ const Theme1 = () => {
                     {/* PROFILE */}
                     <section className='container overflow-hidden pt-5 pb-12 grid mx-auto'>
                         <div className='p-6 text-center'>
-                            <h1 data-aos="zoom-in" data-aos-duration="1000" className={`${playFair.className} text-3xl text-primaryInv`}>
+                            <h1 data-aos="zoom-in" data-aos-duration="1000" className={`${playFair.className} text-3xl text-secondary`}>
                                 The Wedding Of
                             </h1>
                             <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} my-2 italic`}>The pleasure of your company is requested</p>
@@ -521,7 +521,7 @@ const Theme1 = () => {
                             <div>
                                 <div className='grid justify-center py-8'>
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
-                                        <div data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300" data-aos-once="true" className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -bottom-7 -left-10'></div>
+                                        <div data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300" data-aos-once="true" className='bg-flower-pink absolute h-40 w-full bg-contain bg-no-repeat -z-10 -bottom-7 -left-10'></div>
                                         <Image
                                             src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.pengantin_pria.foto}
                                             alt="Mempelai Pria"
@@ -533,7 +533,7 @@ const Theme1 = () => {
                                     </div>
                                 </div>
                                 <div className='text-center grid gap-y-2.5 px-2.5 py-5'>
-                                    <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-4xl text-primaryInv`}>{wedding.undangan_digital.pengantin_pria.nama_lengkap}</h2>
+                                    <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-4xl text-secondary`}>{wedding.undangan_digital.pengantin_pria.nama_lengkap}</h2>
                                     <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-base`}>Putra dari Bapak {wedding.undangan_digital.pengantin_pria.nama_ortu_bapak} dan {wedding.undangan_digital.pengantin_pria.nama_ortu_ibu}</p>
                                     <div data-aos="fade-up" data-aos-duration="1000" className='flex gap-2 items-center justify-center'>
                                         <i className="ri-instagram-line ri-1x"></i>
@@ -547,7 +547,7 @@ const Theme1 = () => {
                                 <div style={{ backgroundSize: '100% 100%' }} className='absolute -z-10 bg-center bg-story-texture -bottom-64 left-0 right-0 mx-auto h-full w-[500px] bg-no-repeat'></div>
                                 <div className='grid justify-center py-8'>
                                     <div data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" className='relative w-56 h-56 rounded-full border-2 border-solid border-tertiaryInv'>
-                                        <div className='bg-flower-dark absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
+                                        <div className='bg-flower-pink absolute h-40 w-full bg-contain bg-no-repeat -z-10 -top-7 -right-10 rotate-180'></div>
                                         <Image
                                             src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.undangan_digital.pengantin_wanita.foto}
                                             alt="Mempelai Pria"
@@ -559,7 +559,7 @@ const Theme1 = () => {
                                     </div>
                                 </div>
                                 <div className='text-center grid gap-y-2.5 px-2.5 py-5'>
-                                    <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-4xl text-primaryInv`}>{wedding.undangan_digital.pengantin_wanita.nama_lengkap}</h2>
+                                    <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-4xl text-secondary`}>{wedding.undangan_digital.pengantin_wanita.nama_lengkap}</h2>
                                     <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-base`}>Putri dari {wedding.undangan_digital.pengantin_wanita.nama_ortu_bapak} dan Ibu {wedding.undangan_digital.pengantin_wanita.nama_ortu_ibu}</p>
                                     <div data-aos="fade-up" data-aos-duration="1000" className='flex gap-2 items-center justify-center'>
                                         <i className="ri-instagram-line ri-1x"></i>
@@ -583,12 +583,12 @@ const Theme1 = () => {
                             <div className='grid gap-1 py-5'>
                                 <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-tertiaryInv italic text-5xl leading-normal`}>Save<br />The Date</h1>
                                 {/* <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" className='text-primaryInv'>July 8 <sup>th </sup>, 2023</p> */}
-                                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-primaryInv text-lg italic`}>{wedding.reception_begin_at.date}</p>
+                                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-secondary text-lg italic`}>{wedding.reception_begin_at.date}</p>
                             </div>
 
                             {/* COUNTDOWN */}
                             <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100" className='grid justify-center py-10'>
-                                {isClient && <Countdown className={`${playFair.className} text-5xl text-primaryInv`} date={`${yearPart}-${monthPart}-${dayPart}T${wedding.reception_begin_at.time}:00`} />}
+                                {isClient && <Countdown className={`${playFair.className} text-5xl text-secondary`} date={`${yearPart}-${monthPart}-${dayPart}T${wedding.reception_begin_at.time}:00`} />}
                             </div>
 
                             {/* <div className='grid justify-end py-5 mt-1'>
@@ -605,7 +605,7 @@ const Theme1 = () => {
                                 <Tab className={({ selected }) =>
                                     classNames('flex justify-center items-center w-full px-4 border-b-2',
                                         selected
-                                            ? 'border-tertiaryInv text-tertiaryInv'
+                                            ? 'border-secondary text-secondary'
                                             : 'text-N400 border-N400'
                                     )
                                 }>
@@ -614,7 +614,7 @@ const Theme1 = () => {
                                 <Tab className={({ selected }) =>
                                     classNames('flex justify-center items-center w-full px-4 border-b-2',
                                         selected
-                                            ? 'border-tertiaryInv text-tertiaryInv'
+                                            ? 'border-secondary text-secondary'
                                             : 'text-N400 border-N400'
                                     )
                                 }>
@@ -631,7 +631,7 @@ const Theme1 = () => {
                                         <div style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-line-orn-event h-2.5 w-full bg-center bg-no-repeat -bottom-7'></div>
 
                                         <div className='grid gap-1.5 p-5 text-center'>
-                                            <h2 data-aos="zoom-in" data-aos-duration="1500" className={`${playFair.className} text-2xl text-primaryInv italic`}>Intimate Reception</h2>
+                                            <h2 data-aos="zoom-in" data-aos-duration="1500" className={`${playFair.className} text-2xl text-secondary italic`}>Intimate Reception</h2>
                                             <p data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} text-base italic text-[#00000080]`}>Kami mengundang anda ke dalam Resepsi Pernikahan Virtual (Virtual Wedding) berikut ini.</p>
                                         </div>
                                     </div>
@@ -641,9 +641,9 @@ const Theme1 = () => {
                                             {/* DECORATION */}
                                             <div data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="250" style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
 
-                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-primaryInv text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
+                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-secondary text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
                                             {/* <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}<sup>th</sup></span> {wedding.reception_begin_at.month}, {yearPart}</h2> */}
-                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
+                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
                                         </div>
 
                                         <div className='p-5 text-center'>
@@ -657,11 +657,11 @@ const Theme1 = () => {
                                                 priority
                                             />
                                             <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>Virtual Reception</h3>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
                                         </div>
 
                                         <div className='grid p-5'>
-                                            <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} italic inline-block text-primaryInv border hover:bg-white border-solid hover:border-tertiaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-tertiaryInv bg-tertiaryInv transition-all ease-in-out`}>Hadiri Resepsi</Link></div>
+                                            <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} italic inline-block text-white border hover:bg-white border-solid hover:border-tertiaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-tertiaryInv bg-tertiaryInv transition-all ease-in-out`}>Hadiri Resepsi</Link></div>
                                             {/* <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondaryInv rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div> */}
                                         </div>
                                     </div>
@@ -674,7 +674,7 @@ const Theme1 = () => {
                                         <div style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-line-orn-event h-2.5 w-full bg-center bg-no-repeat -bottom-7'></div>
 
                                         <div className='grid gap-1.5 p-5 text-center'>
-                                            <h2 data-aos="zoom-in" data-aos-duration="1500" className={`${playFair.className} text-2xl text-primaryInv italic`}>It&#39;s Wedding Day</h2>
+                                            <h2 data-aos="zoom-in" data-aos-duration="1500" className={`${playFair.className} text-2xl text-secondary italic`}>It&#39;s Wedding Day</h2>
                                             <p data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} text-base italic text-[#00000080]`}>Kami mengundang anda ke Resepsi Pernikahan berikut ini.</p>
                                         </div>
                                     </div>
@@ -684,8 +684,8 @@ const Theme1 = () => {
                                             {/* DECORATION */}
                                             <div data-aos="zoom-out" data-aos-duration="3000" data-aos-delay="250" style={{ backgroundSize: 'auto 100%' }} className='-z-10 absolute bg-forest h-[130%] w-full bg-center bg-no-repeat top-0 bottom-0 left-0 right-0 m-auto'></div>
 
-                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-primaryInv text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
-                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
+                                            <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} uppercase text-secondary text-xl tracking-[8px]`}>{wedding.reception_begin_at.day},</h3>
+                                            <h2 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary text-3xl font-semibold`}><span className='text-5xl'>{dayPart}</span> {wedding.reception_begin_at.month} {yearPart}</h2>
                                         </div>
 
                                         {
@@ -702,7 +702,7 @@ const Theme1 = () => {
                                                             priority
                                                         />
                                                         <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>{daftar_acara.event_name}</h3>
-                                                        <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{daftar_acara.event_time} — End</p>
+                                                        <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary text-lg`}>{daftar_acara.event_time} — End</p>
                                                     </div>
                                                 )
                                             })
@@ -719,12 +719,12 @@ const Theme1 = () => {
                                                 priority
                                             />
                                             <h3 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} mb-3 italic text-secondaryInvInv text-4xl text-tertiaryInv`}>Reception</h3>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary text-lg`}>{wedding.reception_begin_at.time} — {wedding.reception_end_at.time}</p>
                                         </div>
 
                                         <div className='grid gap-2 p-5 text-center'>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic font-bold text-primaryInv`}>{wedding.undangan_digital.reception_location_name}</p>
-                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-primaryInv`}>{wedding.undangan_digital.reception_location_address}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic font-bold text-secondary`}>{wedding.undangan_digital.reception_location_name}</p>
+                                            <p data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} italic text-secondary`}>{wedding.undangan_digital.reception_location_address}</p>
                                             {/* <p data-aos="fade-up" data-aos-duration="1000" className='text-primaryInv'>Tabanan Regency</p> */}
                                             <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><a href={wedding.undangan_digital.reception_location_maps_url} target='_blank' className={`${playFair.className} italic inline-block text-tertiaryInv border bg-white border-solid border-tertiaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-white hover:bg-tertiaryInv transition-all ease-in-out`}>View Maps</a></div>
                                         </div>
@@ -739,7 +739,7 @@ const Theme1 = () => {
                     <section className='pt-5 pb-10 bg-forest-potrait bg-cover bg-center mx-auto min-w-full'>
                         <div className='max-w-md mx-auto'>
                             <div className='px-5 py-6'>
-                                <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-primaryInv italic text-left text-4xl`}>Our Moment</h1>
+                                <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-secondary italic text-left text-4xl`}>Our Moment</h1>
                             </div>
                             <div className='px-5 grid grid-cols-2 gap-3 overflow-hidden'>
                                 {wedding.media.prewedding_photos.map((photos, key) => {
@@ -769,7 +769,7 @@ const Theme1 = () => {
                         {wedding.media.prewedding_videos[0] &&
                             <div className='max-w-md mx-auto mt-40'>
                                 <div className='px-5 py-6'>
-                                    <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-primaryInv italic text-left text-4xl`}>Video gallery</h1>
+                                    <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-secondary italic text-left text-4xl`}>Video gallery</h1>
                                 </div>
                                 <div className='p-5'>
                                     <iframe
@@ -787,8 +787,8 @@ const Theme1 = () => {
                     </section>
 
                     {/* TIMELINE */}
-                    <section className='min-w-full pt-5 pb-10 bg-gradient-to-b from-white from-70% to-backgroundColorInv to-90%'>
-                        <h1 data-aos="fade-right" data-aos-duration="1000" className={`${playFair.className} text-primaryInv italic text-left text-4xl p-5`}>Our Story</h1>
+                    <section className='min-w-full pt-5 pb-10 bg-gradient-to-b from-white from-70% to-secondary to-90%'>
+                        <h1 data-aos="fade-right" data-aos-duration="1000" className={`${playFair.className} text-secondary italic text-left text-4xl p-5`}>Our Story</h1>
 
                         <div className={`${playFair.className}`}>
                             <Chrono
@@ -828,22 +828,22 @@ const Theme1 = () => {
                                 hideControls={true}
                                 // scrollable={true}
                                 theme={{
-                                    primary: "#765b46",
+                                    primary: "#FF9797",
                                     secondary: "#D5AF6F",
                                     cardBgColor: "white",
                                     titleColor: "black",
                                     titleColorActive: "white",
-                                    cardTitleColor: "#906020"
+                                    cardTitleColor: "#FF9797"
                                 }}
                             />
                         </div>
                     </section>
 
                     {/* RSPV & COMMENT */}
-                    <section className='bg-backgroundColorInv pt-5 pb-2.5'>
+                    <section className='bg-secondary pt-5 pb-2.5'>
                         <div className='p-5 grid gap-4'>
-                            <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-primaryInv italic text-left text-4xl`}>Wedding Wish</h1>
-                            <p data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-primaryInv italic text-left text-base`}>{ucapanUndanganDigital?.total} Comments</p>
+                            <h1 data-aos="fade-up" data-aos-duration="1000" className={`${playFair.className} text-white italic text-left text-4xl`}>Wedding Wish</h1>
+                            <p data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" className={`${playFair.className} text-white italic text-left text-base`}>{ucapanUndanganDigital?.total} Comments</p>
 
                             <div className='flex justify-between'>
 
@@ -855,17 +855,17 @@ const Theme1 = () => {
                                 ))} */}
 
                                 {/*  */}
-                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
-                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.hadir}</h2>
-                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Hadir</p>
+                                <div className='border-2 rounded border-solid border-white p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-white`}>{ucapanUndanganDigital?.hadir}</h2>
+                                    <p className={`${playFair.className} text-base text-white text-center italic`}>Hadir</p>
                                 </div>
-                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
-                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.tidak_hadir}</h2>
-                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Tidak Hadir</p>
+                                <div className='border-2 rounded border-solid border-white p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-white`}>{ucapanUndanganDigital?.tidak_hadir}</h2>
+                                    <p className={`${playFair.className} text-base text-white text-center italic`}>Tidak Hadir</p>
                                 </div>
-                                <div className='border-2 rounded border-solid border-primaryInv p-4 grid items-center justify-items-center w-20'>
-                                    <h2 className={`${playFair.className} text-3xl text-primaryInv`}>{ucapanUndanganDigital?.ragu}</h2>
-                                    <p className={`${playFair.className} text-base text-primaryInv text-center italic`}>Ragu</p>
+                                <div className='border-2 rounded border-solid border-white p-4 grid items-center justify-items-center w-20'>
+                                    <h2 className={`${playFair.className} text-3xl text-white`}>{ucapanUndanganDigital?.ragu}</h2>
+                                    <p className={`${playFair.className} text-base text-white text-center italic`}>Ragu</p>
                                 </div>
                             </div>
                         </div>
@@ -941,7 +941,7 @@ const Theme1 = () => {
                                 </Listbox>
                             </div>
                             <div className="flex items-center justify-between z-10">
-                                <button data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} bg-primaryInv text-white italic py-2 px-8 rounded `} type="submit">
+                                <button data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} bg-tertiaryInv text-white hover:text-tertiaryInv border hover:bg-white border-tertiaryInv transition-all ease-in-out italic py-2 px-8 rounded `} type="submit">
                                     Kirim
                                 </button>
                             </div>
@@ -964,11 +964,11 @@ const Theme1 = () => {
                             {ucapanUndanganDigital?.data?.map((data, key) => (
                                 <div data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className='mb-7' key={key}>
                                     <div>
-                                        <h3 className={`${playFair.className} text-lg text-primaryInv font-bold`}>{data.nama}</h3>
-                                        <small className={`${playFair.className} text-xs text-primaryInv italic`}>{data.status_kehadiran}</small>
+                                        <h3 className={`${playFair.className} text-lg text-white font-bold`}>{data.nama}</h3>
+                                        <small className={`${playFair.className} text-xs text-white italic`}>{data.status_kehadiran}</small>
                                     </div>
                                     <div className='mt-2.5'>
-                                        <p className={`${playFair.className} text-base text-primaryInv italic`}>{data.ucapan_invitation_text}</p>
+                                        <p className={`${playFair.className} text-base text-white italic`}>{data.ucapan_invitation_text}</p>
                                     </div>
                                 </div>
                             ))}
@@ -976,7 +976,7 @@ const Theme1 = () => {
 
                         <div className='p-5'>
                             {ucapanUndanganDigital?.data && displayCount < ucapanUndanganDigital?.data?.length && (
-                                <button className={`${playFair.className} bg-primaryInv text-white w-full py-2.5 px-5 rounded text-base italic`} onClick={handleLoadMore}>Load More Comments</button>
+                                <button className={`${playFair.className} bg-tertiaryInv text-white w-full py-2.5 px-5 rounded text-base italic border hover:bg-white border-tertiaryInv transition-all ease-in-out`} onClick={handleLoadMore}>Load More Comments</button>
                             )}
                         </div>
 
@@ -985,7 +985,7 @@ const Theme1 = () => {
                     </section>
 
                     {/* FOOTNOTE */}
-                    <section className='bg-backgroundColorInv container min-w-full grid justify-center relative py-7 overflow-hidden mx-auto'>
+                    <section className='bg-secondary container min-w-full grid justify-center relative py-7 overflow-hidden mx-auto'>
                         {/* DECORATION */}
                         <div className='left-0 right-0 mx-auto'>
                             <div className='absolute min-w-full h-full w-[240%] max-w-[900px] bg-no-repeat bg-center bg-forest-landscape opacity-20'
@@ -998,11 +998,11 @@ const Theme1 = () => {
                         </div>
                         <div className='relative px-5 py-16 mt-36 text-center grid gap-5'>
                             {/* DECORATION */}
-                            <div data-aos-once="true" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" className='z-10 absolute left-0 right-0 mx-auto h-full w-[130px] rounded-full bg-[#E6D1B6]' />
-                            <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} italic z-20 text-primaryInv text-base`}>Two souls become one heart</p>
-                            <h1 data-aos-once="true" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" className={`${playFair.className} z-20 text-6xl text-primaryInv`}>{wedding.wedding_name.replace('&', '')}</h1>
+                            <div data-aos-once="true" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" className='z-10 absolute left-0 right-0 mx-auto h-full w-[130px] rounded-full bg-secondary/70' />
+                            <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" className={`${playFair.className} italic z-20 text-white text-base`}>Two souls become one heart</p>
+                            <h1 data-aos-once="true" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" className={`${playFair.className} z-20 text-6xl text-white`}>{wedding.wedding_name.replace('&', '')}</h1>
                             {/* <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500" className='z-20 text-base text-primaryInv'>July 8<sup>th</sup> 2023</p> */}
-                            <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500" className={`${playFair.className} z-20 text-xl text-primaryInv`}>{wedding.reception_begin_at.date}</p>
+                            <p data-aos-once="true" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500" className={`${playFair.className} z-20 text-xl text-white`}>{wedding.reception_begin_at.date}</p>
                         </div>
                     </section>
 
@@ -1012,7 +1012,7 @@ const Theme1 = () => {
                         </button>
                     </section> */}
 
-                    <footer className='bg-primaryInv py-2.5 grid justify-center min-w-full'>
+                    <footer className='bg-secondary py-2.5 grid justify-center min-w-full'>
                         <div>
                             <p className={`${playFair.className} italic text-center text-white`}>Powered by <Link href='/' className={`font-ade uppercase hover:underline not-italic`}>virtuwed</Link></p>
                         </div>
