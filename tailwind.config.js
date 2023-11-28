@@ -30,7 +30,10 @@ module.exports = {
           end: '#FF9797',     // Warna pada langkah kedua
         },
 
+
+
         // NEUTRAL
+        dark: "#181926",
         N900: "#1F2223",
         N800: "#363939",
         N700: "#57595A",
