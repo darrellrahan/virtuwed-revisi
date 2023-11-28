@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-const page = () => {
+const Menu = () => {
     useEffect(() => {
         document.body.classList.remove("overflow-hidden");
     }, [])
@@ -64,4 +64,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Menu
