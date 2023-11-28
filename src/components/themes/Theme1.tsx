@@ -382,7 +382,7 @@ const Theme1 = () => {
                                     <i className="ri-calendar-event-line ri-lg"></i>
                                     Undangan
                                 </button>
-                                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
+                                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
                                     <i className="ri-image-line ri-lg"></i>
                                     Galeri
                                 </Link>
@@ -413,10 +413,14 @@ const Theme1 = () => {
                 <section className='block lg:grid lg:col-span-4 lg:col-start-9 relative'>
 
                     {/* NAVIGATION */}
-                    <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-secondary w-full py-3 grid justify-center z-30 border-t border-secondary'>
+                    <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-secondary w-full py-3 grid grid-cols-2 justify-items-center justify-center z-30 border-t border-secondary'>
                         <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-building-4-line ri-xl"></i>
                             <p className='p3-r capitalize'>resepsi virtual</p>
+                        </Link>
+                        <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
+                            <i className="ri-image-line ri-xl"></i>
+                            <p className='p3-r capitalize'>kenangan virtual</p>
                         </Link>
                     </section>
                     {/* MODAL MOMENT */}

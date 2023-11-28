@@ -33,12 +33,12 @@ export const data = {
                 "fov": 1.5707963267948966
             },
             "linkHotspots": [
-                {
-                    "yaw": 0.5787631231131556,
-                    "pitch": 0.1321688672861896,
-                    "rotation": 0,
-                    "target": "fajar_tiara_hall.jpg"
-                }
+                // {
+                //     "yaw": 0.5787631231131556,
+                //     "pitch": 0.1321688672861896,
+                //     "rotation": 0,
+                //     "target": "fajar_tiara_hall.jpg"
+                // }
             ],
             "infoHotspots": [
                 {

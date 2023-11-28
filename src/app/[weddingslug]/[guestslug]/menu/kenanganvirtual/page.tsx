@@ -1,5 +1,5 @@
 'use client'
-// import KenanganVirtual from '@/components/kenanganVirtual'
+import { useSearchParams } from 'next/navigation'
 import KenanganVirtual from '@/components/KenanganVirtual'
 import { data } from './dataKenanganVirtual'
 import React, { useEffect, useState } from 'react'
@@ -25,6 +25,9 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
 
 
     const guest = useSelector((state: RootState) => state.value.guest);
+    const searchParams = useSearchParams()
+
+    const place = searchParams.get('place')
 
     useEffect(() => {
         // setIsPlaying(true)
@@ -55,8 +58,11 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
     if (params.guestslug === guest.guest_slug) {
         return (
             <main className='h-screen w-full overflow-hidden'>
-                <KenanganVirtual dataKenanganVirtual={data} />
+                {place &&
+                    <KenanganVirtual place={place as string} dataKenanganVirtual={data} />
+                }
 
+                {/* <h1>{place}</h1> */}
                 {/* MUSIC */}
                 {/* <section className='fixed z-10 top-3 right-3'>
                     <button className={`block bg-music-disc bg-cover w-12 h-12 ${isPlaying ? 'animate-spin-slow' : 'animate-none'}`}
