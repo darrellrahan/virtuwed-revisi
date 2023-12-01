@@ -1,6 +1,6 @@
 'use client'
-import { getAllGuestDigitalGiftByWeddingSessionId } from '@/utility/hadiah';
-import { GET_GIFT } from '@/utility/queries';
+import { getAllGuestDigitalGiftByWeddingSessionId } from '@/src/utility/hadiah';
+import { GET_GIFT } from '@/src/utility/queries';
 import React, { useEffect, useState } from 'react'
 
 type getAllGuestDigitalGiftByWeddingSessionId = {

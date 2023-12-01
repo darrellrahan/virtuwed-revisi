@@ -1,6 +1,6 @@
 'use client'
-import { getAllAssetByWeddingSession } from '@/utility/assets';
-import { GET_ASSETS } from '@/utility/queries';
+import { getAllAssetByWeddingSession } from '@/src/utility/assets';
+import { GET_ASSETS } from '@/src/utility/queries';
 import React, { useEffect, useState } from 'react'
 
 type getAllAssetByWeddingSession = {

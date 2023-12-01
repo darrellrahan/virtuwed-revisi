@@ -1,6 +1,6 @@
 'use client'
-import { GET_GUEST } from '@/utility/queries';
-import { getAllGuestWeddingSessionId } from '@/utility/tamu';
+import { GET_GUEST } from '@/src/utility/queries';
+import { getAllGuestWeddingSessionId } from '@/src/utility/tamu';
 import React, { useEffect, useState } from 'react'
 
 type GuestWeddingSession = {

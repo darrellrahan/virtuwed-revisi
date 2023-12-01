@@ -1,6 +1,6 @@
 'use client'
-import { GET_COMMENT } from '@/utility/queries';
-import { getAllGuestCommentsByWeddingSessionId } from '@/utility/ucapan';
+import { GET_COMMENT } from '@/src/utility/queries';
+import { getAllGuestCommentsByWeddingSessionId } from '@/src/utility/ucapan';
 import React, { useEffect, useState } from 'react'
 
 type getAllGuestCommentsByWeddingSessionId = {
