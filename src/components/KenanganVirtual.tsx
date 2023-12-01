@@ -1,5 +1,5 @@
 'use client'
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 import LoadingSkeleton from './LoadingSkeleton';
@@ -45,13 +45,15 @@ interface PanoProps {
     };
 
     place: string
+
+    lang: string
 }
 
 
 
 
 
-const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual, place }) => {
+const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual, place, lang }) => {
     const router = useRouter()
 
     const panoRef = useRef(null);
@@ -322,7 +324,7 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual, place }) =>
             </div >
 
             <>
-                <div onClick={() => router.push(`/${wedding.wedding_slug}/${guest.guest_slug}/menu`)} ref={menuGallery} className='hotspot link-hotspot'>
+                <div onClick={() => router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu`)} ref={menuGallery} className='hotspot link-hotspot'>
                     <img src="/assets/kenanganVirtual/link.png" alt="" className='link-hotspot-icon' />
                     <div className='hotspot-tooltip link-hotspot-tooltip'>
                         Menu

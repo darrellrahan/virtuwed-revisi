@@ -2,6 +2,8 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Head from 'next/head'
 import { ReduxProvider } from './redux/provider'
+import { Locale, i18n } from '@/i18n.config'
+
 
 export const metadata = {
   title: 'Virtuwed',
@@ -9,19 +11,24 @@ export const metadata = {
 }
 
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }))
+}
+
+
 const amiamie = localFont({
   src: [
 
     {
-      path: '../../public/assets/fonts/amiamie/Amiamie-Light.ttf',
+      path: '../../../public/assets/fonts/amiamie/Amiamie-Light.ttf',
       weight: '300'
     },
     {
-      path: '../../public/assets/fonts/amiamie/Amiamie-Regular.ttf',
+      path: '../../../public/assets/fonts/amiamie/Amiamie-Regular.ttf',
       weight: '400'
     },
     {
-      path: '../../public/assets/fonts/amiamie/Amiamie-Black.ttf',
+      path: '../../../public/assets/fonts/amiamie/Amiamie-Black.ttf',
       weight: '700'
     }
   ],
@@ -31,7 +38,7 @@ const amiamie = localFont({
 const deAetna = localFont({
   src: [
     {
-      path: '../../public/assets/fonts/deAetna/DeAetna-Caption.otf',
+      path: '../../../public/assets/fonts/deAetna/DeAetna-Caption.otf',
       weight: '700'
     }
   ],
@@ -41,7 +48,7 @@ const deAetna = localFont({
 const ade = localFont({
   src: [
     {
-      path: '../../public/assets/fonts/ade/Ade-Display.otf',
+      path: '../../../public/assets/fonts/ade/Ade-Display.otf',
       weight: '400'
     }
   ],
@@ -52,11 +59,13 @@ const ade = localFont({
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { lang: Locale }
 }) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <Head>
         <link rel="preload" href="/video.mp4" as="video" />
       </Head>

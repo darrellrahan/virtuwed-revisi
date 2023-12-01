@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.2",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.7",
@@ -27,6 +28,7 @@
     "graphql": "^16.6.0",
     "hamburger-react": "^2.5.0",
     "marzipano": "^0.10.2",
+    "negotiator": "^0.6.3",
     "next": "^14.0.0",
     "panolens": "^0.12.1",
     "postcss": "8.4.24",
@@ -50,6 +52,7 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.1.0",
+    "@types/negotiator": "^0.6.3",
     "@types/react-scroll": "^1.8.7",
     "@types/three": "^0.152.1",
     "@types/video-react": "^0.15.4",

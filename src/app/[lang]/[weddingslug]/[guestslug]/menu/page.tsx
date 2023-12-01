@@ -1,10 +1,11 @@
 'use client'
-import { RootState } from '@/app/redux/reducers';
+import { Locale } from '@/i18n.config';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-const Menu = () => {
+const Menu = ({ params }: { params: { lang: Locale } }) => {
     useEffect(() => {
         document.body.classList.remove("overflow-hidden");
     }, [])
@@ -24,7 +25,7 @@ const Menu = () => {
 
                 <input type="text" placeholder="Cari event" className="input input-bordered w-full" />
 
-                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className='pt-3'>
+                <Link href={`/${params.lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className='pt-3'>
                     <div className='flex justify-between items-center pb-2'>
                         <h4>Pernikahan #1</h4>
                         <p className='l4-r'>4 Desember 2024</p>
@@ -41,7 +42,7 @@ const Menu = () => {
                         </div>
                     </div>
                 </Link>
-                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[1]`} className='pt-3'>
+                <Link href={`/${params.lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[1]`} className='pt-3'>
                     <div className='flex justify-between items-center pb-2'>
                         <h4>Kelahiran Anak</h4>
                         <p className='l4-r'>20-30 November 2023</p>

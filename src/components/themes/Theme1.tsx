@@ -7,7 +7,7 @@ import Countdown from 'react-countdown';
 import Link from 'next/link';
 import { Dialog, Listbox, Transition } from '@headlessui/react'
 import axios from 'axios';
-import { countGuestComment, countRSPVStatus, getAllGuestCommentsByWeddingSessionId } from '@/app/api/api';
+import { countGuestComment, countRSPVStatus, getAllGuestCommentsByWeddingSessionId } from '@/src/app/[lang]/api/api';
 import { useSelector } from 'react-redux';
 
 // FONT PURPOSE
@@ -23,7 +23,9 @@ function classNames(...classes: string[]) {
 // ANIMATION
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import the CSS file
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
+import { Locale } from '@/i18n.config';
+// import { RootState } from '@/src/app/redux/reducers';
 
 type GuestComments = {
     id: string;
@@ -65,7 +67,7 @@ const rspv = [
 ]
 
 
-const Theme1 = () => {
+const Theme1 = ({ lang }: { lang: Locale }) => {
     const [isClient, setIsClient] = useState(false);
     const openingContainerDigitalInvitation = useRef<HTMLDivElement>(null)
 
@@ -372,7 +374,7 @@ const Theme1 = () => {
 
                         <div className='grid gap-4 max-w-screen-md w-full mx-auto z-10'>
 
-                            <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} px-1.5 py-3 bg-secondary text-white w-full rounded-lg flex gap-2 items-center justify-center`}>
+                            <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} px-1.5 py-3 bg-secondary text-white w-full rounded-lg flex gap-2 items-center justify-center`}>
                                 <i className="ri-cake-2-fill ri-lg"></i>
                                 Hadiri Pernikahan
                             </Link>
@@ -382,7 +384,7 @@ const Theme1 = () => {
                                     <i className="ri-calendar-event-line ri-lg"></i>
                                     Undangan
                                 </button>
-                                <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
+                                <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
                                     <i className="ri-image-line ri-lg"></i>
                                     Galeri
                                 </Link>
@@ -414,11 +416,11 @@ const Theme1 = () => {
 
                     {/* NAVIGATION */}
                     <section className='fixed bottom-0 left-0 h-auto lg:w-2/6 lg:right-0 lg:left-auto bg-white text-secondary w-full py-3 grid grid-cols-2 justify-items-center justify-center z-30 border-t border-secondary'>
-                        <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
+                        <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-building-4-line ri-xl"></i>
                             <p className='p3-r capitalize'>resepsi virtual</p>
                         </Link>
-                        <Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
+                        <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-image-line ri-xl"></i>
                             <p className='p3-r capitalize'>kenangan virtual</p>
                         </Link>
@@ -665,7 +667,7 @@ const Theme1 = () => {
                                         </div>
 
                                         <div className='grid p-5'>
-                                            <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href={`/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} italic inline-block text-white border hover:bg-white border-solid hover:border-tertiaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-tertiaryInv bg-tertiaryInv transition-all ease-in-out`}>Hadiri Resepsi</Link></div>
+                                            <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/resepsivirtual`} className={`${playFair.className} italic inline-block text-white border hover:bg-white border-solid hover:border-tertiaryInv rounded-lg pt-2 pb-2.5 px-6 hover:text-tertiaryInv bg-tertiaryInv transition-all ease-in-out`}>Hadiri Resepsi</Link></div>
                                             {/* <div data-aos="fade-up" data-aos-duration="1000" className='mt-3 text-center'><Link href="/homepage/resepsivirtual" className='inline-block text-white bg-secondaryInv rounded-lg pt-2 pb-2.5 px-6'>Buka Resepsi Virtual</Link></div> */}
                                         </div>
                                     </div>

@@ -1,19 +1,21 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
-import KenanganVirtual from '@/components/KenanganVirtual'
+import KenanganVirtual from '@/src/components/KenanganVirtual'
 import { data } from './dataKenanganVirtual'
 import React, { useEffect, useState } from 'react'
 // var Marzipano = require('./marzipano');
 import { redirect } from 'next/navigation';
-import { RootState } from '@/app/redux/reducers';
+// import { RootState } from '@/src/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers'
 import { useSelector } from 'react-redux';
 
 // import boopSfx from '/assets/kenanganVirtual/GonnaLiveForever.mp3'
 import useSound from 'use-sound';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
+import LoadingSkeleton from '@/src/components/LoadingSkeleton';
 import axios from 'axios';
+import { Locale } from '@/i18n.config'
 
-const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }) => {
+const Page = ({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) => {
     // const [play, { stop, isPlaying }] = useSound('/assets/kenanganVirtual/GonnaLiveForever.mp3');
     // const [play, { pause }] = useSound('/assets/kenanganVirtual/GonnaLiveForever.mp3')
     // const [isPlaying, setIsPlaying] = useState(false);
@@ -59,7 +61,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
         return (
             <main className='h-screen w-full overflow-hidden'>
                 {place &&
-                    <KenanganVirtual place={place as string} dataKenanganVirtual={data} />
+                    <KenanganVirtual lang={params.lang} place={place as string} dataKenanganVirtual={data} />
                 }
 
                 {/* <h1>{place}</h1> */}

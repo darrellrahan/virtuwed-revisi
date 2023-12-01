@@ -35,7 +35,7 @@ import { Player } from "video-react";
 // ANIMATION
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import YouTubePlayer from './YoutubePlayer';
@@ -91,7 +91,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-const Ballroom = () => {
+const Ballroom = (props: { lang: any }) => {
     const [isClient, setIsClient] = useState(false);
 
     const [loading, setLoading] = useState(false);
@@ -960,7 +960,7 @@ const Ballroom = () => {
             keluarRuanganInfospot.addEventListener('click', function () {
 
                 // Use the router to navigate without a page reload
-                router.push(`/${wedding.wedding_slug}/${guest.guest_slug}/`);
+                router.push(`/${props.lang}/${wedding.wedding_slug}/${guest.guest_slug}/`);
             });
 
 
@@ -973,7 +973,7 @@ const Ballroom = () => {
                 // window.location.href = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
                 // redirect('/' + wedding.wedding_slug + '/' + guest.guest_slug + '/kenanganvirtual')
                 // return redirect('/register-guest')
-                const newUrl = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
+                const newUrl = `/${props.lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`;
 
                 // Use the router to navigate without a page reload
                 router.push(newUrl);

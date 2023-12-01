@@ -11,13 +11,13 @@ import 'aos/dist/aos.css'; // Import the CSS file
 // FONT PURPOSE
 import { Playfair_Display } from 'next/font/google'
 import axios from 'axios';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
+import LoadingSkeleton from '@/src/components/LoadingSkeleton';
 const playFair = Playfair_Display({ subsets: ['latin'] })
 import { useDispatch, useSelector } from 'react-redux';
 // import { setData, fetchData } from '../redux/actions';
 import { fetchData as fetchAction, setData, setNewData } from '../redux/actions';
 import Image from 'next/image';
-import { ButtonDaisy } from '@/components/ButtonComponent';
+import { ButtonDaisy } from '@/src/components/ButtonComponent';
 
 
 const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }) => {

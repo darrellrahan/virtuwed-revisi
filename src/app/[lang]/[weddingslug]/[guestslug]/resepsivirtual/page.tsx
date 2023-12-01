@@ -1,17 +1,22 @@
 'use client'
-import Ballroom from '@/components/Ballroom';
+import Ballroom from '@/src/components/Ballroom';
 import { Suspense, useEffect, useState } from 'react';
 import Loading from './loading';
 import useSound from 'use-sound';
 import { redirect, usePathname } from 'next/navigation';
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { Locale } from '@/i18n.config';
+import { setData, fetchData as fetchAction } from '../../../redux/actions';
+import LoadingSkeleton from '@/src/components/LoadingSkeleton';
 
-const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }) => {
+const Page = ({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) => {
+    const dispatch = useDispatch();
 
     const API_BASE_URL = 'https://panel.virtuwed.id/api';
+    const API_ENDPOINT = `/wedding?wedding_slug=${params.weddingslug}&${params.guestslug && params.guestslug ? 'guest_slug=' + params.guestslug : ''}`;
     const ANALYTIC = `/wedding/analytic?wedding_slug=${params.weddingslug}&guest_slug=${params.guestslug}&feature_hit=resepsi_virtual`;
 
     // SONG 
@@ -22,6 +27,22 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
     const guest = useSelector((state: RootState) => state.value.guest);
 
     useEffect(() => {
+        dispatch(fetchAction());
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(API_BASE_URL + API_ENDPOINT);
+
+
+                dispatch(setData(response.data.data));
+                // setMessage(response.data.data.message)
+                console.log(response.data.data);
+                hitAnalytic()
+            }
+
+            catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
         // setIsPlaying(true)
         const hitAnalytic = async () => {
             try {
@@ -33,7 +54,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
             }
         };
 
-        hitAnalytic()
+        fetchData()
     }, [])
 
     // const handleButtonClick = () => {
@@ -52,7 +73,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
             // <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden relative`}>
             <main className={`container w-full min-w-full min-h-[100dvh] h-[100dvh] mx-auto overflow-hidden relative`}>
                 <Suspense fallback={<Loading />}>
-                    <Ballroom />
+                    <Ballroom lang={params.lang} />
                 </Suspense>
 
                 {/* MUSIC */}
@@ -63,7 +84,11 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
             </main >
         )
     } else {
-        return redirect('/')
+        return (
+
+            // redirect('/')
+            <LoadingSkeleton />
+        )
     }
 
 

@@ -1,11 +1,14 @@
 'use client'
 
-import { setData, fetchData as fetchAction, setNewData, fetchNewData } from '@/app/redux/actions';
-import { RootState } from '@/app/redux/reducers';
-import { ButtonDaisy } from '@/components/ButtonComponent';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
-import Theme1 from '@/components/themes/Theme1';
-import Theme2 from '@/components/themes/Theme2';
+// import { setData, fetchData as fetchAction, setNewData, fetchNewData } from '@/app/redux/actions';
+import { setData, fetchData as fetchAction, setNewData, fetchNewData } from '../../redux/actions';
+// import { RootState } from '@/app/redux/reducers';
+import { RootState } from '../../redux/reducers';
+
+import { ButtonDaisy } from '@/src/components/ButtonComponent';
+import LoadingSkeleton from '@/src/components/LoadingSkeleton';
+import Theme1 from '@/src/components/themes/Theme1';
+import Theme2 from '@/src/components/themes/Theme2';
 import axios from 'axios';
 import React, { Suspense, useEffect, useState } from 'react'
 import { redirect } from 'next/navigation';
@@ -13,9 +16,10 @@ import { redirect } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Locale } from '@/i18n.config';
 
 
-const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }) => {
+const Page = ({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) => {
     const dispatch = useDispatch();
 
     const API_BASE_URL = 'https://panel.virtuwed.id/api';
@@ -30,7 +34,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
     const theme = useSelector((state: RootState) => state.value.theme);
 
     interface ThemeComponents {
-        [key: string]: () => JSX.Element;
+        [key: string]: ({ lang }: { lang: Locale }) => JSX.Element;
     }
 
     const themeComponents: ThemeComponents = {
@@ -185,7 +189,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string } }
 
     } else {
         return (
-            <ThemeComponent />
+            <ThemeComponent lang={params.lang} />
         )
     }
 
