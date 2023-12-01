@@ -215,12 +215,13 @@ export default async function Home({
 						<div className='grid justify-items-start lg:grid-cols-2 gap-6'>
 							<div>
 								<Image
-									src='https://katsudoto.id/media/assets/promo/kbt-min.webp'
+									src='/assets/landingpage/feature/feat4.webp'
 									alt="Jumbotron Ilustration"
 									className="w-full h-auto mx-auto"
-									width={220}
-									height={220}
+									width={2908}
+									height={1824}
 									priority
+									quality={100}
 								/>
 							</div>
 

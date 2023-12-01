@@ -505,7 +505,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                     {/* QUOTE */}
                     <div className='relative py-14'>
                         <div className='relative text-center mx-4 py-5'>
-                            <div data-aos="zoom-in" data-aos-duration="1500" style={{ backgroundSize: '100% 100%' }} className='absolute bottom-0 top-0 mx-auto right-0 left-0 w-full max-w-sm bg-no-repeat bg-center bg-[url(https://katsudoto.id/media/template/custom/denis-serlyn/brown/frame-quote-min.png)]'></div>
+                            <div data-aos="zoom-in" data-aos-duration="1500" style={{ backgroundSize: '100% 100%' }} className='absolute bottom-0 top-0 mx-auto right-0 left-0 w-full max-w-sm bg-no-repeat bg-center bg-[url(/assets/undanganDigital/website/frame-quote-min.png)]'></div>
                             <div className='grid items-center h-full px-6 overflow-y-auto'>
                                 <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className={`${playFair.className} leading-relaxed italic`}>&quot;The best thing to hold onto in life is each other.&quot;<br />– Audrey Hepburn</p>
                             </div>
@@ -655,7 +655,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                                         <div className='p-5 text-center'>
                                             <Image
                                                 data-aos="fade-up" data-aos-duration="1000"
-                                                src="https://katsudoto.id/media/template/icons/gold/01.png"
+                                                src="/assets/undanganDigital/website/01.png"
                                                 alt="Resepsi"
                                                 className="object-contain object-center mb-7 mx-auto"
                                                 width={50}
@@ -700,7 +700,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                                                     <div key={key} className='p-6 text-center'>
                                                         <Image
                                                             data-aos="fade-up" data-aos-duration="1000"
-                                                            src="https://katsudoto.id/media/template/icons/gold/01.png"
+                                                            src="/assets/undanganDigital/website/01.png"
                                                             alt="Icon Daftar Acara"
                                                             className="object-contain object-center mb-8 mx-auto"
                                                             width={50}
@@ -717,7 +717,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                                         <div className='p-6 text-center'>
                                             <Image
                                                 data-aos="fade-up" data-aos-duration="1000"
-                                                src="https://katsudoto.id/media/template/icons/gold/02.png"
+                                                src="/assets/undanganDigital/website/02.png"
                                                 alt="Resepsi"
                                                 className="object-contain object-center mb-8 mx-auto"
                                                 width={50}
