@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useState, useEffect, useRef } from 'react'
 import { Link as ScrollLink } from 'react-scroll';
 import MobileNavigation from './MobileNavigation';
+import LocaleSwitcher from './local-switcher';
 
 const Navbar = () => {
 
@@ -26,13 +27,15 @@ const Navbar = () => {
                         />
                     </ScrollLink>
 
-                    <div className="hidden lg:block">
+                    <div className="hidden lg:flex lg:gap-x-6">
                         <ul className="flex gap-6 font-amiamie text-third text-base">
-                            <li className='cursor-pointer'><ScrollLink to="Beranda" smooth={true} duration={500}><p>Beranda</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Fitur" smooth={true} duration={500}><p>Fitur</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Paket" smooth={true} duration={500}><p>Paket</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Testimoni" smooth={true} duration={500}><p>Testimoni</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Beranda" smooth={true} duration={500}><p>Home</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Fitur" smooth={true} duration={500}><p>Feature</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Paket" smooth={true} duration={500}><p>Packages</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Testimoni" smooth={true} duration={500}><p>Testimonial</p></ScrollLink></li>
                         </ul>
+
+                        <LocaleSwitcher />
                     </div>
                 </div>
 

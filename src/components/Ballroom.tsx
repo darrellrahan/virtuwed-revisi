@@ -35,7 +35,7 @@ import { Player } from "video-react";
 // ANIMATION
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import YouTubePlayer from './YoutubePlayer';
@@ -91,7 +91,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-const Ballroom = () => {
+const Ballroom = (props: { lang: any }) => {
     const [isClient, setIsClient] = useState(false);
 
     const [loading, setLoading] = useState(false);
@@ -960,7 +960,7 @@ const Ballroom = () => {
             keluarRuanganInfospot.addEventListener('click', function () {
 
                 // Use the router to navigate without a page reload
-                router.push(`/${wedding.wedding_slug}/${guest.guest_slug}/`);
+                router.push(`/${props.lang}/${wedding.wedding_slug}/${guest.guest_slug}/`);
             });
 
 
@@ -973,7 +973,7 @@ const Ballroom = () => {
                 // window.location.href = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
                 // redirect('/' + wedding.wedding_slug + '/' + guest.guest_slug + '/kenanganvirtual')
                 // return redirect('/register-guest')
-                const newUrl = `/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`;
+                const newUrl = `/${props.lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`;
 
                 // Use the router to navigate without a page reload
                 router.push(newUrl);
@@ -1266,12 +1266,163 @@ const Ballroom = () => {
                     left: '50%',
                     transform: 'translateX(-50%)'
                 }}
-                className='absolute w-full h-full z-10 hidden'>
-                <YouTubePlayer height={window.innerHeight} width={window.innerWidth} videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
-            </div>
+                className='absolute w-full h-full z-30 hidden'>
+                <div className='w-full h-full relative'>
+                    {/* NAVBAR */}
+                    <div className='bg-dark flex gap-x-2.5 justify-items-center justify-center items-center w-full h-14 fixed top-0 left-0 px-6'>
+                        <button onClick={() => document.querySelector('#livestreamContainer')?.classList.toggle('hidden')} className='z-10 absolute left-6 flex justify-self-start'>
+                            <i className="ri-arrow-left-s-line ri-xl text-white"></i>
+                        </button>
+                        <Image
+                            src={'/assets/logopack/Virtuwed_Main_Logo_White.png'}
+                            alt="Virtuwed Logo"
+                            width={1887}
+                            height={1003}
+                            className='h-6 w-auto'
+                        />
+                        <div>
+                            <h4 className='text-white'>Agy & Yoriko</h4>
+                            <p className='l4-r text-white'>Akad Nikah</p>
+                        </div>
+
+                    </div>
+
+                    <YouTubePlayer height={window.innerHeight} width={window.innerWidth} videoId={wedding.resepsi_virtual.wedding_live_streaming_link.query ? wedding.resepsi_virtual.wedding_live_streaming_link.query : "HqYhkpGgZXc"} />
+
+                    {/* COMMENT & BUTTON GIFT */}
+                    <div className='fixed b w-full bottom-0 left-0 bg-dark py-2.5 px-3 flex gap-x-2.5'>
+                        <input type="text" placeholder="Type your comment..." className="input input-bordered w-full" />
+                        <button onClick={() => document.querySelector('#digitalGiftContainer2')?.classList.toggle('hidden')} className='px-3'>
+                            <Image
+                                src={'/assets/ballroom/button/giftLivestream.svg'}
+                                alt="Virtuwed Logo"
+                                width={46}
+                                height={46}
+                                className='h-12 w-12'
+                            />
+                        </button>
+                    </div>
+
+
+                    < div id="digitalGiftContainer2" className='absolute w-full overflow-y-auto px-6 z-10 hidden'
+                        style={{
+                            maxWidth: '500px',
+                            maxHeight: '100%',
+                            minWidth: '200px',
+                            minHeight: '250px',
+                            WebkitOverflowScrolling: 'touch',
+                            // top: '72px',
+                            bottom: '80px',
+                            left: '50%',
+                            transform: 'translateX(-50%)'
+                        }}>
+
+                        {/* DIGITAL GIFT LIVESTREAM */}
+                        <div className="text-center text-black bg-White w-full grid gap-3 px-3 py-4 rounded">
+                            <div className='grid justify-end'>
+                                <button onClick={() => document.querySelector('#digitalGiftContainer2')?.classList.toggle('hidden')} >
+                                    <i className="ri-close-line ri-xl"></i>
+                                </button>
+                            </div>
+
+                            <div className='grid justify-items-center text-center w-full max-w-[500px] mx-auto'>
+                                <h3 className='capitalize text-N800'>berikan hadiah digital</h3>
+                                <p className='p3-r text-N700 max-w-[285px]'>Hadiah digital hanya merupakan simbolis, pengantin akan menerima nominal dari hadiah yang anda berikan</p>
+                            </div>
+
+                            <div className='p-3 grid w-full max-w-[500px] mx-auto'>
+                                <RadioGroup className='w-full grid gap-3' value={digitalGift} onChange={setDigitalGift}>
+                                    <div className="grid grid-cols-4 gap-y-3 gap-x-1">
+                                        {mainGifts.map((gift) => (
+                                            <RadioGroup.Option
+                                                key={gift.name}
+                                                value={gift}
+                                                style={{
+                                                    background: `
+                                        linear-gradient(357deg, #000 -23.05%, rgba(0, 0, 0, 0.00) 97.17%),
+                                        url('${gift.img}') center/cover no-repeat`,
+                                                }}
+                                                className={({ active, checked }) =>
+                                                    `${checked ? 'border-secondary border-4' : 'border-none'} grid w-full h-36 rounded-md items-end p-1.5 cursor-pointer`
+                                                }>
+                                                <div className='grid justify-start text-white text-start'>
+                                                    <p className='l4-r font-deAetna capitalize'>{gift.name}</p>
+                                                    <p className='text-[8px] capitalize'>{gift.price}</p>
+                                                </div>
+                                            </RadioGroup.Option>
+                                        ))}
+                                    </div >
+
+                                    {/* <RadioGroup.Option
+                                key={gifts[4].name}
+                                value={gifts[4]}
+                                className={({ active, checked }) => `${checked ? 'border-secondary text-secondary' : 'text-N500'} flex w-full border border-N500 pl-3 rounded-full items-center relative`}
+                            >
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Remember me</span>
+                                        <input type="checkbox" className="checkbox checkbox-primary" />
+                                    </label>
+                                </div>
+                                {({ active, checked }) => (
+                                    <>
+                                        <i className="ri-cash-line ri-xl absolute"></i>
+                                        <input
+                                            type="number"
+                                            // value={digitalGiftCustom}
+                                            // onChange={
+                                            //     (e) => {
+                                            //         setDigitalGiftCustom(e.target.value)
+                                            //         console.log(gifts[4].price)
+                                            //         console.log(digitalGiftCustom)
+                                            //     }
+                                            // }
+                                            placeholder={gifts[4].name}
+                                            className={`${checked ? 'text-secondary' : 'text-N500'} w-full outline-none py-3 text-center bg-transparent`}
+                                        />
+                                    </>
+                                )}
+                            </RadioGroup.Option> */}
+
+
+                                    <div className='flex w-full items-center gap-1 text-red-500'>
+                                        <i className="ri-error-warning-line self-start"></i>
+                                        <p className='p3-r'>Invoice akan dikirimkan ke whatsapp anda</p>
+                                    </div>
+                                </RadioGroup >
+                                <button
+                                    className='mt-3 z-10 btn btn-secondary rounded'
+                                    onClick={() => {
+                                        const digitalGiftModal = document.getElementById('digitalGiftModal') as HTMLDialogElement | null;
+                                        if (digitalGiftModal) {
+                                            digitalGiftModal.showModal();
+                                        }
+                                    }}>
+                                    <i className="ri-gift-line ri-xl"></i>
+                                    <p className='l2-r font-deAetna'>kirim hadiah</p>
+                                </button>
+                            </div >
+
+                            {/* DECORATION */}
+                            <Image
+                                src={
+                                    '/assets/virtuwed/accent/vintage-ornaments.png'
+                                }
+                                alt="decoration"
+                                width={110}
+                                height={110}
+                                className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                            />
+
+                        </div >
+                    </div>
+
+
+                </div>
+            </div >
 
             {/* KONFIRMASI */}
-            <div id="konfirmasiContainer" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
+            < div id="konfirmasiContainer" className='absolute w-full rounded-lg overflow-y-auto px-4 z-10 hidden'
                 style={{
                     maxWidth: '500px',
                     maxHeight: '100%',
@@ -1282,11 +1433,8 @@ const Ballroom = () => {
                     bottom: '88px',
                     left: '50%',
                     transform: 'translateX(-50%)'
-                }}
-                data-aos-once="true"
-                data-aos="zoom-in"
-                data-aos-delay="300"
-                data-aos-duration="1200"
+                }
+                }
             >
 
                 <div className="text-black bg-White rounded-lg overflow-auto w-full grid gap-3 px-3 pt-3 pb-6">
@@ -1399,10 +1547,10 @@ const Ballroom = () => {
                         className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
                     />
                 </div>
-            </div >
+            </ div >
 
             {/* HADIAH DIGITAL */}
-            <div id="digitalGiftContainer" className='absolute w-full h-full overflow-y-auto z-20 hidden'
+            < div id="digitalGiftContainer" className='absolute w-full h-full overflow-y-auto z-20 hidden'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -1412,7 +1560,8 @@ const Ballroom = () => {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
-                }}
+                }
+                }
             >
                 <div className="text-center text-black bg-White w-full grid gap-3 px-3 py-4">
                     <div className='grid justify-end'>
@@ -1536,7 +1685,7 @@ const Ballroom = () => {
                 </div >
             </ div >
             {/* MODAL VALIDATATION */}
-            <dialog id="digitalGiftModal" className="modal" >
+            < dialog id="digitalGiftModal" className="modal" >
                 <div className="modal-box bg-White px-5 py-8 grid justify-items-center gap-6 rounded-lg w-11/12 max-w-5xl">
 
                     <Image
@@ -1591,7 +1740,7 @@ const Ballroom = () => {
                         </button>
                     </form>
                 </div>
-            </dialog>
+            </dialog >
 
 
             {/* UCAPAN SELAMAT */}
@@ -1696,7 +1845,7 @@ const Ballroom = () => {
                 </div >
             </ div >
             {/* MODAL VALIDATATION */}
-            <dialog id="ucapanSelamatModal" className="modal" >
+            < dialog id="ucapanSelamatModal" className="modal" >
                 <div className="modal-box bg-White px-5 py-8 grid justify-items-center gap-6 rounded-lg w-11/12 max-w-5xl">
 
                     <Image

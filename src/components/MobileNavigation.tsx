@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import { Link as ScrollLink } from 'react-scroll';
+import LocaleSwitcher from './local-switcher';
 
 const MobileNavigation = (props: any) => {
 
@@ -33,6 +34,7 @@ const MobileNavigation = (props: any) => {
                 <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Fitur" smooth={true} duration={500}><p className='text-lg font-light'>Fitur</p></ScrollLink></li>
                 <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Paket" smooth={true} duration={500}><p className='text-lg font-light'>Paket</p></ScrollLink></li>
                 <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Testimoni" smooth={true} duration={500}><p className='text-lg font-light'>Testimoni</p></ScrollLink></li>
+                <LocaleSwitcher />
             </motion.ul>
         </AnimatePresence>
     )

@@ -30,7 +30,10 @@ module.exports = {
           end: '#FF9797',     // Warna pada langkah kedua
         },
 
+
+
         // NEUTRAL
+        dark: "#181926",
         N900: "#1F2223",
         N800: "#363939",
         N700: "#57595A",
@@ -54,14 +57,14 @@ module.exports = {
 
 
         // UNDANGAN DIGITAL PURPOSE
-        'flower-dark': "url(/assets/undanganDigital/website/flower-dark.png)",
-        'story-texture': "url(/assets/undanganDigital/website/story-texture.png)",
-        'silent-garden': "url(/assets/undanganDigital/website/silent-garden.png)",
+        'flower-pink': "url(/assets/undanganDigital/website/flower-pink.png)",
+        'story-texture': "url(/assets/undanganDigital/website/story-pink.png)",
+        'silent-garden': "url(/assets/undanganDigital/website/silent-garden-pink.png)",
         'line-orn-event': "url(/assets/undanganDigital/website/line-orn-event.png)",
-        'forest': "url(/assets/undanganDigital/website/forest.png)",
-        'forest-potrait': "url(/assets/undanganDigital/website/forest-potrait.png)",
-        'forest-landscape': "url(/assets/undanganDigital/website/forest-landscape.png)",
-        'rsvp-texture': "url(/assets/undanganDigital/website/rsvp-texture.png)",
+        'forest': "url(/assets/undanganDigital/website/forest-2-pink.png)",
+        'forest-potrait': "url(/assets/undanganDigital/website/forest-pink.png)",
+        'forest-landscape': "url(/assets/undanganDigital/website/forest-landscape-pink.png)",
+        'rsvp-texture': "url(/assets/undanganDigital/website/rsvp-pink.png)",
         'cover-wedding': "url(/assets/undanganDigital/Prewed24.jpeg)",
         'cover-session': "url(/assets/undanganDigital/website/cover-session.avif)",
         'music-disc': "url(/assets/undanganDigital/website/music-disc.png)",
@@ -81,6 +84,10 @@ module.exports = {
         'pengantin4': "url('/assets/kenanganVirtual/gallery/Prewed4.jpeg')",
         'pengantin5': "url('/assets/kenanganVirtual/gallery/Prewed5.jpeg')",
         'pengantin6': "url('/assets/kenanganVirtual/gallery/Prewed6.jpeg')",
+      },
+      screens: {
+        'tall': { 'raw': '(min-height: 700px)' },
+        // => @media (min-height: 800px) { ... }
       },
       linearGradientColors: {
         '107': '107deg, #primaryGradient-start -7.85%, #primaryGradient-end 88.84%',

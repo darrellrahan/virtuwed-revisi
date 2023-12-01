@@ -28,18 +28,18 @@ const Footer = () => {
 
                 <div className='grid grid-cols-2 items-start lg:pt-8 lg:justify-items-end'>
                     <div className='grid gap-4'>
-                        <h5 className='text-base lg:text-lg font-body text-white font-deAetna'>Navigasi</h5>
+                        <h5 className='text-base lg:text-lg font-body text-white font-deAetna'>Navigation</h5>
 
                         <ul className='grid gap-2 font-light font-amiamie'>
-                            <li className='cursor-pointer hover:underline'><ScrollLink to="Beranda" smooth={true} duration={500}><p className='text-white'>Beranda</p></ScrollLink></li>
-                            <li className='cursor-pointer hover:underline'><ScrollLink to="Fitur" smooth={true} duration={500}><p className='text-white'>Fitur</p></ScrollLink></li>
-                            <li className='cursor-pointer hover:underline'><ScrollLink to="Paket" smooth={true} duration={500}><p className='text-white'>Paket</p></ScrollLink></li>
-                            <li className='cursor-pointer hover:underline'><ScrollLink to="Testimoni" smooth={true} duration={500}><p className='text-white'>Testimoni</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Beranda" smooth={true} duration={500}><p className='text-white'>Home</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Fitur" smooth={true} duration={500}><p className='text-white'>Feature</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Paket" smooth={true} duration={500}><p className='text-white'>Packages</p></ScrollLink></li>
+                            <li className='cursor-pointer hover:underline'><ScrollLink to="Testimoni" smooth={true} duration={500}><p className='text-white'>Testimonial</p></ScrollLink></li>
                         </ul>
                     </div>
 
                     <div className='grid gap-4 items-start'>
-                        <h5 className='text-base lg:text-lg font-deAetna text-white'>Sosial Media</h5>
+                        <h5 className='text-base lg:text-lg font-deAetna text-white'>Media Social</h5>
 
                         <ul className='grid gap-2 font-light text-sm font-amiamie'>
                             <li>

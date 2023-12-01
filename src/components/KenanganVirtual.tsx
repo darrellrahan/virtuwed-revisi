@@ -1,10 +1,11 @@
 'use client'
-import { RootState } from '@/app/redux/reducers';
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 import LoadingSkeleton from './LoadingSkeleton';
 import Image from 'next/image';
 import YouTubePlayer from './YoutubePlayer';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PanoProps {
     dataKenanganVirtual: {
@@ -42,13 +43,23 @@ interface PanoProps {
             }[];
         }[];
     };
+
+    place: string
+
+    lang: string
 }
 
 
-const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
+
+
+
+const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual, place, lang }) => {
+    const router = useRouter()
+
     const panoRef = useRef(null);
     const iframespot = useRef(null);
     const picturespot1 = useRef(null);
+    const menuGallery = useRef(null);
     const picturespot2 = useRef(null);
     const picturespot3 = useRef(null);
     const picturespot4 = useRef(null);
@@ -57,7 +68,11 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
     const textInfo = useRef(null);
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
+    const guest = useSelector((state: RootState) => state.value.guest);
     const IMAGE_URL = 'sgp1.vultrobjects.com/virtuwed-storage';
+
+    // const searchParams = useSearchParams()
+    // const place = searchParams.get('place')
 
     document.body.classList.add('no-touch');
     window.addEventListener('touchstart', function () {
@@ -217,10 +232,13 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                 // updateSceneList(scene);
             }
 
-            switchScene(panoScenes[0]);
+            // switchScene(panoScenes[0]);
+            const value = eval(place);
+            switchScene(value);
             // ==================================================================================================
 
             // panoScenes[0].scene.switchTo();
+            // place?.scene.switchTo();
 
             // panoScenes[0].scene.hotspotContainer().createHotspot(document.getElementById('iframespot'), { yaw: 0.0335, pitch: -0.102 }, { perspective: { radius: 1640, extraTransforms: "rotateX(5deg)" } })
 
@@ -264,6 +282,9 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
                 // INFOSPOT POTO1
                 container.createHotspot(textInfo.current, { yaw: 1.2663669301631675, pitch: -0.1802312721318824 });
 
+                // LINK HOTSPOT TO MENU
+                container.createHotspot(menuGallery.current, { yaw: 0.5787631231131556, pitch: 0.1321688672861896 });
+
             } else {
                 console.error("Element with ID 'iframespot' not found.");
             }
@@ -303,6 +324,15 @@ const KenanganVirtual: React.FC<PanoProps> = ({ dataKenanganVirtual }) => {
             </div >
 
             <>
+                <div onClick={() => router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu`)} ref={menuGallery} className='hotspot link-hotspot'>
+                    <img src="/assets/kenanganVirtual/link.png" alt="" className='link-hotspot-icon' />
+                    <div className='hotspot-tooltip link-hotspot-tooltip'>
+                        Menu
+                    </div>
+                </div>
+
+
+
                 <div ref={picturespot1} className='relative w-[1350px] h-[1080px]'>
                     <Image
                         src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[0]}

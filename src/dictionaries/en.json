@@ -1,0 +1,123 @@
+{
+    "navigation": {
+        "home": "Home",
+        "feature": "Feature",
+        "package": "Package",
+        "testimonial": "Testimonial"
+    },
+    "page": {
+        "home": {
+            "jumbotron": {
+                "title": {
+                    "special": "Virtual",
+                    "common": " Wedding Platform"
+                },
+                "description": "Make your dream wedding come true, virtually.",
+                "button1": "Start now",
+                "button2": "How to get started"
+            },
+            "tagline": {
+                "title": {
+                    "special": "Virtuwed.",
+                    "common": "Achieve an unique wedding with "
+                },
+                "description": "Enriching Weddings Through Innovative Digital Experiences."
+            },
+            "feature": {
+                "feat1": {
+                    "title": "Virtual 360° Wedding",
+                    "description": "With Virtuwed, bring the concept of your dream wedding into our virtual platform, allowing guests to experience the sacredness of your wedding digitally.",
+                    "button": "Explore the 360° Virtual Wedding"
+                },
+                "feat2": {
+                    "title": "Digital Invitations",
+                    "description": "Welcome to the new era of integrated digital invitations, directly linked to our 360 Virtual Room, and say goodbye to the old-fashioned digital invitation era.",
+                    "button": "View Invitation Samples"
+                },
+                "feat3": {
+                    "title": "Elegant & Exclusive Design",
+                    "description": "We craft the wedding concept specially for you and seamlessly integrate it with our 360 Virtual Platform.",
+                    "button": "Find Your Dream Design"
+                },
+                "feat4": {
+                    "title": "Integrate your Wedding with our Best Features",
+                    "points": [
+                        "Two-Way Live Streaming",
+                        "Digital Gifts",
+                        "Wedding Wishes"
+                    ]
+                }
+            },
+            "package": {
+                "title": "Virtuwed Packages",
+                "package1": [
+                    "Digital Invitations (500 Guests)",
+                    "Virtual Reception",
+                    "Wedding Photo Gallery",
+                    "Video Call",
+                    "Wedding Live Streaming",
+                    "Digital Gifts",
+                    "Accessible for 1 Year"
+                ],
+                "package2": {
+                    "description": "Everything included in Virtuwed Premium, Plus:",
+                    "points": [
+                        "Livestreaming with Professional Camera",
+                        "Video Call with 40-inch TV",
+                        "Dedicated Internet",
+                        "360-Degree Documentation"
+                    ]
+                },
+                "button": "Create your wedding now!"
+            },
+            "testimoni": {
+                "title": "What They Say",
+                "description": "Offering the finest solutions for your special moments to become unforgettable. Experience a captivating wedding journey."
+            },
+            "cta": {
+                "title": "Create Your Virtuwed Now",
+                "description": "Immerse yourself in an unforgettable wedding experience with Virtuwed.",
+                "button": "Start now"
+            },
+            "faq": {
+                "description": "Everything you need to know about our products and how they work. Can't find an answer? Contact us.",
+                "accordion1": {
+                    "title": "What is Virtuwed?",
+                    "description": "Virtuwed is a virtual wedding platform featuring digital invitations, a 360 platform, photo gallery, video call, live streaming, and more."
+                },
+                "accordion2": {
+                    "title": "What are the key features offered by Virtuwed?",
+                    "description": "Key features include digital invitations, digital gifts, virtual reception, wedding photo gallery, video call, and wedding live streaming."
+                },
+                "accordion3": {
+                    "title": "What packages does Virtuwed offer?",
+                    "description": "There are 2 packages: VIRTUWED Premium (2 Million Rupiah) for intimate weddings, and VIRTUWED Priority (10 Million Rupiah) with more professional services."
+                },
+                "accordion4": {
+                    "title": "Is there an additional cost for adding guests to VIRTUWED Premium?",
+                    "description": "Yes, adding 100 guests incurs an additional fee of Rp.50,000."
+                },
+                "accordion5": {
+                    "title": "Why choose Virtuwed for your wedding?",
+                    "description": "Virtuwed provides an economical and innovative solution to create an unforgettable wedding with affordable costs and accessibility from anywhere."
+                }
+            }
+        },
+        "about": {
+            "title": "About Us",
+            "description": "This is the about page"
+        }
+    },
+    "footer": {
+        "title": [
+            "navigation",
+            "Media Social"
+        ],
+        "points": [
+            "Home",
+            "Feature",
+            "Package",
+            "Testimonial"
+        ]
+    }
+}
