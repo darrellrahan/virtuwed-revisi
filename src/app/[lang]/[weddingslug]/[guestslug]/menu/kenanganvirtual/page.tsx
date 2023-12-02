@@ -7,15 +7,20 @@ import React, { useEffect, useState } from 'react'
 import { redirect } from 'next/navigation';
 // import { RootState } from '@/src/app/redux/reducers';
 import { RootState } from '@/src/app/[lang]/redux/reducers'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+// import { setData, fetchData as fetchAction } from '../../../redux/actions';
 // import boopSfx from '/assets/kenanganVirtual/GonnaLiveForever.mp3'
 import useSound from 'use-sound';
 import LoadingSkeleton from '@/src/components/LoadingSkeleton';
 import axios from 'axios';
 import { Locale } from '@/i18n.config'
+import { setData, fetchData as fetchAction } from '@/src/app/[lang]/redux/actions'
 
 const Page = ({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) => {
+    const dispatch = useDispatch();
+
+
     // const [play, { stop, isPlaying }] = useSound('/assets/kenanganVirtual/GonnaLiveForever.mp3');
     // const [play, { pause }] = useSound('/assets/kenanganVirtual/GonnaLiveForever.mp3')
     // const [isPlaying, setIsPlaying] = useState(false);
@@ -23,6 +28,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
 
 
     const API_BASE_URL = 'https://panel.virtuwed.id/api';
+    const API_ENDPOINT = `/wedding?wedding_slug=${params.weddingslug}&${params.guestslug && params.guestslug ? 'guest_slug=' + params.guestslug : ''}`;
     const ANALYTIC = `/wedding/analytic?wedding_slug=${params.weddingslug}&guest_slug=${params.guestslug}&feature_hit=kenangan_virtual`;
 
 
@@ -32,7 +38,23 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
     const place = searchParams.get('place')
 
     useEffect(() => {
+        dispatch(fetchAction());
         // setIsPlaying(true)
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(API_BASE_URL + API_ENDPOINT);
+
+
+                dispatch(setData(response.data.data));
+                // setMessage(response.data.data.message)
+                console.log(response.data.data);
+                hitAnalytic()
+            }
+
+            catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
         const hitAnalytic = async () => {
             try {
                 const response = await axios.get(API_BASE_URL + ANALYTIC);
@@ -43,7 +65,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
             }
         };
 
-        hitAnalytic()
+        fetchData()
     }, [])
 
     // const handleButtonClick = () => {
@@ -75,7 +97,10 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
             </main >
         )
     } else {
-        return redirect('/')
+        return (
+            <LoadingSkeleton />
+        )
+        // redirect('/')
     }
 }
 
