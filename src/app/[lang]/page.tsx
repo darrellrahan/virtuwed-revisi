@@ -67,7 +67,7 @@ export default async function Home({
 			<main className='container min-w-full'>
 
 				{/* JUMBOTRON */}
-				<section id='Beranda' className='container w-full grid gap-6 justify-center items-center px-4 py-20 lg:py-28 lg:grid-cols-2 mt-8 md:mt-0 lg:px-40 lg:h-screen max-w-screen-xl mx-auto'>
+				<section id='Home' className='container w-full grid gap-6 justify-center items-center px-4 py-20 lg:py-28 lg:grid-cols-2 mt-8 md:mt-0 lg:px-40 lg:h-screen max-w-screen-xl mx-auto'>
 					<div className='lg:order-2'>
 						<Image
 							src="/assets/landingpage/jumbotron.png"
@@ -116,7 +116,7 @@ export default async function Home({
 				</section>
 
 				{/* FEATURE */}
-				<section id='Fitur' className='min-w-full'>
+				<section id='Feature' className='min-w-full'>
 					{/* FEATURE 1 */}
 					<div className='grid gap-6 px-4 justify-center items-center py-16 lg:px-40 lg:grid-cols-2 max-w-screen-xl mx-auto'>
 						<div className='lg:order-2'>
@@ -259,7 +259,7 @@ export default async function Home({
 				</section>
 
 				{/* PRODUCT */}
-				<section id='Paket' className='grid gap-6 bg-gray-300/25 py-20 px-4 content-center lg:px-40 max-w-screen-xl mx-auto'>
+				<section id='Packages' className='grid gap-6 bg-gray-300/25 py-20 px-4 content-center lg:px-40 max-w-screen-xl mx-auto'>
 					<span className="overflow-hidden inline-block pb-1.5">
 						<h2 className='font-deAetna text-3xl lg:text-4xl text-center'>{page.home.package.title}</h2>
 					</span>
@@ -393,7 +393,7 @@ export default async function Home({
 				</section>
 
 				{/* TESTIMONI */}
-				<section id='Testimoni' className='grid justify-center items-center py-20 max-w-screen-xl mx-auto'>
+				<section id='Testimonial' className='grid justify-center items-center py-20 max-w-screen-xl mx-auto'>
 					<div className='grid gap-4 px-4 lg:px-40 text-center'>
 						<span className="overflow-hidden inline-block pb-1.5">
 							<h2 className='text-3xl lg:text-4xl font-deAetna'>{page.home.testimoni.title}</h2>

@@ -29,10 +29,10 @@ const Navbar = () => {
 
                     <div className="hidden lg:flex lg:gap-x-6">
                         <ul className="flex gap-6 font-amiamie text-third text-base">
-                            <li className='cursor-pointer'><ScrollLink to="Beranda" smooth={true} duration={500}><p>Home</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Fitur" smooth={true} duration={500}><p>Feature</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Paket" smooth={true} duration={500}><p>Packages</p></ScrollLink></li>
-                            <li className='cursor-pointer'><ScrollLink to="Testimoni" smooth={true} duration={500}><p>Testimonial</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Home" smooth={true} duration={500}><p>Home</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Feature" smooth={true} duration={500}><p>Feature</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Packages" smooth={true} duration={500}><p>Packages</p></ScrollLink></li>
+                            <li className='cursor-pointer'><ScrollLink to="Testimonial" smooth={true} duration={500}><p>Testimonial</p></ScrollLink></li>
                         </ul>
 
                         <LocaleSwitcher />

@@ -30,10 +30,10 @@ const MobileNavigation = (props: any) => {
                 exit={{ height: 0 }}
                 transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute grid gap-6 content-center justify-center py-8 text-center top-16 left-0 bg-white font-amiamie w-screen shadow-lg">
-                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Beranda" smooth={true} duration={500}><p className='text-lg font-light'>Beranda</p></ScrollLink></li>
-                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Fitur" smooth={true} duration={500}><p className='text-lg font-light'>Fitur</p></ScrollLink></li>
-                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Paket" smooth={true} duration={500}><p className='text-lg font-light'>Paket</p></ScrollLink></li>
-                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Testimoni" smooth={true} duration={500}><p className='text-lg font-light'>Testimoni</p></ScrollLink></li>
+                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Home" smooth={true} duration={500}><p className='text-lg font-light'>Home</p></ScrollLink></li>
+                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Feature" smooth={true} duration={500}><p className='text-lg font-light'>Feature</p></ScrollLink></li>
+                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Packages" smooth={true} duration={500}><p className='text-lg font-light'>Packages</p></ScrollLink></li>
+                <li className='cursor-pointer'><ScrollLink onClick={() => props.isMobile && props.closeMobileMenus()} to="Testimonial" smooth={true} duration={500}><p className='text-lg font-light'>Testimonial</p></ScrollLink></li>
                 <LocaleSwitcher />
             </motion.ul>
         </AnimatePresence>
