@@ -1,4 +1,5 @@
 'use client'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
 import React, { useEffect, useRef, useState } from 'react'
 // import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import 'remixicon/fonts/remixicon.css'
@@ -45,11 +46,14 @@ interface PanoProps {
 
 const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     const panoRef = useRef(null);
-    const infoSchool = useRef(null);
-    const infoPark = useRef(null);
-    const infoCorePark = useRef(null);
 
-    // const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const ucapkanSelamat = useRef(null);
+    const berikanHadiah = useRef(null);
+    const checkout = useRef(null);
+    const lihatKenanganVirtual = useRef(null);
+    const keluarResepsi = useRef(null);
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     useEffect(() => {
         const {
@@ -195,34 +199,26 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             switchScene(panoScenes[0]);
             // ==================================================================================================
 
+            const containerFront = panoScenes[1].scene.hotspotContainer();
+            if (containerFront) {
+                containerFront.createHotspot(ucapkanSelamat.current, { yaw: -0.22203056970193202, pitch: -0.10401943690370175 });
+                containerFront.createHotspot(berikanHadiah.current, { yaw: 1.380138804190528, pitch: 0.14947205954750586 });
 
-            // const containerSchool = panoScenes[0].scene.hotspotContainer();
-            // if (containerSchool) {
-            //     // INFOSPOT 
-            //     containerSchool.createHotspot(infoSchool.current, { yaw: -0.053460715856861185, pitch: 0.07998189071985529 });
-
-            // } else {
-            //     console.error("Element with ID 'iframespot' not found.");
-            // }
-
-            // const containerPark = panoScenes[1].scene.hotspotContainer();
-            // if (containerPark) {
-            //     containerPark.createHotspot(infoPark.current, { yaw: 0.3065692298970859, pitch: 0.08750032860305446 });
-            //     containerPark.createHotspot(infoCorePark.current, { yaw: 2.9785878977200912, pitch: 0.014763598534795364 });
-
-            // } else {
-            //     console.error("Element with ID 'iframespot' not found.");
-            // }
+            } else {
+                console.error("Element with ID 'iframespot' not found.");
+            }
 
 
-            // const containerKoridor = panoScenes[0].scene.hotspotContainer();
-            // if (containerKoridor) {
-            //     // INFOSPOT 
-            //     containerKoridor.createHotspot(infoSchool.current, { yaw: -0.053460715856861185, pitch: 0.07998189071985529 });
+            const containerBack = panoScenes[2].scene.hotspotContainer();
+            if (containerBack) {
+                // INFOSPOT 
+                containerBack.createHotspot(checkout.current, { yaw: 1.5343213110499754, pitch: 0.11186694513875928 });
+                containerBack.createHotspot(lihatKenanganVirtual.current, { yaw: 2.935034127070681, pitch: -0.29955839003537754 });
+                containerBack.createHotspot(keluarResepsi.current, { yaw: 3.0045679366218216, pitch: -0.11868394638760549 });
 
-            // } else {
-            //     console.error("Element with ID 'iframespot' not found.");
-            // }
+            } else {
+                console.error("Element with ID 'iframespot' not found.");
+            }
 
             // // CHECK COORDS
             // var pano = panoRef.current;
@@ -243,6 +239,59 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     return (
         <>
             <div className="light h-full w-full absolute" ref={panoRef} ></div>
+
+            {/* FRONT */}
+            <div ref={ucapkanSelamat}>
+                <Button startContent={<i className="ri-message-2-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
+                    Ucapkan Selamat
+                </Button>
+            </div>
+            <div ref={berikanHadiah}>
+                <Button startContent={<i className="ri-gift-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
+                    Berikan Hadiah
+                </Button>
+            </div>
+            <Modal className='light light:text-black' scrollBehavior='inside' isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="font-bold font-sans text-large">Ice Cream?</ModalHeader>
+                            <ModalBody>
+                                <p>
+                                    Saat open house ITB 2023, aku melihat duduk dibarisan depanku dan itulah hari dimana aku memutuskan untuk masuk kesana.
+                                </p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    No
+                                </Button>
+                                <Button className='bg-sky-500' color="primary" onPress={onClose}>
+                                    Yes
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
+            {/* BACK */}
+            <div ref={checkout}>
+                <Button startContent={<i className="ri-checkbox-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
+                    Check Out
+                </Button>
+            </div>
+
+            <div ref={lihatKenanganVirtual}>
+                <Button startContent={<i className="ri-eye-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
+                    Lihat Kenangan Virtual
+                </Button>
+            </div>
+            <div ref={keluarResepsi}>
+                <Button startContent={<i className="ri-logout-box-r-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
+                    Keluar Resepsi
+                </Button>
+            </div>
+
         </>
 
     )

@@ -3,6 +3,7 @@ import './globals.css'
 import Head from 'next/head'
 import { ReduxProvider } from './redux/provider'
 import { Locale, i18n } from '@/i18n.config'
+import { Providers } from './providers'
 
 
 export const metadata = {
@@ -71,7 +72,9 @@ export default function RootLayout({
       </Head>
       <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
         <ReduxProvider>
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </ReduxProvider>
       </body >
     </html >

@@ -34,8 +34,8 @@ export const data = {
             },
             "linkHotspots": [
                 {
-                    "yaw": -2.793201497644347,
-                    "pitch": 0.06833164319282403,
+                    "yaw": -0.010441622421289765,
+                    "pitch": 0.33435553009601904,
                     "rotation": 0,
                     "target": "Front.webp"
                 }
@@ -83,8 +83,8 @@ export const data = {
             },
             "linkHotspots": [
                 {
-                    "yaw": 2.9785878977200912,
-                    "pitch": 0.014763598534795364,
+                    "yaw": 3.1355529802349107,
+                    "pitch": 0.3648328121892064,
                     "rotation": 0,
                     "target": "Back.webp"
                 }
@@ -132,10 +132,16 @@ export const data = {
             },
             "linkHotspots": [
                 {
-                    "yaw": 2.9785878977200912,
-                    "pitch": 0.014763598534795364,
+                    "yaw": 3.116818283519704,
+                    "pitch": 0.9415155847377292,
                     "rotation": 0,
                     "target": "Koridor.webp"
+                },
+                {
+                    "yaw": -0.08064061967984415,
+                    "pitch": 0.946623370379104,
+                    "rotation": 0,
+                    "target": "Front.webp"
                 }
             ],
             "infoHotspots": [
