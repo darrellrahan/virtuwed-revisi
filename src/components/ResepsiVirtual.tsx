@@ -1,8 +1,13 @@
 'use client'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
+import { RootState } from '@/src/app/[lang]/redux/reducers';
 // import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import 'remixicon/fonts/remixicon.css'
+import { useSelector } from 'react-redux';
+import { FileUploader } from 'react-drag-drop-files';
+import { Player } from 'video-react';
 
 interface PanoProps {
     dataPano: {
@@ -44,6 +49,52 @@ interface PanoProps {
     // crush: string;
 }
 
+const gifts = [
+    {
+        emoticon: '/assets/ballroom/emoticons/4.webp',
+        icon: 'ri-plant-line',
+        img: '/assets/ballroom/gift/buket_bunga.webp',
+        name: 'buket bunga',
+        price: '50000'
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/3.webp',
+        icon: 'ri-coupon-3-line',
+        img: '/assets/ballroom/gift/tiket_nonton.webp',
+        name: 'tiket nonton',
+        price: '100000',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/2.webp',
+        icon: 'ri-timer-line',
+        img: '/assets/ballroom/gift/jam_tangan.webp',
+        name: 'jam tangan',
+        price: '500000',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/1.webp',
+        icon: 'ri-tv-2-line',
+        img: '/assets/ballroom/gift/televisi.webp',
+        name: 'televisi',
+        price: '1000000',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/4.webp',
+        icon: 'ri-cash-line',
+        img: '/assets/ballroom/gift/televisi.png',
+        name: 'Jumlah Lainnya',
+        price: '0',
+    },
+    {
+        emoticon: '/assets/ballroom/emoticons/5.webp',
+        icon: 'ri-message-3-line',
+        img: '/assets/ballroom/gift/televisi.png',
+        name: 'Tidak Memberi Apapun',
+        price: '0',
+    },
+]
+
+
 const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     const panoRef = useRef(null);
 
@@ -53,7 +104,30 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     const lihatKenanganVirtual = useRef(null);
     const keluarResepsi = useRef(null);
 
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    // KORIDOR
+    const bridePicture1 = useRef(null);
+
+    const wedding = useSelector((state: RootState) => state.value.wedding);
+    const guest = useSelector((state: RootState) => state.value.guest);
+    const IMAGE_URL = 'sgp1.vultrobjects.com/virtuwed-storage';
+
+    const [digitalGift, setDigitalGift] = useState(gifts[0])
+    const mainGifts = gifts.slice(0, 4)
+
+    // UCAPAN SELAMAT
+    const [ucapanSelamat, setUcapanSelamat] = useState('')
+
+    // PREVIEW HANDLER
+    const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
+    const [file, setFile] = useState<File | null>(null)
+    const handleChange = (file: File) => {
+        setFile(file);
+    };
+
+    // const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const modalUcapanSelamat = useDisclosure()
+    const modalInformativeUcapanSelamat = useDisclosure()
+    const modalKonfirmasi = useDisclosure()
 
     useEffect(() => {
         const {
@@ -73,15 +147,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             const panoScenes = scenes.map((sceneData: any) => {
                 const { id, name, levels, faceSize, initialViewParameters, linkHotspots, infoHotspots } = sceneData;
 
-                // const urlPrefix = "//www.marzipano.net/media";
                 const urlPrefix = "/assets/ResepsiVirtual/equirectangular";
                 const source = Marzipano.ImageUrlSource.fromString(
-                    // `${urlPrefix}/${id}/{z}/{f}/{y}/{x}.jpg`,
-                    // { cubeMapPreviewUrl: `${urlPrefix}/${id}/preview.jpg` },
                     `${urlPrefix}/${id}`,
-                    {
-                        cubeMapPreviewUrl: `${urlPrefix}/${id}`
-                    }
+                    { cubeMapPreviewUrl: `${urlPrefix}/${id}` }
                 );
 
                 const limiter = Marzipano.RectilinearView.limit.traditional(
@@ -199,10 +268,21 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             switchScene(panoScenes[0]);
             // ==================================================================================================
 
+            const containerKoridor = panoScenes[0].scene.hotspotContainer();
+            if (containerKoridor) {
+                containerKoridor.createHotspot(bridePicture1.current, { yaw: 1.1165199114658257, pitch: 0.009338294282953186 },
+                    { perspective: { radius: 3175, extraTransforms: "rotateY(-25deg)" } });
+
+            } else {
+                console.error("Element with ID 'iframespot' not found.");
+            }
+
             const containerFront = panoScenes[1].scene.hotspotContainer();
             if (containerFront) {
-                containerFront.createHotspot(ucapkanSelamat.current, { yaw: -0.22203056970193202, pitch: -0.10401943690370175 });
-                containerFront.createHotspot(berikanHadiah.current, { yaw: 1.380138804190528, pitch: 0.14947205954750586 });
+                containerFront.createHotspot(ucapkanSelamat.current, { yaw: 0, pitch: -0.056795042541741836 },
+                    { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
+                containerFront.createHotspot(berikanHadiah.current, { yaw: 1.4731802513717511, pitch: 0.17922631245596676 },
+                    { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
 
             } else {
                 console.error("Element with ID 'iframespot' not found.");
@@ -212,9 +292,12 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             const containerBack = panoScenes[2].scene.hotspotContainer();
             if (containerBack) {
                 // INFOSPOT 
-                containerBack.createHotspot(checkout.current, { yaw: 1.5343213110499754, pitch: 0.11186694513875928 });
-                containerBack.createHotspot(lihatKenanganVirtual.current, { yaw: 2.935034127070681, pitch: -0.29955839003537754 });
-                containerBack.createHotspot(keluarResepsi.current, { yaw: 3.0045679366218216, pitch: -0.11868394638760549 });
+                containerBack.createHotspot(checkout.current, { yaw: 1.6829013691100227, pitch: 0.21238892003715293 },
+                    { perspective: { radius: 300, extraTransforms: "rotateY(5deg)" } });
+                containerBack.createHotspot(lihatKenanganVirtual.current, { yaw: 3.1373107204237645, pitch: -0.1851510231312865 },
+                    { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
+                containerBack.createHotspot(keluarResepsi.current, { yaw: 3.1409142956927933, pitch: 0.004879153410453085 },
+                    { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
 
             } else {
                 console.error("Element with ID 'iframespot' not found.");
@@ -227,10 +310,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             //     console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
             // });
 
-            // Clean up resources when component unmounts
-            return () => {
-                viewer.destroy();
-            };
+            // // Clean up resources when component unmounts
+            // return () => {
+            //     viewer.destroy();
+            // };
         }
 
 
@@ -240,55 +323,372 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
         <>
             <div className="light h-full w-full absolute" ref={panoRef} ></div>
 
+            {/* KORIDOR */}
+            <div ref={bridePicture1} className='relative w-[1350px] h-[1080px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[0]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                />
+            </div >
+
             {/* FRONT */}
             <div ref={ucapkanSelamat}>
-                <Button startContent={<i className="ri-message-2-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
-                    Ucapkan Selamat
+                <Button startContent={<i className="ri-message-2-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalUcapanSelamat.onOpen}>
+                    <p className='l2-r font-deAetna'>Ucapkan Selamat</p>
                 </Button>
             </div>
             <div ref={berikanHadiah}>
-                <Button startContent={<i className="ri-gift-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
-                    Berikan Hadiah
+                <Button startContent={<i className="ri-gift-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalUcapanSelamat.onOpen}>
+                    <p className='l2-r font-deAetna'>Berikan Hadiah</p>
                 </Button>
             </div>
-            <Modal className='light light:text-black' scrollBehavior='inside' isOpen={isOpen} onOpenChange={onOpenChange}>
+            {/* MODAL UCAPAN SELAMAT */}
+            <Modal className='light light:text-black mx-6 bg-White'
+                scrollBehavior='inside'
+                isOpen={modalUcapanSelamat.isOpen}
+                onOpenChange={modalUcapanSelamat.onOpenChange}
+                placement='center'
+                radius='sm'
+            >
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="font-bold font-sans text-large">Ice Cream?</ModalHeader>
+                            <ModalHeader>
+                                <div className='text-center w-full'>
+                                    <h3 className='text-N800 capitalize'>berikan ucapan selamat</h3>
+                                    <p className='text-N700 p3-r'>Anda dapat memberikan ucapan melalui video ataupun foto</p>
+                                </div>
+                            </ModalHeader>
                             <ModalBody>
-                                <p>
-                                    Saat open house ITB 2023, aku melihat duduk dibarisan depanku dan itulah hari dimana aku memutuskan untuk masuk kesana.
-                                </p>
-                            </ModalBody>
-                            <ModalFooter>
+                                < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3' >
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700 font-deAetna'>Upload Foto/Video Ucapan</p>
+
+                                        <FileUploader handleChange={handleChange} types={fileTypes} name="file">
+                                            <div className='bg-white grid gap-1 justify-items-center border border-N300 rounded-md py-4 px-3 text-N400 cursor-pointer'>
+                                                <i className="ri-upload-2-line ri-lg"></i>
+                                                <p className='p2-r'>Klik untuk {file ? 'ganti' : 'upload'} foto/video</p>
+                                            </div>
+                                        </FileUploader>
+
+                                        {file && (
+                                            file.type.startsWith('video/') ? (
+                                                <Player
+                                                    playsInline
+                                                    src={URL.createObjectURL(file)}
+                                                    fluid
+                                                />
+                                            ) : (
+                                                <Image
+                                                    src={URL.createObjectURL(file)}
+                                                    alt="Preview photo"
+                                                    className="w-full h-auto rounded-md"
+                                                    width={220}
+                                                    height={220}
+                                                    priority
+                                                />
+                                            )
+                                        )
+                                        }
+                                    </div>
+
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700 font-deAetna'>Ucapan Selamat</p>
+                                        <form className='grid gap-6'>
+                                            <textarea
+                                                className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder="..."
+                                                rows={3}
+                                            // value={ucapanSelamat}
+                                            // onChange={
+                                            //     (e) => setUcapanSelamat(e.target.value)
+                                            // }
+                                            // value={ucapanSelamat}
+                                            // onChange={
+                                            //     (e) => setUcapanSelamat(e.target.value)
+                                            // }
+                                            />
+                                        </form>
+                                    </div>
+
+                                    <Button className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} onPress={modalInformativeUcapanSelamat.onOpen}>
+                                        <p className='l2-r font-deAetna'>kirim ucapan</p>
+                                    </Button>
+
+                                </ div >
+
+                                {/* DECORATION */}
+                                < div className='grid' >
+                                    < Image
+                                        src={
+                                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                                        }
+                                        alt="decoration"
+                                        width={110}
+                                        height={110}
+                                        className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                                    />
+                                </ div>
+                            </ModalBody >
+                            {/* <ModalFooter>
                                 <Button color="danger" variant="light" onPress={onClose}>
                                     No
                                 </Button>
                                 <Button className='bg-sky-500' color="primary" onPress={onClose}>
                                     Yes
                                 </Button>
-                            </ModalFooter>
+                            </ModalFooter> */}
+                        </>
+                    )}
+                </ModalContent >
+            </Modal >
+
+            {/* MODAL INFORMATIVE UCAPAN SELAMAT */}
+            <Modal
+                className='bg-White py-8'
+                hideCloseButton
+                isOpen={modalInformativeUcapanSelamat.isOpen}
+                onOpenChange={modalInformativeUcapanSelamat.onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalBody className='grid justify-items-center'>
+                                <Image
+                                    src={
+                                        '/assets/virtuwed/accent/vintage-ornaments.png'
+                                    }
+                                    alt="emoticon"
+                                    width={110}
+                                    height={110}
+                                    className='opacity-50 h-auto w-52'
+                                />
+
+                                <div className='grid gap-2 justify-items-center text-center'>
+                                    <Image
+                                        src={
+                                            file != undefined
+                                                ? '/assets/ballroom/emoticons/1.webp'
+                                                :
+                                                ucapanSelamat != '' ? '/assets/ballroom/emoticons/1.webp' : '/assets/ballroom/emoticons/5.webp'
+                                        }
+                                        alt="emoticon"
+                                        width={110}
+                                        height={110}
+                                    />
+                                    <h4 className="text-N800">
+                                        {
+                                            file != undefined
+                                                ? 'Terimakasih telah memberikan ucapan selamat kepada kami'
+                                                :
+                                                ucapanSelamat != '' ? 'Yakin Ga Sekalian Kirim Foto/Video?' : 'Apakah anda yakin tidak ingin memberikan ucapan selamat?'
+                                        }
+                                    </h4>
+                                    <p className="p3-r text-N600">
+                                        {
+                                            file != undefined
+                                                ? 'Ucapan anda akan sangat berharga bagi momen spesial kami'
+                                                :
+                                                ucapanSelamat != '' ? 'Kirim Foto/Video ucapan anda untuk pengantin' : 'Ucapan anda akan sangat berharga bagi momen spesial kami'
+                                        }
+                                    </p>
+                                </div>
+
+                                <form className='flex gap-1 w-full' method="dialog">
+                                    {/* if there is a button, it will close the modal */}
+                                    <Button startContent={<i className='ri-message-3-line ri-xl' />} className='rounded w-full' color='secondary' onPress={onClose}>
+                                        <p className='l2-r font-deAetna'>
+                                            {
+                                                file != undefined
+                                                    ? 'Ganti Ucapan'
+                                                    :
+                                                    ucapanSelamat != '' ? 'Ganti Ucapan' : 'Beri Ucapan'
+                                            }
+                                        </p>
+                                    </Button>
+                                    <Button
+                                        startContent={<>{file != undefined
+                                            ? <i className='ri-arrow-right-s-line ri-xl' />
+                                            : ucapanSelamat != ''
+                                                ? <i className='ri-arrow-right-s-line ri-xl' />
+                                                : <i className='ri-check-line ri-xl' />}</>}
+                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' onPress={onClose}>
+                                        <p className='l2-r font-deAetna'>
+                                            {
+                                                file != undefined
+                                                    ? 'Lanjut'
+                                                    :
+                                                    ucapanSelamat != '' ? 'Lanjut' : 'Yakin'
+                                            }
+                                        </p>
+                                    </Button>
+                                </form>
+                            </ModalBody>
                         </>
                     )}
                 </ModalContent>
-            </Modal>
+            </Modal >
 
             {/* BACK */}
-            <div ref={checkout}>
-                <Button startContent={<i className="ri-checkbox-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
-                    Check Out
+            < div ref={checkout} >
+                <Button startContent={<i className="ri-checkbox-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalKonfirmasi.onOpen}>
+                    <p className='l2-r font-deAetna'>Check Out</p>
                 </Button>
-            </div>
+
+            </ div >
+            <Modal className='light light:text-black mx-6 bg-White'
+                scrollBehavior='inside'
+                isOpen={modalKonfirmasi.isOpen}
+                onOpenChange={modalKonfirmasi.onOpenChange}
+                placement='center'
+                radius='sm'
+            >
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader>
+                                <div className='text-center w-full'>
+                                    <h3 className='text-N800 capitalize'>Konfirmasi</h3>
+                                    <p className='text-N700 p3-r w-full'>Tolong konfirmasi ucapan selamat dan hadiah yang akan anda berikan</p>
+                                </div>
+                            </ModalHeader>
+                            <ModalBody>
+                                <div className='grid border border-tertiary rounded-lg p-3 gap-5'>
+
+                                    {/* GIFT */}
+                                    <div className='grid gap-1'>
+                                        <p className='l3-r text-N700 font-deAetna'><span className='font-bold font-amiamie'>{guest.nama} </span> memberi {wedding.wedding_name} sebuah...</p>
+                                        {
+                                            digitalGift != gifts[5]
+                                                ?
+                                                <div className='flex gap-1'>
+                                                    <Image
+                                                        src={digitalGift.img}
+                                                        alt="decoration"
+                                                        width={72}
+                                                        height={72}
+                                                        className='h-20 w-20 rounded'
+                                                    />
+                                                    <div className="grid gap-0.5 p-1.5 w-full content-center">
+                                                        <p className='l2-r font-deAetna text-N700 capitalize'>{digitalGift.name}</p>
+                                                        <p className='p3-r text-N600 capitalize'>Rp. {digitalGift.price}</p>
+                                                    </div>
+                                                </div>
+                                                :
+                                                <div className='p-3 gap-1 text-tertiary flex content-center items-center min-h-12 justify-center'>
+                                                    <i className="ri-alert-line ri-lg"></i>
+                                                    <p className='l3-r font-deAetna'>{gifts[5].name}</p>
+                                                </div>
+                                        }
+
+                                    </div>
+
+                                    {/* UCAPAN */}
+                                    <div className='grid gap-1'>
+                                        <p className='L3-r font-deAetna text-N700'>dan Ucapan Selamat...</p>
+                                        <p className='py-3 p3-r text-N400'>{ucapanSelamat}</p>
+                                    </div>
+
+                                    <div className='grid gap-1'>
+                                        {/* FILE UPLOAD */}
+                                        {file && (
+                                            file.type.startsWith('video/') ? (
+                                                <>
+                                                    <p className='L3-r font-deAetna text-N700'>beserta Foto/Video ucapan...</p>
+                                                    <Player
+                                                        playsInline
+                                                        src={URL.createObjectURL(file)}
+                                                        fluid
+                                                    />
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <p className='L3-r font-deAetna text-N700'>beserta Foto/Video ucapan...</p>
+                                                    <Image
+                                                        src={URL.createObjectURL(file)}
+                                                        alt="Preview photo"
+                                                        className="w-full h-auto rounded-md"
+                                                        width={220}
+                                                        height={220}
+                                                        priority
+                                                    />
+                                                </>
+                                            )
+                                        )
+                                        }
+                                    </div>
+                                    <div className='flex w-full items-center gap-1 text-red-500'>
+                                        <i className="ri-error-warning-line self-start"></i>
+                                        <p className='p3-r'>Data anda akan dilihat oleh pengantin</p>
+                                    </div>
+
+                                    <div className='grid gap-2'>
+                                        <div className='z-20 flex overflow-hidden gap-1 content-stretch'>
+                                            {/* <button id='buttonChangeUcapanSelamat' className='rounded btn btn-accent h-full py-2'>
+                                                <i className="ri-message-3-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Ganti Ucapan</p>
+                                            </button>
+                                            <button id='buttonChangeDigitalGift' className='rounded btn btn-accent h-full py-2'>
+                                                <i className="ri-gift-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>Ganti Hadiah</p>
+                                            </button> */}
+
+                                            <Button className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-message-3-line ri-xl"></i>} onPress={onClose}>
+                                                <p className='l2-r font-deAetna'>Ganti Ucapan</p>
+                                            </Button>
+                                            <Button className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-gift-line ri-xl"></i>} onPress={onClose}>
+                                                <p className='l2-r font-deAetna'>Ganti Hadiah</p>
+                                            </Button>
+                                        </div>
+
+                                        {/* <button onClick={handleKonfirmasi} id='konfirmasiButton' className='btn btn-secondary rounded'> */}
+                                        {/* <button id='konfirmasiButton' className='btn btn-secondary rounded'>
+                                                <i className="ri-check-line ri-xl"></i>
+                                                <p className='l2-r font-deAetna'>konfirmasi</p>
+                                            </button> */}
+
+                                        <Button className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} onPress={onClose}>
+                                            <p className='l2-r font-deAetna'>Konfirmasi</p>
+                                        </Button>
+                                    </div>
+                                </div>
+
+                                {/* DECORATION */}
+                                < div className='grid' >
+                                    < Image
+                                        src={
+                                            '/assets/virtuwed/accent/vintage-ornaments.png'
+                                        }
+                                        alt="decoration"
+                                        width={110}
+                                        height={110}
+                                        className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                                    />
+                                </ div>
+                            </ModalBody >
+                            {/* <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    No
+                                </Button>
+                                <Button className='bg-sky-500' color="primary" onPress={onClose}>
+                                    Yes
+                                </Button>
+                            </ModalFooter> */}
+                        </>
+                    )}
+                </ModalContent >
+            </Modal >
 
             <div ref={lihatKenanganVirtual}>
-                <Button startContent={<i className="ri-eye-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
-                    Lihat Kenangan Virtual
+                <Button startContent={<i className="ri-eye-line ri-lg"></i>} color='secondary' className='rounded'>
+                    <p className='l2-r font-deAetna'>Lihat Kenangan Virtual</p>
                 </Button>
             </div>
             <div ref={keluarResepsi}>
-                <Button startContent={<i className="ri-logout-box-r-line ri-lg"></i>} className='bg-white' onPress={onOpen}>
-                    Keluar Resepsi
+                <Button startContent={<i className="ri-logout-box-r-line ri-lg"></i>} color='secondary' className='rounded'>
+                    <p className='l2-r font-deAetna'>Keluar Resepsi</p>
                 </Button>
             </div>
 

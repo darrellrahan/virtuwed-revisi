@@ -114,10 +114,7 @@ body {
   .btn-accent {
     @apply bg-transparent text-tertiary border-tertiary border;
   }
-  
-  .btn-accent:hover {
-    @apply text-White;
-  }
+ 
 }
 
 @layer utilities{
