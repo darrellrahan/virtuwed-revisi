@@ -1,5 +1,5 @@
 'use client'
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, cn, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import { RootState } from '@/src/app/[lang]/redux/reducers';
@@ -8,6 +8,10 @@ import 'remixicon/fonts/remixicon.css'
 import { useSelector } from 'react-redux';
 import { FileUploader } from 'react-drag-drop-files';
 import { Player } from 'video-react';
+import "../../node_modules/video-react/dist/video-react.css";
+import { RadioGroup } from '@headlessui/react';
+
+import { RadioGroup as RadioGroupNextUI, Radio } from "@nextui-org/react";
 
 interface PanoProps {
     dataPano: {
@@ -127,6 +131,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     // const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const modalUcapanSelamat = useDisclosure()
     const modalInformativeUcapanSelamat = useDisclosure()
+    const modalHadiah = useDisclosure()
+    const modalInformativeHadiah = useDisclosure()
     const modalKonfirmasi = useDisclosure()
 
     useEffect(() => {
@@ -342,7 +348,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                 </Button>
             </div>
             <div ref={berikanHadiah}>
-                <Button startContent={<i className="ri-gift-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalUcapanSelamat.onOpen}>
+                <Button startContent={<i className="ri-gift-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalHadiah.onOpen}>
                     <p className='l2-r font-deAetna'>Berikan Hadiah</p>
                 </Button>
             </div>
@@ -402,14 +408,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                             <textarea
                                                 className="resize-y appearance-none rounded-md w-full p-3 text-N800 leading-tight border border-N300 focus:outline-none focus:shadow-outline" placeholder="..."
                                                 rows={3}
-                                            // value={ucapanSelamat}
-                                            // onChange={
-                                            //     (e) => setUcapanSelamat(e.target.value)
-                                            // }
-                                            // value={ucapanSelamat}
-                                            // onChange={
-                                            //     (e) => setUcapanSelamat(e.target.value)
-                                            // }
+                                                value={ucapanSelamat}
+                                                onChange={
+                                                    (e) => setUcapanSelamat(e.target.value)
+                                                }
                                             />
                                         </form>
                                     </div>
@@ -433,14 +435,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                     />
                                 </ div>
                             </ModalBody >
-                            {/* <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    No
-                                </Button>
-                                <Button className='bg-sky-500' color="primary" onPress={onClose}>
-                                    Yes
-                                </Button>
-                            </ModalFooter> */}
                         </>
                     )}
                 </ModalContent >
@@ -531,6 +525,195 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                 </ModalContent>
             </Modal >
 
+            {/* MODAL HADIAH */}
+            <Modal
+                className='h-dvh bg-White overflow-scroll py-4'
+                size={'full'}
+                placement='top-center'
+                isOpen={modalHadiah.isOpen}
+                onClose={modalHadiah.onClose}
+            >
+                <ModalContent className='bg-White'>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader>
+                                <div className='text-center w-full'>
+                                    <h3 className='text-N800 capitalize'>berikan hadiah digital</h3>
+                                    <p className='text-N700 p3-r'>Hadiah digital hanya merupakan simbolis, pengantin akan menerima nominal dari hadiah yang anda berikan</p>
+                                </div>
+                            </ModalHeader>
+                            <ModalBody className='grid justify-items-center'>
+                                <Image
+                                    src={digitalGift.emoticon}
+                                    alt="emot"
+                                    className="justify-self-center"
+                                    width={110}
+                                    height={110}
+                                />
+
+                                <div className='p-3 grid w-full max-w-[500px] mx-auto'>
+                                    <RadioGroup className='w-full grid gap-3' value={digitalGift} onChange={setDigitalGift}>
+                                        <div className="grid grid-cols-2 gap-y-3 gap-x-1">
+                                            {mainGifts.map((gift) => (
+                                                <RadioGroup.Option
+                                                    key={gift.name}
+                                                    value={gift}
+                                                    style={{
+                                                        background: `
+                                        linear-gradient(357deg, #000 -23.05%, rgba(0, 0, 0, 0.00) 97.17%),
+                                        url('${gift.img}') center/cover no-repeat`,
+                                                    }}
+                                                    className={({ active, checked }) =>
+                                                        `${checked ? 'border-secondary border-4' : 'border-none'} grid w-full h-36 rounded-md items-end p-1.5 cursor-pointer`
+                                                    }>
+                                                    <div className='grid justify-start text-white text-start'>
+                                                        <p className='l4-r font-deAetna capitalize'>{gift.name}</p>
+                                                        <p className='text-[8px] capitalize'>{gift.price}</p>
+                                                    </div>
+                                                </RadioGroup.Option>
+                                            ))}
+                                        </div >
+
+                                        <div className='flex gap-2.5 justify-center items-center'>
+                                            <div className='h-1 w-11 rounded-full bg-secondary'></div>
+                                            <p className='l3-r font-deAetna'>Atau</p>
+                                            <div className='h-1 w-11 rounded-full bg-secondary'></div>
+                                        </div>
+
+                                        <RadioGroup.Option
+                                            key={gifts[5].name}
+                                            value={gifts[5]}
+                                            className={({ active, checked }) => `${checked ? 'bg-tertiary text-White' : 'text-tertiary'} flex w-full border border-tertiary px-3 rounded items-center py-3 relative cursor-pointer`}
+                                        >
+                                            <i className="ri-message-3-line ri-xl absolute"></i>
+                                            <p className='capitalize w-full text-center font-deAetna l3-r'>{gifts[5].name}</p>
+                                        </RadioGroup.Option>
+
+                                        <div className='flex w-full items-center gap-1 text-red-500'>
+                                            <i className="ri-error-warning-line self-start"></i>
+                                            <p className='p3-r'>Invoice akan dikirimkan ke whatsapp anda</p>
+                                        </div>
+                                    </RadioGroup >
+
+                                    <RadioGroupNextUI
+                                        color="secondary"
+                                        defaultValue="buket bunga"
+                                    >
+                                        <div className="grid grid-cols-2 gap-y-3 gap-x-1">
+                                            {mainGifts.map((gift) => (
+                                                <Radio value={gift.name}
+                                                    style={{ background: `linear-gradient(357deg, #000 -23.05%, rgba(0, 0, 0, 0.00) 97.17%), url('${gift.img}') center/cover no-repeat`, }}
+                                                    className='grid max-w-full h-36 rounded-md bg-center bg-cover p-1.5 items-end m-0 justify-start cursor-pointer data-[selected=true]:border-secondary data-[selected=true]:border-solid border-4 border-none'>
+                                                    <div className='grid justify-items-start text-white text-start'>
+                                                        <p className='l4-r font-deAetna capitalize'>{gift.name}</p>
+                                                        <p className='text-[8px] capitalize'>{gift.price}</p>
+                                                    </div>
+                                                </Radio>
+                                            ))}
+                                        </div>
+
+                                    </RadioGroupNextUI>
+
+
+                                    <Button className='rounded mt-3' color='secondary' startContent={<i className="ri-gift-line ri-xl" />} onPress={modalInformativeHadiah.onOpen}>
+                                        <p className='l2-r font-deAetna'>kirim hadiah</p>
+                                    </Button>
+                                </div >
+
+                                {/* DECORATION */}
+                                <Image
+                                    src={
+                                        '/assets/virtuwed/accent/vintage-ornaments.png'
+                                    }
+                                    alt="decoration"
+                                    width={110}
+                                    height={110}
+                                    className='opacity-50 h-auto w-52 grid justify-self-center -scale-y-100'
+                                />
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal >
+
+            {/* MODAL INFORMATIVE HADIAH */}
+            <Modal
+                className='bg-White py-8'
+                hideCloseButton
+                isOpen={modalInformativeHadiah.isOpen}
+                onOpenChange={modalInformativeHadiah.onOpenChange} >
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalBody className='grid justify-items-center'>
+                                <Image
+                                    src={
+                                        '/assets/virtuwed/accent/vintage-ornaments.png'
+                                    }
+                                    alt="emoticon"
+                                    width={110}
+                                    height={110}
+                                    className='opacity-50 h-auto w-52'
+                                />
+
+                                <div className='grid gap-2 justify-items-center text-center'>
+                                    <Image
+                                        src={digitalGift.emoticon}
+                                        alt="emoticon"
+                                        width={110}
+                                        height={110}
+                                    />
+                                    <h4 className="text-N800">
+                                        {
+                                            digitalGift === gifts[5]
+                                                ? `Apakah anda yakin hanya memberi ucapan saja kepada ${wedding.wedding_name}?`
+                                                : `${wedding.wedding_name} sangat senang dengan pemberian anda`
+                                        }
+                                    </h4>
+                                    <p className="p3-r text-N600">
+                                        {
+                                            digitalGift === gifts[5]
+                                                ? 'Hadiah dengan berapapun nominalnya akan sangat berharga bagi pengantin'
+                                                : 'Terimakasih telah memberikan hadiah terbaik anda'
+                                        }
+                                    </p>
+                                </div>
+
+                                <form className='flex gap-1 w-full' method="dialog">
+                                    {/* if there is a button, it will close the modal */}
+                                    <Button startContent={<i className='ri-message-3-line ri-xl' />} className='rounded w-full' color='secondary' onPress={onClose}>
+                                        <p className='l2-r font-deAetna'>
+                                            {
+                                                file != undefined
+                                                    ? 'Ganti Ucapan'
+                                                    :
+                                                    ucapanSelamat != '' ? 'Ganti Ucapan' : 'Beri Ucapan'
+                                            }
+                                        </p>
+                                    </Button>
+                                    <Button
+                                        startContent={<>{file != undefined
+                                            ? <i className='ri-arrow-right-s-line ri-xl' />
+                                            : ucapanSelamat != ''
+                                                ? <i className='ri-arrow-right-s-line ri-xl' />
+                                                : <i className='ri-check-line ri-xl' />}</>}
+                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' onPress={onClose}>
+                                        <p className='l2-r font-deAetna'>
+                                            {
+                                                file != undefined
+                                                    ? 'Lanjut'
+                                                    :
+                                                    ucapanSelamat != '' ? 'Lanjut' : 'Yakin'
+                                            }
+                                        </p>
+                                    </Button>
+                                </form>
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal >
+
             {/* BACK */}
             < div ref={checkout} >
                 <Button startContent={<i className="ri-checkbox-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalKonfirmasi.onOpen}>
@@ -538,6 +721,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                 </Button>
 
             </ div >
+
+            {/* MODAL KONFIRMASI */}
             <Modal className='light light:text-black mx-6 bg-White'
                 scrollBehavior='inside'
                 isOpen={modalKonfirmasi.isOpen}
