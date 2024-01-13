@@ -127,6 +127,7 @@ function Story() {
             (data: any, index: number) => {
               return (
                 <button
+                  key={index}
                   onClick={() => setIndexDesktop(index)}
                   className="flex gap-4 items-center text-black"
                 >
