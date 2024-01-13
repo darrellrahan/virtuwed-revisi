@@ -97,6 +97,12 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
+        rotate: "rotate 20s linear infinite",
+      },
+      keyframes: {
+        rotate: {
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       transitionDelay: {
         '2000': '2000ms',

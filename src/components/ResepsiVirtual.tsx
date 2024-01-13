@@ -1,18 +1,16 @@
 'use client'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, cn, useDisclosure } from '@nextui-org/react';
+import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import { RootState } from '@/src/app/[lang]/redux/reducers';
-// import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import 'remixicon/fonts/remixicon.css'
 import { useSelector } from 'react-redux';
 import { FileUploader } from 'react-drag-drop-files';
 import { Player } from 'video-react';
 import "../../node_modules/video-react/dist/video-react.css";
 import { RadioGroup } from '@headlessui/react';
-
-import { RadioGroup as RadioGroupNextUI, Radio } from "@nextui-org/react";
 import YouTubePlayer from './YoutubePlayer';
+import { useRouter } from 'next/navigation';
 
 interface PanoProps {
     dataPano: {
@@ -51,7 +49,7 @@ interface PanoProps {
         }[];
     };
 
-    // crush: string;
+    lang: string
 }
 
 const gifts = [
@@ -100,8 +98,8 @@ const gifts = [
 ]
 
 
-const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
-    const panoRef = useRef(null);
+const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
+    const panoRef = useRef<any>(null);
 
     const ucapkanSelamat = useRef(null);
     const berikanHadiah = useRef(null);
@@ -109,12 +107,23 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
     const lihatKenanganVirtual = useRef(null);
     const keluarResepsi = useRef(null);
 
+    const lookToHadiah = useRef<HTMLButtonElement | null>(null);
+    const lookToHadiah2 = useRef<HTMLButtonElement | null>(null);
+    const lookToKonfirmasi = useRef<HTMLButtonElement | null>(null);
+    const lookToKonfirmasi2 = useRef<HTMLButtonElement | null>(null);
+    const lookToEnd = useRef<HTMLButtonElement | null>(null);
+    const lookToEnd2 = useRef<HTMLButtonElement | null>(null);
+
+
     // KORIDOR
     const bridePicture1 = useRef(null);
+
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
     const guest = useSelector((state: RootState) => state.value.guest);
     const IMAGE_URL = 'sgp1.vultrobjects.com/virtuwed-storage';
+
+    const router = useRouter();
 
     const [digitalGift, setDigitalGift] = useState(gifts[0])
     const mainGifts = gifts.slice(0, 4)
@@ -129,13 +138,20 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
         setFile(file);
     };
 
-    // const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const modalUcapanSelamat = useDisclosure()
     const modalInformativeUcapanSelamat = useDisclosure()
     const modalHadiah = useDisclosure()
     const modalInformativeHadiah = useDisclosure()
     const modalKonfirmasi = useDisclosure()
     const modalLivestream = useDisclosure()
+
+    // LIHAT KV & KELUAR RV
+    const handleLihatKV = () => {
+        router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`);
+    };
+    const handleKeluarRV = () => {
+        router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/`);
+    };
 
     useEffect(() => {
         const {
@@ -274,6 +290,71 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             }
 
             switchScene(panoScenes[0]);
+
+            // ===================================================================================================================
+
+            // TRY CHANGE VIEW
+            var destinationViewParameters = {
+                yaw: 1.4731802513717511,
+                pitch: 0.17922631245596676
+            };
+
+            var options = {
+                transitionDuration: 1000
+            }
+
+
+            // LOOK TO HADIAH
+            const handleClicklookToHadiah = () => {
+                lookToHadiah2.current?.addEventListener('click', function () {
+                    console.log('lookto2');
+                    panoScenes[1].scene.lookTo(destinationViewParameters, options);
+
+                })
+            };
+
+            const checklookToHadiah = () => {
+                if (lookToHadiah.current) {
+                    console.log('tes');
+                    lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                }
+            };
+
+
+            // LOOK TO KONFIRMASI 
+            const handleClicklookToKonfirmasi = () => {
+                lookToKonfirmasi2.current?.addEventListener('click', function () {
+                    console.log('looktoKonfirmasi2');
+                    panoScenes[1].scene.lookTo({ yaw: -3.1149072553601655, pitch: -0.0070584653244445406 }, options);
+
+                })
+            };
+
+            const checklookToKonfirmasi = () => {
+                if (lookToKonfirmasi.current) {
+                    console.log('konfirmasi');
+                    lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                }
+            };
+
+            // LOOK TO END
+            const checklookToEnd = () => {
+                if (lookToEnd.current) {
+                    console.log('tes');
+                    lookToEnd.current?.addEventListener('click', function () {
+                        panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
+                    });
+                }
+            };
+
+
+            // Add event listener to a common ancestor or document
+            document.addEventListener('click', checklookToHadiah);
+            document.addEventListener('click', checklookToKonfirmasi);
+            document.addEventListener('click', checklookToEnd);
+
+
+
             // ==================================================================================================
 
             const containerKoridor = panoScenes[0].scene.hotspotContainer();
@@ -311,17 +392,20 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                 console.error("Element with ID 'iframespot' not found.");
             }
 
-            // // CHECK COORDS
+            // CHECK COORDS
             // var pano = panoRef.current;
-            // pano.addEventListener('click', (e) => {
+            // pano.addEventListener('click', (e: any) => {
             //     var view = viewer.view();
             //     console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
             // });
 
-            // // Clean up resources when component unmounts
-            // return () => {
-            //     viewer.destroy();
-            // };
+
+
+            return () => {
+                document.removeEventListener('click', checklookToHadiah);
+
+                // viewer.destroy();
+            }
         }
 
 
@@ -470,18 +554,12 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                 )}
                             </RadioGroup.Option> */}
 
-
                                                     <div className='flex w-full items-center gap-1 text-red-500'>
                                                         <i className="ri-error-warning-line self-start"></i>
                                                         <p className='p3-r'>Invoice akan dikirimkan ke whatsapp anda</p>
                                                     </div>
                                                 </RadioGroup >
-                                                <Button className='rounded mt-3 z-10' color='secondary' startContent={<i className="ri-gift-line ri-xl"></i>} onClick={() => {
-                                                    const digitalGiftModal = document.getElementById('digitalGiftModal') as HTMLDialogElement | null;
-                                                    if (digitalGiftModal) {
-                                                        digitalGiftModal.showModal();
-                                                    }
-                                                }}>
+                                                <Button className='rounded mt-3 z-10' color='secondary' startContent={<i className="ri-gift-line ri-xl"></i>}>
                                                     <p className='l2-r font-deAetna'>kirim hadiah</p>
                                                 </Button>
                                             </div >
@@ -517,6 +595,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                     width={500}
                     height={500}
                     priority
+                    id='bridePicture1Click'
                 />
             </div >
 
@@ -592,12 +671,16 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                                     (e) => setUcapanSelamat(e.target.value)
                                                 }
                                             />
+
                                         </form>
                                     </div>
 
-                                    <Button className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} onPress={modalInformativeUcapanSelamat.onOpen}>
+                                    <Button ref={lookToHadiah} onPress={modalInformativeUcapanSelamat.onOpen} className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} >
                                         <p className='l2-r font-deAetna'>kirim ucapan</p>
                                     </Button>
+
+
+
 
                                 </ div >
 
@@ -624,7 +707,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                 className='bg-White py-8'
                 hideCloseButton
                 isOpen={modalInformativeUcapanSelamat.isOpen}
-                onOpenChange={modalInformativeUcapanSelamat.onOpenChange}>
+                onOpenChange={modalInformativeUcapanSelamat.onOpenChange}
+            >
                 <ModalContent>
                     {(onClose) => (
                         <>
@@ -682,12 +766,15 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                         </p>
                                     </Button>
                                     <Button
+                                        ref={lookToHadiah2}
+                                        onPress={onClose}
+                                        onClick={modalUcapanSelamat.onClose}
                                         startContent={<>{file != undefined
                                             ? <i className='ri-arrow-right-s-line ri-xl' />
                                             : ucapanSelamat != ''
                                                 ? <i className='ri-arrow-right-s-line ri-xl' />
                                                 : <i className='ri-check-line ri-xl' />}</>}
-                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' onPress={onClose}>
+                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered'>
                                         <p className='l2-r font-deAetna'>
                                             {
                                                 file != undefined
@@ -701,11 +788,12 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                             </ModalBody>
                         </>
                     )}
+
                 </ModalContent>
             </Modal >
 
             {/* MODAL HADIAH */}
-            <Modal
+            < Modal
                 className='h-dvh bg-White overflow-scroll py-4'
                 size={'full'}
                 placement='top-center'
@@ -808,7 +896,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                     </RadioGroupNextUI> */}
 
 
-                                    <Button className='rounded mt-3' color='secondary' startContent={<i className="ri-gift-line ri-xl" />} onPress={modalInformativeHadiah.onOpen}>
+                                    <Button ref={lookToKonfirmasi} className='rounded mt-3' color='secondary' startContent={<i className="ri-gift-line ri-xl" />} onPress={modalInformativeHadiah.onOpen}>
                                         <p className='l2-r font-deAetna'>kirim hadiah</p>
                                     </Button>
                                 </div >
@@ -827,10 +915,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                         </>
                     )}
                 </ModalContent>
-            </Modal >
+            </ Modal >
 
             {/* MODAL INFORMATIVE HADIAH */}
-            <Modal
+            < Modal
                 className='bg-White py-8'
                 hideCloseButton
                 isOpen={modalInformativeHadiah.isOpen}
@@ -877,26 +965,25 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                     <Button startContent={<i className='ri-message-3-line ri-xl' />} className='rounded w-full' color='secondary' onPress={onClose}>
                                         <p className='l2-r font-deAetna'>
                                             {
-                                                file != undefined
-                                                    ? 'Ganti Ucapan'
-                                                    :
-                                                    ucapanSelamat != '' ? 'Ganti Ucapan' : 'Beri Ucapan'
+                                                digitalGift === gifts[5]
+                                                    ? 'Beri Hadiah'
+                                                    : 'Ganti Hadiah'
                                             }
                                         </p>
                                     </Button>
                                     <Button
-                                        startContent={<>{file != undefined
-                                            ? <i className='ri-arrow-right-s-line ri-xl' />
-                                            : ucapanSelamat != ''
-                                                ? <i className='ri-arrow-right-s-line ri-xl' />
-                                                : <i className='ri-check-line ri-xl' />}</>}
-                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' onPress={onClose}>
+                                        ref={lookToKonfirmasi2}
+                                        onPress={onClose}
+                                        onClick={modalHadiah.onClose}
+                                        startContent={<>{digitalGift === gifts[5]
+                                            ? <i className='ri-check-line ri-xl' />
+                                            : <i className='ri-arrow-right-s-line ri-xl' />}</>}
+                                        className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered'>
                                         <p className='l2-r font-deAetna'>
                                             {
-                                                file != undefined
-                                                    ? 'Lanjut'
-                                                    :
-                                                    ucapanSelamat != '' ? 'Lanjut' : 'Yakin'
+                                                digitalGift === gifts[5]
+                                                    ? 'Yakin'
+                                                    : 'Lanjut'
                                             }
                                         </p>
                                     </Button>
@@ -905,7 +992,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                         </>
                     )}
                 </ModalContent>
-            </Modal >
+            </ Modal >
 
             {/* BACK */}
             < div ref={checkout} >
@@ -916,7 +1003,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
             </ div >
 
             {/* MODAL KONFIRMASI */}
-            <Modal className='light light:text-black mx-6 bg-White'
+            < Modal className='light light:text-black mx-6 bg-White'
                 scrollBehavior='inside'
                 isOpen={modalKonfirmasi.isOpen}
                 onOpenChange={modalKonfirmasi.onOpenChange}
@@ -1004,15 +1091,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
 
                                     <div className='grid gap-2'>
                                         <div className='z-20 flex overflow-hidden gap-1 content-stretch'>
-                                            {/* <button id='buttonChangeUcapanSelamat' className='rounded btn btn-accent h-full py-2'>
-                                                <i className="ri-message-3-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Ganti Ucapan</p>
-                                            </button>
-                                            <button id='buttonChangeDigitalGift' className='rounded btn btn-accent h-full py-2'>
-                                                <i className="ri-gift-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>Ganti Hadiah</p>
-                                            </button> */}
-
                                             <Button className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-message-3-line ri-xl"></i>} onPress={onClose}>
                                                 <p className='l2-r font-deAetna'>Ganti Ucapan</p>
                                             </Button>
@@ -1021,13 +1099,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                             </Button>
                                         </div>
 
-                                        {/* <button onClick={handleKonfirmasi} id='konfirmasiButton' className='btn btn-secondary rounded'> */}
-                                        {/* <button id='konfirmasiButton' className='btn btn-secondary rounded'>
-                                                <i className="ri-check-line ri-xl"></i>
-                                                <p className='l2-r font-deAetna'>konfirmasi</p>
-                                            </button> */}
-
-                                        <Button className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} onPress={onClose}>
+                                        <Button ref={lookToEnd} className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} onPress={onClose}>
                                             <p className='l2-r font-deAetna'>Konfirmasi</p>
                                         </Button>
                                     </div>
@@ -1046,26 +1118,18 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano }) => {
                                     />
                                 </ div>
                             </ModalBody >
-                            {/* <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    No
-                                </Button>
-                                <Button className='bg-sky-500' color="primary" onPress={onClose}>
-                                    Yes
-                                </Button>
-                            </ModalFooter> */}
                         </>
                     )}
                 </ModalContent >
-            </Modal >
+            </ Modal >
 
             <div ref={lihatKenanganVirtual}>
-                <Button startContent={<i className="ri-eye-line ri-lg"></i>} color='secondary' className='rounded'>
+                <Button onPress={handleLihatKV} startContent={<i className="ri-eye-line ri-lg"></i>} color='secondary' className='rounded'>
                     <p className='l2-r font-deAetna'>Lihat Kenangan Virtual</p>
                 </Button>
             </div>
             <div ref={keluarResepsi}>
-                <Button startContent={<i className="ri-logout-box-r-line ri-lg"></i>} color='secondary' className='rounded'>
+                <Button onPress={handleKeluarRV} startContent={<i className="ri-logout-box-r-line ri-lg"></i>} color='secondary' className='rounded'>
                     <p className='l2-r font-deAetna'>Keluar Resepsi</p>
                 </Button>
             </div>
