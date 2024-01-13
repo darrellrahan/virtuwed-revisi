@@ -70,7 +70,7 @@ export default function RootLayout({
       <Head>
         <link rel="preload" href="/video.mp4" as="video" />
       </Head>
-      <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
+      <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable} overflow-x-hidden`}>
         <ReduxProvider>
           <Providers>
             {children}

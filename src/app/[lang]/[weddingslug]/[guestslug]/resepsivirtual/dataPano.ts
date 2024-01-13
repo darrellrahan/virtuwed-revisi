@@ -126,8 +126,8 @@ export const data = {
             ],
             "faceSize": 4096,
             "initialViewParameters": {
-                "pitch": 0,
-                "yaw": 0,
+                "pitch": -0.1851510231312865,
+                "yaw": 3.1373107204237645,
                 "fov": 1.5707963267948966
             },
             "linkHotspots": [
