@@ -1,5 +1,5 @@
 'use client'
-import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
+import { Button, ButtonGroup, Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import { RootState } from '@/src/app/[lang]/redux/reducers';
@@ -11,6 +11,7 @@ import "../../node_modules/video-react/dist/video-react.css";
 import { RadioGroup } from '@headlessui/react';
 import YouTubePlayer from './YoutubePlayer';
 import { useRouter } from 'next/navigation';
+import { Icon } from '@iconify/react';
 
 interface PanoProps {
     dataPano: {
@@ -99,7 +100,12 @@ const gifts = [
 
 
 const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
-    const panoRef = useRef<any>(null);
+    const panoRef = useRef<HTMLDivElement | null>(null);
+
+    const opening = useRef<HTMLDivElement | null>(null);
+    const birthdayCard = useRef<HTMLDivElement | null>(null);
+    const cardFront = useRef<HTMLDivElement | null>(null);
+    const openingTouch = useRef<HTMLDivElement | null>(null);
 
     const ucapkanSelamat = useRef(null);
     const berikanHadiah = useRef<HTMLDivElement | null>(null);
@@ -107,12 +113,15 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const lihatKenanganVirtual = useRef<HTMLDivElement | null>(null);
     const keluarResepsi = useRef<HTMLDivElement | null>(null);
 
+    const gantiUcapan = useRef<HTMLButtonElement | null>(null);
+    const gantiHadiah = useRef<HTMLButtonElement | null>(null);
+
+
     const lookToHadiah = useRef<HTMLButtonElement | null>(null);
     const lookToHadiah2 = useRef<HTMLButtonElement | null>(null);
     const lookToKonfirmasi = useRef<HTMLButtonElement | null>(null);
     const lookToKonfirmasi2 = useRef<HTMLButtonElement | null>(null);
     const lookToEnd = useRef<HTMLButtonElement | null>(null);
-    const lookToEnd2 = useRef<HTMLButtonElement | null>(null);
 
 
     // KORIDOR
@@ -291,18 +300,33 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             switchScene(panoScenes[0]);
 
-            // ===================================================================================================================
+            const onLoad = () => {
+                setTimeout(function () {
+                    birthdayCard.current?.classList.add('birthdayCard');
+                    birthdayCard.current?.classList.add('titleGuestBook');
+                    cardFront.current?.classList.add('cardFront');
+                }, 1000);
+                setTimeout(function () {
+                    opening.current?.classList.remove('opacity-100');
+                    opening.current?.classList.add('opacity-0');
+                    openingTouch.current?.classList.remove('hidden');
+                    panoRef.current?.classList.remove('saturate-0');
+                }, 4000);
+                setTimeout(function () {
+                    opening.current?.classList.add('hidden');
+                }, 4500);
+                setTimeout(function () {
+                    openingTouch.current?.classList.add('hidden');
+                }, 7000);
+            }
 
-            // TRY CHANGE VIEW
-            var destinationViewParameters = {
-                yaw: 1.4731802513717511,
-                pitch: 0.17922631245596676
-            };
+            onLoad()
+
+            // ===================================================================================================================
 
             var options = {
                 transitionDuration: 1000
             }
-
 
             // LOOK TO HADIAH
             const handleClicklookToHadiah = () => {
@@ -310,7 +334,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     if (berikanHadiah.current && berikanHadiah.current?.classList.contains('invisible')) {
                         berikanHadiah.current?.classList.remove('invisible');
                     }
-                    panoScenes[1].scene.lookTo(destinationViewParameters, options);
+                    panoScenes[1].scene.lookTo({ yaw: 1.4731802513717511, pitch: 0.17922631245596676 }, options);
 
                 })
             };
@@ -329,6 +353,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                     setTimeout(function () {
                         switchScene(panoScenes[2]);
+                        panoScenes[2].scene.lookTo({ pitch: -0.1851510231312865, yaw: 3.1373107204237645, }, { transitionDuration: 0 })
+
                         setTimeout(function () {
                             panoScenes[2].scene.lookTo({ yaw: 1.6829013691100227, pitch: 0.21238892003715293 }, options);
                         }, 1500);
@@ -343,7 +369,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             };
 
             // LOOK TO END
-            const checklookToEnd = () => {
+            const handleClickCheckout = () => {
                 if (lookToEnd.current) {
                     lookToEnd.current?.addEventListener('click', function () {
                         if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
@@ -355,13 +381,30 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                         panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
                     });
                 }
+
+                if (gantiUcapan.current) {
+                    gantiUcapan.current?.addEventListener('click', function () {
+                        switchScene(panoScenes[1])
+                        panoScenes[1].scene.lookTo({ yaw: 0, pitch: -0.056795042541741836 }, { transitionDuration: 0 })
+                    })
+                }
+
+                if (gantiHadiah.current) {
+                    gantiHadiah.current?.addEventListener('click', function () {
+                        switchScene(panoScenes[1])
+                        panoScenes[1].scene.lookTo({ yaw: 1.4731802513717511, pitch: 0.17922631245596676 }, { transitionDuration: 0 })
+                    })
+                }
             };
 
 
             // Add event listener to a common ancestor or document
             document.addEventListener('click', checklookToHadiah);
             document.addEventListener('click', checklookToKonfirmasi);
-            document.addEventListener('click', checklookToEnd);
+            document.addEventListener('click', handleClickCheckout);
+
+
+
 
 
 
@@ -421,15 +464,111 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
     }, [dataPano]);
 
+    useEffect(() => {
+
+
+
+        // return () => {
+        //     second
+        // }
+    }, [])
+
+
     return (
         <>
-            <div className="light h-full w-full absolute" ref={panoRef} ></div>
+            {/* <div className="light h-full w-full absolute " ref={panoRef} ></div> */}
+            <div className="light h-full w-full absolute saturate-0 transition-all duration-1000 delay-[3000ms]" ref={panoRef} ></div>
 
-            {/* LIVESTREAM */}
+            {/* OPENING */}
+            <div ref={opening} className='transition-opacity duration-500 opacity-100 absolute w-full h-full z-50'
+                style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }}>
+
+                <div className="relative overflow-auto w-full h-full grid justify-items-center content-center p-6 ">
+
+                    {/* GUEST BOOK */}
+                    <div
+                        ref={birthdayCard}
+                        style={{
+                            transformStyle: 'preserve-3d',
+                            transform: 'perspective(2500px)',
+                            transition: '1s',
+                        }}
+                        // className='relative w-64 h-96 cursor-pointer birthdayCard titleGuestBook'>
+                        className='relative w-64 h-96 cursor-pointer'>
+                        <div
+                            ref={cardFront}
+                            style={{
+                                transformOrigin: 'left',
+                                transition: '.6s',
+                            }}
+                            // className='cardFront grid justify-center content-center relative bg-guestBookCover bg-contain bg-no-repeat bg-center w-full h-full overflow-hidden '>
+                            className='grid justify-center content-center relative bg-guestBookCover bg-contain bg-no-repeat bg-center w-full h-full overflow-hidden '>
+                            <h2 className='text-White  titleGuestBook mb-28'>Guest Book</h2>
+                        </div>
+
+                        <div className='absolute bg-guestBookInsideRight bg-contain bg-center bg-no-repeat w-full h-full grid gap-6 justify-items-center content-start pb-6 pt-8 pl-6 pr-12 -z-10 left-0 top-0'>
+                            <h3 className='text-N700'>Buku Tamu</h3>
+                            {/* MAKS 11 ORANG */}
+                            <ul className='grid gap-1 text-start w-full list-decimal list-inside text-N700'>
+                                <li className='p1-r font-deAetna'>Mugia Choir</li>
+                                <li className='p1-r font-deAetna'>Elang Fajar Buana</li>
+                                <li className='p1-r font-deAetna'>Zuhdan Nur Ihsan I</li>
+                                <li className='p1-r font-deAetna'>Hasnat</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            {/* OPENING-TOUCH */}
+            <div ref={openingTouch} id="openingTouch" className='hidden pointer-events-none absolute w-full h-full z-40'
+                style={{
+                    maxWidth: '400px',
+                    maxHeight: '300px',
+                    minWidth: '200px',
+                    minHeight: '250px',
+                    WebkitOverflowScrolling: 'touch',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }}>
+
+                <div className="relative overflow-auto w-full h-full grid text-center justify-items-center content-center p-6 ">
+
+                    <Icon icon="carbon:touch-1-filled" color="white" fontSize={128} className='animate-pulse animate-wiper' />
+                    <h4 className='font-deAetna text-xl text-white lg:text-2xl'>Geser untuk menggunakan<br />resepsi virtual</h4>
+                </div>
+            </div>
+
+            {/* NAVIGATION */}
             <div className='fixed bottom-0 left-0 w-full p-3'>
-                <Button startContent={<i className="ri-live-line ri-xl"></i>} size='lg' className='rounded w-full bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end text-white hover:btn-shadow-primary' onPress={modalLivestream.onOpen}>
-                    <p className='l3-r font-deAetna'>Lihat Pernikahan Live</p>
-                </Button>
+                <div className='bg-White py-3 rounded-lg max-w-lg mx-auto'>
+                    <ButtonGroup className='w-full !h-full' size='lg'>
+                        <Button startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                            <p className='l3-r font-deAetna'>Kembali</p>
+                        </Button>
+                        <Button radius='sm' className='!rounded !h-full gap-1.5 grid grid-flow-row w-full bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end text-white py-2' onPress={modalLivestream.onOpen}>
+                            <i className="ri-live-line ri-xl"></i>
+                            <p className='l3-r font-deAetna'>Livestream</p>
+                        </Button>
+                        <Button endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                            <p className='l3-r font-deAetna'>Selanjutnya</p>
+                        </Button>
+                    </ButtonGroup>
+                </div>
+
             </div>
             <Modal
                 className='h-dvh bg-White overflow-scroll m-0 p-0'
@@ -1101,10 +1240,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                                     <div className='grid gap-2'>
                                         <div className='z-20 flex overflow-hidden gap-1 content-stretch'>
-                                            <Button className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-message-3-line ri-xl"></i>} onPress={onClose}>
+                                            <Button ref={gantiUcapan} className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-message-3-line ri-xl"></i>} onPress={onClose}>
                                                 <p className='l2-r font-deAetna'>Ganti Ucapan</p>
                                             </Button>
-                                            <Button className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-gift-line ri-xl"></i>} onPress={onClose}>
+                                            <Button ref={gantiHadiah} className='rounded w-full bg-transparent text-tertiary border-tertiary border' variant='bordered' startContent={<i className="ri-gift-line ri-xl"></i>} onPress={onClose}>
                                                 <p className='l2-r font-deAetna'>Ganti Hadiah</p>
                                             </Button>
                                         </div>
