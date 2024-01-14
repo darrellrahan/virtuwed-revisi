@@ -102,10 +102,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const panoRef = useRef<any>(null);
 
     const ucapkanSelamat = useRef(null);
-    const berikanHadiah = useRef(null);
+    const berikanHadiah = useRef<HTMLDivElement | null>(null);
     const checkout = useRef(null);
-    const lihatKenanganVirtual = useRef(null);
-    const keluarResepsi = useRef(null);
+    const lihatKenanganVirtual = useRef<HTMLDivElement | null>(null);
+    const keluarResepsi = useRef<HTMLDivElement | null>(null);
 
     const lookToHadiah = useRef<HTMLButtonElement | null>(null);
     const lookToHadiah2 = useRef<HTMLButtonElement | null>(null);
@@ -307,7 +307,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             // LOOK TO HADIAH
             const handleClicklookToHadiah = () => {
                 lookToHadiah2.current?.addEventListener('click', function () {
-                    console.log('lookto2');
+                    if (berikanHadiah.current && berikanHadiah.current?.classList.contains('invisible')) {
+                        berikanHadiah.current?.classList.remove('invisible');
+                    }
                     panoScenes[1].scene.lookTo(destinationViewParameters, options);
 
                 })
@@ -315,7 +317,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             const checklookToHadiah = () => {
                 if (lookToHadiah.current) {
-                    console.log('tes');
                     lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
                 }
             };
@@ -324,15 +325,19 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             // LOOK TO KONFIRMASI 
             const handleClicklookToKonfirmasi = () => {
                 lookToKonfirmasi2.current?.addEventListener('click', function () {
-                    console.log('looktoKonfirmasi2');
                     panoScenes[1].scene.lookTo({ yaw: -3.1149072553601655, pitch: -0.0070584653244445406 }, options);
 
+                    setTimeout(function () {
+                        switchScene(panoScenes[2]);
+                        setTimeout(function () {
+                            panoScenes[2].scene.lookTo({ yaw: 1.6829013691100227, pitch: 0.21238892003715293 }, options);
+                        }, 1500);
+                    }, 1500);
                 })
             };
 
             const checklookToKonfirmasi = () => {
                 if (lookToKonfirmasi.current) {
-                    console.log('konfirmasi');
                     lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
                 }
             };
@@ -340,8 +345,13 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             // LOOK TO END
             const checklookToEnd = () => {
                 if (lookToEnd.current) {
-                    console.log('tes');
                     lookToEnd.current?.addEventListener('click', function () {
+                        if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
+                            keluarResepsi.current?.classList.remove('invisible');
+                        }
+                        if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
+                            lihatKenanganVirtual.current?.classList.remove('invisible');
+                        }
                         panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
                     });
                 }
@@ -605,7 +615,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     <p className='l2-r font-deAetna'>Ucapkan Selamat</p>
                 </Button>
             </div>
-            <div ref={berikanHadiah}>
+            <div ref={berikanHadiah} className='invisible'>
                 <Button startContent={<i className="ri-gift-line ri-lg"></i>} color='secondary' className='rounded' onPress={modalHadiah.onOpen}>
                     <p className='l2-r font-deAetna'>Berikan Hadiah</p>
                 </Button>
@@ -1123,12 +1133,12 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 </ModalContent >
             </ Modal >
 
-            <div ref={lihatKenanganVirtual}>
+            <div ref={lihatKenanganVirtual} className='invisible'>
                 <Button onPress={handleLihatKV} startContent={<i className="ri-eye-line ri-lg"></i>} color='secondary' className='rounded'>
                     <p className='l2-r font-deAetna'>Lihat Kenangan Virtual</p>
                 </Button>
             </div>
-            <div ref={keluarResepsi}>
+            <div ref={keluarResepsi} className='invisible'>
                 <Button onPress={handleKeluarRV} startContent={<i className="ri-logout-box-r-line ri-lg"></i>} color='secondary' className='rounded'>
                     <p className='l2-r font-deAetna'>Keluar Resepsi</p>
                 </Button>
