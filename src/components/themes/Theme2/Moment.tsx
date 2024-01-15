@@ -104,7 +104,7 @@ function Moment() {
         </div>
         <div
           ref={sliderRef}
-          className="gap-8 h-[470px] scroll-smooth hidden lg:flex overflow-x-auto"
+          className="scrollbar-none gap-8 h-[470px] scroll-smooth hidden lg:flex overflow-x-auto"
         >
           {wedding.media.prewedding_photos.map((data: any) => {
             return (

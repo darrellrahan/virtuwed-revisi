@@ -40,20 +40,20 @@ function Hero() {
           </Zoom>
           <div className="flex gap-8 lg:justify-center items-end">
             <Fade direction="left">
-              <h1 className={`text-[6rem] leading-[1] font-semibold ${benton.className}`}>
+              <h1 className={`text-[4rem]  leading-[1] font-semibold ${benton.className}`}>
                 {wedding.wedding_name.split(" ")[0]}
               </h1>
             </Fade>
             <Fade direction="right">
               <span
-                className={`text-[7.5rem] leading-[1] ${lovelyCoffee.className}`}
+                className={`text-[5.5rem] leading-[1] ${lovelyCoffee.className}`}
               >
                 &
               </span>
             </Fade>
           </div>
           <Fade direction="up">
-            <h1 className={`text-[6rem] leading-[1] font-semibold text-center ${benton.className}`}>
+            <h1 className={`text-[4rem] leading-[1] font-semibold text-center ${benton.className}`}>
               {wedding.wedding_name.split(" ")[2]}
             </h1>
           </Fade>
