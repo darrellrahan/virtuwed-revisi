@@ -126,6 +126,24 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
     // KORIDOR
     const bridePicture1 = useRef(null);
+    const bridePicture2 = useRef(null);
+    const bridePicture3 = useRef(null);
+    const bridePicture4 = useRef(null);
+    const bridePicture5 = useRef(null);
+    const bridePicture6 = useRef(null);
+    const bridePicture7 = useRef(null);
+
+    // FRONT
+    const bridePicture8 = useRef(null);
+    const bridePicture9 = useRef(null);
+    const bridePicture10 = useRef(null);
+    const bridePicture11 = useRef(null);
+
+    // BACK
+    const bridePicture12 = useRef(null);
+    const bridePicture13 = useRef(null);
+    const bridePicture14 = useRef(null);
+    const bridePicture15 = useRef(null);
 
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
@@ -386,6 +404,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     gantiUcapan.current?.addEventListener('click', function () {
                         switchScene(panoScenes[1])
                         panoScenes[1].scene.lookTo({ yaw: 0, pitch: -0.056795042541741836 }, { transitionDuration: 0 })
+                        // modalUcapanSelamat.isOpen
+                        modalUcapanSelamat.onOpen()
                     })
                 }
 
@@ -405,15 +425,30 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
 
-
+            // 1 = {yaw: 2.7664720145284134, pitch: -0.13936477893798127}
+            // 2 = {yaw: 2.896924155498631, pitch: -0.1448877727448732}
+            // 3 = {yaw: -2.898176835461687, pitch: -0.1445024049846424}
+            // 4 = {yaw: -2.767850265539211, pitch: -0.13883335444879563}
 
 
             // ==================================================================================================
 
             const containerKoridor = panoScenes[0].scene.hotspotContainer();
             if (containerKoridor) {
-                containerKoridor.createHotspot(bridePicture1.current, { yaw: 1.1165199114658257, pitch: 0.009338294282953186 },
-                    { perspective: { radius: 3175, extraTransforms: "rotateY(-25deg)" } });
+                containerKoridor.createHotspot(bridePicture1.current, { yaw: -1.164598164451725, pitch: -0.3047599598934614 },
+                    { perspective: { radius: 2080, extraTransforms: "rotateY(25deg) rotateX(15deg) rotateZ(7deg)" } });
+                containerKoridor.createHotspot(bridePicture2.current, { yaw: -0.7283039004229686, pitch: -0.06379271830326516 },
+                    { perspective: { radius: 3830, extraTransforms: "rotateY(46deg) rotateX(3deg) rotateZ(3deg)" } });
+                containerKoridor.createHotspot(bridePicture3.current, { yaw: -0.38660091738350033, pitch: 0.0854400652578704 },
+                    { perspective: { radius: 4550, extraTransforms: "rotateY(7deg) rotateX(12deg) rotateZ(-0.75deg)" } });
+                containerKoridor.createHotspot(bridePicture4.current, { yaw: 0.16648722780547587, pitch: 0.04460063328119723 },
+                    { perspective: { radius: 8850, extraTransforms: "rotateY(-45deg) rotateX(12deg) rotateZ(2deg)" } });
+                containerKoridor.createHotspot(bridePicture5.current, { yaw: 0.3852822083866734, pitch: 0.08653882466922802 },
+                    { perspective: { radius: 4550, extraTransforms: "rotateY(-7deg) rotateX(12deg) rotateZ(0.75deg)" } });
+                containerKoridor.createHotspot(bridePicture6.current, { yaw: 0.7285051078120084, pitch: -0.06574146003724834 },
+                    { perspective: { radius: 3830, extraTransforms: "rotateY(-46deg) rotateX(3deg) rotateZ(-3deg)" } });
+                containerKoridor.createHotspot(bridePicture7.current, { yaw: 1.1642880111712266, pitch: -0.30463877068957146 },
+                    { perspective: { radius: 2080, extraTransforms: "rotateY(-25deg) rotateX(15deg) rotateZ(-7deg)" } });
 
             } else {
                 console.error("Element with ID 'iframespot' not found.");
@@ -425,6 +460,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
                 containerFront.createHotspot(berikanHadiah.current, { yaw: 1.4731802513717511, pitch: 0.17922631245596676 },
                     { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
+                containerFront.createHotspot(bridePicture8.current, { yaw: 2.7664720145284134, pitch: -0.13936477893798127 },
+                    { perspective: { radius: 9000, extraTransforms: "rotateY(-18deg) rotateX(8deg) rotateZ(-3deg)" } });
+                containerFront.createHotspot(bridePicture9.current, { yaw: 2.896924155498631, pitch: -0.1448877727448732 },
+                    { perspective: { radius: 8700, extraTransforms: "rotateY(-12deg) rotateX(8deg) rotateZ(-2deg)" } });
+                containerFront.createHotspot(bridePicture10.current, { yaw: -2.898176835461687, pitch: -0.1445024049846424 },
+                    { perspective: { radius: 8700, extraTransforms: "rotateY(12deg) rotateX(8deg) rotateZ(2deg)" } });
+                containerFront.createHotspot(bridePicture11.current, { yaw: -2.767850265539211, pitch: -0.13883335444879563 },
+                    { perspective: { radius: 9000, extraTransforms: "rotateY(18deg) rotateX(8deg) rotateZ(3deg)" } });
 
             } else {
                 console.error("Element with ID 'iframespot' not found.");
@@ -446,33 +489,23 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             }
 
             // CHECK COORDS
-            // var pano = panoRef.current;
-            // pano.addEventListener('click', (e: any) => {
-            //     var view = viewer.view();
-            //     console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
-            // });
+            var pano = panoRef.current;
+            pano?.addEventListener('click', (e: any) => {
+                var view = viewer.view();
+                console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
+            });
 
 
 
             return () => {
                 document.removeEventListener('click', checklookToHadiah);
 
-                // viewer.destroy();
+                viewer.destroy();
             }
         }
 
 
     }, [dataPano]);
-
-    useEffect(() => {
-
-
-
-        // return () => {
-        //     second
-        // }
-    }, [])
-
 
     return (
         <>
@@ -736,9 +769,75 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             </Modal >
 
             {/* KORIDOR */}
-            <div ref={bridePicture1} className='relative w-[1350px] h-[1080px]'>
+            <div ref={bridePicture1} className='relative w-[1024px] h-[768px]'>
                 <Image
                     src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[0]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture2} className='relative w-[1350px] h-[1080px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[1]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture3} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[2]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture4} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[3]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture5} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[4]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture6} className='relative w-[1350px] h-[1080px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[5]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture7} className='relative w-[1024px] h-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[6]}
                     alt="Moment pengantin"
                     className="object-cover object-center min-w-full w-full h-full"
                     width={500}
@@ -1142,6 +1241,54 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     )}
                 </ModalContent>
             </ Modal >
+
+            <div ref={bridePicture8} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[1]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+
+            <div ref={bridePicture9} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[8]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+
+            <div ref={bridePicture10} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[9]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+
+            <div ref={bridePicture11} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[10]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
 
             {/* BACK */}
             < div ref={checkout} >
