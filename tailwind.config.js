@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+import { nextui } from "@nextui-org/react";
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
@@ -94,6 +97,12 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
+        rotate: "rotate 20s linear infinite",
+      },
+      keyframes: {
+        rotate: {
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       transitionDelay: {
         '2000': '2000ms',
@@ -104,6 +113,7 @@ module.exports = {
     require("daisyui"),
     require("tailwindcss-gradients")
   ],
+  plugins: [nextui()],
   daisyui: {
     themes: [
       {

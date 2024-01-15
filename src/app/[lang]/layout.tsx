@@ -3,6 +3,7 @@ import './globals.css'
 import Head from 'next/head'
 import { ReduxProvider } from './redux/provider'
 import { Locale, i18n } from '@/i18n.config'
+import { Providers } from './providers'
 
 
 export const metadata = {
@@ -69,9 +70,11 @@ export default function RootLayout({
       <Head>
         <link rel="preload" href="/video.mp4" as="video" />
       </Head>
-      <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable}`}>
+      <body className={`${amiamie.variable} ${deAetna.variable} ${ade.variable} overflow-x-hidden`}>
         <ReduxProvider>
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </ReduxProvider>
       </body >
     </html >

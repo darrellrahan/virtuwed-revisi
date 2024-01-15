@@ -1,123 +1,110 @@
 {
-    "navigation": {
-        "home": "Beranda",
-        "feature": "Fitur",
-        "package": "Paket",
-        "testimonial": "Testimonial"
+    "header": [
+        "beranda",
+        "portofolio",
+        "tema",
+        "artikel"
+    ],
+    "hero": {
+        "heading": "Nikah dengan 100, 1000, 10 ribu tamu? Bisa dengan Virtuwed!",
+        "subheading": "Platform pernikahan yang bisa bikin pernikahanmu diakses kapanpun, dimanapun dengan kapasitas tamu tanpa batas",
+        "button": "Mulai sekarang",
+        "video": "Putar Video"
     },
-    "page": {
-        "home": {
-            "jumbotron": {
-                "title": {
-                    "special": "Virtual",
-                    "common": "Platform Pernikahan "
-                },
-                "description": "Wujudkan pernikahan yang mewah dan elegan anda, secara virtual.",
-                "button1": "Mulai Sekarang",
-                "button2": "Cara memulai"
+    "award": "Nominasi sebagai Startup Of The Year, Asia Pacific ICT Awards, APICTA 2023 [Hong Kong]",
+    "feature": {
+        "heading": "Virtuwed merupakan platform pernikahan virtual pertama di Indonesia dengan fitur terlengkap",
+        "subheading": "Bawa pengalaman pernikahan Anda ke dunia virtual",
+        "features": [
+            {
+                "title": "Undangan Digital Premium",
+                "body": "Kirim Undangan Digital Anda Secara Eksklusif, Aman, dan Terpercaya"
             },
-            "tagline": {
-                "title": {
-                    "special": "Virtuwed",
-                    "common": "Raih pernikahan luar biasa "
-                },
-                "description": "Memperkaya Pernikahan Melalui Pengalaman Digital yang Inovatif."
+            {
+                "title": "Resepsi Virtual 360-Derajat",
+                "body": "Gelar pernikahanmu semewah mungkin, kapan saja dan di mana saja"
             },
-            "feature": {
-                "feat1": {
-                    "title": "Virtual 360° Wedding",
-                    "description": "Dengan Virtuwed, hadirkan suasana pernikahan impianmu ke dalam bentuk virtual room yang kami miliki, sehingga tamu dapat merasakan kesakralan atau feel pernikahan konvensional anda secara digital.",
-                    "button": "Lihat 360° Virtual Wedding"
-                },
-                "feat2": {
-                    "title": "Undangan Digital",
-                    "description": "Sambutlah era baru undangan digital yang terintegrasi langsung dengan Ruang Virtual 360 kami, dan ucapkan selamat tinggal pada undangan digital era lama.",
-                    "button": "Lihat Contoh Undangan"
-                },
-                "feat3": {
-                    "title": "Desain Mewah & Eksklusif",
-                    "description": "Pilih dari ratusan desain mewah dan eksklusif yang telah dirancang khusus untuk diintegrasikan dengan Ruang Virtual 360 kami dengan cara yang mengesankan.",
-                    "button": "Cari Desain Impian Anda"
-                },
-                "feat4": {
-                    "title": "Integrasikan Dengan Fitur Terbaik",
-                    "points": [
-                        "Live Streaming 2 arah",
-                        "Hadiah digital",
-                        "Ucapan Pernikahan"
-                    ]
-                }
-            },
-            "package": {
-                "title": "Paket Virtuwed",
-                "package1": [
-                    "Undangan Digital (500 Tamu)",
-                    "Resepsi Virtual",
-                    "Galeri Foto Pernikahan",
-                    "Video call",
-                    "Live Streaming Pernikahan",
-                    "Hadiah Digital",
-                    "Dapat Diakses Selama 1 Tahun"
-                ],
-                "package2": {
-                    "description": "Semua yang dimiliki Virtuwed Premium, Plus:",
-                    "points": [
-                        "Livestreaming dengan Kamera Profesional",
-                        "Video Call dengan TV 40 inch",
-                        "Dedicated Internet",
-                        "Dokumentasi 360 Derajat"
-                    ]
-                },
-                "button": "Berlangganan Sekarang"
-            },
-            "testimoni": {
-                "title": "Yang Mereka Katakan",
-                "description": "Menawarkan solusi terbaik untuk momen istimewa Anda menjadi tak terlupakan. Dapatkan pengalaman pernikahan yang memikat."
-            },
-            "cta": {
-                "title": "Buat Virtuwed-mu Sekarang",
-                "description": "Nikmati pengalaman pernikahan yang tak terlupakan dengan Virtuwed.",
-                "button": "Mulai Sekarang"
-            },
-            "faq": {
-                "description": "Semua yang anda perlu tahu mengenai produk dan bagaimana cara produk kami bekerja. Tidak menemukan jawaban? Hubungi kami.",
-                "accordion1": {
-                    "title": "Apa itu Virtuwed?",
-                    "description": "Virtuwed adalah platform virtual pernikahan dengan fitur undangan digital, platform 360, galeri foto, video call, live streaming, dan lainnya."
-                },
-                "accordion2": {
-                    "title": "Apa saja fitur utama yang ditawarkan Virtuwed?",
-                    "description": "Fitur utama meliputi undangan digital, pengiriman souvenir, sambutan virtual, galeri foto pernikahan, video call, dan live streaming pernikahan."
-                },
-                "accordion3": {
-                    "title": "Apa saja paket yang disediakan oleh Virtuwed?",
-                    "description": "Ada 2 paket: VIRTUWED Premium (2 Juta Rupiah) untuk pernikahan intim, dan VIRTUWED Priority (10 Juta Rupiah) dengan layanan lebih profesional."
-                },
-                "accordion4": {
-                    "title": "Apakah ada biaya tambahan untuk penambahan tamu pada VIRTUWED Premium?",
-                    "description": "Ya, penambahan 100 tamu dikenakan biaya Rp.50.000,-"
-                },
-                "accordion5": {
-                    "title": "Mengapa Virtuwed menjadi pilihan untuk pernikahan?",
-                    "description": "Virtuwed menawarkan solusi ekonomis dan inovatif untuk menciptakan pernikahan yang tak terlupakan dengan biaya terjangkau dan dapat diakses dari mana saja."
-                }
+            {
+                "title": "Kenangan Virtual 360-Derajat",
+                "body": "Lihat kenangan tak terlupakan yang dapat diakses kapan saja dan di mana saja"
             }
-        },
-        "about": {
-            "title": "About Us",
-            "description": "This is the about page"
-        }
-    },
-    "footer": {
-        "title": [
-            "Navigasi",
-            "Sosial Media"
-        ],
-        "points": [
-            "Beranda",
-            "Fitur",
-            "Paket",
-            "Testimoni"
         ]
-    }
+    },
+    "value": [
+        {
+            "title": "Virtuwed: Memperluas jangkauan pernikahanmu dengan mudah dan murah",
+            "body": "Ucapkan selamat tinggal untuk pernikahan yang terbatas biaya, jarak dan waktu. Platform Virtuwed dapat memperluas kapasitas tamu secara virtual, dapat dihadiri dari mana saja, dan dengan biaya yang terjangkau."
+        },
+        {
+            "title": "Buat undangan digital secara eksklusif, Kirim dengan Aman dan Terpercaya",
+            "body": "Khawatir undangan tak tersampaikan karena penipuan undangan digital? Dengan Virtuwed, kami memastikan undangan digital eksklusif anda tersampaikan secara Aman dan Terpercaya melalui WhatsApp resmi kami."
+        },
+        {
+            "title": "Gelar pernikahan anda Kapan-pun, Dimana-pun, dengan Berapa-pun jumlah tamu-nya",
+            "body": "Platform kami dapat menggelar pernikahan secara hybrid (Langsung dan Virtual) dengan Live Streaming 360-derajat, memastikan tamu dapat merasakan atmosfir acara pernikahan anda dimanapun mereka berada!"
+        },
+        {
+            "title": "Terima Hadiah Digital dari Tamu Undangan",
+            "body": "Tamu dapat memilih dan mengirimkan hadiah pernikahan dalam bentuk simbolisasi dari benda rumah tangga kepada anda. Kemudian, kami mencairkan nominal benda tersebut ke rekening anda."
+        },
+        {
+            "title": "Lihat dan Abadikan momen pernikahan tak terlupakan secara 360-derajat",
+            "body": "Kenangan Virtual kami meng-abadikan foto dan video akad, pemberkatan dan resepsi secara 360-derajat. Lihat kembali setiap momen yang terjadi tanpa terkekang oleh arahan kamera fotografer anda."
+        }
+    ],
+    "pricing": {
+        "heading": "Paket Virtuwed",
+        "subheading": "Pilih paket yang paling sesuai dengan perjalanan pernikahan Anda.",
+        "lite": [
+            "Undangan Digital 200 Tamu, Dikirim Akun Resmi Virtuwed",
+            "Desain Premium",
+            "Resepsi Virtual 360 derajat",
+            "Kenangan Virtual 360 derajat",
+            "Hadiah Digital",
+            "Akses 1 Tahun"
+        ],
+        "priority": [
+            "Undangan Digital 500 Tamu, Dikirim Akun Resmi Virtuwed",
+            "Desain Custom",
+            "Resepsi Virtual 360 Derajat",
+            "Kenangan Virtual 360 Derajat",
+            "Hadiah Digital",
+            "Live Streaming Pernikahan 360 Derajat (Klik Untuk Demo)",
+            "Dokumentasi Foto & Video 360 Derajat (Klik untuk Demo)",
+            "Akses SELAMANYA"
+        ],
+        "addons": [
+            "Tambah Tamu Undangan",
+            "Ubah Akses ke Selamanya",
+            "Live Streaming Pernikahan 360 Derajat",
+            "Dokumentasi Foto & Video 360 Derajat"
+        ]
+    },
+    "review": {
+        "heading": "Yang merka katakan",
+        "subheading": "Kami memprioritaskan peningkatan pengalaman pelanggan, secara konsisten memberikan layanan yang luar biasa."
+    },
+    "video": "Jelajahi panduan komprehensif kami dalam menavigasi platform pernikahan virtual kami",
+    "faq": [
+        {
+            "question": "Apa itu Virtuwed?",
+            "answer": "Virtuwed adalah platform virtual pernikahan dengan fitur undangan digital, platform 360, galeri foto, video call, live streaming, dan lainnya."
+        },
+        {
+            "question": "Apa saja fitur utama yang ditawarkan Virtuwed?",
+            "answer": "Fitur utama meliputi undangan digital, pengiriman souvenir, sambutan virtual, galeri foto pernikahan, video call, dan live streaming pernikahan."
+        },
+        {
+            "question": "Apa saja paket yang disediakan oleh Virtuwed?",
+            "answer": "Ada 2 paket: VIRTUWED Premium (2 Juta Rupiah) untuk pernikahan intim, dan VIRTUWED Priority (10 Juta Rupiah) dengan layanan lebih profesional."
+        },
+        {
+            "question": "Apakah ada biaya tambahan untuk penambahan tamu pada VIRTUWED Premium?",
+            "answer": "Ya, penambahan 100 tamu dikenakan biaya Rp.50.000,-"
+        },
+        {
+            "question": "Mengapa Virtuwed menjadi pilihan untuk pernikahan?",
+            "answer": "Virtuwed menawarkan solusi ekonomis dan inovatif untuk menciptakan pernikahan yang tak terlupakan dengan biaya terjangkau dan dapat diakses dari mana saja."
+        }
+    ]
 }

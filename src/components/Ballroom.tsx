@@ -39,6 +39,7 @@ import { RootState } from '@/src/app/[lang]/redux/reducers';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import YouTubePlayer from './YoutubePlayer';
+import { Button } from '@nextui-org/react';
 
 const gifts = [
     {
@@ -1529,10 +1530,10 @@ const Ballroom = (props: { lang: any }) => {
                                 </button>
                             </div>
 
-                            <button onClick={handleKonfirmasi} id='konfirmasiButton' className='btn btn-secondary rounded'>
+                            <Button onClick={handleKonfirmasi} id='konfirmasiButton' color='secondary' className='rounded'>
                                 <i className="ri-check-line ri-xl"></i>
                                 <p className='l2-r font-deAetna'>konfirmasi</p>
-                            </button>
+                            </Button>
                         </div>
                     </div>
 
@@ -1658,7 +1659,8 @@ const Ballroom = (props: { lang: any }) => {
                                 <p className='p3-r'>Invoice akan dikirimkan ke whatsapp anda</p>
                             </div>
                         </RadioGroup >
-                        <button
+                        <Button
+                            color='secondary'
                             className='mt-3 z-10 btn btn-secondary rounded'
                             onClick={() => {
                                 const digitalGiftModal = document.getElementById('digitalGiftModal') as HTMLDialogElement | null;
@@ -1668,7 +1670,7 @@ const Ballroom = (props: { lang: any }) => {
                             }}>
                             <i className="ri-gift-line ri-xl"></i>
                             <p className='l2-r font-deAetna'>kirim hadiah</p>
-                        </button>
+                        </Button>
                     </div >
 
                     {/* DECORATION */}
@@ -1723,7 +1725,7 @@ const Ballroom = (props: { lang: any }) => {
 
                     <form className='flex items-stretch content-stretch gap-1 w-full' method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="btn btn-secondary rounded-l h-full py-2">
+                        <button className="bg-secondary btn btn-secondary rounded-l h-full py-2">
                             <i className="ri-gift-line ri-xl"></i>
                             {
                                 digitalGift === gifts[5]
@@ -1819,17 +1821,19 @@ const Ballroom = (props: { lang: any }) => {
                             </form>
                         </div>
 
-                        <button
+                        <Button
                             onClick={() => {
                                 const ucapanSelamatModal = document.getElementById('ucapanSelamatModal') as HTMLDialogElement | null;
                                 if (ucapanSelamatModal) {
                                     ucapanSelamatModal.showModal();
                                 }
                             }}
-                            className='btn btn-secondary rounded'>
+                            color='secondary'
+                            className='rounded'
+                        >
                             <i className="ri-send-plane-line ri-xl"></i>
                             <p className='l2-r font-deAetna'>kirim ucapan</p>
-                        </button>
+                        </Button>
                     </ div>
 
                     {/* DECORATION */}
@@ -1890,7 +1894,7 @@ const Ballroom = (props: { lang: any }) => {
 
                     <form className='flex gap-1 w-full' method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="btn btn-secondary rounded-l">
+                        <button className="py-2 btn btn-secondary bg-secondary rounded-l">
                             <i className='ri-message-3-line ri-xl' />
                             {
                                 file != undefined
@@ -1899,7 +1903,7 @@ const Ballroom = (props: { lang: any }) => {
                                     ucapanSelamat != '' ? 'Ganti Ucapan' : 'Beri Ucapan'
                             }
                         </button>
-                        <button id='buttonPelaminan' className="btn btn-accent rounded-r">
+                        <button id='buttonPelaminan' className="py-2 btn btn-accent rounded-r">
                             {
                                 file != undefined
                                     ? <><i className='ri-arrow-right-s-line ri-xl' />Lanjut</>
