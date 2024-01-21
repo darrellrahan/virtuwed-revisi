@@ -123,6 +123,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const lookToKonfirmasi2 = useRef<HTMLButtonElement | null>(null);
     const lookToEnd = useRef<HTMLButtonElement | null>(null);
 
+    const backButton = useRef<HTMLButtonElement | null>(null);
+    const nextButton = useRef<HTMLButtonElement | null>(null);
+
 
     // KORIDOR
     const bridePicture1 = useRef(null);
@@ -144,6 +147,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const bridePicture13 = useRef(null);
     const bridePicture14 = useRef(null);
     const bridePicture15 = useRef(null);
+    const bridePicture16 = useRef(null);
+    const bridePicture17 = useRef(null);
+    const bridePicture18 = useRef(null);
 
 
     const wedding = useSelector((state: RootState) => state.value.wedding);
@@ -294,6 +300,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     return null;
                 }
 
+
                 // Create link hotspots.
                 linkHotspots.forEach(function (hotspot: any) {
                     var element = createLinkHotspotElement(hotspot);
@@ -307,9 +314,44 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 };
             });
 
+            const updateSceneName = (scene: any) => {
+                console.log('updateSceneName called');
+
+
+
+
+                const handleClick = () => {
+                    switch (scene) {
+                        case panoScenes[0]:
+                            console.log('koridor');
+                            // Additional actions for panoScenes[0]
+                            break;
+
+                        case panoScenes[1]:
+                            console.log('front');
+                            // Additional actions for panoScenes[1]
+                            break;
+
+                        case panoScenes[2]:
+                            console.log('back');
+                            // Additional actions for panoScenes[2]
+                            break;
+
+                        default:
+                            break;
+                    }
+                };
+
+                // Remove the previous event listener before adding a new one
+                nextButton.current?.addEventListener('click', handleClick);
+
+
+            }
+
             const switchScene = (scene: any) => {
                 // stopAutorotate();
                 // scene.view.setParameters(scene.initialViewParameters);
+                updateSceneName(scene);
                 scene.scene.switchTo();
                 // startAutorotate();
                 // updateSceneName(scene);
@@ -352,7 +394,12 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     if (berikanHadiah.current && berikanHadiah.current?.classList.contains('invisible')) {
                         berikanHadiah.current?.classList.remove('invisible');
                     }
+                    modalUcapanSelamat.onClose()
                     panoScenes[1].scene.lookTo({ yaw: 1.4731802513717511, pitch: 0.17922631245596676 }, options);
+
+                    setTimeout(function () {
+                        modalHadiah.onOpen()
+                    }, 1500);
 
                 })
             };
@@ -367,6 +414,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             // LOOK TO KONFIRMASI 
             const handleClicklookToKonfirmasi = () => {
                 lookToKonfirmasi2.current?.addEventListener('click', function () {
+                    modalHadiah.onClose()
                     panoScenes[1].scene.lookTo({ yaw: -3.1149072553601655, pitch: -0.0070584653244445406 }, options);
 
                     setTimeout(function () {
@@ -375,6 +423,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                         setTimeout(function () {
                             panoScenes[2].scene.lookTo({ yaw: 1.6829013691100227, pitch: 0.21238892003715293 }, options);
+                            setTimeout(function () {
+                                modalKonfirmasi.onOpen()
+                            }, 1500);
                         }, 1500);
                     }, 1500);
                 })
@@ -404,8 +455,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     gantiUcapan.current?.addEventListener('click', function () {
                         switchScene(panoScenes[1])
                         panoScenes[1].scene.lookTo({ yaw: 0, pitch: -0.056795042541741836 }, { transitionDuration: 0 })
-                        // modalUcapanSelamat.isOpen
-                        modalUcapanSelamat.onOpen()
+
+                        setTimeout(function () {
+                            modalUcapanSelamat.onOpen()
+                        }, 1500);
                     })
                 }
 
@@ -413,6 +466,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     gantiHadiah.current?.addEventListener('click', function () {
                         switchScene(panoScenes[1])
                         panoScenes[1].scene.lookTo({ yaw: 1.4731802513717511, pitch: 0.17922631245596676 }, { transitionDuration: 0 })
+
+                        setTimeout(function () {
+                            modalHadiah.onOpen()
+                        }, 1500);
                     })
                 }
             };
@@ -422,13 +479,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             document.addEventListener('click', checklookToHadiah);
             document.addEventListener('click', checklookToKonfirmasi);
             document.addEventListener('click', handleClickCheckout);
-
-
-
-            // 1 = {yaw: 2.7664720145284134, pitch: -0.13936477893798127}
-            // 2 = {yaw: 2.896924155498631, pitch: -0.1448877727448732}
-            // 3 = {yaw: -2.898176835461687, pitch: -0.1445024049846424}
-            // 4 = {yaw: -2.767850265539211, pitch: -0.13883335444879563}
 
 
             // ==================================================================================================
@@ -484,23 +534,49 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 containerBack.createHotspot(keluarResepsi.current, { yaw: 3.1409142956927933, pitch: 0.004879153410453085 },
                     { perspective: { radius: 300, extraTransforms: "rotateY(0deg)" } });
 
+
+                containerBack.createHotspot(bridePicture12.current, { yaw: 0.7700412269389645, pitch: 0.17738112076748713 },
+                    { perspective: { radius: 2200, extraTransforms: "rotateY(-16deg) rotateX(6deg) rotateZ(3deg)" } });
+
+                containerBack.createHotspot(bridePicture13.current, { yaw: 2.0441387920684173, pitch: -0.3269953170850819 },
+                    { perspective: { radius: 3950, extraTransforms: "rotateY(-64deg) rotateX(8deg) rotateZ(-16deg)" } });
+
+                containerBack.createHotspot(bridePicture14.current, { yaw: 2.250330714266445, pitch: -0.43670196647323856 },
+                    { perspective: { radius: 2980, extraTransforms: "rotateY(-53.5deg) rotateX(15deg) rotateZ(-19.5deg)" } });
+
+                containerBack.createHotspot(bridePicture15.current, { yaw: 2.739585960629082, pitch: -0.037810082463801464 },
+                    { perspective: { radius: 6650, extraTransforms: "rotateY(65.5deg) rotateX(0.5deg) rotateZ(2deg)" } });
+
+                containerBack.createHotspot(bridePicture16.current, { yaw: -2.7404817812359674, pitch: -0.0385358756343539 },
+                    { perspective: { radius: 6650, extraTransforms: "rotateY(-65.5deg) rotateX(0.5deg) rotateZ(-2deg)" } });
+
+                containerBack.createHotspot(bridePicture17.current, { yaw: -2.250996098602439, pitch: -0.4365461346165951 },
+                    { perspective: { radius: 2980, extraTransforms: "rotateY(53.5deg) rotateX(15deg) rotateZ(19.5deg)" } });
+
+                containerBack.createHotspot(bridePicture18.current, { yaw: -2.045404274690286, pitch: -0.3277844486449055 },
+                    { perspective: { radius: 3950, extraTransforms: "rotateY(64deg) rotateX(8deg) rotateZ(16deg)" } });
+
             } else {
                 console.error("Element with ID 'iframespot' not found.");
             }
 
             // CHECK COORDS
-            var pano = panoRef.current;
-            pano?.addEventListener('click', (e: any) => {
-                var view = viewer.view();
-                console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
-            });
+            // var pano = panoRef.current;
+            // pano?.addEventListener('click', (e: any) => {
+            //     var view = viewer.view();
+            //     console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }))
+            // });
+
 
 
 
             return () => {
                 document.removeEventListener('click', checklookToHadiah);
+                document.removeEventListener('click', checklookToKonfirmasi);
+                document.removeEventListener('click', handleClickCheckout);
 
-                viewer.destroy();
+                nextButton.current?.removeEventListener('click', updateSceneName);
+                // viewer.destroy();
             }
         }
 
@@ -589,14 +665,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             <div className='fixed bottom-0 left-0 w-full p-3'>
                 <div className='bg-White py-3 rounded-lg max-w-lg mx-auto'>
                     <ButtonGroup className='w-full !h-full' size='lg'>
-                        <Button startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button ref={backButton} startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Kembali</p>
                         </Button>
                         <Button radius='sm' className='!rounded !h-full gap-1.5 grid grid-flow-row w-full bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end text-white py-2' onPress={modalLivestream.onOpen}>
                             <i className="ri-live-line ri-xl"></i>
                             <p className='l3-r font-deAetna'>Livestream</p>
                         </Button>
-                        <Button endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button ref={nextButton} endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Selanjutnya</p>
                         </Button>
                     </ButtonGroup>
@@ -1016,7 +1092,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                     <Button
                                         ref={lookToHadiah2}
                                         onPress={onClose}
-                                        onClick={modalUcapanSelamat.onClose}
                                         startContent={<>{file != undefined
                                             ? <i className='ri-arrow-right-s-line ri-xl' />
                                             : ucapanSelamat != ''
@@ -1222,7 +1297,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                     <Button
                                         ref={lookToKonfirmasi2}
                                         onPress={onClose}
-                                        onClick={modalHadiah.onClose}
                                         startContent={<>{digitalGift === gifts[5]
                                             ? <i className='ri-check-line ri-xl' />
                                             : <i className='ri-arrow-right-s-line ri-xl' />}</>}
@@ -1244,7 +1318,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             <div ref={bridePicture8} className='relative h-[1024px] w-[768px]'>
                 <Image
-                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[1]}
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[7]}
                     alt="Moment pengantin"
                     className="object-cover object-center min-w-full w-full h-full"
                     width={500}
@@ -1429,6 +1503,86 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     <p className='l2-r font-deAetna'>Keluar Resepsi</p>
                 </Button>
             </div>
+
+            <div ref={bridePicture12} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[3]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture13} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[7]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture14} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[8]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+
+            <div ref={bridePicture15} className='relative w-[1350px] h-[1080px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[5]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+
+            <div ref={bridePicture16} className='relative w-[1350px] h-[1080px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[1]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture17} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[9]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
+            <div ref={bridePicture18} className='relative h-[1024px] w-[768px]'>
+                <Image
+                    src={`https://sgp1.vultrobjects.com/virtuwed-storage/` + wedding.media.prewedding_photos[10]}
+                    alt="Moment pengantin"
+                    className="object-cover object-center min-w-full w-full h-full"
+                    width={500}
+                    height={500}
+                    priority
+                    id='bridePicture1Click'
+                />
+            </div >
 
         </>
 
