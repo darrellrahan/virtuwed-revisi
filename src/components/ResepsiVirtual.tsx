@@ -12,6 +12,7 @@ import { RadioGroup } from '@headlessui/react';
 import YouTubePlayer from './YoutubePlayer';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 
 interface PanoProps {
     dataPano: {
@@ -164,6 +165,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     // UCAPAN SELAMAT
     const [ucapanSelamat, setUcapanSelamat] = useState('')
 
+    const [loading, setLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
     // PREVIEW HANDLER
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
     const [file, setFile] = useState<File | null>(null)
@@ -178,6 +182,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const modalKonfirmasi = useDisclosure()
     const modalLivestream = useDisclosure()
 
+    const modalInformativeError = useDisclosure()
+
     // LIHAT KV & KELUAR RV
     const handleLihatKV = () => {
         router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`);
@@ -185,6 +191,61 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const handleKeluarRV = () => {
         router.push(`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/`);
     };
+
+    const handleKonfirmasi = async () => {
+        // e.preventDefault();
+        const formData = new FormData();
+        formData.append('wedding_slug', wedding.wedding_slug);
+        formData.append('guest_slug', guest.guest_slug);
+        formData.append('ucapan', ucapanSelamat);
+        if (file != null) {
+            formData.append('ucapan_file', file!);
+        }
+
+
+        // Prevent multiple submissions
+        if (loading) {
+            return;
+        }
+
+        setLoading(true); // Set loading to true when the submission starts
+
+        // KIRIM HADIAH & UCAPAN SELAMAT
+        try {
+
+            if (digitalGift != gifts[5]) {
+                const postGift = await axios.post('https://panel.virtuwed.id/api/gift', {
+                    wedding_slug: wedding.wedding_slug,
+                    guest_slug: guest.guest_slug,
+                    nama_hadiah: digitalGift.name,
+                    nominal: digitalGift.price,
+                });
+
+                console.log(postGift.data);
+
+            }
+
+            if (ucapanSelamat != '' || file != null) {
+                const postUcapanResepsiVirtual = await axios.post(
+                    'https://panel.virtuwed.id/api/guest/ucapan/resepsi',
+                    formData
+                );
+                console.log(postUcapanResepsiVirtual.data);
+            }
+
+            // Set loading to false when the submission is done, whether it succeeded or failed
+            setIsSuccess(true)
+        } catch (error) {
+            setIsSuccess(false)
+            console.log('error gan');
+            modalInformativeError.onOpen()
+
+            // alert(error)
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     useEffect(() => {
         const {
@@ -224,15 +285,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     view,
                     pinFirstLevel: true,
                 });
-
-                // const switchScene = (scene: any) => {
-                //     // stopAutorotate();
-                //     scene.view.setParameters(scene.data.initialViewParameters);
-                //     scene.scene.switchTo();
-                //     // startAutorotate();
-                //     // updateSceneName(scene);
-                //     // updateSceneList(scene);
-                // }
 
                 const createLinkHotspotElement = (hotspot: any) => {
 
@@ -440,16 +492,45 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             // LOOK TO END
             const handleClickCheckout = () => {
                 if (lookToEnd.current) {
-                    lookToEnd.current?.addEventListener('click', function () {
-                        if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
-                            keluarResepsi.current?.classList.remove('invisible');
+                    // lookToEnd.current?.addEventListener('click', function () {
+                    //     handleKonfirmasi().then(() => {
+                    //         console.log('bisa');
+
+
+                    //         if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
+                    //             keluarResepsi.current?.classList.remove('invisible');
+                    //         }
+                    //         if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
+                    //             lihatKenanganVirtual.current?.classList.remove('invisible');
+                    //         }
+                    //         panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
+                    //         // if (isSuccess === true) {
+                    //         // }
+                    //     });
+                    // });
+
+                    lookToEnd.current?.addEventListener('click', async function () {
+                        try {
+                            await handleKonfirmasi();
+
+                            // if (isSuccess === true) {
+                            // }
+                            modalKonfirmasi.onClose()
+
+                            if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
+                                keluarResepsi.current?.classList.remove('invisible');
+                            }
+                            if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
+                                lihatKenanganVirtual.current?.classList.remove('invisible');
+                            }
+                            panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
+                        } catch (error) {
+                            console.error('Error in click event listener:', error);
+                            alert('Error during click event');
                         }
-                        if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
-                            lihatKenanganVirtual.current?.classList.remove('invisible');
-                        }
-                        panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
                     });
                 }
+
 
                 if (gantiUcapan.current) {
                     gantiUcapan.current?.addEventListener('click', function () {
@@ -473,6 +554,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     })
                 }
             };
+
 
 
             // Add event listener to a common ancestor or document
@@ -1469,9 +1551,18 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                             </Button>
                                         </div>
 
-                                        <Button ref={lookToEnd} className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} onPress={onClose}>
-                                            <p className='l2-r font-deAetna'>Konfirmasi</p>
-                                        </Button>
+                                        {/* <Button ref={lookToEnd} className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} onPress={onClose} > */}
+
+                                        {loading ?
+                                            <Button color="secondary" className='rounded' isLoading>
+                                                <p className='l2-r font-deAetna'>Loading</p>
+                                            </Button>
+                                            :
+
+                                            <Button ref={lookToEnd} className='rounded' color='secondary' startContent={<i className="ri-check-line ri-xl"></i>} >
+                                                <p className='l2-r font-deAetna'>Konfirmasi</p>
+                                            </Button>
+                                        }
                                     </div>
                                 </div>
 
@@ -1492,6 +1583,49 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                     )}
                 </ModalContent >
             </ Modal >
+            {/* MODAL INFORMATIVE ERROR */}
+            <Modal
+                className='bg-White py-8'
+                hideCloseButton
+                isOpen={modalInformativeError.isOpen}
+                onOpenChange={modalInformativeError.onOpenChange}
+            >
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalBody className='grid justify-items-center'>
+                                <Image
+                                    src={
+                                        '/assets/virtuwed/accent/vintage-ornaments.png'
+                                    }
+                                    alt="emoticon"
+                                    width={110}
+                                    height={110}
+                                    className='opacity-50 h-auto w-52'
+                                />
+
+                                <div className='grid gap-2 justify-items-center justify-center text-center'>
+                                    <i className="ri-error-warning-fill text-red-500 text-9xl"></i>
+                                    <h4 className="text-N800">
+                                        Oh no!
+                                    </h4>
+                                    <p className="p3-r text-N600">
+                                        An error has occured while sending message and gift.
+                                    </p>
+                                </div>
+
+                                <form className='flex gap-1 w-full' method="dialog">
+                                    {/* if there is a button, it will close the modal */}
+                                    <Button startContent={<i className='ri-message-3-line ri-xl' />} className='rounded w-full' color='secondary' onPress={onClose}>
+                                        Try again
+                                    </Button>
+                                </form>
+                            </ModalBody>
+                        </>
+                    )}
+
+                </ModalContent>
+            </Modal >
 
             <div ref={lihatKenanganVirtual} className='invisible'>
                 <Button onPress={handleLihatKV} startContent={<i className="ri-eye-line ri-lg"></i>} color='secondary' className='rounded'>

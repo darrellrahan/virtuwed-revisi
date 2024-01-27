@@ -75,8 +75,8 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
             // <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden relative`}>
             <main className={`container w-full min-w-full min-h-dvh h-dvh mx-auto overflow-hidden relative`}>
                 <Suspense fallback={<Loading />}>
-                    {/* <Ballroom lang={params.lang} /> */}
-                    <ResepsiVirtual dataPano={data} lang={params.lang} />
+                    <Ballroom lang={params.lang} />
+                    {/* <ResepsiVirtual dataPano={data} lang={params.lang} /> */}
                 </Suspense>
 
                 {/* MUSIC */}
