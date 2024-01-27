@@ -42,7 +42,7 @@ function GeneralFeatures({
               height={100}
               className="absolute inset-x-1/2 -top-12 -translate-x-1/2"
             />
-            <div>
+            <div className="w-full">
               <h3
                 className={` text-center text-3xl font-semibold my-8`}
               >
@@ -62,7 +62,7 @@ function GeneralFeatures({
               height={100}
               className="absolute inset-x-1/2 -top-12 -translate-x-1/2"
             />
-            <div>
+            <div className="w-full">
               <h3
                 className={` text-center text-3xl font-semibold my-8`}
               >
@@ -82,7 +82,7 @@ function GeneralFeatures({
               height={100}
               className="absolute inset-x-1/2 -top-12 -translate-x-1/2"
             />
-            <div>
+            <div className="w-full">
               <h3
                 className={` text-center text-3xl font-semibold my-8`}
               >

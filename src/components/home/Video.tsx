@@ -12,7 +12,7 @@ function Video({ dict }: { dict: string }) {
 
   return (
     <section id="video" className="py-32 relative overflow-hidden">
-      <VideoModal src="https://www.youtube.com/embed/5BeOh1XHAVI?si=74V_eTkY97ocatka" />
+      <VideoModal src="https://www.youtube.com/embed/zp7IhIxQk6Y?si=9_Ps9SeXENiIsFuW" />
       <div className="z-10 relative px-6 lg:px-48">
         <Fade direction="down">
           <h1

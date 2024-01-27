@@ -25,19 +25,19 @@ function SpecificFeatures({
 
   useEffect(() => {
     const onPageScroll = () => {
-      if (window.scrollY < 2300) {
+      if (window.scrollY < 2200) {
         return setSrc("/assets/landingpage/value-1.png");
       }
-      if (window.scrollY >= 2300 && window.scrollY < 3040) {
+      if (window.scrollY >= 2200 && window.scrollY < 2700) {
         return setSrc("/assets/landingpage/value-2.png");
       }
-      if (window.scrollY >= 3040 && window.scrollY < 3780) {
+      if (window.scrollY >= 2700 && window.scrollY < 3200) {
         return setSrc("/assets/landingpage/value-3.png");
       }
-      if (window.scrollY >= 3780 && window.scrollY < 4520) {
+      if (window.scrollY >= 3200 && window.scrollY < 3700) {
         return setSrc("/assets/landingpage/value-4.png");
       }
-      if (window.scrollY >= 4520 && window.scrollY < 5260) {
+      if (window.scrollY >= 3700 && window.scrollY < 4200) {
         return setSrc("/assets/landingpage/value-5-p.gif");
       }
     };
@@ -58,11 +58,11 @@ function SpecificFeatures({
           alt="virtuwed panel"
           width={600}
           height={545}
-          className="hidden lg:inline-block sticky top-32 duration-300 ease-linear"
+          className="hidden lg:inline-block sticky top-40 duration-300 ease-linear"
         />
         <div className="mt-16 lg:mt-0 lg:w-[500px] space-y-32 lg:space-y-0">
           {dict.map((data, index) => (
-            <div key={data.title} className="lg:h-screen lg:flex items-center">
+            <div key={data.title} className="lg:h-[70vh] lg:flex items-center">
               <Image
                 priority={true}
                 src={IMAGES_SRC[index]}

@@ -16,7 +16,7 @@ function Hero({
 
   return (
     <section id="hero" className="lg:h-screen lg:grid grid-cols-2">
-      <VideoModal src="https://www.youtube.com/embed/5BeOh1XHAVI?si=74V_eTkY97ocatka" />
+      <VideoModal src="https://www.youtube.com/embed/zp7IhIxQk6Y?si=9_Ps9SeXENiIsFuW" />
       <div className="lg:bg-[url('/assets/landingpage/hero-accent-lg.svg')] bg-cover relative h-screen flex items-center">
         <div className="absolute bottom-0 inset-x-0 h-[300px] bg-[url('/assets/landingpage/hero-accent-sm.svg')] lg:hidden bg-cover"></div>
         <div className="relative w-fit mx-auto lg:translate-x-24 lg:translate-y-16">
