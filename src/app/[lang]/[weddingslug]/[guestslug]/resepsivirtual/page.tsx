@@ -37,7 +37,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
 
                 dispatch(setData(response.data.data));
                 // setMessage(response.data.data.message)
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 hitAnalytic()
             }
 
@@ -49,7 +49,7 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
         const hitAnalytic = async () => {
             try {
                 const response = await axios.get(API_BASE_URL + ANALYTIC);
-                console.log(response.data);
+                // console.log(response.data);
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -75,8 +75,8 @@ const Page = ({ params }: { params: { weddingslug: string, guestslug: string, la
             // <main className={`container w-full min-w-full h-screen mx-auto overflow-hidden relative`}>
             <main className={`container w-full min-w-full min-h-dvh h-dvh mx-auto overflow-hidden relative`}>
                 <Suspense fallback={<Loading />}>
-                    <Ballroom lang={params.lang} />
-                    {/* <ResepsiVirtual dataPano={data} lang={params.lang} /> */}
+                    {/* <Ballroom lang={params.lang} /> */}
+                    <ResepsiVirtual dataPano={data} lang={params.lang} />
                 </Suspense>
 
                 {/* MUSIC */}

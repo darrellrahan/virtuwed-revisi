@@ -1,7 +1,7 @@
 'use client'
 import { Button, ButtonGroup, Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { RootState } from '@/src/app/[lang]/redux/reducers';
 import 'remixicon/fonts/remixicon.css'
 import { useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import YouTubePlayer from './YoutubePlayer';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
+import { log } from 'console';
 
 interface PanoProps {
     dataPano: {
@@ -124,8 +125,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const lookToKonfirmasi2 = useRef<HTMLButtonElement | null>(null);
     const lookToEnd = useRef<HTMLButtonElement | null>(null);
 
-    const backButton = useRef<HTMLButtonElement | null>(null);
-    const nextButton = useRef<HTMLButtonElement | null>(null);
+    const backButton = useRef<HTMLButtonElement>(null);
+    const nextButton = useRef<HTMLButtonElement>(null);
 
 
     // KORIDOR
@@ -165,8 +166,13 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     // UCAPAN SELAMAT
     const [ucapanSelamat, setUcapanSelamat] = useState('')
 
+    // CHECKOUT VALIDATION
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    // BUTTON NAVIGATION CHECKUP
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
+
 
     // PREVIEW HANDLER
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
@@ -245,7 +251,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             setLoading(false);
         }
     };
-
 
     useEffect(() => {
         const {
@@ -366,51 +371,62 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 };
             });
 
-            const updateSceneName = (scene: any) => {
-                console.log('updateSceneName called');
+
+            let tempattempat: String
+
+            const handleClickNat = () => {
+                // e.preventDefault()
+                // console.log('Michelle')
+                console.log(tempattempat + '<-- itu bang')
+
+                // switch (tempattempat) {
+                //     case "Koridor.webp":
+                //         console.log("ke depan yaa");
+                //         // switchScene(panoScenes[1]);
+                //         // setTimeout(function () {
+                //         //     modalUcapanSelamat.onOpen();
+                //         // }, 1500);
+                //         break;
+
+                //     case "Front.webp":
+                //         console.log("ke koridor yaa");
+                //         // modalUcapanSelamat.onOpen();
+                //         break;
+
+                //     case "Back.webp":
+                //         console.log("ke finish yaa");
+                //         // modalKonfirmasi.onOpen();
+                //         break;
+
+                //     default:
+                //         console.log("this if default");
+                //         break;
+                // }
 
 
+            };
 
 
-                const handleClick = () => {
-                    switch (scene) {
-                        case panoScenes[0]:
-                            console.log('koridor');
-                            // Additional actions for panoScenes[0]
-                            break;
-
-                        case panoScenes[1]:
-                            console.log('front');
-                            // Additional actions for panoScenes[1]
-                            break;
-
-                        case panoScenes[2]:
-                            console.log('back');
-                            // Additional actions for panoScenes[2]
-                            break;
-
-                        default:
-                            break;
-                    }
-                };
-
-                // Remove the previous event listener before adding a new one
-                nextButton.current?.addEventListener('click', handleClick);
-
-
-            }
 
             const switchScene = (scene: any) => {
                 // stopAutorotate();
                 // scene.view.setParameters(scene.initialViewParameters);
-                updateSceneName(scene);
-                scene.scene.switchTo();
-                // startAutorotate();
                 // updateSceneName(scene);
-                // updateSceneList(scene);
+                scene.scene.switchTo();
+                // setTempat(scene.sceneData.id)
+                tempattempat = scene.sceneData.id
+                console.log('kita lagi ada di: ' + tempattempat);
+
+
+                // Add a single event listener for the current scene
+
             }
 
-            switchScene(panoScenes[0]);
+            switchScene(panoScenes[0])
+
+            nextButton.current?.addEventListener('click', handleClickNat);
+
+
 
             const onLoad = () => {
                 setTimeout(function () {
@@ -653,17 +669,21 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
             return () => {
+
+
                 document.removeEventListener('click', checklookToHadiah);
                 document.removeEventListener('click', checklookToKonfirmasi);
                 document.removeEventListener('click', handleClickCheckout);
 
-                nextButton.current?.removeEventListener('click', updateSceneName);
-                // viewer.destroy();
+                nextButton.current?.removeEventListener('click', handleClickNat);
             }
         }
 
 
-    }, [dataPano]);
+        // }, [dataPano]);
+    }, []);
+
+
 
     return (
         <>
@@ -747,14 +767,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             <div className='fixed bottom-0 left-0 w-full p-3'>
                 <div className='bg-White py-3 rounded-lg max-w-lg mx-auto'>
                     <ButtonGroup className='w-full !h-full' size='lg'>
-                        <Button ref={backButton} startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button isDisabled ref={backButton} startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Kembali</p>
                         </Button>
                         <Button radius='sm' className='!rounded !h-full gap-1.5 grid grid-flow-row w-full bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end text-white py-2' onPress={modalLivestream.onOpen}>
                             <i className="ri-live-line ri-xl"></i>
                             <p className='l3-r font-deAetna'>Livestream</p>
                         </Button>
-                        <Button ref={nextButton} endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button ref={nextButton} isDisabled={isNextButtonDisabled} endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Selanjutnya</p>
                         </Button>
                     </ButtonGroup>
