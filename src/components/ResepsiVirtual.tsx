@@ -379,29 +379,29 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 // console.log('Michelle')
                 console.log(tempattempat + '<-- itu bang')
 
-                // switch (tempattempat) {
-                //     case "Koridor.webp":
-                //         console.log("ke depan yaa");
-                //         // switchScene(panoScenes[1]);
-                //         // setTimeout(function () {
-                //         //     modalUcapanSelamat.onOpen();
-                //         // }, 1500);
-                //         break;
+                switch (tempattempat) {
+                    case "Koridor.webp":
+                        console.log("ke depan yaa");
+                        switchScene(panoScenes[1]);
+                        setTimeout(function () {
+                            modalUcapanSelamat.onOpen();
+                        }, 1500);
+                        break;
 
-                //     case "Front.webp":
-                //         console.log("ke koridor yaa");
-                //         // modalUcapanSelamat.onOpen();
-                //         break;
+                    case "Front.webp":
+                        console.log("ke koridor yaa");
+                        modalUcapanSelamat.onOpen();
+                        break;
 
-                //     case "Back.webp":
-                //         console.log("ke finish yaa");
-                //         // modalKonfirmasi.onOpen();
-                //         break;
+                    case "Back.webp":
+                        console.log("ke finish yaa");
+                        modalKonfirmasi.onOpen();
+                        break;
 
-                //     default:
-                //         console.log("this if default");
-                //         break;
-                // }
+                    default:
+                        console.log("this if default");
+                        break;
+                }
 
 
             };
