@@ -109,11 +109,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const cardFront = useRef<HTMLDivElement | null>(null);
     const openingTouch = useRef<HTMLDivElement | null>(null);
 
-    const ucapkanSelamat = useRef(null);
+    const ucapkanSelamat = useRef<HTMLDivElement | null>(null);
     const berikanHadiah = useRef<HTMLDivElement | null>(null);
-    const checkout = useRef(null);
+    const checkout = useRef<HTMLDivElement | null>(null);
     const lihatKenanganVirtual = useRef<HTMLDivElement | null>(null);
     const keluarResepsi = useRef<HTMLDivElement | null>(null);
+
+
+    const INFORMATIVEUCAPANSELAMAT = useRef<HTMLDivElement | null>(null);
 
     const gantiUcapan = useRef<HTMLButtonElement | null>(null);
     const gantiHadiah = useRef<HTMLButtonElement | null>(null);
@@ -169,6 +172,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     // CHECKOUT VALIDATION
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
 
     // BUTTON NAVIGATION CHECKUP
     const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
@@ -375,8 +379,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             let tempattempat: String
 
             const handleClickNat = () => {
-                // e.preventDefault()
-                // console.log('Michelle')
                 console.log(tempattempat + '<-- itu bang')
 
                 switch (tempattempat) {
@@ -385,27 +387,36 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                         switchScene(panoScenes[1]);
                         setTimeout(function () {
                             modalUcapanSelamat.onOpen();
+                            setTimeout(() => {
+                                console.log('wow ada bang');
+                                lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                            }, 0);
                         }, 1500);
                         break;
 
                     case "Front.webp":
                         console.log("ke koridor yaa");
                         modalUcapanSelamat.onOpen();
+                        setTimeout(() => {
+                            console.log('wow ada bang');
+                            lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                        }, 0);
                         break;
 
                     case "Back.webp":
                         console.log("ke finish yaa");
                         modalKonfirmasi.onOpen();
+                        setTimeout(() => {
+                            console.log('jalankan fungsi handleClickCheckout');
+                            handleClickCheckout()
+                        }, 100);
                         break;
 
                     default:
                         console.log("this if default");
                         break;
                 }
-
-
             };
-
 
 
             const switchScene = (scene: any) => {
@@ -423,7 +434,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             }
 
             switchScene(panoScenes[0])
-
             nextButton.current?.addEventListener('click', handleClickNat);
 
 
@@ -456,6 +466,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 transitionDuration: 1000
             }
 
+
+
             // LOOK TO HADIAH
             const handleClicklookToHadiah = () => {
                 lookToHadiah2.current?.addEventListener('click', function () {
@@ -467,6 +479,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                     setTimeout(function () {
                         modalHadiah.onOpen()
+                        setTimeout(() => {
+                            console.log('kasih hadiah bang');
+                            lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                        }, 100);
                     }, 1500);
 
                 })
@@ -474,7 +490,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             const checklookToHadiah = () => {
                 if (lookToHadiah.current) {
-                    lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                    setTimeout(() => {
+                        console.log('wow ada bang');
+                        lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                    }, 0);
                 }
             };
 
@@ -493,6 +512,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                             panoScenes[2].scene.lookTo({ yaw: 1.6829013691100227, pitch: 0.21238892003715293 }, options);
                             setTimeout(function () {
                                 modalKonfirmasi.onOpen()
+                                setTimeout(() => {
+                                    console.log('jalankan fungsi handleClickCheckout');
+                                    handleClickCheckout()
+                                }, 100);
                             }, 1500);
                         }, 1500);
                     }, 1500);
@@ -501,29 +524,16 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             const checklookToKonfirmasi = () => {
                 if (lookToKonfirmasi.current) {
-                    lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                    setTimeout(() => {
+                        console.log('checklookToKonfirmasi');
+                        lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                    }, 0);
                 }
             };
 
             // LOOK TO END
             const handleClickCheckout = () => {
                 if (lookToEnd.current) {
-                    // lookToEnd.current?.addEventListener('click', function () {
-                    //     handleKonfirmasi().then(() => {
-                    //         console.log('bisa');
-
-
-                    //         if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
-                    //             keluarResepsi.current?.classList.remove('invisible');
-                    //         }
-                    //         if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
-                    //             lihatKenanganVirtual.current?.classList.remove('invisible');
-                    //         }
-                    //         panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
-                    //         // if (isSuccess === true) {
-                    //         // }
-                    //     });
-                    // });
 
                     lookToEnd.current?.addEventListener('click', async function () {
                         try {
@@ -555,6 +565,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                         setTimeout(function () {
                             modalUcapanSelamat.onOpen()
+                            setTimeout(() => {
+                                console.log('wow ada bang');
+                                lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
+                            }, 250);
                         }, 1500);
                     })
                 }
@@ -566,6 +580,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                         setTimeout(function () {
                             modalHadiah.onOpen()
+                            setTimeout(() => {
+                                console.log('kasih hadiah bang');
+                                lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                            }, 100);
                         }, 1500);
                     })
                 }
@@ -573,11 +591,10 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
 
-            // Add event listener to a common ancestor or document
-            document.addEventListener('click', checklookToHadiah);
-            document.addEventListener('click', checklookToKonfirmasi);
-            document.addEventListener('click', handleClickCheckout);
 
+            checkout.current?.addEventListener('click', handleClickCheckout)
+            ucapkanSelamat.current?.addEventListener('click', checklookToHadiah)
+            berikanHadiah.current?.addEventListener('click', checklookToKonfirmasi)
 
             // ==================================================================================================
 
@@ -669,11 +686,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
             return () => {
-
-
-                document.removeEventListener('click', checklookToHadiah);
-                document.removeEventListener('click', checklookToKonfirmasi);
-                document.removeEventListener('click', handleClickCheckout);
+                checkout.current?.addEventListener('click', handleClickCheckout)
+                ucapkanSelamat.current?.addEventListener('click', checklookToHadiah)
+                berikanHadiah.current?.addEventListener('click', checklookToKonfirmasi)
 
                 nextButton.current?.removeEventListener('click', handleClickNat);
             }
@@ -681,7 +696,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
         // }, [dataPano]);
-    }, []);
+    }, [])
 
 
 
@@ -1101,7 +1116,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                         </form>
                                     </div>
 
-                                    <Button ref={lookToHadiah} onPress={modalInformativeUcapanSelamat.onOpen} className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} >
+                                    <Button ref={lookToHadiah} id='lookToHadiah' onPress={modalInformativeUcapanSelamat.onOpen} className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} >
                                         <p className='l2-r font-deAetna'>kirim ucapan</p>
                                     </Button>
 
@@ -1130,6 +1145,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             {/* MODAL INFORMATIVE UCAPAN SELAMAT */}
             <Modal
+                ref={INFORMATIVEUCAPANSELAMAT}
                 className='bg-White py-8'
                 hideCloseButton
                 isOpen={modalInformativeUcapanSelamat.isOpen}
