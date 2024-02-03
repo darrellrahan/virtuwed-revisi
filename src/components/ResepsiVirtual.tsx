@@ -390,7 +390,9 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                         setTimeout(function () {
                             modalUcapanSelamat.onOpen();
-                            checklookToHadiah()
+                            setTimeout(() => {
+                                checklookToHadiah()
+                            }, 0);
                         }, 1500);
                         break;
 
@@ -1108,7 +1110,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                 </div>
                             </ModalHeader>
                             <ModalBody>
-                                < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3' >
+                                < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3 overflow-x-hidden' >
                                     <div className='grid gap-1'>
                                         <p className='l3-r text-N700 font-deAetna'>Upload Foto/Video Ucapan</p>
 
