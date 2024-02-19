@@ -1,7 +1,7 @@
 'use client'
 import { Button, ButtonGroup, Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { RootState } from '@/src/app/[lang]/redux/reducers';
 import 'remixicon/fonts/remixicon.css'
 import { useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import YouTubePlayer from './YoutubePlayer';
 import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
+import { log } from 'console';
 
 interface PanoProps {
     dataPano: {
@@ -108,11 +109,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const cardFront = useRef<HTMLDivElement | null>(null);
     const openingTouch = useRef<HTMLDivElement | null>(null);
 
-    const ucapkanSelamat = useRef(null);
+    const ucapkanSelamat = useRef<HTMLDivElement | null>(null);
     const berikanHadiah = useRef<HTMLDivElement | null>(null);
-    const checkout = useRef(null);
+    const checkout = useRef<HTMLDivElement | null>(null);
     const lihatKenanganVirtual = useRef<HTMLDivElement | null>(null);
     const keluarResepsi = useRef<HTMLDivElement | null>(null);
+
+
+    const INFORMATIVEUCAPANSELAMAT = useRef<HTMLDivElement | null>(null);
 
     const gantiUcapan = useRef<HTMLButtonElement | null>(null);
     const gantiHadiah = useRef<HTMLButtonElement | null>(null);
@@ -124,8 +128,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     const lookToKonfirmasi2 = useRef<HTMLButtonElement | null>(null);
     const lookToEnd = useRef<HTMLButtonElement | null>(null);
 
-    const backButton = useRef<HTMLButtonElement | null>(null);
-    const nextButton = useRef<HTMLButtonElement | null>(null);
+    const backButton = useRef<HTMLButtonElement>(null);
+    const nextButton = useRef<HTMLButtonElement>(null);
 
 
     // KORIDOR
@@ -165,8 +169,15 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
     // UCAPAN SELAMAT
     const [ucapanSelamat, setUcapanSelamat] = useState('')
 
+    // CHECKOUT VALIDATION
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+
+    // BUTTON NAVIGATION CHECKUP
+    const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true);
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
+
 
     // PREVIEW HANDLER
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "TIFF", "PSD", "EPS", "AI", "RAW", "INDD", "MP4", "MOV", "AVI", "WMV", "AVCHD", "WebM", "FLV"];
@@ -245,7 +256,6 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             setLoading(false);
         }
     };
-
 
     useEffect(() => {
         const {
@@ -366,51 +376,95 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 };
             });
 
-            const updateSceneName = (scene: any) => {
-                console.log('updateSceneName called');
 
+            let tempattempat: String
 
+            const nextButtonLogic = () => {
+                console.log(tempattempat + '<-- itu bang')
 
+                switch (tempattempat) {
+                    case "Koridor.webp":
+                        switchScene(panoScenes[1]);
+                        setIsBackButtonDisabled(false)
+                        console.log("ke depan yaa");
 
-                const handleClick = () => {
-                    switch (scene) {
-                        case panoScenes[0]:
-                            console.log('koridor');
-                            // Additional actions for panoScenes[0]
-                            break;
+                        setTimeout(function () {
+                            modalUcapanSelamat.onOpen();
+                            setTimeout(() => {
+                                checklookToHadiah()
+                            }, 0);
+                        }, 1500);
+                        break;
 
-                        case panoScenes[1]:
-                            console.log('front');
-                            // Additional actions for panoScenes[1]
-                            break;
+                    case "Front.webp":
+                        console.log("ke koridor yaa");
 
-                        case panoScenes[2]:
-                            console.log('back');
-                            // Additional actions for panoScenes[2]
-                            break;
+                        modalUcapanSelamat.onOpen();
+                        checklookToHadiah()
+                        break;
 
-                        default:
-                            break;
-                    }
-                };
+                    case "Back.webp":
+                        console.log("ke finish yaa");
+                        modalKonfirmasi.onOpen();
+                        setTimeout(() => {
+                            handleClickCheckout()
+                        }, 0);
+                        break;
 
-                // Remove the previous event listener before adding a new one
-                nextButton.current?.addEventListener('click', handleClick);
+                    default:
+                        console.log("this if default");
+                        break;
+                }
+            };
+            const backButtonLogic = () => {
+                console.log(tempattempat + '<-- itu bang')
 
+                switch (tempattempat) {
+                    case "Koridor.webp":
+                        break;
 
-            }
+                    case "Front.webp":
+                        switchScene(panoScenes[0]);
+                        setIsBackButtonDisabled(true)
+                        break;
+
+                    case "Back.webp":
+                        switchScene(panoScenes[1])
+                        setIsNextButtonDisabled(false)
+                        panoScenes[1].scene.lookTo({ yaw: 0, pitch: -0.056795042541741836 }, { transitionDuration: 0 })
+
+                        setTimeout(function () {
+                            modalUcapanSelamat.onOpen()
+                            setTimeout(() => {
+                                checklookToHadiah()
+                            }, 0);
+                        }, 1500);
+                        break;
+
+                    default:
+                        console.log("this if default");
+                        break;
+                }
+            };
+
 
             const switchScene = (scene: any) => {
                 // stopAutorotate();
                 // scene.view.setParameters(scene.initialViewParameters);
-                updateSceneName(scene);
-                scene.scene.switchTo();
-                // startAutorotate();
                 // updateSceneName(scene);
-                // updateSceneList(scene);
+                scene.scene.switchTo();
+                // setTempat(scene.sceneData.id)
+                tempattempat = scene.sceneData.id
+                console.log('kita lagi ada di: ' + tempattempat);
+                // Add a single event listener for the current scene
+
             }
 
-            switchScene(panoScenes[0]);
+            switchScene(panoScenes[0])
+            nextButton.current?.addEventListener('click', nextButtonLogic);
+            backButton.current?.addEventListener('click', backButtonLogic);
+
+
 
             const onLoad = () => {
                 setTimeout(function () {
@@ -440,9 +494,13 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                 transitionDuration: 1000
             }
 
+
+
             // LOOK TO HADIAH
-            const handleClicklookToHadiah = () => {
-                lookToHadiah2.current?.addEventListener('click', function () {
+            const handleClicklookToHadiah = (e: Event) => {
+                e.preventDefault()
+
+                const lookToHadiah2Func = () => {
                     if (berikanHadiah.current && berikanHadiah.current?.classList.contains('invisible')) {
                         berikanHadiah.current?.classList.remove('invisible');
                     }
@@ -451,21 +509,30 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
                     setTimeout(function () {
                         modalHadiah.onOpen()
+                        setTimeout(() => {
+                            checklookToKonfirmasi()
+                        }, 0);
                     }, 1500);
+                }
 
-                })
+                setTimeout(() => {
+                    lookToHadiah2.current?.addEventListener('click', lookToHadiah2Func)
+                }, 100);
             };
 
             const checklookToHadiah = () => {
-                if (lookToHadiah.current) {
+                setTimeout(() => {
                     lookToHadiah.current?.addEventListener('click', handleClicklookToHadiah);
-                }
+                    lookToHadiah.current?.addEventListener('touchstart', handleClicklookToHadiah);
+                }, 0);
             };
 
 
             // LOOK TO KONFIRMASI 
-            const handleClicklookToKonfirmasi = () => {
-                lookToKonfirmasi2.current?.addEventListener('click', function () {
+            const handleClicklookToKonfirmasi = (e: Event) => {
+                e.preventDefault()
+
+                const lookToKonfirmasi2Func = () => {
                     modalHadiah.onClose()
                     panoScenes[1].scene.lookTo({ yaw: -3.1149072553601655, pitch: -0.0070584653244445406 }, options);
 
@@ -477,46 +544,33 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                             panoScenes[2].scene.lookTo({ yaw: 1.6829013691100227, pitch: 0.21238892003715293 }, options);
                             setTimeout(function () {
                                 modalKonfirmasi.onOpen()
+                                setTimeout(() => {
+                                    handleClickCheckout()
+                                }, 0);
                             }, 1500);
                         }, 1500);
                     }, 1500);
-                })
+                }
+                setTimeout(() => {
+                    lookToKonfirmasi2.current?.addEventListener('click', lookToKonfirmasi2Func)
+                }, 100);
             };
 
             const checklookToKonfirmasi = () => {
-                if (lookToKonfirmasi.current) {
+                setTimeout(() => {
                     lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
-                }
+                    lookToKonfirmasi.current?.addEventListener('touchstart', handleClicklookToKonfirmasi);
+                }, 0);
             };
 
             // LOOK TO END
             const handleClickCheckout = () => {
-                if (lookToEnd.current) {
-                    // lookToEnd.current?.addEventListener('click', function () {
-                    //     handleKonfirmasi().then(() => {
-                    //         console.log('bisa');
-
-
-                    //         if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
-                    //             keluarResepsi.current?.classList.remove('invisible');
-                    //         }
-                    //         if (lihatKenanganVirtual.current && lihatKenanganVirtual.current?.classList.contains('invisible')) {
-                    //             lihatKenanganVirtual.current?.classList.remove('invisible');
-                    //         }
-                    //         panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
-                    //         // if (isSuccess === true) {
-                    //         // }
-                    //     });
-                    // });
-
+                setTimeout(() => {
                     lookToEnd.current?.addEventListener('click', async function () {
                         try {
                             await handleKonfirmasi();
 
-                            // if (isSuccess === true) {
-                            // }
                             modalKonfirmasi.onClose()
-
                             if (keluarResepsi.current && keluarResepsi.current?.classList.contains('invisible')) {
                                 keluarResepsi.current?.classList.remove('invisible');
                             }
@@ -524,44 +578,53 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                 lihatKenanganVirtual.current?.classList.remove('invisible');
                             }
                             panoScenes[2].scene.lookTo({ yaw: 3.1373107204237645, pitch: -0.1851510231312865 }, options);
+                            setIsNextButtonDisabled(true)
                         } catch (error) {
                             console.error('Error in click event listener:', error);
                             alert('Error during click event');
                         }
                     });
-                }
 
 
-                if (gantiUcapan.current) {
                     gantiUcapan.current?.addEventListener('click', function () {
                         switchScene(panoScenes[1])
+                        setIsNextButtonDisabled(false)
                         panoScenes[1].scene.lookTo({ yaw: 0, pitch: -0.056795042541741836 }, { transitionDuration: 0 })
 
                         setTimeout(function () {
                             modalUcapanSelamat.onOpen()
+                            setTimeout(() => {
+                                checklookToHadiah()
+                            }, 0);
                         }, 1500);
                     })
-                }
 
-                if (gantiHadiah.current) {
                     gantiHadiah.current?.addEventListener('click', function () {
                         switchScene(panoScenes[1])
+                        setIsNextButtonDisabled(false)
                         panoScenes[1].scene.lookTo({ yaw: 1.4731802513717511, pitch: 0.17922631245596676 }, { transitionDuration: 0 })
 
                         setTimeout(function () {
                             modalHadiah.onOpen()
+                            setTimeout(() => {
+                                checklookToKonfirmasi()
+                            }, 0);
                         }, 1500);
                     })
-                }
+                }, 0);
             };
 
 
 
-            // Add event listener to a common ancestor or document
-            document.addEventListener('click', checklookToHadiah);
-            document.addEventListener('click', checklookToKonfirmasi);
-            document.addEventListener('click', handleClickCheckout);
 
+            ucapkanSelamat.current?.addEventListener('click', checklookToHadiah)
+            ucapkanSelamat.current?.addEventListener('touchstart', checklookToHadiah)
+
+            berikanHadiah.current?.addEventListener('click', checklookToKonfirmasi)
+            berikanHadiah.current?.addEventListener('touchstart', checklookToKonfirmasi)
+
+            checkout.current?.addEventListener('click', handleClickCheckout)
+            checkout.current?.addEventListener('touchstart', handleClickCheckout)
 
             // ==================================================================================================
 
@@ -653,17 +716,30 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
             return () => {
-                document.removeEventListener('click', checklookToHadiah);
-                document.removeEventListener('click', checklookToKonfirmasi);
-                document.removeEventListener('click', handleClickCheckout);
+                ucapkanSelamat.current?.removeEventListener('click', checklookToHadiah)
+                ucapkanSelamat.current?.removeEventListener('touchstart', checklookToHadiah)
+                lookToHadiah.current?.removeEventListener('click', handleClicklookToHadiah);
+                lookToHadiah.current?.removeEventListener('touchstart', handleClicklookToHadiah);
 
-                nextButton.current?.removeEventListener('click', updateSceneName);
-                // viewer.destroy();
+                berikanHadiah.current?.removeEventListener('click', checklookToKonfirmasi)
+                berikanHadiah.current?.removeEventListener('touchstart', checklookToKonfirmasi)
+                lookToKonfirmasi.current?.addEventListener('click', handleClicklookToKonfirmasi);
+                lookToKonfirmasi.current?.addEventListener('touchstart', handleClicklookToKonfirmasi);
+
+
+                checkout.current?.removeEventListener('click', handleClickCheckout)
+                checkout.current?.removeEventListener('touchstart', handleClickCheckout)
+
+                nextButton.current?.removeEventListener('click', nextButtonLogic);
+                backButton.current?.removeEventListener('click', backButtonLogic);
             }
         }
 
 
-    }, [dataPano]);
+        // }, [dataPano]);
+    }, [])
+
+
 
     return (
         <>
@@ -747,14 +823,14 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             <div className='fixed bottom-0 left-0 w-full p-3'>
                 <div className='bg-White py-3 rounded-lg max-w-lg mx-auto'>
                     <ButtonGroup className='w-full !h-full' size='lg'>
-                        <Button ref={backButton} startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button ref={backButton} isDisabled={isBackButtonDisabled} startContent={<i className="ri-arrow-left-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Kembali</p>
                         </Button>
                         <Button radius='sm' className='!rounded !h-full gap-1.5 grid grid-flow-row w-full bg-gradient-to-r from-primaryGradient-start to-primaryGradient-end text-white py-2' onPress={modalLivestream.onOpen}>
                             <i className="ri-live-line ri-xl"></i>
                             <p className='l3-r font-deAetna'>Livestream</p>
                         </Button>
-                        <Button ref={nextButton} endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
+                        <Button ref={nextButton} isDisabled={isNextButtonDisabled} endContent={<i className="ri-arrow-right-s-line ri-xl"></i>} className='w-full text-N800 bg-White'>
                             <p className='l3-r font-deAetna'>Selanjutnya</p>
                         </Button>
                     </ButtonGroup>
@@ -1034,7 +1110,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                 </div>
                             </ModalHeader>
                             <ModalBody>
-                                < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3' >
+                                < div className='grid gap-3 w-full border border-tertiary rounded-b pt-6 px-3 pb-3 overflow-x-hidden' >
                                     <div className='grid gap-1'>
                                         <p className='l3-r text-N700 font-deAetna'>Upload Foto/Video Ucapan</p>
 
@@ -1081,7 +1157,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
                                         </form>
                                     </div>
 
-                                    <Button ref={lookToHadiah} onPress={modalInformativeUcapanSelamat.onOpen} className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} >
+                                    <Button ref={lookToHadiah} id='lookToHadiah' onPress={modalInformativeUcapanSelamat.onOpen} className='rounded' color='secondary' startContent={<i className="ri-send-plane-line ri-xl"></i>} >
                                         <p className='l2-r font-deAetna'>kirim ucapan</p>
                                     </Button>
 
@@ -1110,6 +1186,7 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
             {/* MODAL INFORMATIVE UCAPAN SELAMAT */}
             <Modal
+                ref={INFORMATIVEUCAPANSELAMAT}
                 className='bg-White py-8'
                 hideCloseButton
                 isOpen={modalInformativeUcapanSelamat.isOpen}
