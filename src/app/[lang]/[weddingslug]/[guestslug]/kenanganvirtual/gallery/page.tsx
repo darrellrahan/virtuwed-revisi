@@ -8,15 +8,13 @@ import Search from "@/src/components/kenanganVirtual/Search";
 import Memory from "@/src/components/kenanganVirtual/Memory";
 import { Locale } from "@/i18n.config";
 
-function page({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) {
+function Page({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) {
     const { data } = useApiContext();
-    const { galleryState, setGalleryState } = useRestoreScrollContext();
-
-    if (!data) return null;
+    const { scrollY, setScrollY } = useRestoreScrollContext();
 
     useEffect(() => {
         function handleScroll() {
-            setGalleryState({ ...galleryState, scrollY: window.scrollY });
+            setScrollY(window.scrollY);
         }
 
         window.addEventListener("scroll", handleScroll);
@@ -28,10 +26,13 @@ function page({ params }: { params: { weddingslug: string, guestslug: string, la
 
     useEffect(() => {
         window.scrollTo({
-            top: galleryState.scrollY,
+            top: scrollY,
             behavior: "smooth",
         });
     }, []);
+
+    if (!data) return null;
+
 
     return (
         <main className="p-8 lg:p-16 lg:pb-96 pb-72 relative overflow-hidden">
@@ -67,4 +68,4 @@ function page({ params }: { params: { weddingslug: string, guestslug: string, la
     );
 }
 
-export default page;
+export default Page;

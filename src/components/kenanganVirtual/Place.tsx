@@ -12,7 +12,6 @@ import React, { useEffect, useRef } from "react";
 
 function Place({ params }: { params: { weddingslug: string, guestslug: string, lang: Locale } }) {
     const panoRef = useRef(null);
-    const { push } = useRouter();
     const { photo } = useAsset360Context();
 
     useEffect(() => {

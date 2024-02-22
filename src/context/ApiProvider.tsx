@@ -29,6 +29,8 @@ export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const response = await axios.get(
                 `https://panel.virtuwed.id/api/wedding?wedding_slug=${wedding.wedding_slug}&guest_slug=${guest.guest_slug}`
+                // "https://panel.virtuwed.id/api/wedding?wedding_slug=agy-yoriko&guest_slug=agy-nurwicaksono-ugv29i"
+
             );
             setData(response.data);
         } catch (error) {

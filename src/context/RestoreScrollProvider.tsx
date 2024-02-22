@@ -3,24 +3,17 @@
 import React, { useContext, useState } from "react";
 
 type RestoreScrollContextType = {
-    galleryState: {
-        scrollY: number;
-        currentSlide: number;
-    };
-    setGalleryState: React.Dispatch<
-        React.SetStateAction<{
-            scrollY: number;
-            currentSlide: number;
-        }>
-    >;
+    scrollY: number;
+    setScrollY: React.Dispatch<React.SetStateAction<number>>;
+    currentSlide: number;
+    setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const RestoreScrollContext = React.createContext<RestoreScrollContextType>({
-    galleryState: {
-        scrollY: 0,
-        currentSlide: 0,
-    },
-    setGalleryState: () => { },
+    scrollY: 0,
+    setScrollY: () => { },
+    currentSlide: 0,
+    setCurrentSlide: () => { },
 });
 
 export const useRestoreScrollContext = () => useContext(RestoreScrollContext);
@@ -30,16 +23,16 @@ export const RestoreScrollProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [galleryState, setGalleryState] = useState({
-        scrollY: 0,
-        currentSlide: 0,
-    });
+    const [scrollY, setScrollY] = useState(0);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     return (
         <RestoreScrollContext.Provider
             value={{
-                galleryState,
-                setGalleryState,
+                scrollY,
+                setScrollY,
+                currentSlide,
+                setCurrentSlide,
             }}
         >
             {children}

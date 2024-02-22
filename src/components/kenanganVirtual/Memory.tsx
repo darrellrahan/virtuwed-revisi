@@ -8,12 +8,14 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import Link from "next/link";
+
 import "../../app/[lang]/swiper-carousel.css";
 import { useAsset360Context } from "@/src/context/Asset360Provider";
 import { useRestoreScrollContext } from "@/src/context/RestoreScrollProvider";
 import { lora } from "@/src/app/[lang]/[weddingslug]/[guestslug]/kenanganvirtual/font";
 import { EffectCards, Navigation, Scrollbar } from "swiper";
-import { Locale } from "@/i18n.config";
+
+
 
 function Memory({
     assets,
@@ -25,7 +27,8 @@ function Memory({
     const [explore360, setExplore360] = useState("hidden");
     const openingTouch = useRef<HTMLDivElement>(null);
     const { setPhoto, setVideo } = useAsset360Context();
-    const { galleryState, setGalleryState } = useRestoreScrollContext();
+    const { currentSlide, setCurrentSlide } = useRestoreScrollContext();
+    const [currentSlideLocal, setCurrentSlideLocal] = useState(0);
 
     useEffect(() => {
         const id = setTimeout(() => {
@@ -47,7 +50,7 @@ function Memory({
             </h1>
             <div className="px-8 py-16 relative">
                 <Swiper
-                    initialSlide={galleryState.currentSlide}
+                    initialSlide={currentSlide}
                     effect={"cards"}
                     grabCursor={true}
                     scrollbar={{
@@ -56,10 +59,7 @@ function Memory({
                     modules={[EffectCards, Scrollbar, Navigation]}
                     className="mySwiper"
                     onSlideChange={(swiper: any) => {
-                        setGalleryState({
-                            ...galleryState,
-                            currentSlide: swiper.activeIndex,
-                        });
+                        setCurrentSlideLocal(swiper.activeIndex);
                     }}
                     navigation={true}
                 >
@@ -83,6 +83,7 @@ function Memory({
                                 href={slide.url}
                                 className="absolute inset-0 items-center justify-center flex"
                                 onClick={() => {
+                                    setCurrentSlide(currentSlideLocal);
                                     if (slide.src.includes("https")) {
                                         return setVideo(slide.src);
                                     }
@@ -107,7 +108,7 @@ function Memory({
                     <h1
                         className={`text-2xl font-semibold ${lora.className} absolute -bottom-[4.75rem] right-0`}
                     >
-                        {galleryState.currentSlide + 1}/{assets.length}
+                        {currentSlideLocal + 1}/{assets.length}
                     </h1>
                     <div
                         ref={openingTouch}
@@ -144,3 +145,6 @@ function Memory({
 }
 
 export default Memory;
+
+
+
