@@ -384,7 +384,8 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                                     <i className="ri-calendar-event-line ri-lg"></i>
                                     Undangan
                                 </button>
-                                <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
+                                {/* <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}> */}
+                                <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual/gallery`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}>
                                     <i className="ri-image-line ri-lg"></i>
                                     Galeri
                                 </Link>
@@ -420,7 +421,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                             <i className="ri-building-4-line ri-xl"></i>
                             <p className='p3-r capitalize'>resepsi virtual</p>
                         </Link>
-                        <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
+                        <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual/gallery`} className='w-fit justify-items-center items-center gap-2 inline-grid'>
                             <i className="ri-image-line ri-xl"></i>
                             <p className='p3-r capitalize'>kenangan virtual</p>
                         </Link>
