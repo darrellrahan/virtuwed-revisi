@@ -467,22 +467,34 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
 
 
             const onLoad = () => {
+                // DISABLE BUKU TAMU
+                // setTimeout(function () {
+                //     birthdayCard.current?.classList.add('birthdayCard');
+                //     birthdayCard.current?.classList.add('titleGuestBook');
+                //     cardFront.current?.classList.add('cardFront');
+                // }, 1000);
+                // setTimeout(function () {
+                //     opening.current?.classList.remove('opacity-100');
+                //     opening.current?.classList.add('opacity-0');
+                //     openingTouch.current?.classList.remove('hidden');
+                //     panoRef.current?.classList.remove('saturate-0');
+                // }, 4000);
+                // setTimeout(function () {
+                //     opening.current?.classList.add('hidden');
+                // }, 4500);
+                // setTimeout(function () {
+                //     openingTouch.current?.classList.add('hidden');
+                // }, 7000);
+
+                // BUKU TAMU DISABLE
                 setTimeout(function () {
-                    birthdayCard.current?.classList.add('birthdayCard');
-                    birthdayCard.current?.classList.add('titleGuestBook');
-                    cardFront.current?.classList.add('cardFront');
-                }, 1000);
-                setTimeout(function () {
-                    opening.current?.classList.remove('opacity-100');
-                    opening.current?.classList.add('opacity-0');
                     openingTouch.current?.classList.remove('hidden');
                     panoRef.current?.classList.remove('saturate-0');
-                }, 4000);
-                setTimeout(function () {
-                    opening.current?.classList.add('hidden');
-                }, 4500);
+                }, 1000);
                 setTimeout(function () {
                     openingTouch.current?.classList.add('hidden');
+                }, 4000);
+                setTimeout(function () {
                 }, 7000);
             }
 
@@ -747,7 +759,8 @@ const ResepsiVirtual: React.FC<PanoProps> = ({ dataPano, lang }) => {
             <div className="light h-full w-full absolute saturate-0 transition-all duration-1000 delay-[3000ms]" ref={panoRef} ></div>
 
             {/* OPENING */}
-            <div ref={opening} className='transition-opacity duration-500 opacity-100 absolute w-full h-full z-50'
+            {/* <div ref={opening} className='transition-opacity duration-500 opacity-100 absolute w-full h-full z-50' */}
+            <div ref={opening} className='transition-opacity duration-500 opacity-100 absolute w-full h-full z-50 hidden'
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
