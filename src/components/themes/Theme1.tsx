@@ -425,7 +425,7 @@ const Theme1 = ({ lang }: { lang: Locale }) => {
                 </Link>
                 {/* <Link href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/menu/kenanganvirtual?place=panoScenes[0]`} className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}> */}
                 <Link
-                  href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual/gallery`}
+                  href={`/${lang}/${wedding.wedding_slug}/${guest.guest_slug}/kenanganvirtual`}
                   className={`${playFair.className} px-1.5 py-3 bg-white text-secondary border border-solid border-secondary w-full rounded-lg flex gap-2 items-center justify-center`}
                 >
                   <i className="ri-image-line ri-lg"></i>
